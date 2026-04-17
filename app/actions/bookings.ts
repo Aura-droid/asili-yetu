@@ -85,15 +85,16 @@ export async function sendBrandedEmail(inquiryId: string, customMessage?: string
       inquiry.access_token
     );
 
-    const { data: emailData, error: emailError } = await resend.emails.send({
+    // STAMP: 2026-04-17-PULSE-CHECK: Ensuring build sync
+    const { data: finalResendData, error: finalResendError } = await resend.emails.send({
       from: 'Asili Yetu Safaris <info@asiliyetusafaris.com>',
       to: [inquiry.client_email],
       subject: `Update on your Asili Yetu Expedition: ${inquiry.status.replace('_', ' ').toUpperCase()}`,
       html: html,
     });
 
-    if (emailError) throw emailError;
-    return { success: true, data: emailData };
+    if (finalResendError) throw finalResendError;
+    return { success: true, data: finalResendData };
   } catch (err: any) {
     console.error("Email Error:", err);
     return { success: false, error: err.message };
