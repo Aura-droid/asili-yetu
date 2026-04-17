@@ -22,10 +22,6 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  // Universal Payload Expansion (Next.js 15/16 Hybrid Logic)
-  serverActions: {
-    bodySizeLimit: '20mb',
-  },
   experimental: {
     serverActions: {
       bodySizeLimit: '20mb',
