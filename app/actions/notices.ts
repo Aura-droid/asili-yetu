@@ -88,3 +88,15 @@ export async function toggleNotice(id: string, is_active: boolean) {
   revalidatePath("/admin/notices");
   return { success: !error };
 }
+
+export async function deleteNotice(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("company_notices")
+    .delete()
+    .eq("id", id);
+  
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/notices");
+  return { success: !error, error: error?.message };
+}

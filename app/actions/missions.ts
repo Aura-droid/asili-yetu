@@ -51,3 +51,14 @@ export async function claimMission(missionId: string, rangerId: string) {
   if (!error) revalidatePath(`/mission/${missionId}`);
   return { success: !error, error: error?.message };
 }
+
+export async function deleteMission(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("missions")
+    .delete()
+    .eq("id", id);
+  
+  revalidatePath("/admin");
+  return { success: !error, error: error?.message };
+}

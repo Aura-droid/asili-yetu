@@ -1,8 +1,9 @@
 "use client";
 
 import { useTransition, useState, useEffect } from "react";
-import { Megaphone, Plus, Power, AlertTriangle, Tag, Loader2 } from "lucide-react";
-import { getNotices, createNotice, toggleNotice } from "@/app/actions/notices";
+import { Megaphone, Plus, Power, AlertTriangle, Tag, Loader2, Trash2 } from "lucide-react";
+import { getNotices, createNotice, toggleNotice, deleteNotice } from "@/app/actions/notices";
+import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 
 export default function AdminNoticesPage() {
   const [notices, setNotices] = useState<any[]>([]);
@@ -11,6 +12,9 @@ export default function AdminNoticesPage() {
   const [previewMessage, setPreviewMessage] = useState("");
   const [previewType, setPreviewType] = useState<"info" | "discount" | "alert">("info");
   const [isCreating, setIsCreating] = useState(false);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleteTitle, setDeleteTitle] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     loadNotices();
@@ -46,6 +50,17 @@ export default function AdminNoticesPage() {
       await toggleNotice(id, !currentlyActive);
       loadNotices();
     });
+  };
+
+  const handleDelete = async () => {
+    if (!deleteId) return;
+    setIsDeleting(true);
+    const res = await deleteNotice(deleteId);
+    if (res.success) {
+      setNotices(notices.filter(n => n.id !== deleteId));
+      setDeleteId(null);
+    }
+    setIsDeleting(false);
   };
 
   const bgColors = {
@@ -237,21 +252,34 @@ export default function AdminNoticesPage() {
                   <p className="text-foreground text-lg font-black tracking-tight leading-relaxed italic">"{notice.message}"</p>
                 </div>
                 
-                <button 
-                  onClick={() => handleToggle(notice.id, notice.is_active)}
-                  disabled={isPending}
-                  className={`flex flex-col items-center justify-center w-20 h-20 rounded-[1.5rem] shrink-0 transition-all duration-700 ${notice.is_active ? 'bg-primary text-black shadow-2xl shadow-primary/40 rotate-12 scale-110' : 'bg-foreground/[0.03] text-foreground/20 border border-foreground/5 hover:text-foreground/60 hover:bg-foreground/5 hover:rotate-3'}`}
-                >
-                  <Power className={`w-8 h-8 mb-1.5 ${notice.is_active ? 'animate-pulse' : ''}`} />
-                  <span className="text-[9px] font-black uppercase tracking-widest leading-none shrink-0 italic">
-                    {notice.is_active ? 'LIVE' : 'IDLE'}
-                  </span>
-                </button>
+                <div className="flex flex-col items-center gap-2">
+                  <button 
+                    onClick={() => handleToggle(notice.id, notice.is_active)}
+                    disabled={isPending}
+                    className={`flex flex-col items-center justify-center w-20 h-20 rounded-[1.5rem] shrink-0 transition-all duration-700 ${notice.is_active ? 'bg-primary text-black shadow-2xl shadow-primary/40 rotate-12 scale-110' : 'bg-foreground/[0.03] text-foreground/20 border border-foreground/5 hover:text-foreground/60 hover:bg-foreground/5 hover:rotate-3'}`}
+                  >
+                    <Power className={`w-8 h-8 mb-1.5 ${notice.is_active ? 'animate-pulse' : ''}`} />
+                    <span className="text-[9px] font-black uppercase tracking-widest leading-none shrink-0 italic">
+                      {notice.is_active ? 'LIVE' : 'IDLE'}
+                    </span>
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      setDeleteId(notice.id);
+                      setDeleteTitle(notice.message.substring(0, 40) + "...");
+                    }}
+                    className="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <DeleteConfirmDialog isOpen={!!deleteId} onClose={() => setDeleteId(null)} onConfirm={handleDelete} title={deleteTitle} loading={isDeleting} />
     </div>
   );
 }

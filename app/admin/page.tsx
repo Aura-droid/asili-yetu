@@ -4,6 +4,7 @@ import { getLatestFleetTelemetry } from "@/app/actions/telemetry";
 import dynamic from "next/dynamic";
 import DynamicSentinelMap from "@/components/DynamicSentinelMap";
 import AIReportGenerator from "@/components/AIReportGenerator";
+import MissionFeedClient from "@/components/MissionFeedClient";
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
@@ -151,37 +152,7 @@ export default async function AdminDashboard() {
         <DynamicSentinelMap telemetry={latestTelemetry} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {missions?.map((mission) => (
-          <div key={mission.id} className="bg-white rounded-[2.5rem] p-8 border border-black/5 hover:border-primary/50 transition-all group shadow-sm hover:shadow-2xl hover:shadow-black/5">
-            <div className="flex items-start justify-between mb-6">
-              <div className={`p-4 rounded-2xl transition-all ${mission.status === 'accepted' ? 'bg-primary text-black' : 'bg-black/5 text-black/20 group-hover:text-black/40'}`}>
-                <Zap className="w-6 h-6" />
-              </div>
-              <span className={`text-[8px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest border ${mission.status === 'accepted'
-                  ? 'bg-green-100 text-green-700 border-green-200'
-                  : 'bg-black/5 text-black/40 border-black/5'
-                }`}>
-                {mission.status}
-              </span>
-            </div>
-            <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.2em] mb-2 leading-none">
-              {mission.status === 'accepted' ? 'Ranger on Point' : 'Dispatch Pending'}
-            </p>
-            <h4 className="text-xl font-black text-foreground italic mb-4 leading-none truncate">
-              {mission.guides?.name || 'Awaiting Response'}
-            </h4>
-            <div className="flex items-center justify-between pt-4 border-t border-black/5">
-              <span className="text-[10px] font-bold text-foreground/50 italic truncate max-w-[150px]">
-                Guest: {mission.inquiries?.client_name || 'Custom Expedition'}
-              </span>
-              <span className="text-[10px] font-bold text-foreground/50">
-                {new Date(mission.dispatched_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <MissionFeedClient initialMissions={missions || []} />
 
       {/* TACTICAL FLEET OVERVIEW */}
       <h2 className="text-2xl font-black text-foreground mb-8 mt-16 tracking-tighter uppercase italic flex items-center gap-4">

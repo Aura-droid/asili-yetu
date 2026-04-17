@@ -170,13 +170,23 @@ export default function AdminBookingsPage() {
                     {inquiry.itinerary_details?.recommendedTitle || "Custom Safari"}
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                   <div className={`px-4 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-foreground/5 text-foreground/40'}`}>
-                      {status.replace('_', ' ')}
-                   </div>
-                   {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                </div>
-              </div>
+                 <div className="flex items-center gap-4">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setDeleteId(inquiry.id);
+                        setDeleteTitle(inquiry.client_name);
+                      }}
+                      className="w-10 h-10 rounded-xl hover:bg-red-50 text-red-400 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                    <div className={`px-4 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-foreground/5 text-foreground/40'}`}>
+                       {status.replace('_', ' ')}
+                    </div>
+                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                 </div>
+               </div>
 
               {isExpanded && (
                 <div className="border-t border-foreground/10 bg-foreground/1">
