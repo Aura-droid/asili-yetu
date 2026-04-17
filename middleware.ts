@@ -15,7 +15,12 @@ export async function proxy(request: NextRequest) {
   }
 
   // 2. Run i18n Routing Logic ONLY for public routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
+  const isPublicRoute = 
+    !request.nextUrl.pathname.startsWith('/admin') && 
+    !request.nextUrl.pathname.startsWith('/sitemap.xml') && 
+    !request.nextUrl.pathname.startsWith('/robots.txt');
+
+  if (!isPublicRoute) {
     return supabaseResponse;
   }
 
@@ -38,6 +43,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
