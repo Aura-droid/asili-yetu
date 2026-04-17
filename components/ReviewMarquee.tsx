@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { getReviews } from "@/app/actions/reviews";
 import { Star, Quote } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -47,6 +47,33 @@ export default function ReviewMarquee() {
     return () => { isSubscribed = false; };
   }, []);
 
+  const controls = useAnimationControls();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reviews.length === 0) return;
+    const itemsCount = reviews.length / 2;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % itemsCount);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [reviews.length]);
+
+  useEffect(() => {
+    if (reviews.length === 0) return;
+    const itemsCount = reviews.length / 2;
+    
+    // Snap logic for infinite loop
+    if (index === 0) {
+      // If we just wrapped around, we might want to snap, but let's see how simple works
+    }
+
+    controls.start({
+      x: -(index * 432),
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    });
+  }, [index, reviews.length, controls]);
+
   if (!mounted || reviews.length === 0) return null;
 
   return (
@@ -64,8 +91,7 @@ export default function ReviewMarquee() {
 
       <div className="relative flex">
         <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+          animate={controls}
           className="flex gap-8 px-4"
         >
           {reviews.map((review, i) => (

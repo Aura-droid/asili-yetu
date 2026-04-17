@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { Car, Users, Map, ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,6 +37,33 @@ export default function SafariShowcase() {
     }
   ];
 
+  const controls = useAnimationControls();
+  const [index, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
+       setIndex(0);
+       return;
+    }
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % highlightItems.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [highlightItems.length]);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
+      controls.set({ x: 0 });
+      return;
+    }
+    // We move by the width of one card + gap. 
+    // On mobile we'll assume a consistent width for items.
+    controls.start({ 
+      x: `calc(-${index * 100}% - ${index * 2}rem)`,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    });
+  }, [index, controls]);
+
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -59,35 +86,40 @@ export default function SafariShowcase() {
            </p>
         </div>
 
-        {/* Discovery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {highlightItems.map((item, i) => (
-            <Link 
-              href={item.link} 
-              key={i}
-              className="group relative h-[500px] rounded-[3rem] overflow-hidden border border-foreground/5 shadow-sm hover:shadow-2xl transition-all duration-700 active:scale-95"
-            >
-              <Image 
-                src={item.image} 
-                alt={item.title} 
-                fill 
-                className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0 opacity-80"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.color} mix-blend-overlay`} />
-              <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-black via-black/40 to-transparent">
-                 <div className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center text-primary mb-6 transform -rotate-12 group-hover:rotate-0 transition-transform">
-                    {item.icon}
-                 </div>
-                 <h3 className="text-3xl font-black text-white italic tracking-tighter mb-2">{item.title}</h3>
-                 <p className="text-white/60 font-medium text-sm flex items-center gap-2">
-                    {item.sub || item.status} <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" />
-                 </p>
-              </div>
+        {/* Discovery Grid - Marquee on Mobile, Grid on Desktop */}
+        <div className="relative overflow-hidden md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
+          <motion.div 
+            animate={controls}
+            className="flex md:grid md:grid-cols-3 gap-8 md:gap-8 w-full"
+          >
+            {highlightItems.map((item, i) => (
+              <Link 
+                href={item.link} 
+                key={i}
+                className="group relative h-[500px] w-full shrink-0 md:shrink md:w-auto rounded-[3rem] overflow-hidden border border-foreground/5 shadow-sm hover:shadow-2xl transition-all duration-700 active:scale-95"
+              >
+                <Image 
+                  src={item.image} 
+                  alt={item.title} 
+                  fill 
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0 opacity-80"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.color} mix-blend-overlay`} />
+                <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-black via-black/40 to-transparent">
+                   <div className="w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center text-primary mb-6 transform -rotate-12 group-hover:rotate-0 transition-transform">
+                      {item.icon}
+                   </div>
+                   <h3 className="text-3xl font-black text-white italic tracking-tighter mb-2">{item.title}</h3>
+                   <p className="text-white/60 font-medium text-sm flex items-center gap-2">
+                      {item.sub || item.status} <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" />
+                   </p>
+                </div>
 
-              {/* Hover Glow */}
-              <div className="absolute inset-0 border-[6px] border-primary/0 group-hover:border-primary/20 rounded-[3rem] transition-all pointer-events-none" />
-            </Link>
-          ))}
+                {/* Hover Glow */}
+                <div className="absolute inset-0 border-[6px] border-primary/0 group-hover:border-primary/20 rounded-[3rem] transition-all pointer-events-none" />
+              </Link>
+            ))}
+          </motion.div>
         </div>
         
         {/* Animated Marquee Strip Overlay */}

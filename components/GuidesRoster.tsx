@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React from "react";
+import { motion, useAnimationControls } from "framer-motion";
 import { Binoculars, Languages, Award, Map as MapIcon, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -37,6 +38,32 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
       bio: bioMatch ? bioMatch[1] : g.bio
     };
   };
+
+  const controls = useAnimationControls();
+  const [index, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      setIndex(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % (guides.length || 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [guides.length]);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      controls.set({ x: 0 });
+      return;
+    }
+    controls.start({ 
+      x: `calc(-${index * 100}% - ${index * 2}rem)`,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    });
+  }, [index, controls]);
+
   return (
     <div className="min-h-screen bg-background pt-32 pb-24 selection:bg-primary selection:text-black">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -69,82 +96,82 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
           </motion.p>
         </div>
 
-        {/* Guides Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12"
-        >
-          {guides.map((guide) => {
-            const local = getLocalizedGuide(guide);
-            return (
-              <motion.div 
-                key={guide.id} 
-                variants={itemVariants}
-                className="group relative bg-foreground/5 rounded-[2rem] overflow-hidden border border-foreground/10 hover:border-primary/50 transition-colors duration-500 flex flex-col"
-              >
-                {/* Image Header */}
-                <div className="relative w-full aspect-[4/5] overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                  <Image 
-                    src={guide.image_url || guide.image} 
-                    alt={guide.name} 
-                    fill 
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
-                  />
-                  
-                  {/* Overlay Info */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
-                    <p className="text-primary font-black uppercase tracking-widest text-xs mb-2">{local.role}</p>
-                    <h3 className="text-3xl font-black">{guide.name}</h3>
-                  </div>
-                </div>
-
-                {/* Body Details */}
-                <div className="p-8 flex-1 flex flex-col">
-                  <p className="text-foreground/70 mb-8 leading-relaxed font-medium">
-                    {local.bio}
-                  </p>
-
-                  <div className="space-y-4 mt-auto">
-                    <div className="flex items-center gap-4 text-sm">
-                      <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                        <Award className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Experience</p>
-                        <p className="font-bold text-foreground">{guide.experience_years || guide.experience} Years in the Field</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-4 text-sm">
-                      <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                        <MapIcon className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Specialty</p>
-                        <p className="font-bold text-foreground">{local.specialty}</p>
-                      </div>
-                    </div>
-
-                  <div className="flex items-center gap-4 text-sm pb-2">
-                    <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                      <Languages className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Languages</p>
-                      <p className="font-bold text-foreground">
-                        {Array.isArray(guide.languages) ? guide.languages.join(", ") : guide.languages}
-                      </p>
+        {/* Guides Grid - Marquee on Mobile, Grid on Desktop */}
+        <div className="relative overflow-hidden md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
+          <motion.div 
+            animate={controls}
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full"
+          >
+            {guides.map((guide) => {
+              const local = getLocalizedGuide(guide);
+              return (
+                <motion.div 
+                  key={guide.id} 
+                  variants={itemVariants}
+                  className="group relative bg-foreground/5 rounded-[2rem] overflow-hidden border border-foreground/10 hover:border-primary/50 transition-colors duration-500 flex flex-col w-full shrink-0 md:shrink md:w-auto"
+                >
+                  {/* Image Header */}
+                  <div className="relative w-full aspect-[4/5] overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+                    <Image 
+                      src={guide.image_url || guide.image} 
+                      alt={guide.name} 
+                      fill 
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                    />
+                    
+                    {/* Overlay Info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
+                      <p className="text-primary font-black uppercase tracking-widest text-xs mb-2">{local.role}</p>
+                      <h3 className="text-3xl font-black">{guide.name}</h3>
                     </div>
                   </div>
+
+                  {/* Body Details */}
+                  <div className="p-8 flex-1 flex flex-col">
+                    <p className="text-foreground/70 mb-8 leading-relaxed font-medium">
+                      {local.bio}
+                    </p>
+
+                    <div className="space-y-4 mt-auto">
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                          <Award className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Experience</p>
+                          <p className="font-bold text-foreground">{guide.experience_years || guide.experience} Years in the Field</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                          <MapIcon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Specialty</p>
+                          <p className="font-bold text-foreground">{local.specialty}</p>
+                        </div>
+                      </div>
+
+                    <div className="flex items-center gap-4 text-sm pb-2">
+                      <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                        <Languages className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Languages</p>
+                        <p className="font-bold text-foreground">
+                          {Array.isArray(guide.languages) ? guide.languages.join(", ") : guide.languages}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-            );
-          })}
-        </motion.div>
+              </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
 
         {/* Call to Action */}
         <motion.div 

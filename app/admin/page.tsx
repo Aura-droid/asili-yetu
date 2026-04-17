@@ -1,9 +1,9 @@
 import { Users, Car, Map, Briefcase, TrendingUp, Zap, Radio, ArrowUpRight, ShieldCheck, Activity } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import { getLatestFleetTelemetry } from "@/app/actions/telemetry";
-import AdminSentinelMap from "@/components/AdminSentinelMap";
 import dynamic from "next/dynamic";
 import DynamicSentinelMap from "@/components/DynamicSentinelMap";
+import AIReportGenerator from "@/components/AIReportGenerator";
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
@@ -41,6 +41,8 @@ export default async function AdminDashboard() {
 
   // 5. Fetch all vehicles for the overview
   const { data: vehicles } = await supabase.from('vehicles').select('*').order('model_name', { ascending: true });
+
+  const avgYield = confirmedLeads > 0 ? Math.round(pipelineValue / confirmedLeads) : 0;
 
   const stats = [
     { label: "Active Expeditions", value: bookingsCount || 0, icon: Map, color: "text-blue-600", bg: "bg-blue-50" },
@@ -128,14 +130,14 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        <div className="bg-primary rounded-[3rem] p-10 text-black flex flex-col justify-between group hover:bg-black hover:text-white transition-all duration-500 cursor-pointer shadow-2xl shadow-primary/20">
-          <div>
-            <Zap className="w-10 h-10 mb-6 group-hover:animate-bounce" />
-            <h3 className="text-2xl font-black italic uppercase leading-[0.9] text-black group-hover:text-primary transition-colors">Generate<br />Weekly Report</h3>
-            <p className="text-[10px] font-bold mt-4 uppercase tracking-widest opacity-50">Last synced 5m ago</p>
-          </div>
-          <ArrowUpRight className="w-12 h-12 self-end opacity-20 group-hover:opacity-100 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all" />
-        </div>
+        <AIReportGenerator 
+          metrics={{ 
+            totalInquiries: totalLeads, 
+            conversionRate: Number(conversionRate), 
+            totalRevenue: pipelineValue, 
+            avgYield: avgYield 
+          }} 
+        />
       </div>
 
       {/* MISSION SENTINEL FEED */}

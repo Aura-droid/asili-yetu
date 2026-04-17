@@ -23,6 +23,25 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
   const t = useTranslations("Fleet");
   const locale = useLocale();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (selectedId) return; // Don't scroll if a vehicle is being inspected
+    
+    const interval = setInterval(() => {
+      if (!scrollRef.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const maxScroll = scrollWidth - clientWidth;
+      
+      if (scrollLeft >= maxScroll - 10) {
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        scrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+      }
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [selectedId, fleet.length]);
 
   const selectedVehicle = fleet.find((v) => v.id === selectedId);
   
@@ -67,7 +86,10 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
             >
               {t("select")}
             </motion.p>
-            <div className="flex flex-nowrap overflow-x-auto gap-12 px-12 pb-24 snap-x snap-mandatory hide-scrollbar">
+            <div 
+              ref={scrollRef}
+              className="flex flex-nowrap overflow-x-auto gap-12 px-12 pb-24 snap-x snap-mandatory hide-scrollbar"
+            >
               {fleet.map((vehicle) => (
                 <motion.div
                   layoutId={`vehicle-container-${vehicle.id}`}

@@ -8,7 +8,7 @@ import { useLocale } from "next-intl";
 export default function WhatsAppPulse() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const whatsappNumber = "255746204634";
+  const whatsappNumber = "491751159881";
   const locale = useLocale();
 
   useEffect(() => {

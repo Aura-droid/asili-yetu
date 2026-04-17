@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition, useState, useEffect } from "react";
-import { Megaphone, Plus, Power, AlertTriangle, Tag } from "lucide-react";
+import { Megaphone, Plus, Power, AlertTriangle, Tag, Loader2 } from "lucide-react";
 import { getNotices, createNotice, toggleNotice } from "@/app/actions/notices";
 
 export default function AdminNoticesPage() {
@@ -10,6 +10,7 @@ export default function AdminNoticesPage() {
   const [isPending, startTransition] = useTransition();
   const [previewMessage, setPreviewMessage] = useState("");
   const [previewType, setPreviewType] = useState<"info" | "discount" | "alert">("info");
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     loadNotices();
@@ -23,15 +24,20 @@ export default function AdminNoticesPage() {
 
   const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    formData.set("type", previewType); // Use state value
-    const res = await createNotice(formData);
-    if (res.success) {
-      loadNotices();
-      (e.target as HTMLFormElement).reset();
-      setPreviewMessage("");
-    } else {
-      alert("Error: " + res.error);
+    setIsCreating(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.set("type", previewType); // Use state value
+      const res = await createNotice(formData);
+      if (res.success) {
+        loadNotices();
+        (e.target as HTMLFormElement).reset();
+        setPreviewMessage("");
+      } else {
+        alert("Error: " + res.error);
+      }
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -177,8 +183,19 @@ export default function AdminNoticesPage() {
                 </button>
               </div>
 
-              <button type="submit" className="w-full mt-4 bg-primary text-black font-black py-4 rounded-full hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3 active:scale-[0.98] shadow-xl shadow-primary/20 border border-primary/50 text-sm italic">
-                Broadcast Globally
+              <button 
+                type="submit" 
+                disabled={isCreating}
+                className="w-full mt-4 bg-primary text-black font-black py-4 rounded-full hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3 active:scale-[0.98] shadow-xl shadow-primary/20 border border-primary/50 text-sm italic disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isCreating ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Broadcasting...
+                  </>
+                ) : (
+                  "Broadcast Globally"
+                )}
               </button>
             </form>
           </div>

@@ -15,9 +15,7 @@ export default function FloatingWhatsApp() {
 
   if (!isVisible) return null;
 
-  // [TESTING_PHASE_ONLY]: Currently using the dev's testing number +255746204634
-  // [PRODUCTION_REMINDER]: Swap this to +49 175 1159881 (491751159881) for live.
-  const companyPhone = "255746204634"; 
+  const companyPhone = "491751159881"; 
   const defaultMessage = "Jambo! I'm interested in planning a safari with Asili Yetu.";
 
   return (

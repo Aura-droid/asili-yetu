@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Heart, MessageCircle } from "lucide-react";
 import { getInstagramPosts } from "@/lib/instagram";
 import { getTranslations } from "next-intl/server";
+import InstagramClient from "./InstagramClient";
 
 export default async function InstagramFeed() {
   const MIN_COMMENT_LENGTH = 10;
@@ -52,29 +53,9 @@ export default async function InstagramFeed() {
           </a>
         </div>
 
-        {/* Social Proof Marquee (Real comments from real posts) */}
-        {posts.some(p => p.comments?.data && p.comments.data.length > 0) && (
-          <div className="w-full overflow-hidden mb-12 relative flex items-center bg-foreground/5 py-4 rounded-2xl border border-foreground/10">
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#0d1511] to-transparent z-10" />
-            <div className="flex w-max animate-marquee space-x-12 px-6">
-              {[...posts.map(p => p.comments?.data || []), ...posts.map(p => p.comments?.data || [])].flat().filter(c => c.text && c.text.length > MIN_COMMENT_LENGTH).map((comment, i) => (
-                <div key={`${comment.id}-${i}`} className="flex items-center gap-2">
-                  <span className="text-foreground/80 font-medium italic text-sm md:text-base">"{comment.text.slice(0, MAX_COMMENT_DISPLAY_LENGTH)}{comment.text.length > MAX_COMMENT_DISPLAY_LENGTH ? '...' : ''}"</span>
-                  <span className="text-primary text-xs font-bold uppercase tracking-widest">— @{comment.username}</span>
-                </div>
-              ))}
-            </div>
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#0d1511] to-transparent z-10" />
-            
-            <style dangerouslySetInnerHTML={{__html: `
-              @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-              .animate-marquee { animation: marquee 30s linear infinite; }
-              .animate-marquee:hover { animation-play-state: paused; }
-            `}} />
-          </div>
-        )}
+        <InstagramClient posts={posts} />
 
-        {isEmpty ? (
+        {isEmpty && (
           <div className="flex flex-col items-center justify-center p-12 bg-foreground/5 rounded-3xl border border-dashed border-foreground/20 text-center">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -94,54 +75,6 @@ export default async function InstagramFeed() {
             <p className="text-foreground/50 max-w-sm">
                {t("empty_desc")}
             </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
-              <Link 
-                key={post.id} 
-                href={post.permalink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg"
-              >
-                <Image 
-                  src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
-                  alt={post.caption || "Safari moment by Asili Yetu"} 
-                  fill 
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110" 
-                />
-                
-                {/* Overlay with caption and metrics on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-sm font-medium line-clamp-3 drop-shadow-md">
-                      {post.caption || "A breathtaking moment captured in the wild."}
-                    </p>
-                    <div className="flex items-center justify-between mt-4">
-                      <p className="text-xs text-white/70 font-semibold tracking-wider">
-                        {new Date(post.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-                      </p>
-                      
-                      <div className="flex items-center gap-4">
-                         <div className="flex items-center gap-1.5 opacity-90">
-                           <Heart className="w-4 h-4 fill-white text-white" />
-                           <span className="text-xs font-bold">{post.like_count || 0}</span>
-                         </div>
-                         <div className="flex items-center gap-1.5 opacity-90">
-                           <MessageCircle className="w-4 h-4 fill-white text-white" />
-                           <span className="text-xs font-bold">{post.comments_count || 0}</span>
-                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider">
-                  {post.media_type === 'VIDEO' ? t('video') : post.media_type === 'CAROUSEL_ALBUM' ? t('carousel') : t('photo')}
-                </div>
-              </Link>
-            ))}
           </div>
         )}
       </div>
