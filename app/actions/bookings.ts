@@ -85,7 +85,7 @@ export async function sendBrandedEmail(inquiryId: string, customMessage?: string
       inquiry.access_token
     );
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'Asili Yetu Safaris <info@asiliyetusafaris.com>',
       to: [inquiry.client_email],
       subject: `Update on your Asili Yetu Expedition: ${inquiry.status.replace('_', ' ').toUpperCase()}`,
