@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+export const dynamic = "force-dynamic";
 import "../../app/globals.css";
 import AdminSidebar from "@/components/AdminSidebar";
 import LoadingProvider from "@/providers/LoadingProvider";
