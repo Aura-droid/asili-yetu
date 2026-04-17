@@ -1,0 +1,229 @@
+{
+  "Hero": {
+    "title": "Entdecken Sie die Magie von <p>Tansania</p>",
+    "subtitle": "Entdecken Sie die Wildnis ohne auf Luxus zu verzichten.",
+    "plan_safari": "Safari Planen",
+    "view_fleet": "Flotte Ansehen",
+    "venture": "Erleben Sie die Ultimative Safari",
+    "venture_jungle": "Wagen Sie sich tief in die Wildnis",
+    "where": "Wohin möchten Sie gehen?",
+    "dates": "Daten",
+    "guests": "Gäste",
+    "gearing_up": "Vorbereitung..."
+  },
+  "Navbar": {
+    "safaris": "Unsere Safaris",
+    "destinations": "Reiseziele",
+    "culture": "Kultur",
+    "gallery": "Galerie",
+    "fleet": "Die Flotte",
+    "guides": "Unsere Guides",
+    "about": "Über uns",
+    "savannah_mode": "Savanne-Modus",
+    "jungle_mode": "Dschungel-Modus"
+  },
+  "Booking": {
+    "booking": "Buchung",
+    "luxury_camps": "Luxuszeltlager",
+    "private_guide": "Privatführer Inbegriffen",
+    "step": "Schritt",
+    "of": "von",
+    "traveler_info": "Reiseinformationen",
+    "who_joining": "Wer wird uns auf diesem Abenteuer begleiten?",
+    "full_name": "Vollständiger Name",
+    "email_address": "E-Mail",
+    "whatsapp_phone": "WhatsApp / Telefon (mit Ländervorwahl)",
+    "phone_placeholder": "+255...",
+    "continue": "Weiter",
+    "back": "Zurück",
+    "enhance": "Verbessern Sie Ihre Safari",
+    "hot_air_balloon": "Heißluftballonfahrt",
+    "pro_photo": "Profi-Foto-Set",
+    "dietary": "Ernährungsbedürfnisse",
+    "dietary_placeholder": "Vegan, Nussallergie, etc.",
+    "final_review": "Letzte Überprüfung",
+    "confirm_voyage": "Reise Bestätigen",
+    "lead_explorer": "Hauptentdecker",
+    "contact": "Kontakt",
+    "addons": "Zusätze",
+    "finalizing": "Abschließen...",
+    "initialize": "Expedition Starten",
+    "welcome": "Willkommen in der Wildnis.",
+    "confirmed": "Ihre majestätische Expedition ist bestätigt.",
+    "return": "Zurück zur Basis"
+  },
+  "FunFact": {
+    "label": "DIE WILDE WAHRHEIT",
+    "facts": [
+      "Der Ngorongoro-Krater ist die weltweit größte unversehrte vulkanische Kaldera und beherbergt über 25.000 Großtiere.",
+      "Die Große Migration ist die größte Bewegung von Landsäugetieren auf der Erde mit über 2 Millionen Gnus und Zebras.",
+      "Der Tarangire-Nationalpark weist während der Trockenzeit die weltweit höchste Konzentration an Elefanten auf.",
+      "Der Kilimandscharo ist der höchste freistehende Berg der Welt und verfügt über fünf verschiedene Klimazonen.",
+      "Uralte Affenbrotbäume (Baobabs) können über 1.000 Jahre alt werden und bis zu 120.000 Liter Wasser in ihren Stämmen speichern."
+    ]
+  },
+  "About": {
+    "title": "Geboren in der <p>Wildnis.</p>",
+    "subtitle": "Wir bringen nicht nur Sie nach Afrika. Wir bringen Afrika in Ihre Seele.",
+    "legacy_badge": "Das Erbe",
+    "legacy_title": "Ein Erbe erbaut auf <br></br><p>Naturschutz.</p>",
+    "p1": "Asili Yetu bedeutet 'Unsere Natur'. Für uns ist es das Versprechen, Tansanias Ökosysteme zu schützen.",
+    "p2": "Der Massentourismus verwässerte die Magie der Serengeti. Wir haben Asili Yetu gegründet, um die Würde der Expedition wiederherzustellen.",
+    "local_badge": "Lokales Eigentum & Guides",
+    "pillars_title": "Unsere Drei Säulen",
+    "pillars_sub": "Wir gehen bei der Qualität keine Kompromisse ein. Jede Expedition basiert auf drei Versprechen.",
+    "p_lux": "Kompomissloser Luxus",
+    "p_lux_sub": "Maßgeschneiderte Land Cruiser und Fünf-Sterne-Zeltcamps. Der Busch ist ungezähmt, Ihr Komfort absolut.",
+    "p_safe": "Sicherheit & Präzision",
+    "p_safe_sub": "Unsere Guides sind streng im Sicherheitsprotokoll geschult.",
+    "p_cons": "Tiefgreifender Naturschutz",
+    "p_cons_sub": "Ein Teil jeder Buchung finanziert Anti-Wilderer-Einheiten. Wenn Sie mit uns reisen, schützen Sie Tansania.",
+    "ceo_badge": "Eine Nachricht von unserem Gründer",
+    "ceo_title": "Tief verwurzelte <p>Tradition.</p>",
+    "ceo_p1": "Ich bin in Tansania geboren und aufgewachsen. Dieses Land hat alles geprägt, was ich heute bin. Ich bin mit den Geschichten der Ältesten aufgewachsen und lebe in enger Verbindung mit Gemeinschaften, die vom Land abhängen.",
+    "ceo_p2": "Ich habe Asili Yetu gegründet, weil ich das Gefühl hatte, dass im Tourismus etwas fehlte. Viele Besucher sahen zwar die Tiere, aber sie bauten keine wirkliche Verbindung zu den Menschen, der Kultur und dem echten Leben dieses Landes auf.",
+    "ceo_p3": "Heute sind wir gewachsen, aber im Kern sind wir die Gleichen geblieben. Wir sind immer noch in denselben Werten und der gleichen Liebe zum Land verwurzelt. Wenn Sie mit Asili Yetu reisen, erleben Sie Tansania auf eine echte und ehrliche Weise.",
+    "ceo_signature": "Jeyson, Gründer & Direktor",
+    "mission_badge": "Unser Zweck",
+    "mission_title": "Mission & Vision",
+    "mission_desc": "Hochwertige Reisen zu gestalten, die den wahren Geist Tansanias widerspiegeln, während wir den Naturschutz fördern und lokale Gemeinschaften stärken.",
+    "vision_desc": "Eine vertrauenswürdige afrikanische Reisemarke zu werden, die international für authentische, verantwortungsvolle und transformative Reiseerfahrungen in Tansania bekannt ist.",
+    "presence_badge": "Global verwurzelt",
+    "presence_title": "Arusha bis Köln",
+    "presence_arusha": "Unser operatives Herz in Tansania, das Safari-Logistik, Guide-Training und Fahrzeugmanagement verwaltet.",
+    "presence_koln": "Unser europäisches Zentrum in Köln, Deutschland, das als Koordinationsstelle für Kundenbeziehungen und Markenentwicklung dient.",
+    "values_title": "Unser Nordstern",
+    "v_auth": "Authentizität",
+    "v_integ": "Integrität",
+    "v_prof": "Exzellenz",
+    "v_resp": "Respekt",
+    "v_sust": "Nachhaltigkeit"
+  },
+  "Destinations": {
+    "badge": "Länder der Legenden",
+    "title": "Erkunden Sie <p>Tansania.</p>",
+    "sub": "Von den endlosen goldenen Ebenen der Serengeti bis zum wolkenverhangenen Krater des Ngorongoro.",
+    "time": "Beste Zeit",
+    "wildlife": "Wichtigste Tierwelt",
+    "scale": "Größe",
+    "view": "Safaris Hier Ansehen",
+    "Data": {
+      "serengeti": {
+        "name": "Serengeti Nationalpark",
+        "type": "Endlose Ebenen",
+        "desc": "Das Kronjuwel Tansanias. Heimat der legendären Großen Migration.",
+        "time": "Juni bis Oktober",
+        "wildlife": "Löwen, Leoparden, Geparden, Gnus"
+      },
+      "ngorongoro": {
+        "name": "Ngorongoro-Krater",
+        "type": "Vulkankaldera",
+        "desc": "Ein atemberaubendes natürliches Amphitheater mit der höchsten Tierdichte.",
+        "time": "Ganzjährig",
+        "wildlife": "Spitzmaulnashorn, Löwen, Flusspferde"
+      },
+      "tarangire": {
+        "name": "Tarangire-Nationalpark",
+        "type": "Baobab-Wildnis",
+        "desc": "Das Reich der Elefanten und alten Affenbrotbäume.",
+        "time": "Juli bis November",
+        "wildlife": "Riesige Elefantenherden, Leoparden"
+      },
+      "kilimanjaro": {
+        "name": "Kilimandscharo",
+        "type": "Alpengipfel",
+        "desc": "Das Dach Afrikas. Ein beeindruckender schlafender Vulkan.",
+        "time": "Januar bis März",
+        "wildlife": "Stummelaffen, Alpine Ökologie"
+      },
+      "zanzibar": {
+        "name": "Sansibar-Archipel",
+        "type": "Tropisches Paradies",
+        "desc": "Die Gewürzinseln. Weißer Sand und türkisfarbenes Wasser.",
+        "time": "Juni bis Oktober",
+        "wildlife": "Rote Stummelaffen, Meeresschildkröten"
+      }
+    },
+    "Map": {
+      "discovery_mode": "Entdeckermodus",
+      "discovery_sub": "Navigieren Sie durch die tansanische Wildnis. Klicken Sie auf einen goldenen Wegpunkt, um die tiefen Geheimnisse unserer privaten Reservate zu erkunden.",
+      "explore_packages": "Pakete Erkunden"
+    }
+  },
+  "Gallery": {
+    "badge": "Die Linse",
+    "title": "Immersions- <p>Galerie.</p>",
+    "sub": "Eine kuratierte visuelle Ausstellung live von unseren Expeditionen.",
+    "awaiting": "Warten auf Signale",
+    "connect": "Verbinden Sie Ihr Instagram im Admin-Dashboard.",
+    "video": "Video",
+    "photo": "Foto",
+    "carousel": "Karussell"
+  },
+  "Fleet": {
+    "title": "Die Flotte",
+    "sub": "Reisen Sie mit höchstem Komfort und Sicherheit in unseren maßgeschneiderten Geländewagen.",
+    "select": "FAHRZEUG ZUR INSPEKTION AUSWÄHLEN",
+    "open": "Offenes Dach",
+    "seats": "Sitze",
+    "ac": "Klima",
+    "fridge": "Kühlschrank",
+    "specs": "Fahrzeugspezifikationen"
+  },
+  "Instagram": {
+    "title": "Live aus der Wildnis",
+    "sub": "Echte Momente unserer neuesten Safaris.",
+    "follow": "FOLGEN SIE @ASILIYETUSAFARIS",
+    "empty_title": "Die Wildnis ist heute ruhig",
+    "empty_desc": "Unsere Guides sind tief in der Savanne und erkunden neue Pfade. Schauen Sie bald wieder vorbei für frische Momente!",
+    "video": "Video",
+    "photo": "Foto",
+    "carousel": "Karussell"
+  },
+  "Ecosystem": {
+    "badge": "Schnellzugriff",
+    "title_main": "Das <p>Asili</p> Ökosystem",
+    "sub_main": "Jede Expedition wird von einer erstklassigen Flotte, erfahrenen Fährtenlesern und präziser geostatistischer Intelligenz unterstützt.",
+    "fleet_title": "Die Eliten-Flotte",
+    "fleet_sub": "6 Luxus Land Cruiser",
+    "guides_title": "Meister Rangers",
+    "guides_sub": "8 Lokale Experten-Guides",
+    "destinations_title": "Verbotene Länder",
+    "destinations_sub": "Karte Aktiviert",
+    "explore": "Erkunden",
+    "marquee": {
+      "fleet": "Eliten-Flotte",
+      "rangers": "Meister Rangers",
+      "lands": "Verbotene Länder",
+      "discovery": "Entdecker-Modus"
+    }
+  },
+  "Reviews": {
+    "title": "Stimmen aus der <p>Wildnis</p>",
+    "sub": "Transformative Geschichten unserer globalen Entdecker.",
+    "ig_label": "Instagram Entdecker",
+    "verified_label": "Verifizierter Entdecker"
+  },
+  "Newsletter": {
+    "explorers": "Treten Sie 2.4k+ Entdeckern bei",
+    "title": "Große <p>Migration</p> Alarme",
+    "sub": "Null Lärm. Nur der rohe Puls der tansanischen Wildnis.",
+    "placeholder": "ihre-sichere-email@wild.com",
+    "btn": "Dem Register beitreten",
+    "success_title": "Willkommen im Register",
+    "success_sub": "Expeditions-Puls etabliert.",
+    "error": "Beitritt zum Register fehlgeschlagen."
+  },
+  "Footer": {
+    "whatsapp_title": "Lieber schreiben?",
+    "whatsapp_desc": "Unsere Concierges stehen auf WhatsApp für direkte Anfragen und schnelle Antworten bereit.",
+    "whatsapp_btn": "Schreiben Sie uns auf WhatsApp"
+  },
+  "Packages": {
+    "title": "Unsere Reisen",
+    "subtitle": "Scrollen Sie, um großartige, atemberaubende Abenteuer zu entdecken.",
+    "no_packages": "Keine Pakete verfügbar",
+    "check_back": "Schauen Sie bald wieder vorbei.",
+    "per_person": "pro Person"
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "Hero": {
+    "title": "Gundua Maajabu ya <p>Tanzania</p>",
+    "subtitle": "Gundua pori bila kukosa anasa.",
+    "plan_safari": "Panga Safari",
+    "view_fleet": "Angalia Magari Yetu",
+    "venture": "Pata Uzoefu Mzuri wa Safari",
+    "venture_jungle": "Ingia Ndani ya Pori",
+    "where": "Unataka kwenda wapi?",
+    "dates": "Tarehe",
+    "guests": "Wageni",
+    "gearing_up": "Tunaandaa..."
+  },
+  "Navbar": {
+    "safaris": "Safari Zetu",
+    "destinations": "Vituo Vyetu",
+    "culture": "Utamaduni",
+    "gallery": "Matunzio",
+    "fleet": "Magari Yetu",
+    "guides": "Waongoza Safari",
+    "about": "Kuhusu Sisi",
+    "savannah_mode": "Hali ya Savana",
+    "jungle_mode": "Hali ya Msitu"
+  },
+  "Culture": {
+    "badge": "Mila Hai",
+    "title": "Nasaba ya <p>Maasai</p>",
+    "subtitle": "Ingia katika mahadhi ya kale ya mbuga. Tunakukaribisha kupata uzoefu wa hekima iliyokita mizizi, tapestry mahiri, na nguvu ya kudumu ya watu wa Maasai.",
+    "values_title": "Maadili ya Savana",
+    "story_1_label": "Hadithi I",
+    "story_1_title": "Kuruka kwa Adumu",
+    "story_1_desc": "Jaribio la mahadhi ya nguvu na neema, kuruka maarufu kwa vijana wa Kimaasai kunaashiria roho ya savana.",
+    "story_2_title": "Lugha ya Shanga",
+    "story_2_desc": "Kazi tata ya shanga si sanaa tu—ni simulizi. Rangi husimulia hadithi za umri, hali, na historia ya familia.",
+    "story_3_label": "Hadithi III",
+    "story_3_title": "Walinda Mapori",
+    "story_3_desc": "Wakiishi pamoja na simba na tembo kwa karne nyingi, Wamasai wanawakilisha ushirikiano bora kati ya binadamu na asili."
+  },
+  "Ecosystem": {
+    "badge": "Upatikanaji wa Haraka",
+    "title_main": "Mfumo wa <p>Asili</p>",
+    "sub_main": "Kila msafara unaungwa mkono na magari ya kiwango cha juu, waongozaji wataalam na mfumo sahihi wa kijiografia.",
+    "fleet_title": "Magari ya Kifahari",
+    "fleet_sub": "Land Cruisers 6 za Kifahari",
+    "guides_title": "Maasai Rangers",
+    "guides_sub": "Waongozaji 8 Wataalam wa Ndani",
+    "destinations_title": "Maeneo Tulivu",
+    "destinations_sub": "Ramani Imewezeshwa",
+    "explore": "Gundua",
+    "marquee": {
+      "fleet": "Magari ya Kifahari",
+      "rangers": "Maasai Rangers",
+      "lands": "Maeneo Tulivu",
+      "discovery": "Hali ya Ugunduzi"
+    }
+  },
+  "Reviews": {
+    "title": "Sauti kutoka <p>Nyikani</p>",
+    "sub": "Simulizi za kusisimua kutoka kwa wasafiri wetu wa kimataifa.",
+    "ig_label": "Msafiri wa Instagram",
+    "verified_label": "Msafiri Aliyethibitishwa"
+  },
+  "Newsletter": {
+    "explorers": "Jiunge na Wasafiri 2.4k+",
+    "title": "Habari za <p>Uhamiaji</p> Mkuu",
+    "sub": "Sauti halisi ya nyika ya Tanzania na matoleo mapya ya safari za kipekee.",
+    "placeholder": "barua-pepe-yako@wild.com",
+    "btn": "Jiunge na Daftari",
+    "success_title": "Karibu kwenye Daftari",
+    "success_sub": "Umeunganishwa na mapigo ya nyikani.",
+    "error": "Imeshindwa kujiunga na daftari."
+  },
+  "Booking": {
+    "booking": "Uhifadhi",
+    "luxury_camps": "Kambi za Kifahari",
+    "private_guide": "Mwongoza Safari Binafsi",
+    "step": "Hatua",
+    "of": "ya",
+    "traveler_info": "Taarifa za Msafiri",
+    "who_joining": "Nani atajiunga nasi kwenye hii safari?",
+    "full_name": "Jina Kamili",
+    "email_address": "Barua Pepe",
+    "whatsapp_phone": "WhatsApp / Simu (weka msimbo wa nchi)",
+    "phone_placeholder": "+255...",
+    "continue": "Endelea",
+    "back": "Rudi",
+    "enhance": "Boresha Safari Yako",
+    "hot_air_balloon": "Safari ya Puto",
+    "pro_photo": "Vifaa vya Picha",
+    "dietary": "Mahitaji ya Lishe",
+    "dietary_placeholder": "Vegan, mzio wa karanga, n.k.",
+    "final_review": "Mapitio ya Mwisho",
+    "confirm_voyage": "Thibitisha Safari",
+    "lead_explorer": "Mkuu Mpelelezi",
+    "contact": "Mawasiliano",
+    "addons": "Nyongeza",
+    "finalizing": "Inakamilisha...",
+    "initialize": "Anzisha Safari",
+    "welcome": "Karibu Porini.",
+    "confirmed": "Safari yako imethibitishwa kikamilifu.",
+    "return": "Rudi Mwanzo"
+  },
+  "FunFact": {
+    "label": "UKWELI WA PORINI",
+    "facts": [
+      "Bonde la Ngorongoro ndilo kreta kubwa zaidi duniani isiyovunjika na ni nyumbani kwa wanyama wakubwa zaidi ya 25,000.",
+      "Uhamiaji Mkuu ni harakati kubwa zaidi ya mamalia wa nchi kavu Duniani, kukiwa na zaidi ya nyumbu na pundamilia milioni 2.",
+      "Hifadhi ya Taifa ya Tarangire ina idadi kubwa zaidi ya tembo duniani wakati wa kiangazi.",
+      "Mlima Kilimanjaro ndio mlima mrefu zaidi unaojisimamia duniani na una kanda tano tofauti za hali ya hewa.",
+      "Miti ya kale ya mibuyu inaweza kuishi zaidi ya miaka 1,000 na kuhifadhi hadi lita 120,000 za maji kwenye mashina yake."
+    ]
+  },
+  "About": {
+    "title": "Tumezaliwa <p>Porini.</p>",
+    "subtitle": "Hatukupeleki tu Afrika. Tunaiweka Afrika ndani ya nafsi yako.",
+    "legacy_badge": "Urithi",
+    "legacy_title": "Urithi uliojengwa kwenye <br></br><p>uhifadhi.</p>",
+    "p1": "Asili Yetu. Kwetu, inamaanisha zaidi. Ni ahadi ya kulinda mifumo ya ikolojia ya kale ya Tanzania na kushiriki utukufu wao na ulimwengu.",
+    "p2": "Tuligundua mapema kwamba utalii wa wingi uliyeyusha uchawi wa Serengeti. Tuliunda Asili Yetu kurejesha heshima ya safari.",
+    "local_badge": "Wamiliki na Waelekezi Wazawa",
+    "pillars_title": "Nguzo Zetu Tatu",
+    "pillars_sub": "Hatukubali kupunguza ubora wa uzoefu wako. Kila safari imejengwa kwenye ahadi tatu zisizovunjika.",
+    "p_lux": "Anasa Isiyojutia",
+    "p_lux_sub": "Kutoka Land Cruisers za kisasa hadi kambi za nyota tano. Pori ni kali, lakini faraja yako ni kamilifu.",
+    "p_safe": "Usalama na Umakini",
+    "p_safe_sub": "Kuzunguka pori la Afrika kunahitaji heshima kubwa. Waelekezi wetu wamepewa mafunzo makali.",
+    "p_cons": "Uhifadhi wa Kina",
+    "p_cons_sub": "Sehemu ya kila uhifadhi hufadhili vikosi dhidi ya ujangili na shule za Maasai. Unaposafiri nasi, unailinda Tanzania.",
+    "ceo_badge": "Ujumbe kutoka kwa Mwanzilishi wetu",
+    "ceo_title": "Mizizi inayofika <p>mbali.</p>",
+    "ceo_p1": "Nilizaliwa na kukulia Tanzania. Ardhi hii ilitengeneza kila kitu kunihusu. Nilikua nikisikiliza hadithi kutoka kwa wazee, nikitembea asiliani, na kuishi karibu na jamii zinategemea ardhi.",
+    "ceo_p2": "Nilianzisha Asili Yetu kwa sababu nilihisi kuna kitu kimepungua katika utalii. Wageni wengi waliona wanyama, lakini hawakuunganishwa kweli na watu, utamaduni, na maisha halisi ya nchi hii.",
+    "ceo_p3": "Leo, tumekua, lakini hakuna chochote ndani yetu kimebadilika. Bado tuko mizizi katika maadili yale yale na upendo ule ule kwa ardhi yetu. Unaposafiri na Asili Yetu, unajionea Tanzania katika njia halisi, ya uaminifu, na yenye maana.",
+    "ceo_signature": "Jeyson, Mwanzilishi na Mkurugenzi",
+    "mission_badge": "Lengo Letu",
+    "mission_title": "Dira na Dhima",
+    "mission_desc": "Kubuni na kutoa safari za hali ya juu zinazoakisi roho halisi ya Tanzania huku tukikuza uhifadhi, kuziwezesha jamii za mahali hapo, na kuvuka viwango vya huduma za kimataifa.",
+    "vision_desc": "Kuwa kampuni inayoaminika ya safari za Afrika inayotambulika kimataifa kwa kutoa uzoefu halisi, wa kuwajibika, na wenye kuleta mabadilika nchini Tanzania.",
+    "presence_badge": "Mizizi ya Kimataifa",
+    "presence_title": "Arusha hadi Köln",
+    "presence_arusha": "Moyo wetu wa kiutendaji nchini Tanzania, ukisimamia lojistik ya safari, mafunzo ya waelekezi, na usimamizi wa magari.",
+    "presence_koln": "Kituo chetu cha Ulaya nchini Ujerumani, kinachofanya kazi kama kituo cha uratibu kwa uhusiano wa wateja na maendeleo ya chapa.",
+    "values_title": "Maadili Yetu",
+    "v_auth": "Uhalisia",
+    "v_integ": "Uadilifu",
+    "v_prof": "Ubora",
+    "v_resp": "Heshima",
+    "v_sust": "Uendelevu"
+  },
+  "Destinations": {
+    "badge": "Ardhi za Hadithi",
+    "title": "Gundua <p>Tanzania.</p>",
+    "sub": "Kutoka tambarare za dhahabu za Serengeti hadi bonde lenye ukungu la Ngorongoro, gundua hifadhi za wanyamapori safi kabisa ulimwenguni.",
+    "time": "Wakati Bora",
+    "wildlife": "Wanyamapori Muhimu",
+    "scale": "Ukubwa",
+    "view": "Tazama Safari Hapa",
+    "Data": {
+      "serengeti": {
+        "name": "Hifadhi ya Taifa ya Serengeti",
+        "type": "Tambarare Zisizo na Mwisho",
+        "desc": "Kito cha taji cha Tanzania. Nyumbani kwa Uhamiaji Mkubwa wa hadithi, ambapo mamilioni ya nyumbu na punda milia huvuka tambarare huku wakitazamwa na wanyama wakali wa Afrika.",
+        "time": "Juni hadi Oktoba (Kipindi cha Uhamiaji)",
+        "wildlife": "Simba, Chui, Duma, Nyumbu"
+      },
+      "ngorongoro": {
+        "name": "Hifadhi ya Ngorongoro",
+        "type": "Bonde la Volkano",
+        "desc": "Uwanja wa asili wa kushangaza. Volkano hii iliyoporomoka inafanya kazi kama kizuizi cha asili kwa bioanuwai kubwa ya wanyamapori, ikitoa msongamano mkubwa wa wanyama wa Big Five duniani.",
+        "time": "Mwaka Mzima",
+        "wildlife": "Kifaru Mweusi, Simba, Kiboko, Batamzinga"
+      },
+      "tarangire": {
+        "name": "Hifadhi ya Taifa ya Tarangire",
+        "type": "Nyika ya Mibuyu",
+        "desc": "Ufalme wa tembo na mibuyu ya kale. Udongo mwekundu na mto Tarangire huunda hifadhi ya kuvutia katika msimu wa kiangazi.",
+        "time": "Julai hadi Novemba",
+        "wildlife": "Makundi Makubwa ya Tembo, Chui, Chatu"
+      },
+      "kilimanjaro": {
+        "name": "Mlima Kilimanjaro",
+        "type": "Kilele cha Milima",
+        "desc": "Paa la Afrika. Ukisimama peke yake juu ya tambarare, volkano hii iliyolala inatoa moja ya uzoefu wa kusisimua zaidi wa kupanda mlima duniani.",
+        "time": "Januari hadi Machi / Agosti hadi Oktoba",
+        "wildlife": "Mbega, Ekolojia ya Milimani"
+      },
+      "zanzibar": {
+        "name": "Visiwa vya Zanzibar",
+        "type": "Peponi ya Kitropiki",
+        "desc": "Visiwa vya Viungo. Mchanganyiko wa kuvutia wa fukwe za mchanga mweupe, maji ya samawati, na historia ya kale ya Mji Mkongwe (Stone Town). Sehemu bora ya kupumzika baada ya safari.",
+        "time": "Juni hadi Oktoba",
+        "wildlife": "Kima Punju (Red Colobus), Kobe wa Baharini, Pomboo"
+      }
+    },
+    "Map": {
+      "discovery_mode": "Njia ya Ugunduzi",
+      "discovery_sub": "Vinjari pori la Tanzania. Bofya alama ya dhahabu ili kugundua siri za hifadhi zetu za kibinafsi.",
+      "explore_packages": "Chunguza Vifurushi"
+    }
+  },
+  "Gallery": {
+    "badge": "Lenzi",
+    "title": "Matunzio ya <p>Kuzama.</p>",
+    "sub": "Maonyesho ya kuona yanayotiririshwa moja kwa moja kutoka kwenye safari zetu. Ubora kamili wa asili.",
+    "awaiting": "Tunasubiri Ishara",
+    "connect": "Unganisha Instagram yako kwenye Dashibodi ili kutiririsha picha hapa.",
+    "video": "Video",
+    "photo": "Picha",
+    "carousel": "Albamu"
+  },
+  "Fleet": {
+    "title": "Magari Yetu",
+    "sub": "Safiri kwa faraja na usalama mkubwa na magari yetu maalumu ya 4x4.",
+    "select": "CHAGUA GARI KUKAGUA",
+    "open": "Paa Wazi",
+    "seats": "Viti",
+    "ac": "Hali ya Hewa",
+    "fridge": "Friji",
+    "specs": "Maelezo ya Gari"
+  },
+  "Instagram": {
+    "title": "Mubashara kutoka Nyikani",
+    "sub": "Matukio halisi kutoka safari zetu za hivi karibuni.",
+    "follow": "FUATA @ASILIYETUSAFARIS",
+    "empty_title": "Nyika imetulia leo",
+    "empty_desc": "Waongozaji wetu wako ndani kabisa ya mbuga wakigundua njia mpya. Rudi baadaye kuona matukio mubashara ya safari zetu!",
+    "video": "Video",
+    "photo": "Picha",
+    "carousel": "Albamu"
+  },
+  "Footer": {
+    "whatsapp_title": "Unapendelea kutuma ujumbe?",
+    "whatsapp_desc": "Wasimamizi wetu wanapatikana kwenye WhatsApp kwa maswali ya moja kwa moja na majibu ya haraka.",
+    "whatsapp_btn": "Tuwasiliane kupitia WhatsApp"
+  },
+  "Packages": {
+    "title": "Safari Zetu",
+    "subtitle": "Tembea ili kugundua matukio ya ajabu na yenye kustaajabisha yaliyoundwa mahususi kwa ajili ya pori.",
+    "no_packages": "Mifurushi Haipatikani",
+    "check_back": "Tafadhali rudi hivi karibuni kwa matukio mapya ya ajabu.",
+    "per_person": "kwa kila mtu"
+  }
+}

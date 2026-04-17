@@ -1,0 +1,243 @@
+{
+  "Hero": {
+    "title": "Discover the Magic of <p>Tanzania</p>",
+    "subtitle": "Discover the wild without compromising luxury.",
+    "plan_safari": "Plan Safari",
+    "view_fleet": "View The Fleet",
+    "venture": "Experience the Ultimate Safari",
+    "venture_jungle": "Venture Deep Into the Wild",
+    "where": "Where do you want to go?",
+    "dates": "Dates",
+    "guests": "Guests",
+    "gearing_up": "Gearing up..."
+  },
+  "Navbar": {
+    "safaris": "Our Safaris",
+    "destinations": "Destinations",
+    "culture": "Culture",
+    "gallery": "Gallery",
+    "fleet": "The Fleet",
+    "guides": "Our Guides",
+    "about": "About Us",
+    "savannah_mode": "Savannah Mode",
+    "jungle_mode": "Jungle Mode"
+  },
+  "Booking": {
+    "booking": "Booking",
+    "luxury_camps": "Luxury Tented Camps",
+    "private_guide": "Private Guide Included",
+    "step": "Step",
+    "of": "of",
+    "traveler_info": "Traveler Information",
+    "who_joining": "Who will be joining us on this adventure?",
+    "full_name": "Full Name",
+    "email_address": "Email Address",
+    "whatsapp_phone": "WhatsApp / Phone (with country code)",
+    "phone_placeholder": "+255...",
+    "continue": "Continue",
+    "back": "Back",
+    "enhance": "Enhance Your Safari",
+    "hot_air_balloon": "Hot Air Balloon Flight",
+    "pro_photo": "Pro Photography Kit",
+    "dietary": "Dietary Requirements",
+    "dietary_placeholder": "Vegan, nut allergy, etc.",
+    "final_review": "Final Review",
+    "confirm_voyage": "Confirm Voyage",
+    "lead_explorer": "Lead Explorer",
+    "contact": "Contact",
+    "addons": "Addons",
+    "finalizing": "Finalizing...",
+    "initialize": "Initialize Expedition",
+    "welcome": "Welcome to the Wild.",
+    "confirmed": "Thank you for choosing Asili Yetu Safaris and Tours. An automated acknowledgment has been sent to your email. Our representative will get in touch with you soon.",
+    "return": "Return to Base"
+  },
+  "FunFact": {
+    "label": "THE WILD TRUTH",
+    "facts": [
+      "The Ngorongoro Crater is the world's largest unbroken volcanic caldera and home to over 25,000 large animals.",
+      "The Great Migration is the largest movement of land mammals on Earth, with over 2 million wildebeest and zebras.",
+      "Tarangire National Park holds the highest concentration of elephants in the world during the dry season.",
+      "Mount Kilimanjaro is the highest free-standing mountain in the world and has five distinct climate zones.",
+      "Ancient Baobab trees can live for over 1,000 years and store up to 120,000 liters of water in their trunks."
+    ]
+  },
+  "About": {
+    "title": "Born in the <p>Wild.</p>",
+    "subtitle": "We don't just take you to Africa. We bring Africa into your soul.",
+    "legacy_badge": "The Heritage",
+    "legacy_title": "A legacy built on <br></br><p>conservation.</p>",
+    "p1": "Asili Yetu simply translates to \"Our Nature\" in Swahili. But to us, it means far more. It is a promise to protect the sprawling, ancient ecosystems of Tanzania while sharing their absolute majesty with the world.",
+    "p2": "We realized early on that mass-tourism was diluting the magic of the Serengeti. The profound silence of the bush was being replaced by the roar of crowded minivans. We created Asili Yetu to restore the dignity of the expedition.",
+    "local_badge": "Local Tanzanian Ownership & Guides",
+    "pillars_title": "Our Three Pillars",
+    "pillars_sub": "We refuse to compromise on the quality of your experience. Every expedition is built upon three unbreakable promises.",
+    "p_lux": "Unapologetic Luxury",
+    "p_lux_sub": "From customized Land Cruisers with panoramic roofs to exclusive five-star tented camps. The bush is untamed, but your comfort is absolute.",
+    "p_safe": "Safety & Precision",
+    "p_safe_sub": "Navigating the African wild requires immense respect. Our guides are rigorously trained in safety protocols to ensure complete peace of mind.",
+    "p_cons": "Deep Conservation",
+    "p_cons_sub": "A portion of every booking funds anti-poaching units and local Maasai community schools. When you travel with us, you protect Tanzania.",
+    "ceo_badge": "A Message from our Founder",
+    "ceo_title": "Roots that run <p>deep.</p>",
+    "ceo_p1": "I was born and raised in Tanzania. This land shaped everything about me. I grew up hearing stories from elders, walking in nature, and living close to communities that depend on the land.",
+    "ceo_p2": "I started Asili Yetu because I felt something was missing in tourism. Many visitors saw the animals, but they didn't really connect with the people, the culture, and the real life of this country.",
+    "ceo_p3": "Today, we have grown, but nothing inside us has changed. We are still rooted in the same values and the same love for our land. When you travel with Asili Yetu, you are experiencing Tanzania in a real, honest, and meaningful way.",
+    "ceo_signature": "Jeyson, Founder & Director",
+    "mission_badge": "Our Purpose",
+    "mission_title": "Mission & Vision",
+    "mission_desc": "To design high-quality journeys that reflect the true spirit of Tanzania while promoting conservation, empowering local communities, and exceeding international standards.",
+    "vision_desc": "To become a trusted African travel brand recognized internationally for delivering authentic, responsible, and transformative travel experiences.",
+    "presence_badge": "Global Roots",
+    "presence_title": "Arusha to Köln",
+    "presence_arusha": "Our operational heart in Tanzania, managing safari logistics, guide training, and vehicle management.",
+    "presence_koln": "Our European hub in Germany, serving as a coordination center for client relations and brand development.",
+    "values_title": "Our North Star",
+    "v_auth": "Authenticity",
+    "v_integ": "Integrity",
+    "v_prof": "Excellence",
+    "v_resp": "Respect",
+    "v_sust": "Sustainability"
+  },
+  "Destinations": {
+    "badge": "The Lands of Legend",
+    "title": "Explore <p>Tanzania.</p>",
+    "sub": "From the endless golden plains of the Serengeti to the mist-shrouded crater of Ngorongoro, discover the world's most pristine wildlife sanctuaries.",
+    "time": "Best Time",
+    "wildlife": "Key Wildlife",
+    "scale": "Scale",
+    "view": "View Safaris Here",
+    "Data": {
+      "serengeti": {
+        "name": "Serengeti National Park",
+        "type": "Endless Plains",
+        "desc": "The crown jewel of Tanzania. Home to the legendary Great Migration, where millions of wildebeest and zebra traverse the endless plains under the watchful eyes of Africa's apex predators.",
+        "time": "June to October (The Migration)",
+        "wildlife": "Lions, Leopards, Cheetahs, Wildebeest"
+      },
+      "ngorongoro": {
+        "name": "Ngorongoro Crater",
+        "type": "Volcanic Caldera",
+        "desc": "A breathtaking natural amphitheater. This collapsed volcano acts as a natural enclosure for a staggering diversity of wildlife, offering the densest concentration of Big Five animals on Earth.",
+        "time": "Year-Round",
+        "wildlife": "Black Rhino, Lions, Hippos, Flamingos"
+      },
+      "tarangire": {
+        "name": "Tarangire National Park",
+        "type": "Baobab Wilderness",
+        "desc": "The kingdom of elephants and ancient Baobab trees. Deep reddish earth and the winding Tarangire river create a spectacular dry-season sanctuary for massive herds.",
+        "time": "July to November",
+        "wildlife": "Massive Elephant Herds, Leopards, Pythons"
+      },
+      "kilimanjaro": {
+        "name": "Mount Kilimanjaro",
+        "type": "Alpine Summit",
+        "desc": "The Roof of Africa. Rising utterly alone from the surrounding plains, this dormant volcano offers one of the most awe-inspiring trekking experiences in the world.",
+        "time": "January to March / August to October",
+        "wildlife": "Colobus Monkeys, Alpine Ecology"
+      },
+      "zanzibar": {
+        "name": "Zanzibar Archipelago",
+        "type": "Tropical Paradise",
+        "desc": "The Spice Islands. A mesmerizing blend of white sand beaches, turquoise waters, and ancient Stone Town history. The perfect sanctuary for post-safari relaxation.",
+        "time": "June to October",
+        "wildlife": "Red Colobus Monkeys, Sea Turtles, Dolphins"
+      }
+    },
+    "Map": {
+      "discovery_mode": "Discovery Mode",
+      "discovery_sub": "Navigate the Tanzanian wilderness. Click on a golden waypoint to explore the deep secrets of our private reserves.",
+      "explore_packages": "Explore Packages"
+    }
+  },
+  "Gallery": {
+    "badge": "The Lens",
+    "title": "Immersion <p>Gallery.</p>",
+    "sub": "A curated visual exhibition streaming live from our expeditions. No filters, just the raw majesty of our world.",
+    "awaiting": "Awaiting Signals",
+    "connect": "Connect your Instagram in the Admin Dashboard to stream live expedition photos here.",
+    "video": "Video",
+    "photo": "Photo",
+    "carousel": "Carousel"
+  },
+  "Fleet": {
+    "title": "The Fleet",
+    "sub": "Travel in supreme comfort and safety with our customized 4x4 safari vehicles.",
+    "select": "SELECT A VEHICLE TO INSPECT",
+    "open": "Open Roof",
+    "seats": "Seats",
+    "ac": "Climate",
+    "fridge": "Fridge",
+    "specs": "Vehicle Specifications"
+  },
+  "Instagram": {
+    "title": "Live from the Wild",
+    "sub": "Real moments from our latest safaris.",
+    "follow": "FOLLOW @ASILIYETUSAFARIS",
+    "empty_title": "The Wilderness is Quiet Today",
+    "empty_desc": "Our guides are deep in the savannah exploring new trails. Check back soon for fresh, live moments from our safaris, or visit our page to see past adventures!",
+    "video": "Video",
+    "photo": "Photo",
+    "carousel": "Carousel"
+  },
+  "Footer": {
+    "whatsapp_title": "Prefer to text?",
+    "whatsapp_desc": "Our concierges are available on WhatsApp for direct inquiries and fast answers.",
+    "whatsapp_btn": "Reach us on WhatsApp"
+  },
+  "Packages": {
+    "title": "Our Journeys",
+    "subtitle": "Scroll to explore magnificent, breathtaking adventures fully tailored for the wild.",
+    "no_packages": "No Packages Available",
+    "check_back": "Check back soon for incredible new adventures.",
+    "per_person": "per person"
+  },
+  "Culture": {
+    "badge": "Living Traditions",
+    "title": "The <p>Maasai</p> <br></br> <p>Bloodline</p>",
+    "subtitle": "Step into the ancient rhythms of the savannah. We invite you to experience the deep-rooted wisdom, vibrant tapestry, and enduring strength of the Maasai people.",
+    "values_title": "Values of the Savannah",
+    "story_1_label": "Story I",
+    "story_1_title": "The Jump of Adumu",
+    "story_1_desc": "A rhythmic test of strength and grace, the celebrated jump of the Maasai youth symbolizes the spirit of the savannah.",
+    "story_2_title": "The Language of Beads",
+    "story_2_desc": "Intricate beadwork isn't just art—it's a narrative. Colors tell stories of age, status, and family history.",
+    "story_3_label": "Story III",
+    "story_3_title": "Guardians of the Plains",
+    "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature."
+  },
+  "Ecosystem": {
+    "badge": "Quick Access",
+    "title_main": "The <p>Asili</p> Ecosystem",
+    "sub_main": "Every expedition is backed by a world-class fleet, master trackers, and precise geospatial intelligence.",
+    "fleet_title": "The Elite Fleet",
+    "fleet_sub": "6 Luxury Land Cruisers",
+    "guides_title": "Master Rangers",
+    "guides_sub": "8 Expert Local Guides",
+    "destinations_title": "Forbidden Lands",
+    "destinations_sub": "Map Enabled",
+    "explore": "Explore",
+    "marquee": {
+      "fleet": "Elite Fleet",
+      "rangers": "Master Rangers",
+      "lands": "Forbidden Lands",
+      "discovery": "Discovery Mode"
+    }
+  },
+  "Reviews": {
+    "title": "Voices from the <p>Wild</p>",
+    "sub": "Stories of transformation from our global explorers.",
+    "ig_label": "Instagram Explorer",
+    "verified_label": "Verified Explorer"
+  },
+  "Newsletter": {
+    "explorers": "Join 2.4k+ Explorers",
+    "title": "The Great <p>Migration</p> Alerts",
+    "sub": "Zero noise. Just the raw, high-fidelity pulse of the Tanzanian wild and exclusive expedition reveals.",
+    "placeholder": "your-secure-email@wild.com",
+    "btn": "Join Registry",
+    "success_title": "Welcome to the Registry",
+    "success_sub": "Expedition Pulse Established.",
+    "error": "Failed to join the registry."
+  }
+}

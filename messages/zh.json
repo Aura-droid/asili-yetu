@@ -1,0 +1,229 @@
+{
+  "Hero": {
+    "title": "探索<p>坦桑尼亚</p>的魔力",
+    "subtitle": "在不牺牲奢华的情况下探索荒野。",
+    "plan_safari": "计划您的狩猎之旅",
+    "view_fleet": "查看车队",
+    "venture": "体验终极狩猎之旅",
+    "venture_jungle": "深入丛林探险",
+    "where": "你想去哪里？",
+    "dates": "日期",
+    "guests": "客人",
+    "gearing_up": "准备中..."
+  },
+  "Navbar": {
+    "safaris": "我们的行程",
+    "destinations": "目的地",
+    "culture": "文化",
+    "gallery": "图库",
+    "fleet": "车队",
+    "guides": "我们的导游",
+    "about": "关于我们",
+    "savannah_mode": "大草原模式",
+    "jungle_mode": "丛林模式"
+  },
+  "Booking": {
+    "booking": "预订",
+    "luxury_camps": "豪华帐篷营地",
+    "private_guide": "包含私人向导",
+    "step": "步骤",
+    "of": "共",
+    "traveler_info": "旅客信息",
+    "who_joining": "谁将加入我们的冒险？",
+    "full_name": "全名",
+    "email_address": "电子邮件",
+    "whatsapp_phone": "WhatsApp / 电话 (带国家代码)",
+    "phone_placeholder": "+255...",
+    "continue": "继续",
+    "back": "返回",
+    "enhance": "增强您的Safari",
+    "hot_air_balloon": "热气球飞行",
+    "pro_photo": "专业摄影套件",
+    "dietary": "饮食要求",
+    "dietary_placeholder": "素食，坚果过敏等",
+    "final_review": "最终审核",
+    "confirm_voyage": "确认航程",
+    "lead_explorer": "首席探险家",
+    "contact": "联系方式",
+    "addons": "附加选项",
+    "finalizing": "完成中...",
+    "initialize": "启动探险",
+    "welcome": "欢迎来到荒野",
+    "confirmed": "您宏伟的远征已确认",
+    "return": "返回基地"
+  },
+  "FunFact": {
+    "label": "荒野真相",
+    "facts": [
+      "恩戈罗恩戈罗火山口是世界上最大的未破裂火山破火山口，拥有超过25,000只大型动物。",
+      "大迁徙是地球上最大的陆地哺乳动物运动，有超过200万只角马和斑马参与。",
+      "塔兰吉雷国家公园在旱季拥有世界上最集中的象群。",
+      "乞力马扎罗山是世界上最高的独立山峰，拥有五个截然不同的气候带。",
+      "古老的猴面包树可以存活1000年以上，并在树干中储存多达120,000升水。"
+    ]
+  },
+  "About": {
+    "title": "生于<p>荒野。</p>",
+    "subtitle": "我们不仅仅带您去非洲。我们把非洲带入您的灵魂。",
+    "legacy_badge": "传承",
+    "legacy_title": "建立在<br></br><p>保护</p>之上的传承。",
+    "p1": "Asili Yetu意为“我们的自然”。对我们来说，这是保护坦桑尼亚古老生态系统的承诺。",
+    "p2": "大众旅游正在冲淡塞伦盖蒂的魔力。我们创立了Asili Yetu以恢复探险的尊严。",
+    "local_badge": "坦桑尼亚本地所有权及向导",
+    "pillars_title": "我们的三大支柱",
+    "pillars_sub": "我们在体验质量上毫不妥协。每一次远征都建立在三个不可打破的承诺之上。",
+    "p_lux": "不妥协的奢华",
+    "p_lux_sub": "从定制的陆地巡洋舰到专属的五星级帐篷营地。丛林未被驯服，但您的舒适是绝对的。",
+    "p_safe": "安全与精准",
+    "p_safe_sub": "我们的向导在安全协议方面受过严格训练。",
+    "p_cons": "深度保护",
+    "p_cons_sub": "每笔预订的一部分资金将用于反偷猎部门和当地马赛社区学校。当您与我们同行时，您也在保护坦桑尼亚。",
+    "ceo_badge": "来自创始人的致辞",
+    "ceo_title": "扎根<p>深远。</p>",
+    "ceo_p1": "我在坦桑尼亚出生并长大。这片土地塑造了我的一切。我听着长辈的故事长大，在自然中行走，并与依赖这片土地的社区紧密相连。",
+    "ceo_p2": "我创立 Asili Yetu 是因为我觉得旅游业缺失了一些东西。许多游客看到了动物，但他们并没有真正与这个国家的人民、文化和真实生活产生联系。",
+    "ceo_p3": "今天，我们已经壮大，但内心的初衷从未改变。我们仍然扎根于相同的价值观和对这片土地的热爱。当您选择 Asili Yetu 时，您将以真实、诚实且有意义的方式体验坦桑尼亚。",
+    "ceo_signature": "Jeyson，创始人兼董事",
+    "mission_badge": "我们的初衷",
+    "mission_title": "使命与愿景",
+    "mission_desc": "设计并提供反映坦桑尼亚真实精神的高质量旅程，同时促进野生动物保护，赋能当地社区，并超越国际服务标准。",
+    "vision_desc": "成为备受信任的非洲旅游品牌，因在坦桑尼亚提供真实、负责任且具有变革意义的旅行体验而享誉国际。",
+    "presence_badge": "全球根基",
+    "presence_title": "从阿鲁沙到科隆",
+    "presence_arusha": "我们在坦桑尼亚的运营核心，负责游猎物流、导游培训和车辆管理。",
+    "presence_koln": "我们在德国科隆的欧洲协作中心，负责客户关系协调及品牌发展。",
+    "values_title": "我们的准则",
+    "v_auth": "真实性",
+    "v_integ": "诚信",
+    "v_prof": "卓越",
+    "v_resp": "尊重",
+    "v_sust": "可持续性"
+  },
+  "Destinations": {
+    "badge": "传奇之地",
+    "title": "探索<p>坦桑尼亚。</p>",
+    "sub": "从塞伦盖蒂无尽的金色平原到恩戈罗恩戈罗的雾笼火山口。",
+    "time": "最佳时间",
+    "wildlife": "主要野生动物",
+    "scale": "规模",
+    "view": "点击此处查看狩猎行程",
+    "Data": {
+      "serengeti": {
+        "name": "塞伦盖蒂国家公园",
+        "type": "无尽的平原",
+        "desc": "坦桑尼亚皇冠上的明珠。传奇大迁徙的家园。",
+        "time": "6月至10月",
+        "wildlife": "狮子、豹子、猎豹、牛羚"
+      },
+      "ngorongoro": {
+        "name": "恩戈罗恩戈罗火山口",
+        "type": "火山破火山口",
+        "desc": "令人叹为观止的天然圆形剧场。",
+        "time": "全年",
+        "wildlife": "黑犀牛、狮子、河马"
+      },
+      "tarangire": {
+        "name": "塔兰吉雷国家公园",
+        "type": "猴面包树荒野",
+        "desc": "大象和古老猴面包树的王国。",
+        "time": "7月至11月",
+        "wildlife": "巨大的象群、豹子"
+      },
+      "kilimanjaro": {
+        "name": "乞力马扎罗山",
+        "type": "高山巅峰",
+        "desc": "非洲屋脊。世界最高徒步胜地之一。",
+        "time": "1月至3月",
+        "wildlife": "疣猴、高山生态"
+      },
+      "zanzibar": {
+        "name": "桑给巴尔群岛",
+        "type": "热带天堂",
+        "desc": "香料之岛。白沙滩与绿宝石色海水。",
+        "time": "6月至10月",
+        "wildlife": "红疣猴、海龟、海豚"
+      }
+    },
+    "Map": {
+      "discovery_mode": "探索模式",
+      "discovery_sub": "航行在坦桑尼亚的荒野中。点击金色航标，深入探索我们私家保护区的奥秘。",
+      "explore_packages": "查看具体套餐"
+    }
+  },
+  "Gallery": {
+    "badge": "镜头",
+    "title": "沉浸式<p>图库。</p>",
+    "sub": "从我们的探险中实时流传的精选视觉展览。",
+    "awaiting": "等待信号",
+    "connect": "在仪表板中连接您的Instagram以在此处传输实时图片。",
+    "video": "视频",
+    "photo": "图片",
+    "carousel": "轮播"
+  },
+  "Fleet": {
+    "title": "车队",
+    "sub": "我们定制的4x4狩猎越野车让您在极大的舒适和安全中旅行。",
+    "select": "选择一辆越野车进行查看",
+    "open": "开放式车顶",
+    "seats": "座位",
+    "ac": "空调",
+    "fridge": "冰箱",
+    "specs": "车辆规格"
+  },
+  "Instagram": {
+    "title": "来自荒野的现场",
+    "sub": "我们最新游猎行程的真实瞬间。",
+    "follow": "关注 @ASILIYETUSAFARIS",
+    "empty_title": "今天野外很安静",
+    "empty_desc": "我们的导游正在萨瓦纳深处探索新路径。请稍后再来！",
+    "video": "视频",
+    "photo": "照片",
+    "carousel": "轮播"
+  },
+  "Ecosystem": {
+    "badge": "快速访问",
+    "title_main": "<p>Asili</p> 生态系统",
+    "sub_main": "每一次探险都有世界级的车队、专业追踪者和精确的地理空间情报支持。",
+    "fleet_title": "精英车队",
+    "fleet_sub": "6 辆豪华陆地巡洋舰",
+    "guides_title": "王牌护林员",
+    "guides_sub": "8 名当地专家导游",
+    "destinations_title": "禁忌之地",
+    "destinations_sub": "地图已启用",
+    "explore": "探索",
+    "marquee": {
+      "fleet": "精英车队",
+      "rangers": "王牌护林员",
+      "lands": "禁忌之地",
+      "discovery": "探索模式"
+    }
+  },
+  "Reviews": {
+    "title": "来自 <p>野外</p> 的声音",
+    "sub": "全球探险家们的蜕变故事。",
+    "ig_label": "Instagram 探险家",
+    "verified_label": "认证探险家"
+  },
+  "Newsletter": {
+    "explorers": "加入 2.4k+ 探险家行列",
+    "title": "大 <p>迁徙</p> 警报",
+    "sub": "零噪音。只有坦桑尼亚野外的高保密脉动。",
+    "placeholder": "your-email@wild.com",
+    "btn": "加入登记册",
+    "success_title": "欢迎加入登记册",
+    "success_sub": "探险脉动已建立。",
+    "error": "加入登记册失败。"
+  },
+  "Footer": {
+    "whatsapp_title": "更喜欢发短信？",
+    "whatsapp_desc": "我们的礼宾人员随时可以通过 WhatsApp 回答您的直接咨询。",
+    "whatsapp_btn": "通过 WhatsApp 联系我们"
+  },
+  "Packages": {
+    "title": "我们的旅程",
+    "subtitle": "滚动探索专为荒野量身定制的宏伟、令人叹为观止的冒险。",
+    "no_packages": "暂无行程",
+    "check_back": "请稍后回来查看精彩的新探险。",
+    "per_person": "每人"
+  }
+}

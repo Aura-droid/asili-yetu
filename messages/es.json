@@ -1,0 +1,229 @@
+{
+  "Hero": {
+    "title": "Descubre la Magia de <p>Tanzania</p>",
+    "subtitle": "Descubre la naturaleza salvaje sin renunciar al lujo.",
+    "plan_safari": "Planificar Safari",
+    "view_fleet": "Ver Vehiculos",
+    "venture": "Experimenta el Safari Definitivo",
+    "venture_jungle": "Aventúrate Profundamente en la Selva",
+    "where": "¿A dónde quieres ir?",
+    "dates": "Fechas",
+    "guests": "Huéspedes",
+    "gearing_up": "Preparando..."
+  },
+  "Navbar": {
+    "safaris": "Nuestros Safaris",
+    "destinations": "Destinos",
+    "culture": "Cultura",
+    "gallery": "Galería",
+    "fleet": "La Flota",
+    "guides": "Nuestros Guías",
+    "about": "Sobre Nosotros",
+    "savannah_mode": "Modo Sabana",
+    "jungle_mode": "Modo Selva"
+  },
+  "Booking": {
+    "booking": "Reserva",
+    "luxury_camps": "Campamentos de Lujo",
+    "private_guide": "Guía Privado Incluido",
+    "step": "Paso",
+    "of": "de",
+    "traveler_info": "Información del Viajero",
+    "who_joining": "¿Quién nos acompañará en esta aventura?",
+    "full_name": "Nombre Completo",
+    "email_address": "Correo Electrónico",
+    "whatsapp_phone": "WhatsApp / Teléfono (con código de país)",
+    "phone_placeholder": "+255...",
+    "continue": "Continuar",
+    "back": "Volver",
+    "enhance": "Mejora tu Safari",
+    "hot_air_balloon": "Vuelo en Globo",
+    "pro_photo": "Kit de Fotografía",
+    "dietary": "Requisitos Dietéticos",
+    "dietary_placeholder": "Vegano, alergia a las nueces, etc.",
+    "final_review": "Revisión Final",
+    "confirm_voyage": "Confirmar Viaje",
+    "lead_explorer": "Explorador Principal",
+    "contact": "Contacto",
+    "addons": "Complementos",
+    "finalizing": "Finalizando...",
+    "initialize": "Iniciar Expedición",
+    "welcome": "Bienvenido a lo Salvaje.",
+    "confirmed": "Tu majestuosa expedición está confirmada.",
+    "return": "Volver a la Base"
+  },
+  "FunFact": {
+    "label": "LA VERDAD SALVAJE",
+    "facts": [
+      "El cráter del Ngorongoro es la caldera volcánica intacta más grande del mundo y alberga a más de 25,000 animales grandes.",
+      "La Gran Migración es el movimiento de mamíferos terrestres más grande de la Tierra, con más de 2 millones de ñus y cebras.",
+      "El Parque Nacional Tarangire tiene la mayor concentración de elefantes del mundo durante la estación seca.",
+      "El Kilimanjaro es la montaña independiente más alta del mundo y tiene cinco zonas climáticas distintas.",
+      "Los antiguos baobabs pueden vivir más de 1,000 años y almacenar hasta 120,000 litros de agua en sus troncos."
+    ]
+  },
+  "About": {
+    "title": "Nacidos en lo <p>Salvaje.</p>",
+    "subtitle": "No solo te llevamos a África. Llevamos a África a tu alma.",
+    "legacy_badge": "El Legado",
+    "legacy_title": "Un legado construido en la <br></br><p>conservación.</p>",
+    "p1": "Asili Yetu se traduce como 'Nuestra Naturaleza'. Para nosotros, es una promesa de proteger los antiguos ecosistemas de Tanzania.",
+    "p2": "Nos dimos cuenta temprano de que el turismo masivo estaba diluyendo la magia del Serengeti. Creamos Asili Yetu para restaurar la dignidad de la expedición.",
+    "local_badge": "Propiedad y Guías Locales",
+    "pillars_title": "Nuestros Tres Pilares",
+    "pillars_sub": "Nos negamos a comprometer la calidad. Cada expedición se basa en tres promesas inquebrantables.",
+    "p_lux": "Lujo Intransigente",
+    "p_lux_sub": "Desde Land Cruisers personalizados hasta exclusivos campamentos de cinco estrellas. La selva es salvaje, pero tu confort es absoluto.",
+    "p_safe": "Seguridad y Precisión",
+    "p_safe_sub": "Navegar por la naturaleza africana exige un inmenso respeto. Nuestros guías están rigurosamente formados.",
+    "p_cons": "Conservación Profunda",
+    "p_cons_sub": "Una parte de cada reserva financia unidades contra la caza furtiva. Cuando viajas con nosotros, proteges Tanzania.",
+    "ceo_badge": "Un mensaje de nuestro fundador",
+    "ceo_title": "Raíces que son <p>profundas.</p>",
+    "ceo_p1": "Nací y crecí en Tanzania. Esta tierra dio forma a todo lo que soy. Crecí escuchando historias de los ancianos, caminando en la naturaleza y viviendo cerca de comunidades que dependen de la tierra.",
+    "ceo_p2": "Empecé Asili Yetu porque sentía que algo faltaba en el turismo. Muchos visitantes veían los animales, pero no conectaban realmente con la gente, la cultura y la vida real de este país.",
+    "ceo_p3": "Hoy hemos crecido, pero nada ha cambiado en nuestro interior. Seguimos arraigados en los mismos valores y el mismo amor por nuestra tierra. Cuando viajas con Asili Yetu, experimentas Tanzania de una manera real, honesta y significativa.",
+    "ceo_signature": "Jeyson, Fundador y Director",
+    "mission_badge": "Nuestro Propósito",
+    "mission_title": "Misión y Visión",
+    "mission_desc": "Diseñar viajes de alta calidad que reflejen el verdadero espíritu de Tanzania, promoviendo la conservación, empoderando a las comunidades locales y superando los estándares internacionales.",
+    "vision_desc": "Convertirnos en una marca de viajes africana de confianza, reconocida internacionalmente por ofrecer experiencias de viaje auténticas, responsables y transformadoras.",
+    "presence_badge": "Raíces Globales",
+    "presence_title": "De Arusha a Colonia",
+    "presence_arusha": "Nuestro corazón operativo en Tanzania, gestionando la logística del safari, la formación de guías y la gestión de vehículos.",
+    "presence_koln": "Nuestro centro europeo en Alemania, que sirve como centro de coordinación para las relaciones con los clientes y el desarrollo de la marca.",
+    "values_title": "Nuestra Estrella Polar",
+    "v_auth": "Autenticidad",
+    "v_integ": "Integridad",
+    "v_prof": "Excelencia",
+    "v_resp": "Respeto",
+    "v_sust": "Sostenibilidad"
+  },
+  "Destinations": {
+    "badge": "Tierras de Leyenda",
+    "title": "Explora <p>Tanzania.</p>",
+    "sub": "Desde las interminables llanuras doradas del Serengeti hasta el cráter envuelto en niebla del Ngorongoro.",
+    "time": "Mejor Época",
+    "wildlife": "Fauna Clave",
+    "scale": "Escala",
+    "view": "Ver Safaris Aquí",
+    "Data": {
+      "serengeti": {
+        "name": "Parque Nacional del Serengeti",
+        "type": "Llanuras Interminables",
+        "desc": "La joya de la corona de Tanzania. Hogar de la legendaria Gran Migración, donde millones de ñus y cebras atraviesan las llanuras bajo la mirada de los depredadores más feroces de África.",
+        "time": "Junio a Octubre (La Migración)",
+        "wildlife": "Leones, Leopardos, Guepardos, Ñus"
+      },
+      "ngorongoro": {
+        "name": "Cráter del Ngorongoro",
+        "type": "Caldera Volcánica",
+        "desc": "Un anfiteatro natural impresionante. Este volcán colapsado actúa como un recinto natural para una asombrosa diversidad de vida silvestre, ofreciendo la mayor concentración de los Cinco Grandes.",
+        "time": "Todo el Año",
+        "wildlife": "Rinoceronte Negro, Leones, Hipopótamos, Flamencos"
+      },
+      "tarangire": {
+        "name": "Parque Nacional de Tarangire",
+        "type": "Desierto de Baobabs",
+        "desc": "El reino de los elefantes y los antiguos árboles Baobab. La tierra rojiza y el río Tarangire crean un santuario espectacular en la estación seca.",
+        "time": "Julio a Noviembre",
+        "wildlife": "Manadas de Elefantes, Leopardos, Pitones"
+      },
+      "kilimanjaro": {
+        "name": "Monte Kilimanjaro",
+        "type": "Cumbre Alpina",
+        "desc": "El Techo de África. Elevándose solitario sobre las llanuras, este volcán inactivo ofrece una de las experiencias de senderismo más impresionantes del mundo.",
+        "time": "Enero a Marzo / Agosto a Octubre",
+        "wildlife": "Monos Colobos, Ecología Alpina"
+      },
+      "zanzibar": {
+        "name": "Archipiélago de Zanzíbar",
+        "type": "Paraíso Tropical",
+        "desc": "Las Islas de las Especias. Una mezcla hipnotizante de playas de arena blanca, aguas turquesas y la historia antigua de Stone Town. El santuario perfecto para relajarse después del safari.",
+        "time": "Junio a Octubre",
+        "wildlife": "Monos Colobos Rojos, Tortugas Marinas, Delfines"
+      }
+    },
+    "Map": {
+      "discovery_mode": "Modo Descubrimiento",
+      "discovery_sub": "Navega por la naturaleza de Tanzania. Haz clic en un marcador dorado para explorar los secretos de nuestras reservas privadas.",
+      "explore_packages": "Explorar Paquetes"
+    }
+  },
+  "Gallery": {
+    "badge": "La Lente",
+    "title": "Galería de <p>Inmersión.</p>",
+    "sub": "Una exhibición visual curada en vivo desde nuestras expediciones. Sin filtros, solo la cruda majestuosidad de nuestro mundo.",
+    "awaiting": "Esperando Señales",
+    "connect": "Conecta tu Instagram en el Dashboard para transmitir fotos en vivo aquí.",
+    "video": "Video",
+    "photo": "Foto",
+    "carousel": "Carrusel"
+  },
+  "Fleet": {
+    "title": "La Flota",
+    "sub": "Viaja con suprema comodidad y seguridad con nuestros vehículos safari 4x4 personalizados.",
+    "select": "SELECCIONA UN VEHÍCULO PARA INSPECCIONAR",
+    "open": "Techo Abierto",
+    "seats": "Asientos",
+    "ac": "Clima",
+    "fridge": "Refrigerador",
+    "specs": "Especificaciones del Vehículo"
+  },
+  "Instagram": {
+    "title": "En vivo desde lo salvaje",
+    "sub": "Momentos reales de nuestros últimos safaris.",
+    "follow": "SÍGUENOS @ASILIYETUSAFARIS",
+    "empty_title": "La Naturaleza está tranquila hoy",
+    "empty_desc": "Nuestros guías están en lo profundo de la sabana explorando nuevos senderos. ¡Vuelve pronto!",
+    "video": "Video",
+    "photo": "Foto",
+    "carousel": "Carrusel"
+  },
+  "Ecosystem": {
+    "badge": "Acceso Rápido",
+    "title_main": "El Ecosistema <p>Asili</p>",
+    "sub_main": "Cada expedición está respaldada por una flota de clase mundial, rastreadores expertos e inteligencia geoespacial precisa.",
+    "fleet_title": "La Flota Élite",
+    "fleet_sub": "6 Land Cruisers de Lujo",
+    "guides_title": "Maestros Rangers",
+    "guides_sub": "8 Guías Locales Expertos",
+    "destinations_title": "Tierras Prohibidas",
+    "destinations_sub": "Mapa Activado",
+    "explore": "Explorar",
+    "marquee": {
+      "fleet": "Flota Élite",
+      "rangers": "Maestros Rangers",
+      "lands": "Tierras Prohibidas",
+      "discovery": "Modo Descubrimiento"
+    }
+  },
+  "Reviews": {
+    "title": "Voces de la <p>Naturaleza</p>",
+    "sub": "Historias de transformación de nuestros exploradores globales.",
+    "ig_label": "Explorador de Instagram",
+    "verified_label": "Explorador Verificado"
+  },
+  "Newsletter": {
+    "explorers": "Únete a 2.4k+ Exploradores",
+    "title": "Alertas de la Gran <p>Migración</p>",
+    "sub": "Cero ruido. Solo el pulso puro de la naturaleza tanzana.",
+    "placeholder": "tu-email-seguro@wild.com",
+    "btn": "Unirse al Registro",
+    "success_title": "Bienvenido al Registro",
+    "success_sub": "Pulso de expedición establecido.",
+    "error": "Error al unirse al registro."
+  },
+  "Footer": {
+    "whatsapp_title": "¿Prefieres chatear?",
+    "whatsapp_desc": "Nuestros conserjes están disponibles en WhatsApp para consultas directas y respuestas rápidas.",
+    "whatsapp_btn": "Contáctanos por WhatsApp"
+  },
+  "Packages": {
+    "title": "Nuestros Viajes",
+    "subtitle": "Explora aventuras magníficas y asombrosas totalmente adaptadas para lo salvaje.",
+    "no_packages": "No hay paquetes disponibles",
+    "check_back": "Vuelve pronto para nuevas aventuras increíbles.",
+    "per_person": "por persona"
+  }
+}

@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Default Luxury/Savannah Theme */
+  --background: #fdfaf6; /* soft sand/cream */
+  --foreground: #2d3748; 
+  --primary: #c08b5e; /* earthy brown/gold */
+  --accent: #556b2f; /* dark olive green */
+}
+
+/* Jungle Theme variables */
+:root[data-theme='jungle'] {
+  --background: #0d1b11; /* deep jungle green */
+  --foreground: #e6f1e8;
+  --primary: #4ade80; /* vibrant bright leaf green */
+  --accent: #22c55e;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Hide Jotform AI on Admin pages */
+.hide-jotform-ai iframe[src*='jotfor.ms'] { 
+  display: none !important; 
 }
