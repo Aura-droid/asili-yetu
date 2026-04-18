@@ -6,8 +6,19 @@ import { getInquiries, updateInquiryStatus, updateInquiryNotes, updateQuotedPric
 import QuickReplies from "@/components/QuickReplies";
 import SentinelDispatch from "@/components/SentinelDispatch";
 import { createClient } from "@/utils/supabase/client";
-import { Send, FileText, Settings2, ShieldCheck, Map as MapIcon, Globe, CreditCard, Trash2, Zap } from "lucide-react";
+import { Send, FileText, Settings2, ShieldCheck, Map as MapIcon, Globe, CreditCard, Trash2, Zap, MessageSquare, DollarSign } from "lucide-react";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
+
+const WhatsApp = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    className={className}
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.396.015 12.03c0 2.12.559 4.191 1.62 6.004L0 24l6.135-1.61a11.83 11.83 0 005.911 1.586h.005c6.637 0 12.032-5.396 12.035-12.032a11.762 11.762 0 00-3.483-8.503z" />
+  </svg>
+);
 
 function ChatTerminal({ inquiry, onNewMessage }: { inquiry: any, onNewMessage: () => void }) {
   const [messages, setMessages] = useState<any[]>([]);
@@ -59,12 +70,48 @@ function ChatTerminal({ inquiry, onNewMessage }: { inquiry: any, onNewMessage: (
     }
   };
 
+  const openDialer = () => {
+    if (inquiry.client_phone) window.location.href = `tel:${inquiry.client_phone}`;
+    else alert("No cellular signal registered for this explorer.");
+  };
+
+  const phone = inquiry.client_phone?.replace(/\D/g, '');
+  const waPhone = phone?.startsWith('0') ? '255' + phone.substring(1) : phone;
+  const waUrl = waPhone ? `https://wa.me/${waPhone}` : null;
+
   return (
     <div className="flex flex-col h-[600px] bg-white border border-foreground/10 rounded-2xl shadow-sm overflow-hidden">
-      <div className="p-4 border-b border-foreground/5 bg-foreground/5 flex justify-between items-center text-foreground/40 text-[10px] font-black uppercase tracking-widest">
+      <div className="p-4 border-b border-foreground/10 bg-foreground/5 flex justify-between items-center">
+        <div className="flex items-center gap-2 text-foreground/40 text-[10px] font-black uppercase tracking-widest">
+           <MessageCircle className="w-4 h-4 text-primary" />
+           <span>Signal Terminal</span>
+        </div>
         <div className="flex items-center gap-2">
-          <MessageCircle className="w-4 h-4 text-primary" />
-          <span>Signal Terminal</span>
+           {waUrl ? (
+             <a 
+               href={waUrl} 
+               target="_blank" 
+               rel="noopener noreferrer"
+               title="Launch WhatsApp Intelligence" 
+               className="w-10 h-10 rounded-xl bg-[#25D366]/10 text-[#25D366] flex items-center justify-center hover:bg-[#25D366]/20 transition-all border border-[#25D366]/10 active:scale-95"
+             >
+                <WhatsApp className="w-5 h-5" />
+             </a>
+           ) : (
+             <button 
+               onClick={() => alert("No valid phone intelligence found for this explorer.")}
+               className="w-10 h-10 rounded-xl bg-foreground/5 text-foreground/20 flex items-center justify-center border border-foreground/10 cursor-not-allowed"
+             >
+                <WhatsApp className="w-5 h-5" />
+             </button>
+           )}
+           <button 
+             onClick={openDialer} 
+             title="Cellular Uplink" 
+             className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-all border border-primary/20 active:scale-95"
+           >
+              <Phone className="w-5 h-5" />
+           </button>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto p-6 space-y-4">
@@ -93,6 +140,7 @@ export default function AdminBookingsPage() {
   const [loadingInitial, setLoadingInitial] = useState(true);
   const [tabLoading, setTabLoading] = useState<string | null>(null);
   const [dispatchPending, setDispatchPending] = useState<string | null>(null);
+  const [livePrice, setLivePrice] = useState<Record<string, number>>({});
 
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteTitle, setDeleteTitle] = useState("");
@@ -120,9 +168,39 @@ export default function AdminBookingsPage() {
 
   const handleStatusChange = async (id: string, status: string) => {
     startTransition(async () => {
-      await updateInquiryStatus(id, status);
-      loadInquiries();
+      const res = await updateInquiryStatus(id, status);
+      if (res.success) loadInquiries();
     });
+  };
+
+  const handlePriceUpdate = async (id: string, price: number) => {
+    const res = await updateQuotedPrice(id, price);
+    if (res.success) loadInquiries();
+  };
+
+  const handleSendInvoice = async (inquiry: any) => {
+    setDispatchPending(inquiry.id);
+    
+    // Ensure the database is absolutely synced with the latest live price before dispatch
+    const currentPrice = livePrice[inquiry.id] !== undefined ? livePrice[inquiry.id] : inquiry.quoted_price;
+    if (livePrice[inquiry.id] !== undefined) {
+      await updateQuotedPrice(inquiry.id, livePrice[inquiry.id]);
+    }
+
+    if (!currentPrice) {
+      setDispatchPending(null);
+      alert("Dispatch Aborted: No expedition value has been set.");
+      return;
+    }
+
+    const res = await sendInvoiceEmail(inquiry.id, currentPrice);
+    setDispatchPending(null);
+    if (res.success) {
+      alert(`Strategic Invoice Dispatched to ${inquiry.client_email}. Status updated to Quote Sent.`);
+      loadInquiries();
+    } else {
+      alert(`Dispatch Failed: ${res.error}`);
+    }
   };
 
   if (needsMigration) {
@@ -231,18 +309,36 @@ export default function AdminBookingsPage() {
                       )}
                       {(activeTabs[inquiry.id] || 'dossier') === 'logistics' && (
                         <div className="grid grid-cols-2 gap-6">
-                          <div>
-                            <p className="text-[10px] font-bold opacity-30 uppercase mb-3">Status Pipeline</p>
-                            <select value={inquiry.status} onChange={(e) => handleStatusChange(inquiry.id, e.target.value)} className="w-full bg-white border border-foreground/10 rounded-xl p-4 font-bold text-sm outline-none focus:border-primary">
-                               <option value="new">New Arrival</option>
-                               <option value="confirmed">Confirmed</option>
-                               <option value="cancelled">Dismissed</option>
-                            </select>
-                          </div>
-                          <div className="bg-foreground/5 p-6 rounded-2xl">
-                             <p className="text-[10px] font-black opacity-30 uppercase mb-3">Expedition Value</p>
-                             <p className="text-2xl font-black italic">${inquiry.quoted_price || 0}</p>
-                          </div>
+                           <div>
+                             <p className="text-[10px] font-black opacity-30 uppercase mb-3">Expedition Value (Per Person)</p>
+                             <div className="relative group">
+                                <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/30 group-focus-within:text-primary transition-colors" />
+                                <input 
+                                  type="number"
+                                  value={livePrice[inquiry.id] !== undefined ? livePrice[inquiry.id] : (inquiry.quoted_price || 0)}
+                                  onChange={(e) => setLivePrice({...livePrice, [inquiry.id]: parseFloat(e.target.value) || 0})}
+                                  onBlur={(e) => handlePriceUpdate(inquiry.id, parseFloat(e.target.value) || 0)}
+                                  className="w-full bg-white border border-foreground/10 rounded-xl py-3 pl-10 pr-4 font-black text-xl outline-none focus:border-primary transition-all"
+                                  placeholder="Set Agreed Price..."
+                                />
+                             </div>
+                           </div>
+                           <div className="flex flex-col gap-4">
+                              <div className="bg-foreground/5 p-6 rounded-2xl flex-1 flex flex-col justify-center">
+                                 <p className="text-[10px] font-black opacity-30 uppercase mb-1">Total Group Yield ({inquiry.party_size || 1} Guests)</p>
+                                 <p className="text-3xl font-black italic tracking-tighter">
+                                   ${(livePrice[inquiry.id] !== undefined ? livePrice[inquiry.id] : (inquiry.quoted_price || 0)) * (inquiry.party_size || 1)}
+                                 </p>
+                              </div>
+                              <button 
+                                onClick={() => handleSendInvoice(inquiry)}
+                                disabled={dispatchPending === inquiry.id || (livePrice[inquiry.id] === undefined && !inquiry.quoted_price)}
+                                className="w-full bg-primary text-black py-4 rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:grayscale shadow-lg shadow-primary/10"
+                              >
+                                 {dispatchPending === inquiry.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+                                 Send Strategic Invoice
+                              </button>
+                           </div>
                         </div>
                       )}
                    </div>

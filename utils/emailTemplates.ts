@@ -181,7 +181,8 @@ export const getAdminNotificationHtml = (payload: any) => {
         <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
         
         <p><strong>Explorer:</strong> ${payload.name}</p>
-        <p><strong>Contact:</strong> ${payload.email}</p>
+        <p><strong>Email:</strong> ${payload.email}</p>
+        <p><strong>Phone:</strong> ${payload.phone || 'Not provided'}</p>
         <p><strong>Itinerary:</strong> ${payload.itinerary?.recommendedTitle || 'Custom'}</p>
         <p><strong>Special Requests:</strong> ${payload.dietary || 'None'}</p>
         <p><strong>Add-ons:</strong> ${payload.addons?.join(', ') || 'None'}</p>

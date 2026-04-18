@@ -150,7 +150,7 @@ export async function deleteInquiry(id: string) {
   return { success: !error, error: error?.message, data: data || [] };
 }
 
-export async function sendInvoiceEmail(inquiryId: string) {
+export async function sendInvoiceEmail(inquiryId: string, manualPrice?: number) {
   const supabase = await createClient();
   const { data: inquiry } = await supabase
     .from("inquiries")
@@ -159,7 +159,12 @@ export async function sendInvoiceEmail(inquiryId: string) {
     .single();
 
   if (!inquiry) return { success: false, error: "Inquiry not found" };
-  if (!inquiry.quoted_price) return { success: false, error: "Please set a price first" };
+  
+  const finalPrice = manualPrice !== undefined ? manualPrice : inquiry.quoted_price;
+
+  if (!finalPrice || finalPrice <= 0) {
+    return { success: false, error: "Expedition value must be greater than $0 to dispatch an invoice." };
+  }
 
   const { getInvoiceEmailHtml } = await import("@/utils/emailTemplates");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://asiliyetusafaris.com';
@@ -167,7 +172,7 @@ export async function sendInvoiceEmail(inquiryId: string) {
   const html = getInvoiceEmailHtml(
     inquiry.client_name,
     inquiry.itinerary_details?.recommendedTitle || "Custom Safari Expedition",
-    inquiry.quoted_price,
+    finalPrice,
     siteUrl,
     inquiry.access_token
   );

@@ -18,6 +18,20 @@ export async function submitBookingInquiry(payload: any) {
         const guestsMatch = payload.guests?.match(/\d+/);
         const partySize = guestsMatch ? parseInt(guestsMatch[0]) : (payload.guests ? 1 : null);
 
+        // 0. Intelligent Price Capture: If this was bridged from a package, fetch its baseline price
+        let initialQuotedPrice = null;
+        if (payload.itinerary?.packageId) {
+            const { data: pkg } = await supabaseServer
+                .from('packages')
+                .select('price_usd, discount_price')
+                .eq('id', payload.itinerary.packageId)
+                .single();
+            
+            if (pkg) {
+                initialQuotedPrice = pkg.discount_price || pkg.price_usd;
+            }
+        }
+
         const { data: newInquiry, error: dbError } = await supabaseServer
             .from('inquiries')
             .insert([{
@@ -28,6 +42,7 @@ export async function submitBookingInquiry(payload: any) {
                 travel_dates: payload.dates || null,
                 special_requests: (payload.dietary || "") + (payload.addons ? ` | Addons: ${payload.addons.join(", ")}` : ""),
                 itinerary_details: payload.itinerary || null,
+                quoted_price: initialQuotedPrice, // Seed the bargaining terminal
                 locale: payload.locale || 'en', // Signal context
             }])
             .select('*')
