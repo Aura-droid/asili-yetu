@@ -43,7 +43,7 @@ export async function submitBookingInquiry(payload: any) {
 
         await resend.emails.send({
             from: 'Asili Yetu Safaris <onboarding@resend.dev>',
-            to: ['frdrckmmari@gmail.com'], // Admin
+            to: ['bookings@asiliyetusafaris.com'], // Admin
             subject: `New Safari Quote Request: ${payload.name}`,
             html: getAdminNotificationHtml(payload),
         });

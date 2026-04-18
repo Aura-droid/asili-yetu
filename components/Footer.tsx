@@ -15,7 +15,7 @@ export default function Footer() {
   const { setIsLoading } = useLoading();
   
   // Official Production Identity
-  const whatsappNumber = "4917634360699"; 
+  const whatsappNumber = "491751159881"; 
   const email = "info@asiliyetusafaris.com";
 
   useEffect(() => {
@@ -40,9 +40,9 @@ export default function Footer() {
           
           <div className="lg:col-span-1 flex flex-col items-start">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <Image src="/logo.png" alt="Asili Yetu Safaris" width={40} height={40} className="w-10 h-10 object-contain" />
+              <Image src="/logo.png" alt="Asili Yetu Safaris and Tours" width={40} height={40} className="w-10 h-10 object-contain" />
               <span className="text-xl font-black tracking-tighter text-foreground uppercase italic shadow-sm">
-                Asili Yetu <span className="text-primary italic">Safaris</span>
+                Asili Yetu <span className="text-primary italic">Safaris and Tours</span>
               </span>
             </Link>
             <p className="text-foreground/60 text-sm leading-loose mb-6 font-medium">
@@ -82,7 +82,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-foreground/60 text-sm font-semibold">
                 <Phone className="w-4 h-4 text-primary shrink-0" />
-                <a href={`tel:+${whatsappNumber}`} className="hover:text-primary transition-colors">+{whatsappNumber}</a>
+                <a href={`tel:+${whatsappNumber}`} className="hover:text-primary transition-colors">+49 175 1159881</a>
               </li>
             </ul>
           </div>

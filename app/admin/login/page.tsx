@@ -44,7 +44,7 @@ export default function LoginPage() {
               name="email" 
               type="email" 
               required 
-              defaultValue="frdrckmmari@gmail.com"
+              defaultValue="bookings@asiliyetusafaris.com"
               className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             />
           </div>

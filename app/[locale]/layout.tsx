@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     template: "%s | Asili Yetu Safaris and Tours"
   },
   description: "Premium safari experiences and authentic Tanzanian adventures with Asili Yetu Safaris and Tours.",
+  applicationName: "Asili Yetu Safaris and Tours",
+  appleWebApp: {
+    title: "Asili Yetu Safaris and Tours",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Asili Yetu Safaris and Tours",
+  }
 };
 
 export default async function RootLayout(props: {

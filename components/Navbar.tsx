@@ -44,7 +44,7 @@ export default function Navbar() {
             priority
           />
           <span className="text-2xl font-bold tracking-tighter text-foreground hidden sm:block">
-            Asili Yetu Safaris
+            Asili Yetu <span className="text-primary italic">Safaris and Tours</span>
           </span>
         </Link>
 

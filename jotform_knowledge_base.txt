@@ -1,4 +1,4 @@
-# Asili Yetu Safaris - AI Assistant Knowledge Base (v2.1)
+# Asili Yetu Safaris and Tours - AI Assistant Knowledge Base (v2.1)
 
 ## Core Persona & Rules
 - **Name**: Laura

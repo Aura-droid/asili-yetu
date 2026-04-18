@@ -2,9 +2,12 @@ import { Users, Car, Map, Briefcase, TrendingUp, Zap, Radio, ArrowUpRight, Shiel
 import { createClient } from "@/utils/supabase/server";
 import { getLatestFleetTelemetry } from "@/app/actions/telemetry";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import DynamicSentinelMap from "@/components/DynamicSentinelMap";
 import AIReportGenerator from "@/components/AIReportGenerator";
 import MissionFeedClient from "@/components/MissionFeedClient";
+import DashboardBookingsClient from "@/components/DashboardBookingsClient";
+import DashboardNoticesClient from "@/components/DashboardNoticesClient";
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
@@ -39,6 +42,10 @@ export default async function AdminDashboard() {
 
   // 4. Fetch Live Telemetry
   const latestTelemetry = await getLatestFleetTelemetry();
+  
+  // 5. Fetch Recent Bookings and Component Notices for Dashboard Management
+  const { data: recentInquiries } = await supabase.from('inquiries').select('*').order('created_at', { ascending: false }).limit(4);
+  const { data: recentNotices } = await supabase.from('company_notices').select('*').order('created_at', { ascending: false }).limit(3);
 
   // 5. Fetch all vehicles for the overview
   const { data: vehicles } = await supabase.from('vehicles').select('*').order('model_name', { ascending: true });
@@ -46,10 +53,10 @@ export default async function AdminDashboard() {
   const avgYield = confirmedLeads > 0 ? Math.round(pipelineValue / confirmedLeads) : 0;
 
   const stats = [
-    { label: "Active Expeditions", value: bookingsCount || 0, icon: Map, color: "text-blue-600", bg: "bg-blue-50" },
-    { label: "Curated Packages", value: toursCount || 0, icon: Briefcase, color: "text-emerald-600", bg: "bg-emerald-50" },
-    { label: "Expert Guides", value: guidesCount || 0, icon: Users, color: "text-amber-600", bg: "bg-amber-50" },
-    { label: "Elite Fleet", value: fleetCount || 0, icon: Car, color: "text-rose-600", bg: "bg-rose-50" },
+    { label: "Active Expeditions", value: bookingsCount || 0, icon: Map, color: "text-blue-600", bg: "bg-blue-50", href: "/admin/bookings" },
+    { label: "Curated Packages", value: toursCount || 0, icon: Briefcase, color: "text-emerald-600", bg: "bg-emerald-50", href: "/admin/packages" },
+    { label: "Expert Guides", value: guidesCount || 0, icon: Users, color: "text-amber-600", bg: "bg-amber-50", href: "/admin/guides" },
+    { label: "Elite Fleet", value: fleetCount || 0, icon: Car, color: "text-rose-600", bg: "bg-rose-50", href: "/admin/fleet" },
   ];
 
   return (
@@ -78,7 +85,11 @@ export default async function AdminDashboard() {
       {/* CORE METRICS GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-white rounded-[2.5rem] p-8 border border-black/5 hover:border-primary/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-black/5 relative overflow-hidden">
+          <Link 
+            key={i} 
+            href={stat.href}
+            className="bg-white rounded-[2.5rem] p-8 border border-black/5 hover:border-primary/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-black/5 relative overflow-hidden block"
+          >
             <div className={`p-4 rounded-2xl w-fit mb-6 ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform duration-500`}>
               <stat.icon className="w-6 h-6" />
             </div>
@@ -87,7 +98,7 @@ export default async function AdminDashboard() {
             <div className="absolute top-8 right-8 text-black/5 group-hover:text-primary/20 transition-colors">
               <ArrowUpRight className="w-8 h-8" />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
@@ -153,6 +164,12 @@ export default async function AdminDashboard() {
       </div>
 
       <MissionFeedClient initialMissions={missions || []} />
+
+      {/* RAPID MANAGEMENT SECTION */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 mt-8">
+        <DashboardBookingsClient initialInquiries={recentInquiries || []} />
+        <DashboardNoticesClient initialNotices={recentNotices || []} />
+      </div>
 
       {/* TACTICAL FLEET OVERVIEW */}
       <h2 className="text-2xl font-black text-foreground mb-8 mt-16 tracking-tighter uppercase italic flex items-center gap-4">

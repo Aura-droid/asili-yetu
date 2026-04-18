@@ -50,7 +50,7 @@ export default function JungleTransitionOverlay() {
            >
               <Image 
                 src="/logo.png" 
-                alt="Asili Yetu Safaris" 
+                alt="Asili Yetu Safaris and Tours" 
                 width={120} 
                 height={120} 
                 className="w-24 h-24 object-contain"

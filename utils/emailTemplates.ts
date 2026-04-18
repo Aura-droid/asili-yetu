@@ -149,7 +149,7 @@ export const safariEmailTemplate = (clientName: string, itineraryTitle: string, 
             </div>
             <div class="footer">
                 AUTHENTIC • PRIVATE • VISIONARY<br>
-                &copy; 2026 ASILI YETU SAFARIS
+                &copy; 2026 ASILI YETU SAFARIS AND TOURS
             </div>
         </div>
     </body>

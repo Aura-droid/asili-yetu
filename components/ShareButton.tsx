@@ -20,7 +20,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
     setShareUrl(url || window.location.href);
   }, [url]);
 
-  const shareTitle = `Asili Yetu Safaris: ${title}`;
+  const shareTitle = `Asili Yetu Safaris and Tours: ${title}`;
   const shareText = text || `I just found this incredible safari masterpiece! You have to check this out.`;
 
   const handleShare = async () => {

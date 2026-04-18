@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const month = parts[1] || "";
   
   const title = month 
-    ? `Best ${park} Safari in ${month.charAt(0).toUpperCase() + month.slice(1)} 2026 | Asili Yetu`
-    : `Expert ${park} Safari Expeditions | Asili Yetu Safaris`;
+    ? `Best ${park} Safari in ${month.charAt(0).toUpperCase() + month.slice(1)} 2026 | Asili Yetu Safaris and Tours`
+    : `Expert ${park} Safari Expeditions | Asili Yetu Safaris and Tours`;
 
   return {
     title,

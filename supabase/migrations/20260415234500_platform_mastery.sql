@@ -6,7 +6,7 @@
 CREATE TABLE IF NOT EXISTS public.platform_settings (
     id UUID PRIMARY KEY DEFAULT '00000000-0000-0000-0000-000000000000'::uuid,
     whatsapp_number TEXT DEFAULT '+255000000000',
-    admin_email TEXT DEFAULT 'frdrckmmari@gmail.com',
+    admin_email TEXT DEFAULT 'bookings@asiliyetusafaris.com',
     office_address TEXT DEFAULT 'Arusha, Tanzania',
     instagram_username TEXT DEFAULT 'asiliyetusafaris',
     facebook_link TEXT,

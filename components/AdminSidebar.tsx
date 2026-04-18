@@ -1,5 +1,7 @@
 "use client";
 
+// SYNC-STAMP: 2026-04-18-BRANDING-UPDATE
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -63,7 +65,7 @@ export default function AdminSidebar() {
       <div className="p-8 border-b border-white/5 flex flex-col items-start gap-4">
         <Image 
           src="/logo.png" 
-          alt="Asili Yetu Safaris Admin" 
+          alt="Asili Yetu Safaris and Tours Admin" 
           width={56} 
           height={56} 
           className="w-14 h-14 object-contain brightness-110 drop-shadow-[0_0_15px_rgba(255,183,0,0.3)]"
@@ -71,7 +73,7 @@ export default function AdminSidebar() {
         />
         <div>
           <h2 className="text-2xl font-black tracking-tighter text-white uppercase italic">Command <span className="text-primary italic">Center</span></h2>
-          <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Operations</p>
+          <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Safaris and Tours Ops</p>
         </div>
       </div>
 

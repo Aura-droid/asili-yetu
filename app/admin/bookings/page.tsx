@@ -159,7 +159,7 @@ export default function AdminBookingsPage() {
           const status = inquiry.status || 'new';
           
           return (
-            <div key={inquiry.id} className="bg-white rounded-2xl border border-foreground/10 overflow-hidden shadow-sm">
+            <div key={inquiry.id} className="bg-white rounded-2xl border border-foreground/10 overflow-hidden shadow-sm group">
               <div onClick={() => setExpandedId(isExpanded ? null : inquiry.id)} className="p-6 flex items-center justify-between cursor-pointer hover:bg-foreground/2">
                 <div className="flex items-center gap-6">
                   <div>
