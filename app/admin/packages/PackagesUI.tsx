@@ -265,8 +265,25 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                            <div className="space-y-2">
                               <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">Focus Ecosystem</label>
                               <select name="destination_id" defaultValue={editingPkg?.destination_id} className="w-full bg-white border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold text-sm shadow-sm appearance-none">
-                                 {destinations.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+                                 {destinations && destinations.length > 0 ? (
+                                    destinations.map(d => <option key={d.id} value={d.id}>{d.name}</option>)
+                                 ) : (
+                                    <>
+                                       <option value="">Select Legendary Enclave...</option>
+                                       <option value="serengeti">Serengeti National Park</option>
+                                       <option value="ngorongoro">Ngorongoro Conservation Area</option>
+                                       <option value="tarangire">Tarangire National Park</option>
+                                       <option value="manyara">Lake Manyara National Park</option>
+                                       <option value="kilimanjaro">Mount Kilimanjaro</option>
+                                       <option value="zanzibar">Zanzibar Archipelago</option>
+                                    </>
+                                 )}
                               </select>
+                              {(!destinations || destinations.length === 0) && (
+                                <p className="text-[9px] text-primary font-bold mt-2 ml-1 uppercase transition-all flex items-center gap-2 italic">
+                                  <ShieldCheck className="w-3.5 h-3.5" /> High-Fidelity Defaults Enabled (Local Override)
+                                </p>
+                              )}
                            </div>
                          </div>
                          <div className="space-y-2">

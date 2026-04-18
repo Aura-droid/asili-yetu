@@ -9,16 +9,20 @@ export const metadata = {
 
 export default async function AdminPackagesPage() {
   const { data: packages, error } = await getPackages();
-  const { data: destinations } = await getDestinations();
+  const { data: destinations, error: destError } = await getDestinations();
 
-  if (error === 'needs_migration') {
+  if (error === 'needs_migration' || destError) {
     return (
       <div className="p-12 text-center max-w-2xl mx-auto mt-20 bg-red-500/10 border border-red-500/30 rounded-3xl">
         <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-6" />
-        <h2 className="text-2xl font-black text-foreground mb-4">Database Table Missing</h2>
-        <p className="text-foreground/70">
-          The <code>packages</code> table does not exist. Please ensure you have run the migrations or created the table in Supabase.
+        <h2 className="text-2xl font-black text-foreground mb-4">Database Signal Error</h2>
+        <p className="text-foreground/70 mb-4">
+          Failed to synchronize with the mission atlas.
         </p>
+        <div className="bg-black/5 p-4 rounded-xl text-left font-mono text-xs overflow-auto max-h-40">
+           {error && <div>Packages Error: {error}</div>}
+           {destError && <div>Destinations Error: {destError}</div>}
+        </div>
       </div>
     );
   }
