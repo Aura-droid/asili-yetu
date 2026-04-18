@@ -8,6 +8,7 @@ import SentinelDispatch from "@/components/SentinelDispatch";
 import { createClient } from "@/utils/supabase/client";
 import { Send, FileText, Settings2, ShieldCheck, Map as MapIcon, Globe, CreditCard, Trash2, Zap, MessageSquare, DollarSign } from "lucide-react";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
+import OperationStatusDialog from "@/components/OperationStatusDialog";
 
 const WhatsApp = ({ className }: { className?: string }) => (
   <svg 
@@ -146,6 +147,13 @@ export default function AdminBookingsPage() {
   const [deleteTitle, setDeleteTitle] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const [statusModal, setStatusModal] = useState<{isOpen: boolean, type: 'success' | 'error', title: string, message: string}>({
+    isOpen: false,
+    type: 'success',
+    title: '',
+    message: ''
+  });
+
   useEffect(() => { loadInquiries(); }, []);
 
   const loadInquiries = async () => {
@@ -176,6 +184,14 @@ export default function AdminBookingsPage() {
   const handlePriceUpdate = async (id: string, price: number) => {
     const res = await updateQuotedPrice(id, price);
     if (res.success) loadInquiries();
+    else {
+      setStatusModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Database Sync Failed',
+        message: 'The new expedition value could not be persisted. Please check your connection and try again.'
+      });
+    }
   };
 
   const handleSendInvoice = async (inquiry: any) => {
@@ -189,17 +205,32 @@ export default function AdminBookingsPage() {
 
     if (!currentPrice) {
       setDispatchPending(null);
-      alert("Dispatch Aborted: No expedition value has been set.");
+      setStatusModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Dispatch Aborted',
+        message: 'No expedition value has been set. Please establish a price before generating an invoice.'
+      });
       return;
     }
 
     const res = await sendInvoiceEmail(inquiry.id, currentPrice);
     setDispatchPending(null);
     if (res.success) {
-      alert(`Strategic Invoice Dispatched to ${inquiry.client_email}. Status updated to Quote Sent.`);
+      setStatusModal({
+        isOpen: true,
+        type: 'success',
+        title: 'Signal Transmitted',
+        message: `Strategic Invoice successfully dispatched to ${inquiry.client_email}. The explorer's portal has been updated to Quote Sent.`
+      });
       loadInquiries();
     } else {
-      alert(`Dispatch Failed: ${res.error}`);
+      setStatusModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Dispatch Failure',
+        message: `The signal could not be completed: ${res.error}`
+      });
     }
   };
 
@@ -350,6 +381,14 @@ export default function AdminBookingsPage() {
       </div>
 
       <DeleteConfirmDialog isOpen={!!deleteId} onClose={() => setDeleteId(null)} onConfirm={handleDelete} title={deleteTitle} loading={isDeleting} />
+      
+      <OperationStatusDialog 
+        isOpen={statusModal.isOpen} 
+        onClose={() => setStatusModal(prev => ({ ...prev, isOpen: false }))}
+        type={statusModal.type}
+        title={statusModal.title}
+        message={statusModal.message}
+      />
     </div>
   );
 }
