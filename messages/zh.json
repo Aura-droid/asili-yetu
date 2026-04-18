@@ -9,7 +9,9 @@
     "where": "你想去哪里？",
     "dates": "日期",
     "guests": "客人",
-    "gearing_up": "准备中..."
+    "gearing_up": "准备中...",
+    "modal_title": "AI 探险策略顾问",
+    "proceed": "继续预订"
   },
   "Navbar": {
     "safaris": "我们的行程",

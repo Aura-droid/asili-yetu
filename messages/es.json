@@ -9,7 +9,9 @@
     "where": "¿A dónde quieres ir?",
     "dates": "Fechas",
     "guests": "Huéspedes",
-    "gearing_up": "Preparando..."
+    "gearing_up": "Preparando...",
+    "modal_title": "Estratega de Expedición de IA",
+    "proceed": "Continuar con la reserva"
   },
   "Navbar": {
     "safaris": "Nuestros Safaris",

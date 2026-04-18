@@ -9,7 +9,9 @@
     "where": "Wohin möchten Sie gehen?",
     "dates": "Daten",
     "guests": "Gäste",
-    "gearing_up": "Vorbereitung..."
+    "gearing_up": "Vorbereitung...",
+    "modal_title": "KI-Expeditionsstratege",
+    "proceed": "Zur Buchung fortfahren"
   },
   "Navbar": {
     "safaris": "Unsere Safaris",
