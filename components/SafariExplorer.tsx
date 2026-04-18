@@ -1,15 +1,34 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal, Layers, Thermometer, Zap, Clock, X, Info } from "lucide-react";
+import { Search, SlidersHorizontal, Layers, Thermometer, Zap, Clock, X, Info, DollarSign } from "lucide-react";
 import BiomePackageCard from "./BiomePackageCard";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { useEffect, useState as ReactState } from "react";
 
-export default function SafariExplorer({ packages, t }: { packages: any[], t: any }) {
+export default function SafariExplorer({ packages }: { packages: any[] }) {
+  const t = useTranslations("Packages");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBiome, setSelectedBiome] = useState<string | null>(null);
   const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
+  const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
+  const [priceSort, setPriceSort] = useState<"low" | "high" | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  
+  // Condensing search logic
+  const { scrollY } = useScroll();
+  const [isCondensed, setIsCondensed] = ReactState(false);
+  
+  useEffect(() => {
+    return scrollY.onChange((latest) => {
+       if (latest > 100) setIsCondensed(true);
+       else setIsCondensed(false);
+    });
+  }, [scrollY]);
+
+  const containerPadding = isCondensed ? "p-3" : "p-6";
+  const containerWidth = isCondensed ? "max-w-2xl" : "max-w-7xl";
 
   const biomes = useMemo(() => {
     const set = new Set(packages.map(p => p.biome_orientation).filter(Boolean));
@@ -22,33 +41,50 @@ export default function SafariExplorer({ packages, t }: { packages: any[], t: an
   }, [packages]);
 
   const filteredPackages = useMemo(() => {
-    return packages.filter(pkg => {
+    let result = packages.filter(pkg => {
       const searchStr = `${pkg.title} ${pkg.description} ${pkg.biome_orientation} ${pkg.temperature_profile} ${pkg.intensity_vibe}`.toLowerCase();
       const matchesSearch = searchStr.includes(searchQuery.toLowerCase());
       const matchesBiome = !selectedBiome || pkg.biome_orientation === selectedBiome;
       const matchesIntensity = !selectedIntensity || pkg.intensity_vibe === selectedIntensity;
-      return matchesSearch && matchesBiome && matchesIntensity;
+      
+      let matchesDuration = true;
+      if (selectedDuration === "short") matchesDuration = pkg.duration_days <= 5;
+      else if (selectedDuration === "medium") matchesDuration = pkg.duration_days > 5 && pkg.duration_days <= 9;
+      else if (selectedDuration === "long") matchesDuration = pkg.duration_days > 9;
+
+      return matchesSearch && matchesBiome && matchesIntensity && matchesDuration;
     });
-  }, [packages, searchQuery, selectedBiome, selectedIntensity]);
+
+    if (priceSort === "low") {
+      result.sort((a, b) => (a.discount_price || a.price_usd) - (b.discount_price || b.price_usd));
+    } else if (priceSort === "high") {
+      result.sort((a, b) => (b.discount_price || b.price_usd) - (a.discount_price || a.price_usd));
+    }
+
+    return result;
+  }, [packages, searchQuery, selectedBiome, selectedIntensity, selectedDuration, priceSort]);
 
   return (
     <div className="space-y-12">
       {/* Search & Filter Header */}
-      <div className="flex flex-col gap-6 sticky top-24 z-40 bg-background/80 backdrop-blur-xl p-6 rounded-[3rem] border border-foreground/5 shadow-2xl">
-        <div className="flex flex-col md:flex-row gap-4">
+      <motion.div 
+        layout
+        className={`flex flex-col gap-4 sticky top-12 z-40 bg-background/60 backdrop-blur-2xl rounded-[3rem] border border-foreground/5 shadow-2x transition-all duration-500 mx-auto ${containerPadding} ${containerWidth} ${isCondensed ? 'shadow-primary/5' : 'shadow-2xl'}`}
+      >
+        <div className="flex items-center gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/30" />
+            <Search className={`absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/30 transition-all ${isCondensed ? 'scale-75' : ''}`} />
             <input 
               type="text"
-              placeholder="Search by biome, vibe, or destination (e.g. 'Savannah', 'Tropical', 'Extreme')..."
+              placeholder={isCondensed ? "Quick Search..." : "Search by biome, vibe, or destination (e.g. 'Savannah', 'Tropical', 'Extreme')..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-foreground/5 border-none rounded-full py-6 pl-16 pr-8 text-lg font-bold text-foreground focus:ring-2 focus:ring-primary transition-all shadow-inner"
+              className={`w-full bg-foreground/5 border-none rounded-full font-bold text-foreground focus:ring-2 focus:ring-primary transition-all shadow-inner ${isCondensed ? 'py-4 pl-12 pr-6 text-sm' : 'py-6 pl-16 pr-8 text-lg'}`}
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery("")}
-                className="absolute right-6 top-1/2 -translate-y-1/2 p-2 hover:bg-foreground/5 rounded-full"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-foreground/5 rounded-full"
               >
                 <X className="w-4 h-4 text-foreground/40" />
               </button>
@@ -56,12 +92,12 @@ export default function SafariExplorer({ packages, t }: { packages: any[], t: an
           </div>
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center gap-3 px-8 py-6 rounded-full font-black uppercase tracking-widest text-sm transition-all ${showFilters ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'}`}
+            className={`flex items-center justify-center gap-3 rounded-full font-black uppercase tracking-widest transition-all shrink-0 ${showFilters ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'} ${isCondensed ? 'w-12 h-12 p-0' : 'px-8 py-6 text-sm'}`}
           >
-            <SlidersHorizontal className="w-5 h-5" />
-            {showFilters ? 'Lock Filters' : 'Refine'}
-            {(selectedBiome || selectedIntensity) && (
-               <span className="w-5 h-5 bg-white text-black rounded-full flex items-center justify-center text-[10px] animate-pulse">!</span>
+            <SlidersHorizontal className={`w-5 h-5 ${isCondensed ? 'mr-0' : ''}`} />
+            {!isCondensed && (showFilters ? 'Lock Filters' : 'Refine')}
+            {(selectedBiome || selectedIntensity || selectedDuration || priceSort) && (
+               <span className={`bg-white text-black rounded-full flex items-center justify-center text-[10px] animate-pulse ${isCondensed ? 'absolute -top-1 -right-1 w-4 h-4' : 'w-5 h-5'}`}>!</span>
             )}
           </button>
         </div>
@@ -120,11 +156,69 @@ export default function SafariExplorer({ packages, t }: { packages: any[], t: an
                     ))}
                   </div>
                 </div>
+
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.3em] flex items-center gap-2">
+                    <Clock className="w-3 h-3" /> Endurance Window
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <button 
+                      onClick={() => setSelectedDuration(null)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!selectedDuration ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Any Days
+                    </button>
+                    <button 
+                      onClick={() => setSelectedDuration("short")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${selectedDuration === "short" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Quick (1-5D)
+                    </button>
+                    <button 
+                      onClick={() => setSelectedDuration("medium")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${selectedDuration === "medium" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Classic (6-9D)
+                    </button>
+                    <button 
+                      onClick={() => setSelectedDuration("long")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${selectedDuration === "long" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Grand (10D+)
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.3em] flex items-center gap-2">
+                    <DollarSign className="w-3 h-3" /> Yield Sorting
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <button 
+                      onClick={() => setPriceSort(null)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!priceSort ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Default
+                    </button>
+                    <button 
+                      onClick={() => setPriceSort("low")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${priceSort === "low" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Lowest First
+                    </button>
+                    <button 
+                      onClick={() => setPriceSort("high")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${priceSort === "high" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
+                    >
+                      Highest First
+                    </button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {/* Results Count */}
       <div className="flex items-center gap-4 px-6 md:px-0">
@@ -151,6 +245,8 @@ export default function SafariExplorer({ packages, t }: { packages: any[], t: an
                 setSearchQuery("");
                 setSelectedBiome(null);
                 setSelectedIntensity(null);
+                setSelectedDuration(null);
+                setPriceSort(null);
               }}
               className="mt-10 px-10 py-5 bg-foreground text-background rounded-full font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-2xl"
             >

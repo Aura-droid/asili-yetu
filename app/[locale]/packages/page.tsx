@@ -85,7 +85,7 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
             <p className="text-foreground/60 mt-3 text-lg">{t("check_back")}</p>
           </div>
         ) : (
-          <SafariExplorer packages={packages || []} t={t} />
+          <SafariExplorer packages={packages || []} />
         )}
       </div>
     </div>

@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { AlertTriangle, RefreshCw, MessageSquare, ArrowLeft } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AlertTriangle, RefreshCw, MessageSquare, ArrowLeft, ShieldCheck, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Error({
   error,
@@ -12,6 +12,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [reported, setReported] = useState(false);
+
   useEffect(() => {
     // Technical logging remains in the console for your eyes only
     console.error("Sentinel Error Intercepted:", error);
@@ -62,7 +64,7 @@ export default function Error({
              </button>
              
              <button 
-               onClick={() => alert("Report Transmitted to Command Center. We are on it.")}
+               onClick={() => setReported(true)}
                className="w-full bg-white/5 border border-white/10 py-5 rounded-2xl text-white font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/10 transition-all text-[10px]"
              >
                 <MessageSquare className="w-5 h-5 text-red-500" /> Dispatch Intelligence Report
@@ -80,6 +82,43 @@ export default function Error({
            Error ID: {error.digest || "EXPEDITION_DESYNC_01"} • Asili Yetu Command
         </p>
       </div>
+
+      <AnimatePresence>
+        {reported && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-[#0a0a0a]/90 backdrop-blur-xl flex items-center justify-center p-6"
+          >
+             <motion.div 
+               initial={{ scale: 0.9, y: 20 }}
+               animate={{ scale: 1, y: 0 }}
+               className="max-w-md w-full bg-white rounded-[3rem] p-12 text-center relative"
+             >
+                <button 
+                  onClick={() => setReported(false)}
+                  className="absolute top-8 right-8 text-black/20 hover:text-black transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                   <ShieldCheck className="w-10 h-10 text-primary" />
+                </div>
+                <h3 className="text-3xl font-black text-black tracking-tighter uppercase italic leading-none mb-4">Transmission Successful</h3>
+                <p className="text-black/50 text-xs font-bold uppercase tracking-widest mb-8 leading-relaxed">
+                   The intelligence report has been dispatched to our **Asili Yetu Command Center** (bookings@asiliyetusafaris.com). Our technical team is already on point.
+                </p>
+                <button 
+                  onClick={() => setReported(false)}
+                  className="w-full bg-black py-4 rounded-2xl text-white font-black uppercase tracking-widest text-[10px]"
+                >
+                   Close Manifest
+                </button>
+             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
