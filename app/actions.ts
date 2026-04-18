@@ -60,7 +60,7 @@ export async function submitBookingInquiry(payload: any) {
         const { getAcknowledgmentEmailHtml, getAdminNotificationHtml } = await import('@/utils/emailTemplates');
 
         await resend.emails.send({
-            from: 'Asili Yetu Safaris and Tours <onboarding@resend.dev>',
+            from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
             to: ['bookings@asiliyetusafaris.com'], // Admin
             subject: `New Safari Quote Request: ${payload.name}`,
             html: getAdminNotificationHtml(payload),
@@ -68,7 +68,7 @@ export async function submitBookingInquiry(payload: any) {
 
         // 3. Email the User acknowledging the inquiry with Magic Link
         await resend.emails.send({
-            from: 'Asili Yetu Safaris and Tours <onboarding@resend.dev>',
+            from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
             to: [payload.email],
             subject: 'Your Tanzanian Expedition: Inquiry Received',
             html: getAcknowledgmentEmailHtml({ ...payload, access_token: newInquiry.access_token }, payload.locale || 'en'),

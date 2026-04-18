@@ -87,7 +87,7 @@ export async function sendBrandedEmail(inquiryId: string, customMessage?: string
 
     // STAMP: 2026-04-17-PULSE-CHECK: Ensuring build sync
     const { data: finalResendData, error: finalResendError } = await resend.emails.send({
-      from: 'Asili Yetu Safaris and Tours <info@asiliyetusafaris.com>',
+      from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
       to: [inquiry.client_email],
       subject: `Update on your Asili Yetu Expedition: ${inquiry.status.replace('_', ' ').toUpperCase()}`,
       html: html,
@@ -178,7 +178,7 @@ export async function sendInvoiceEmail(inquiryId: string, manualPrice?: number) 
   );
 
   await resend.emails.send({
-    from: 'Asili Yetu Safaris and Tours <onboarding@resend.dev>',
+    from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
     to: [inquiry.client_email],
     subject: `Expedition Authorization: Final Quote for ${inquiry.itinerary_details?.recommendedTitle || "Your Safari"}`,
     html: html,
@@ -235,7 +235,7 @@ export async function sendSignalNotification(inquiryId: string, content: string)
   );
 
   await resend.emails.send({
-    from: 'Asili Yetu Safaris and Tours <onboarding@resend.dev>',
+    from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
     to: [inquiry.client_email],
     subject: `New Message from Asili Yetu Agent`,
     html: html,

@@ -107,7 +107,7 @@ export default function Error({
                 </div>
                 <h3 className="text-3xl font-black text-black tracking-tighter uppercase italic leading-none mb-4">Transmission Successful</h3>
                 <p className="text-black/50 text-xs font-bold uppercase tracking-widest mb-8 leading-relaxed">
-                   The intelligence report has been dispatched to our **Asili Yetu Command Center** (bookings@asiliyetusafaris.com). Our technical team is already on point.
+                   The intelligence report has been dispatched to our **Asili Yetu Command Center** (info@asiliyetusafaris.com). Our technical team is already on point.
                 </p>
                 <button 
                   onClick={() => setReported(false)}
