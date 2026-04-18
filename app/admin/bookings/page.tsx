@@ -225,7 +225,7 @@ export default function AdminBookingsPage() {
                           </div>
                           <div className="bg-primary/5 p-6 rounded-2xl border border-primary/20">
                              <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-2">Itinerary Strategy</p>
-                             <p className="text-sm font-medium leading-relaxed italic">"{inquiry.itinerary_details?.rationale || "Base strategy pending..."}"</p>
+                             <p className="text-sm font-medium leading-relaxed italic">"{inquiry.itinerary_details?.strategy || inquiry.itinerary_details?.rationale || "Base strategy pending..."}"</p>
                           </div>
                         </div>
                       )}
