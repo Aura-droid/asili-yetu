@@ -9,14 +9,19 @@ import {
   LogOut, Megaphone, MapPin, Camera, BookOpen, Settings, 
   Search, ChevronRight 
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useLoading } from "@/providers/LoadingProvider";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
   const [search, setSearch] = useState("");
+  const [mounted, setMounted] = useState(false);
   const { setIsLoading } = useLoading();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (pathname === "/admin/login") return null;
 
@@ -62,20 +67,24 @@ export default function AdminSidebar() {
 
   return (
     <div className="w-72 bg-[#0a0a0a] text-white flex flex-col h-full sticky top-0 min-h-screen border-r border-white/5">
-      <div className="p-8 border-b border-white/5 flex flex-col items-start gap-4">
-        <Image 
-          src="/logo.png" 
-          alt="Asili Yetu Safaris and Tours Admin" 
-          width={56} 
-          height={56} 
-          className="w-14 h-14 object-contain brightness-110 drop-shadow-[0_0_15px_rgba(255,183,0,0.3)]"
-          priority
-        />
-        <div>
-          <h2 className="text-2xl font-black tracking-tighter text-white uppercase italic">Command <span className="text-primary italic">Center</span></h2>
-          <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Safaris and Tours Ops</p>
+        <div className="p-8 border-b border-white/5 flex flex-col items-start gap-4">
+          <Image 
+            src="/logo.png" 
+            alt="Asili Yetu Safaris and Tours Admin" 
+            width={56} 
+            height={56} 
+            className="w-14 h-14 object-contain brightness-110 drop-shadow-[0_0_15px_rgba(255,183,0,0.3)]"
+            priority
+          />
+          {mounted ? (
+            <div>
+              <h2 className="text-2xl font-black tracking-tighter text-white uppercase italic">Command <span className="text-primary italic">Center</span></h2>
+              <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Safaris and Tours Ops</p>
+            </div>
+          ) : (
+            <div className="h-12 w-32 bg-white/5 animate-pulse rounded-lg" />
+          )}
         </div>
-      </div>
 
       {/* Strategic Search */}
       <div className="px-6 pt-8 pb-4">
