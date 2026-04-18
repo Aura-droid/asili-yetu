@@ -21,10 +21,12 @@ CREATE TABLE IF NOT EXISTS public.platform_settings (
 ALTER TABLE public.platform_settings ENABLE ROW LEVEL SECURITY;
 
 -- Public can read settings for the header/footer
+DROP POLICY IF EXISTS "Public read platform_settings" ON public.platform_settings;
 CREATE POLICY "Public read platform_settings" ON public.platform_settings
     FOR SELECT USING (true);
 
 -- Only authenticated admins can update
+DROP POLICY IF EXISTS "Admins manage platform_settings" ON public.platform_settings;
 CREATE POLICY "Admins manage platform_settings" ON public.platform_settings
     FOR ALL USING (auth.role() = 'authenticated');
 

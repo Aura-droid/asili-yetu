@@ -15,10 +15,12 @@ CREATE TABLE IF NOT EXISTS culture_stories (
 -- Enable RLS for high-fidelity security
 ALTER TABLE culture_stories ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public read access to culture stories" ON culture_stories;
 CREATE POLICY "Allow public read access to culture stories"
   ON culture_stories FOR SELECT
   USING (is_active = true);
 
+DROP POLICY IF EXISTS "Allow admin full access to culture stories" ON culture_stories;
 CREATE POLICY "Allow admin full access to culture stories"
   ON culture_stories FOR ALL
   TO authenticated

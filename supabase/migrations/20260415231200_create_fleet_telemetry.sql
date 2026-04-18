@@ -11,5 +11,13 @@ CREATE TABLE IF NOT EXISTS fleet_telemetry (
   timestamp TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable realtime for the telemetry grid
-ALTER PUBLICATION supabase_realtime ADD TABLE fleet_telemetry;
+-- Enable realtime for the telemetry grid (Idempotent check)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' AND tablename = 'fleet_telemetry'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE fleet_telemetry;
+  END IF;
+END $$;

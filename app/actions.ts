@@ -1,5 +1,6 @@
 'use server';
 import { Resend } from 'resend';
+import { randomUUID } from 'crypto';
 import { supabase } from '@/lib/supabase';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -17,6 +18,7 @@ export async function submitBookingInquiry(payload: any) {
         // 1. Insert into Supabase (Inquiries CRM)
         const guestsMatch = payload.guests?.match(/\d+/);
         const partySize = guestsMatch ? parseInt(guestsMatch[0]) : (payload.guests ? 1 : null);
+        const accessToken = randomUUID();
 
         // 0. Intelligent Price Capture: If this was bridged from a package, fetch its baseline price
         let initialQuotedPrice = null;
@@ -44,13 +46,14 @@ export async function submitBookingInquiry(payload: any) {
                 itinerary_details: payload.itinerary || null,
                 quoted_price: initialQuotedPrice, // Seed the bargaining terminal
                 locale: payload.locale || 'en', // Signal context
+                access_token: accessToken, // Client-side generated for guaranteed sync
             }])
             .select('*')
             .single();
 
         if (dbError) {
             console.error("🚫 DATABASE SIGNAL FAILURE:", dbError);
-            throw new Error(dbError.message);
+            throw new Error(`Database Error: ${dbError.message} (Hint: Check RLS policies for 'inquiries' table)`);
         }
 
         // 2. Email Admin via Resend

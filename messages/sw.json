@@ -9,7 +9,9 @@
     "where": "Unataka kwenda wapi?",
     "dates": "Tarehe",
     "guests": "Wageni",
-    "gearing_up": "Tunaandaa..."
+    "gearing_up": "Tunaandaa...",
+    "modal_title": "Mkakati wa Msafara wa AI",
+    "proceed": "Endelea na Uhifadhi"
   },
   "Navbar": {
     "safaris": "Safari Zetu",

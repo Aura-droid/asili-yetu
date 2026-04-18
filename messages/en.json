@@ -9,7 +9,9 @@
     "where": "Where do you want to go?",
     "dates": "Dates",
     "guests": "Guests",
-    "gearing_up": "Gearing up..."
+    "gearing_up": "Gearing up...",
+    "modal_title": "AI Expedition Strategist",
+    "proceed": "Proceed to Booking"
   },
   "Navbar": {
     "safaris": "Our Safaris",

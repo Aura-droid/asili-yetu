@@ -14,12 +14,14 @@ CREATE TABLE IF NOT EXISTS public.package_ratings (
 ALTER TABLE public.package_ratings ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access so any visitor can see reviews
+DROP POLICY IF EXISTS "Allow public read access on package_ratings" ON public.package_ratings;
 CREATE POLICY "Allow public read access on package_ratings"
 ON public.package_ratings
 FOR SELECT
 USING (true);
 
 -- Allow anonymous inserts for demonstration (you can change this to authenticated users only later)
+DROP POLICY IF EXISTS "Allow public insert on package_ratings" ON public.package_ratings;
 CREATE POLICY "Allow public insert on package_ratings"
 ON public.package_ratings
 FOR INSERT

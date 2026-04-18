@@ -18,10 +18,12 @@ CREATE TABLE IF NOT EXISTS public.settings (
 ALTER TABLE public.settings ENABLE ROW LEVEL SECURITY;
 
 -- Public read access
+DROP POLICY IF EXISTS "Public read settings" ON public.settings;
 CREATE POLICY "Public read settings" ON public.settings
     FOR SELECT USING (true);
 
 -- Admin management access
+DROP POLICY IF EXISTS "Admins manage settings" ON public.settings;
 CREATE POLICY "Admins manage settings" ON public.settings
     FOR ALL USING (auth.role() = 'authenticated');
 

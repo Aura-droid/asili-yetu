@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS public.company_notices (
 ALTER TABLE public.company_notices ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to fetch active notices
+DROP POLICY IF EXISTS "Allow public read access on company_notices" ON public.company_notices;
 CREATE POLICY "Allow public read access on company_notices"
 ON public.company_notices
 FOR SELECT
@@ -21,11 +22,13 @@ USING (true);
 
 -- Notice: Admins will require authorization to INSERT/UPDATE (configured later through auth)
 -- For now, we lock writes internally because notices should only come from secure admin dashboards.
+DROP POLICY IF EXISTS "Allow authenticated admins to insert company_notices" ON public.company_notices;
 CREATE POLICY "Allow authenticated admins to insert company_notices"
 ON public.company_notices
 FOR INSERT
 WITH CHECK (auth.role() = 'authenticated');
 
+DROP POLICY IF EXISTS "Allow authenticated admins to update company_notices" ON public.company_notices;
 CREATE POLICY "Allow authenticated admins to update company_notices"
 ON public.company_notices
 FOR UPDATE

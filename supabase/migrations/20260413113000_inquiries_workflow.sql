@@ -1,8 +1,13 @@
 -- Create inquiries table to power the Quote & Concierge CRM
 
-CREATE TYPE inquiry_status AS ENUM ('new', 'in_discussion', 'quote_sent', 'confirmed', 'cancelled');
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'inquiry_status') THEN
+        CREATE TYPE inquiry_status AS ENUM ('new', 'in_discussion', 'quote_sent', 'confirmed', 'cancelled');
+    END IF;
+END $$;
 
-CREATE TABLE inquiries (
+CREATE TABLE IF NOT EXISTS inquiries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     client_name TEXT NOT NULL,
     client_email TEXT NOT NULL,
@@ -22,9 +27,11 @@ CREATE TABLE inquiries (
 ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
 
 -- Only authenticated admins can view and edit inquiries
+DROP POLICY IF EXISTS "Admins can manage inquiries" ON inquiries;
 CREATE POLICY "Admins can manage inquiries" ON inquiries
     FOR ALL USING (auth.role() = 'authenticated');
 
 -- Anyone can insert an inquiry
+DROP POLICY IF EXISTS "Public can insert inquiries" ON inquiries;
 CREATE POLICY "Public can insert inquiries" ON inquiries
     FOR INSERT WITH CHECK (true);
