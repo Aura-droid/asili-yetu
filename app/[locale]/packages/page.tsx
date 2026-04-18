@@ -56,7 +56,7 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
       ratingValue: '5',
       reviewCount: '124',
     },
-  }));
+  })) || [];
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 transition-colors duration-1000">
