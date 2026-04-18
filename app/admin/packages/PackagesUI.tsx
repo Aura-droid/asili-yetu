@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2, Star, Loader2, MapPin, Clock, DollarSign, Package, CheckCircle2, Pin, Image as ImageIcon, AlertCircle, RefreshCw, Edit2, XCircle } from "lucide-react";
+import { Plus, Trash2, Star, Loader2, MapPin, Clock, DollarSign, Package, CheckCircle2, Pin, Image as ImageIcon, AlertCircle, RefreshCw, Edit2, XCircle, ShieldCheck, Thermometer, Zap, Layers, Wind, Droplets } from "lucide-react";
 import { createPackage, deletePackage, toggleFeatured, updatePackage } from "@/app/actions/packages";
 import AdminRouteMap from "@/components/AdminRouteMap";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
@@ -155,11 +155,11 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                      onClick={() => handleToggle(pkg.id, pkg.is_featured)} 
                      className={`p-2 rounded-lg border transition-all ${pkg.is_featured ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/30 hover:text-foreground'}`}
                    >
-                      {toggling === pkg.id ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : (
-                        <Star className="w-3.5 h-3.5" fill={pkg.is_featured ? "currentColor" : "none"} />
-                      )}
+                       {toggling === pkg.id ? (
+                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                       ) : (
+                         <Star className="w-3.5 h-3.5" fill={pkg.is_featured ? "currentColor" : "none"} />
+                       )}
                    </button>
                   <button 
                     type="button"
@@ -242,7 +242,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                 </div>}
                 <form key={editingPkg?.id || 'new'} onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <div className="lg:col-span-8 space-y-12 bg-foreground/5 p-10 rounded-[3.5rem] border border-foreground/5 shadow-inner">
-                      <div className="space-y-6">
+                      <div className="space-y-10">
                          <div className="flex items-center justify-between">
                             <h2 className="text-3xl font-black text-foreground italic uppercase tracking-tighter">
                                {editingPkg ? 'Edit Masterpiece' : 'Design New Expedition'}
@@ -257,38 +257,52 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                                </button>
                             )}
                          </div>
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                           <div className="space-y-2">
-                              <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">Expedition Title</label>
-                              <input name="title" defaultValue={editingPkg?.title} required placeholder="e.g. The Serengeti Masterpiece" className="w-full bg-white border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold text-sm shadow-sm" />
-                           </div>
-                           <div className="space-y-2">
-                              <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">Focus Ecosystem</label>
-                              <select name="destination_id" defaultValue={editingPkg?.destination_id} className="w-full bg-white border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold text-sm shadow-sm appearance-none">
-                                 {destinations && destinations.length > 0 ? (
-                                    destinations.map(d => <option key={d.id} value={d.id}>{d.name}</option>)
-                                 ) : (
-                                    <>
-                                       <option value="">Select Legendary Enclave...</option>
-                                       <option value="serengeti">Serengeti National Park</option>
-                                       <option value="ngorongoro">Ngorongoro Conservation Area</option>
-                                       <option value="tarangire">Tarangire National Park</option>
-                                       <option value="manyara">Lake Manyara National Park</option>
-                                       <option value="kilimanjaro">Mount Kilimanjaro</option>
-                                       <option value="zanzibar">Zanzibar Archipelago</option>
-                                    </>
-                                 )}
-                              </select>
-                              {(!destinations || destinations.length === 0) && (
-                                <p className="text-[9px] text-primary font-bold mt-2 ml-1 uppercase transition-all flex items-center gap-2 italic">
-                                  <ShieldCheck className="w-3.5 h-3.5" /> High-Fidelity Defaults Enabled (Local Override)
-                                </p>
-                              )}
-                           </div>
+
+                         <div className="space-y-4">
+                            <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">Expedition Title</label>
+                            <input name="title" defaultValue={editingPkg?.title} required placeholder="e.g. The Serengeti Masterpiece" className="w-full bg-white border border-foreground/10 rounded-[2.5rem] px-10 py-8 text-2xl font-black text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all shadow-xl italic uppercase tracking-tighter" />
                          </div>
+
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-black/[0.03] p-10 rounded-[4rem] border border-foreground/5 shadow-inner">
+                            <div className="md:col-span-2 flex items-center gap-4 mb-2">
+                               <div className="h-px bg-foreground/10 flex-1"></div>
+                               <h3 className="text-[10px] font-black text-foreground/20 uppercase tracking-[0.4em] italic shrink-0">Enclave Positioning</h3>
+                               <div className="h-px bg-foreground/10 flex-1"></div>
+                            </div>
+                            <div className="space-y-3">
+                               <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-2 flex items-center gap-2"><Layers className="w-4 h-4 text-primary" /> Focus Biome</label>
+                               <select name="biome_orientation" defaultValue={editingPkg?.biome_orientation || "Savannah Majesty"} className="w-full bg-white border border-foreground/10 rounded-2xl px-8 py-5 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-black text-sm shadow-sm appearance-none cursor-pointer uppercase tracking-tight">
+                                  <option value="Savannah Majesty">Savannah Majesty (Infinite Plains)</option>
+                                  <option value="Volcanic Highlands">Volcanic Highlands (Crater Edges)</option>
+                                  <option value="Primeval Jungle">Primeval Jungle (Lush Canopy)</option>
+                                  <option value="Equatorial Alpine">Equatorial Alpine (Glacial Peaks)</option>
+                                  <option value="Tropical Turquoise">Tropical Turquoise (Coastal Reefs)</option>
+                               </select>
+                            </div>
+                            <div className="space-y-3">
+                               <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-2 flex items-center gap-2"><Thermometer className="w-4 h-4 text-primary" /> Thermal Profile</label>
+                               <select name="temperature_profile" defaultValue={editingPkg?.temperature_profile || "Warm & Sun-drenched"} className="w-full bg-white border border-foreground/10 rounded-2xl px-8 py-5 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-black text-sm shadow-sm appearance-none cursor-pointer uppercase tracking-tight">
+                                  <option value="Warm & Sun-drenched">Sun-Drenched & Warm</option>
+                                  <option value="Cool Mist & High Altitude">Cool Mist & High Alt</option>
+                                  <option value="Tropical Monsoon">Monsoon Humidity</option>
+                                  <option value="Glacial Chill">Crisp Glacial</option>
+                               </select>
+                            </div>
+                            <div className="space-y-3 md:col-span-2">
+                               <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-2 flex items-center gap-2"><Zap className="w-4 h-4 text-primary" /> Operation Momentum</label>
+                               <select name="intensity_vibe" defaultValue={editingPkg?.intensity_vibe || "Classic Safari"} className="w-full bg-white border border-foreground/10 rounded-2xl px-8 py-5 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-black text-sm shadow-sm appearance-none cursor-pointer uppercase tracking-tight">
+                                  <option value="Classic Safari">Balanced Flow (Standard)</option>
+                                  <option value="Extreme Expedition">High Momentum (Action)</option>
+                                  <option value="Luxury Sanctuary">Refined Pace (Zen)</option>
+                                  <option value="Cultural Immersion">Deep Connection (Human)</option>
+                               </select>
+                            </div>
+                            <input type="hidden" name="destination_id" value={editingPkg?.destination_id || ""} />
+                         </div>
+
                          <div className="space-y-2">
                             <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">The Narrative</label>
-                            <textarea name="description" defaultValue={editingPkg?.description} required rows={4} placeholder="Describe the soul of this expedition..." className="w-full bg-white border border-foreground/10 rounded-[2.5rem] px-8 py-6 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold italic text-sm leading-relaxed resize-none shadow-sm" />
+                            <textarea name="description" defaultValue={editingPkg?.description} required rows={4} placeholder="Describe the soul of this expedition..." className="w-full bg-white border border-foreground/10 rounded-[3rem] px-10 py-8 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold italic text-base leading-relaxed resize-none shadow-sm" />
                          </div>
 
                        <div className="grid grid-cols-1 gap-6 pt-4">
@@ -375,12 +389,12 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                         <div className="relative group/photo h-64 bg-white border-2 border-dashed border-foreground/10 rounded-[3rem] overflow-hidden flex flex-col items-center justify-center transition-all hover:border-primary/50 cursor-pointer">
                            <input name="image" type="file" accept="image/*" onChange={handleImageChange} className="absolute inset-0 opacity-0 cursor-pointer z-10" />
                            {previewUrl ? (
-                              <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
+                               <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
                            ) : (
-                              <>
-                                 <ImageIcon className="w-12 h-12 text-foreground/10 mb-2 group-hover/photo:text-primary transition-colors" />
-                                 <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">Select Image</p>
-                              </>
+                               <>
+                                  <ImageIcon className="w-12 h-12 text-foreground/10 mb-2 group-hover/photo:text-primary transition-colors" />
+                                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest">Select Image</p>
+                               </>
                            )}
                            {previewUrl && (
                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/photo:opacity-100 transition-opacity flex items-center justify-center">

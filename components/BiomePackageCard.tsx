@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import { MapPin, Clock, DollarSign, X, Compass } from "lucide-react";
+import { MapPin, Clock, DollarSign, X, Compass, Layers, Thermometer, Zap } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useTranslations } from "next-intl";
 import RustlingButton from "./RustlingButton";
@@ -33,8 +33,10 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
 
   useEffect(() => {
     if (isInView) {
+      const biome = (pkg.biome_orientation || "").toLowerCase();
       const name = (pkg.destinations?.name || pkg.title || "").toLowerCase();
-      if (name.includes("gorilla") || name.includes("bwindi") || name.includes("mahale") || name.includes("forest") || name.includes("jungle")) {
+      
+      if (biome.includes("jungle") || name.includes("gorilla") || name.includes("bwindi") || name.includes("mahale") || name.includes("forest") || name.includes("jungle")) {
         setTheme("jungle");
       } else {
         setTheme("standard"); // Savannah mode
@@ -124,6 +126,12 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                 <span className="font-bold tracking-widest uppercase text-xs text-primary">{pkg.difficulty_level}</span>
               </div>
+              {pkg.biome_orientation && (
+                  <div className="hidden md:flex items-center gap-2 bg-primary/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30">
+                    <Layers className="w-4 h-4 text-primary" />
+                    <span className="font-bold uppercase text-[10px] tracking-widest text-white">{pkg.biome_orientation}</span>
+                  </div>
+              )}
             </div>
           </div>
 
@@ -196,12 +204,36 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 </div>
 
                 <div className="max-w-4xl">
-                   <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
-                         <Compass className="w-6 h-6" />
-                      </div>
-                      <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Expedition Concept</h3>
-                   </div>
+                    <div className="flex flex-wrap items-center gap-4 mb-8">
+                       <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
+                          <Layers className="w-5 h-5 text-primary" />
+                          <div>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Biome</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.biome_orientation || "Savannah Majesty"}</p>
+                          </div>
+                       </div>
+                       <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
+                          <Thermometer className="w-5 h-5 text-primary" />
+                          <div>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Thermal profile</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.temperature_profile || "Warm & Sun-drenched"}</p>
+                          </div>
+                       </div>
+                       <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
+                          <Zap className="w-5 h-5 text-primary" />
+                          <div>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Momentum</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.intensity_vibe || "Balanced Flow"}</p>
+                          </div>
+                       </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 mb-6">
+                       <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
+                          <Compass className="w-6 h-6" />
+                       </div>
+                       <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Expedition Concept</h3>
+                    </div>
                    <p className="text-xl md:text-2xl font-medium text-foreground/80 leading-relaxed mb-12">
                       {pkg.description}
                    </p>

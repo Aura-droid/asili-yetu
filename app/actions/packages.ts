@@ -42,6 +42,9 @@ export async function createPackage(formData: FormData) {
   const discount_price = discount_price_raw ? parseInt(discount_price_raw) : null;
   const file = formData.get("image") as File | null;
   const is_featured = formData.get("is_featured") === "on";
+  const biome_orientation = formData.get("biome_orientation") as string || "Savannah Majesty";
+  const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
+  const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
   const itineraryRaw = formData.get("itinerary") as string;
   let itinerary = [];
   try {
@@ -87,7 +90,10 @@ export async function createPackage(formData: FormData) {
       main_image: main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80",
       is_featured,
       itinerary,
-      discount_price
+      discount_price,
+      biome_orientation,
+      temperature_profile,
+      intensity_vibe
     }]);
 
   if (!error) revalidatePath("/admin/packages");
@@ -127,6 +133,9 @@ export async function updatePackage(id: string, formData: FormData) {
   const destination_id = formData.get("destination_id") as string;
   const file = formData.get("image") as File | null;
   const is_featured = formData.get("is_featured") === "on";
+  const biome_orientation = formData.get("biome_orientation") as string || "Savannah Majesty";
+  const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
+  const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
   const itineraryRaw = formData.get("itinerary") as string;
   let itinerary = [];
   try {
@@ -144,7 +153,10 @@ export async function updatePackage(id: string, formData: FormData) {
     destination_id: destination_id || null,
     is_featured,
     itinerary,
-    discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null
+    discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
+    biome_orientation,
+    temperature_profile,
+    intensity_vibe
   };
 
   if (file && file.size > 0) {

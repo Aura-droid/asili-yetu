@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { Compass } from "lucide-react";
 import React from "react";
-import BiomePackageCard from "@/components/BiomePackageCard";
+import SafariExplorer from "@/components/SafariExplorer";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from 'next';
 
@@ -65,7 +65,7 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-24 md:mb-32">
+        <div className="text-center mb-20">
           <h1 className="text-6xl md:text-8xl font-extrabold text-foreground tracking-tight mb-6">{t("title")}</h1>
           <p className="text-foreground/70 text-xl md:text-2xl max-w-3xl mx-auto font-medium">
             {t("subtitle")}
@@ -73,7 +73,7 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 p-4 rounded-xl text-center font-medium">
+          <div className="bg-red-50 text-red-600 p-4 rounded-xl text-center font-medium mb-12">
             Error loading packages: {error.message}
           </div>
         )}
@@ -85,15 +85,7 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
             <p className="text-foreground/60 mt-3 text-lg">{t("check_back")}</p>
           </div>
         ) : (
-          <div className="flex flex-col max-w-6xl mx-auto">
-            <div className="w-0.5 h-32 bg-gradient-to-b from-transparent to-primary mx-auto mb-10 opacity-50 hidden md:block" />
-            
-            {packages?.map((pkg: any) => (
-              <BiomePackageCard key={pkg.id} pkg={pkg} />
-            ))}
-
-            <div className="w-0.5 h-32 bg-gradient-to-t from-transparent to-primary mx-auto mt-10 opacity-50 hidden md:block" />
-          </div>
+          <SafariExplorer packages={packages || []} t={t} />
         )}
       </div>
     </div>
