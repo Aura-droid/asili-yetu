@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search, SlidersHorizontal, Layers, Thermometer, Zap, Clock, X, Info, DollarSign } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import BiomePackageCard from "./BiomePackageCard";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -15,16 +16,25 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
   const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
   const [priceSort, setPriceSort] = useState<"low" | "high" | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const searchParams = useSearchParams();
+  
+  useEffect(() => {
+    const query = searchParams.get("q");
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [searchParams]);
   
   // Condensing search logic
   const { scrollY } = useScroll();
   const [isCondensed, setIsCondensed] = ReactState(false);
   
   useEffect(() => {
-    return scrollY.onChange((latest) => {
+    const unsubscribe = scrollY.onChange((latest) => {
        if (latest > 100) setIsCondensed(true);
        else setIsCondensed(false);
     });
+    return () => unsubscribe();
   }, [scrollY]);
 
   const containerPadding = isCondensed ? "p-3" : "p-6";
@@ -42,7 +52,8 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
 
   const filteredPackages = useMemo(() => {
     let result = packages.filter(pkg => {
-      const searchStr = `${pkg.title} ${pkg.description} ${pkg.biome_orientation} ${pkg.temperature_profile} ${pkg.intensity_vibe}`.toLowerCase();
+      const destName = pkg.destinations?.name || "";
+      const searchStr = `${pkg.title} ${pkg.description} ${pkg.biome_orientation} ${pkg.temperature_profile} ${pkg.intensity_vibe} ${destName}`.toLowerCase();
       const matchesSearch = searchStr.includes(searchQuery.toLowerCase());
       const matchesBiome = !selectedBiome || pkg.biome_orientation === selectedBiome;
       const matchesIntensity = !selectedIntensity || pkg.intensity_vibe === selectedIntensity;

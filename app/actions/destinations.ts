@@ -25,6 +25,8 @@ export async function upsertDestination(formData: FormData) {
   const best_time = formData.get("best_time") as string;
   const key_wildlife = formData.get("key_wildlife") as string;
   const size = formData.get("size") as string;
+  const latitude = formData.get("latitude") ? parseFloat(formData.get("latitude") as string) : null;
+  const longitude = formData.get("longitude") ? parseFloat(formData.get("longitude") as string) : null;
 
   let image_url = formData.get("existing_image_url") as string || null;
 
@@ -59,7 +61,9 @@ export async function upsertDestination(formData: FormData) {
     description,
     best_time,
     key_wildlife,
-    size
+    size,
+    latitude,
+    longitude
   };
 
   let error;

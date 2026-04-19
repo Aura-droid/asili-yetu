@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Info, ArrowRight, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 
@@ -42,8 +43,13 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
 
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
 
+    const bounds = new mapboxgl.LngLatBounds();
+    let hasCoords = false;
+
     destinations.forEach((dest) => {
         if (!dest.latitude || !dest.longitude) return;
+        hasCoords = true;
+        bounds.extend([dest.longitude, dest.latitude]);
 
         // Create Custom Marker El
         const el = document.createElement("div");
@@ -76,6 +82,14 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
            });
         });
     });
+
+    if (hasCoords) {
+      map.current.fitBounds(bounds, {
+        padding: 100,
+        maxZoom: 10,
+        duration: 2000
+      });
+    }
 
     return () => map.current?.remove();
   }, [destinations]);
@@ -120,9 +134,12 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
                {selectedDest.description}
             </p>
 
-            <button className="w-full bg-white py-4 rounded-xl text-black font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-primary transition-all active:scale-95">
+            <Link 
+              href={`/packages?q=${selectedDest.name}`}
+              className="w-full bg-white py-4 rounded-xl text-black font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-primary transition-all active:scale-95"
+            >
                {t("explore_packages")} <ArrowRight className="w-5 h-5" />
-            </button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
