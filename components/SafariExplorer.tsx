@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import BiomePackageCard from "./BiomePackageCard";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useEffect, useState as ReactState } from "react";
 
 export default function SafariExplorer({ packages }: { packages: any[] }) {
   const t = useTranslations("Packages");
@@ -27,7 +26,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
   
   // Condensing search logic
   const { scrollY } = useScroll();
-  const [isCondensed, setIsCondensed] = ReactState(false);
+  const [isCondensed, setIsCondensed] = useState(false);
   
   useEffect(() => {
     const unsubscribe = scrollY.onChange((latest) => {

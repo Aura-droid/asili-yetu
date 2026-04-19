@@ -20,8 +20,9 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
     setShareUrl(url || window.location.href);
   }, [url]);
 
-  const shareTitle = `Asili Yetu Safaris and Tours: ${title}`;
-  const shareText = text || `I just found this incredible safari masterpiece! You have to check this out.`;
+  const shareTitle = title;
+  const shareText = text || `Check out this incredible safari masterpiece on Asili Yetu!`;
+  const fullMessage = `${shareTitle}\n${shareText}`;
 
   const handleShare = async () => {
     // 1. Try Native Web Share API (Primary for iOS/Android Mobile Devices)
@@ -29,7 +30,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
       try {
         await navigator.share({
           title: shareTitle,
-          text: shareText,
+          text: fullMessage,
           url: shareUrl,
         });
         return; // Success, bail out!
@@ -77,7 +78,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
              </h4>
              <div className="flex flex-col gap-1">
                <a 
-                 href={`https://wa.me/?text=${encodeURIComponent(shareTitle + "\n\n" + shareText + "\n\n" + shareUrl)}`}
+                 href={`https://api.whatsapp.com/send?text=${encodeURIComponent(fullMessage + "\n" + shareUrl)}`}
                  target="_blank" rel="noopener noreferrer"
                  className="flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-white/10 transition-colors text-sm font-medium"
                  onClick={() => setIsOpen(false)}
@@ -85,7 +86,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
                  <Send className="w-4 h-4 text-[#25D366]" /> WhatsApp
                </a>
                <a 
-                 href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`}
+                 href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(fullMessage + "\n" + shareUrl)}`}
                  className="flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-white/10 transition-colors text-sm font-medium"
                  onClick={() => setIsOpen(false)}
                >
