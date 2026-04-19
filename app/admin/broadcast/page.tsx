@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getNewsletterSubscribers, broadcastNewsletter } from "@/app/actions/newsletter";
-import { Users, Send, CheckCircle2, Loader2, Sparkles, Mail, ShieldCheck } from "lucide-react";
+import { getNewsletterSubscribers, broadcastNewsletter, uploadNewsletterAsset } from "@/app/actions/newsletter";
+import { Users, Send, CheckCircle2, Loader2, Sparkles, Mail, ShieldCheck, FileText, Paperclip, X as XIcon } from "lucide-react";
 
 export default function BroadcastTerminal() {
   const [subscribers, setSubscribers] = useState<any[]>([]);
@@ -10,6 +10,9 @@ export default function BroadcastTerminal() {
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
+  
+  const [attachment, setAttachment] = useState<{ url: string, name: string } | null>(null);
+  const [uploading, setUploading] = useState(false);
   
   const [form, setForm] = useState({
     subject: "The Great Migration: Live Updates",
@@ -20,6 +23,24 @@ export default function BroadcastTerminal() {
   useEffect(() => {
     fetchSubscribers();
   }, []);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await uploadNewsletterAsset(formData);
+    setUploading(false);
+
+    if (res.success && res.url) {
+      setAttachment({ url: res.url, name: res.fileName || file.name });
+    } else {
+      alert("Upload Failure: " + res.error);
+    }
+  };
 
   const fetchSubscribers = async () => {
     const res = await getNewsletterSubscribers();
@@ -35,7 +56,7 @@ export default function BroadcastTerminal() {
     if (!confirm(`Are you sure you want to dispatch this signal to ${count} explorers?`)) return;
     
     setSending(true);
-    const res = await broadcastNewsletter(form.subject, form.title, form.message);
+    const res = await broadcastNewsletter(form.subject, form.title, form.message, attachment?.url, attachment?.name);
     setSending(false);
     
     if (res.success) {
@@ -115,12 +136,60 @@ export default function BroadcastTerminal() {
                        <div>
                           <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-black/40 mb-3 px-2">Expedition Message (HTML Supported)</label>
                           <textarea 
-                            rows={10}
+                            rows={8}
                             value={form.message}
                             onChange={e => setForm({...form, message: e.target.value})}
                             className="w-full bg-foreground/5 border-none outline-none focus:ring-2 focus:ring-primary rounded-[2rem] p-8 text-sm font-medium leading-relaxed placeholder:text-black/20 resize-none"
                             placeholder="Draft your signal to the wild..."
                           />
+                       </div>
+
+                       {/* File Attachment Section */}
+                       <div className="bg-foreground/5 rounded-[2rem] p-6 border border-dashed border-black/10">
+                          <div className="flex items-center justify-between mb-4">
+                             <div className="flex items-center gap-3">
+                                <Paperclip className="w-4 h-4 text-primary" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-black/40">Optional Newsletter Attachment (PDF/Image)</span>
+                             </div>
+                             {attachment && (
+                                <button 
+                                  type="button" 
+                                  onClick={() => setAttachment(null)}
+                                  className="text-red-500 hover:text-red-700 transition-colors"
+                                >
+                                   <XIcon className="w-4 h-4" />
+                                </button>
+                             )}
+                          </div>
+
+                          {attachment ? (
+                             <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
+                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                                   <FileText className="w-5 h-5 text-primary" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                   <p className="text-xs font-black truncate italic">{attachment.name}</p>
+                                   <p className="text-[8px] font-bold text-black/30 truncate uppercase tracking-widest">Ready for Transmission</p>
+                                </div>
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                             </div>
+                          ) : (
+                             <label className="flex flex-col items-center justify-center gap-3 py-6 cursor-pointer hover:bg-foreground/[0.03] transition-colors rounded-2xl border border-transparent">
+                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                   {uploading ? <Loader2 className="w-5 h-5 animate-spin text-primary" /> : <FileText className="w-5 h-5 text-black/20" />}
+                                </div>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
+                                   {uploading ? "Processing Asset..." : "Drag & Drop or Click to Upload"}
+                                </p>
+                                <input 
+                                  type="file" 
+                                  className="hidden" 
+                                  onChange={handleFileUpload}
+                                  accept=".pdf,image/*"
+                                  disabled={uploading}
+                                />
+                             </label>
+                          )}
                        </div>
 
                        <div className="pt-4">

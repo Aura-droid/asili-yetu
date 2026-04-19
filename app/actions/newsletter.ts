@@ -39,7 +39,32 @@ export async function getNewsletterSubscribers() {
   return { subscribers: data || [], count: count || 0, error: error?.message };
 }
 
-export async function broadcastNewsletter(subject: string, title: string, content: string) {
+export async function uploadNewsletterAsset(formData: FormData) {
+  const supabase = await createClient();
+  const file = formData.get("file") as File;
+
+  if (!file || file.size === 0) {
+    return { success: false, error: "No file provided" };
+  }
+
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+  const filePath = `newsletters/${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('asili-images')
+    .upload(filePath, file);
+
+  if (uploadError) return { success: false, error: uploadError.message };
+
+  const { data: publicData } = supabase.storage
+    .from('asili-images')
+    .getPublicUrl(filePath);
+
+  return { success: true, url: publicData.publicUrl, fileName: file.name };
+}
+
+export async function broadcastNewsletter(subject: string, title: string, content: string, assetUrl?: string, assetName?: string) {
   const supabase = await createClient();
   const { data: subscribers, error } = await supabase
     .from("newsletter_subscriptions")
@@ -65,6 +90,12 @@ export async function broadcastNewsletter(subject: string, title: string, conten
         to: [sub.email],
         subject: subject,
         html: html,
+        attachments: assetUrl ? [
+          {
+            filename: assetName || 'Newsletter.pdf',
+            path: assetUrl,
+          }
+        ] : undefined
       });
       return true;
     } catch (e) {
