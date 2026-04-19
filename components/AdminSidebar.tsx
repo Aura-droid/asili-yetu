@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, Users, Car, Map, Briefcase, MessageSquare, 
   LogOut, Megaphone, MapPin, Camera, BookOpen, Settings, 
-  Search, ChevronRight 
+  Search, ChevronRight, Send
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
