@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { getNewsletterSubscribers, broadcastNewsletter, uploadNewsletterAsset } from "@/app/actions/newsletter";
 import { Users, Send, CheckCircle2, Loader2, Sparkles, Mail, ShieldCheck, FileText, Paperclip, X as XIcon } from "lucide-react";
+import StrategicConfirmModal from "@/components/StrategicConfirmModal";
+import OperationStatusDialog from "@/components/OperationStatusDialog";
 
 export default function BroadcastTerminal() {
   const [subscribers, setSubscribers] = useState<any[]>([]);
@@ -13,6 +15,13 @@ export default function BroadcastTerminal() {
   
   const [attachments, setAttachments] = useState<{ url: string, name: string }[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [status, setStatus] = useState<{ isOpen: boolean; type: 'success' | 'error'; title: string; message: string }>({
+    isOpen: false,
+    type: 'success',
+    title: '',
+    message: ''
+  });
   
   const [form, setForm] = useState({
     subject: "The Great Migration: Live Updates",
@@ -38,7 +47,12 @@ export default function BroadcastTerminal() {
     if (res.success && res.url) {
       setAttachments([...attachments, { url: res.url, name: res.fileName || file.name }]);
     } else {
-      alert("Upload Failure: " + res.error);
+      setStatus({
+        isOpen: true,
+        type: 'error',
+        title: 'Upload Failure',
+        message: res.error || 'The asset could not be integrated into the signal.'
+      });
     }
   };
 
@@ -53,8 +67,11 @@ export default function BroadcastTerminal() {
 
   const handleBroadcast = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!confirm(`Are you sure you want to dispatch this signal to ${count} explorers?`)) return;
-    
+    setShowConfirm(true);
+  };
+
+  const confirmBroadcast = async () => {
+    setShowConfirm(false);
     setSending(true);
     const res = await broadcastNewsletter(form.subject, form.title, form.message, attachments);
     setSending(false);
@@ -62,8 +79,14 @@ export default function BroadcastTerminal() {
     if (res.success) {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 5000);
+      setAttachments([]); // Clear after success
     } else {
-      alert("Broadcast Failure: " + res.error);
+      setStatus({
+        isOpen: true,
+        type: 'error',
+        title: 'Transmission Failure',
+        message: res.error || 'The global broadcast encountered a tactical error.'
+      });
     }
   };
 
@@ -255,6 +278,22 @@ export default function BroadcastTerminal() {
            </div>
         </div>
       </div>
+      <StrategicConfirmModal 
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={confirmBroadcast}
+        title="Confirm Dispatch"
+        message={`You are about to transmit this signal to ${count} explorers in the registry. This action will initiate a global email broadcast across all regions.`}
+        confirmText={`Dispatch to ${count} Explorers`}
+        confirmIcon={Send}
+      />
+      <OperationStatusDialog 
+         isOpen={status.isOpen}
+         onClose={() => setStatus({ ...status, isOpen: false })}
+         type={status.type}
+         title={status.title}
+         message={status.message}
+      />
     </div>
   );
 }
