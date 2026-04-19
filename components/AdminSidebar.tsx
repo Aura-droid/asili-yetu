@@ -33,6 +33,7 @@ export default function AdminSidebar() {
         { href: "/admin/bookings", label: "Bookings", icon: Briefcase },
         { href: "/admin/about", label: "About Strategy", icon: BookOpen },
         { href: "/admin/notices", label: "Global Notices", icon: Megaphone },
+        { href: "/admin/broadcast", label: "Signal Dispatch", icon: Send },
       ]
     },
     {
