@@ -64,7 +64,7 @@ export async function uploadNewsletterAsset(formData: FormData) {
   return { success: true, url: publicData.publicUrl, fileName: file.name };
 }
 
-export async function broadcastNewsletter(subject: string, title: string, content: string, assetUrl?: string, assetName?: string) {
+export async function broadcastNewsletter(subject: string, title: string, content: string, attachments: { url: string, name: string }[] = []) {
   const supabase = await createClient();
   const { data: subscribers, error } = await supabase
     .from("newsletter_subscriptions")
@@ -90,12 +90,10 @@ export async function broadcastNewsletter(subject: string, title: string, conten
         to: [sub.email],
         subject: subject,
         html: html,
-        attachments: assetUrl ? [
-          {
-            filename: assetName || 'Newsletter.pdf',
-            path: assetUrl,
-          }
-        ] : undefined
+        attachments: attachments.length > 0 ? attachments.map(a => ({
+          filename: a.name,
+          path: a.url
+        })) : undefined
       });
       return true;
     } catch (e) {

@@ -11,7 +11,7 @@ export default function BroadcastTerminal() {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
   
-  const [attachment, setAttachment] = useState<{ url: string, name: string } | null>(null);
+  const [attachments, setAttachments] = useState<{ url: string, name: string }[]>([]);
   const [uploading, setUploading] = useState(false);
   
   const [form, setForm] = useState({
@@ -36,7 +36,7 @@ export default function BroadcastTerminal() {
     setUploading(false);
 
     if (res.success && res.url) {
-      setAttachment({ url: res.url, name: res.fileName || file.name });
+      setAttachments([...attachments, { url: res.url, name: res.fileName || file.name }]);
     } else {
       alert("Upload Failure: " + res.error);
     }
@@ -56,7 +56,7 @@ export default function BroadcastTerminal() {
     if (!confirm(`Are you sure you want to dispatch this signal to ${count} explorers?`)) return;
     
     setSending(true);
-    const res = await broadcastNewsletter(form.subject, form.title, form.message, attachment?.url, attachment?.name);
+    const res = await broadcastNewsletter(form.subject, form.title, form.message, attachments);
     setSending(false);
     
     if (res.success) {
@@ -149,47 +149,49 @@ export default function BroadcastTerminal() {
                           <div className="flex items-center justify-between mb-4">
                              <div className="flex items-center gap-3">
                                 <Paperclip className="w-4 h-4 text-primary" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-black/40">Optional Newsletter Attachment (PDF/Image)</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-black/40">Newsletter Attachments (PDF/Image)</span>
                              </div>
-                             {attachment && (
-                                <button 
-                                  type="button" 
-                                  onClick={() => setAttachment(null)}
-                                  className="text-red-500 hover:text-red-700 transition-colors"
-                                >
-                                   <XIcon className="w-4 h-4" />
-                                </button>
+                             {attachments.length > 0 && (
+                                <span className="text-[10px] font-black uppercase text-primary">{attachments.length} Ready</span>
                              )}
                           </div>
 
-                          {attachment ? (
-                             <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
-                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                                   <FileText className="w-5 h-5 text-primary" />
+                          <div className="space-y-2 mb-4">
+                             {attachments.map((file, idx) => (
+                                <div key={idx} className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
+                                   <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                                      <FileText className="w-5 h-5 text-primary" />
+                                   </div>
+                                   <div className="flex-1 min-w-0">
+                                      <p className="text-xs font-black truncate italic">{file.name}</p>
+                                      <p className="text-[8px] font-bold text-black/30 truncate uppercase tracking-widest">Asset #{idx + 1} • Linked</p>
+                                   </div>
+                                   <button 
+                                     type="button" 
+                                     onClick={() => setAttachments(attachments.filter((_, i) => i !== idx))}
+                                     className="w-8 h-8 rounded-full hover:bg-red-50 flex items-center justify-center text-black/20 hover:text-red-500 transition-all"
+                                   >
+                                      <XIcon className="w-4 h-4" />
+                                   </button>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                   <p className="text-xs font-black truncate italic">{attachment.name}</p>
-                                   <p className="text-[8px] font-bold text-black/30 truncate uppercase tracking-widest">Ready for Transmission</p>
-                                </div>
-                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                             ))}
+                          </div>
+
+                          <label className={`flex flex-col items-center justify-center gap-3 py-6 cursor-pointer hover:bg-foreground/[0.03] transition-colors rounded-2xl border border-transparent ${attachments.length > 0 ? 'bg-white/50' : ''}`}>
+                             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                {uploading ? <Loader2 className="w-5 h-5 animate-spin text-primary" /> : <Paperclip className="w-5 h-5 text-black/20" />}
                              </div>
-                          ) : (
-                             <label className="flex flex-col items-center justify-center gap-3 py-6 cursor-pointer hover:bg-foreground/[0.03] transition-colors rounded-2xl border border-transparent">
-                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                                   {uploading ? <Loader2 className="w-5 h-5 animate-spin text-primary" /> : <FileText className="w-5 h-5 text-black/20" />}
-                                </div>
-                                <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
-                                   {uploading ? "Processing Asset..." : "Drag & Drop or Click to Upload"}
-                                </p>
-                                <input 
-                                  type="file" 
-                                  className="hidden" 
-                                  onChange={handleFileUpload}
-                                  accept=".pdf,image/*"
-                                  disabled={uploading}
-                                />
-                             </label>
-                          )}
+                             <p className="text-[10px] font-black uppercase tracking-widest text-black/30">
+                                {uploading ? "Uploading Asset..." : attachments.length > 0 ? "Add Another Asset" : "Dispatch Newsletter (PDF/IMG)"}
+                             </p>
+                             <input 
+                               type="file" 
+                               className="hidden" 
+                               onChange={handleFileUpload}
+                               accept=".pdf,image/*"
+                               disabled={uploading}
+                             />
+                          </label>
                        </div>
 
                        <div className="pt-4">
