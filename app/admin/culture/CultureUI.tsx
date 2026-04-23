@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { createCultureStory, toggleStoryStatus, deleteStory } from "@/app/actions/culture";
+import { createCultureStory, toggleStoryStatus, deleteStory, toggleFeaturedStory } from "@/app/actions/culture";
 import { Plus, Trash2, Star, Loader2, Image as ImageIcon, CheckCircle2, Eye, EyeOff, LayoutPanelLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function CultureUI({ stories }: { stories: any[] }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [toggling, setToggling] = useState<string | null>(null);
@@ -27,6 +29,13 @@ export default function CultureUI({ stories }: { stories: any[] }) {
     setToggling(id);
     await toggleStoryStatus(id, current);
     setToggling(null);
+    router.refresh();
+  };
+  const handleToggleMasterpiece = async (id: string, current: boolean) => {
+    setToggling(id + "-featured");
+    await toggleFeaturedStory(id, current);
+    setToggling(null);
+    router.refresh();
   };
 
   const handleDelete = async () => {
@@ -125,6 +134,21 @@ export default function CultureUI({ stories }: { stories: any[] }) {
                   <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest block mb-1 ml-1">Accent Brand Color</label>
                   <input name="accent_color" type="color" defaultValue="#e11d48" className="w-full h-12 bg-foreground/5 border border-foreground/10 rounded-2xl p-2 cursor-pointer" />
                </div>
+               <div className="p-5 bg-foreground/5 rounded-2xl border border-foreground/10 space-y-4">
+                  <label className="flex items-center justify-between cursor-pointer group">
+                      <span className="text-[10px] font-black text-foreground uppercase tracking-tight italic group-hover:text-primary transition-colors">Feature Masterpiece</span>
+                      <div className="relative inline-flex items-center">
+                        <input 
+                          name="is_featured" 
+                          type="checkbox" 
+                          value="on" 
+                          className="sr-only peer" 
+                        />
+                        <div className="w-10 h-5 bg-foreground/10 peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                      </div>
+                  </label>
+                  <p className="text-[9px] font-bold text-foreground/40 italic leading-tight">Elevate this cultural story to the homepage hero.</p>
+               </div>
 
                <button 
                  type="submit" 
@@ -165,13 +189,20 @@ export default function CultureUI({ stories }: { stories: any[] }) {
                        <p className="text-xs font-bold text-foreground/40 line-clamp-2 italic leading-relaxed">{story.description}</p>
                     </div>
 
-                    <div className="flex flex-col gap-3">
-                       <button 
-                         onClick={() => handleToggle(story.id, story.is_active)}
-                         disabled={toggling === story.id}
-                         className={`p-4 rounded-2xl transition-all ${story.is_active ? 'bg-primary text-black' : 'bg-black text-white hover:bg-foreground/50'} shadow-sm border border-foreground/5`}
+                     <div className="flex flex-col gap-3">
+                        <button 
+                          onClick={() => handleToggle(story.id, story.is_active)}
+                          disabled={toggling === story.id}
+                          className={`p-4 rounded-2xl transition-all ${story.is_active ? 'bg-primary text-black' : 'bg-black text-white hover:bg-foreground/50'} shadow-sm border border-foreground/5`}
+                        >
+                           {toggling === story.id ? <Loader2 className="w-5 h-5 animate-spin" /> : (story.is_active ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />)}
+                        </button>
+                        <button 
+                         onClick={() => handleToggleMasterpiece(story.id, story.is_featured)}
+                         disabled={toggling === story.id + "-featured"}
+                         className={`p-4 rounded-2xl transition-all ${story.is_featured ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/30 hover:text-foreground'} shadow-sm border border-foreground/5`}
                        >
-                          {toggling === story.id ? <Loader2 className="w-5 h-5 animate-spin" /> : (story.is_active ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />)}
+                          {toggling === story.id + "-featured" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Star className="w-5 h-5" fill={story.is_featured ? "currentColor" : "none"} />}
                        </button>
                         <button 
                           onClick={() => setDeleteId(story.id)}
@@ -180,7 +211,7 @@ export default function CultureUI({ stories }: { stories: any[] }) {
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
-                    </div>
+                     </div>
                  </motion.div>
               ))}
 

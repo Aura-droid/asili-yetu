@@ -8,6 +8,7 @@ export async function getDestinations() {
   const { data, error } = await supabase
     .from("destinations")
     .select("*")
+    .order("is_featured", { ascending: false })
     .order("name", { ascending: true });
 
   if (error) return { error: error.message, data: [] };
@@ -27,6 +28,8 @@ export async function upsertDestination(formData: FormData) {
   const size = formData.get("size") as string;
   const latitude = formData.get("latitude") ? parseFloat(formData.get("latitude") as string) : null;
   const longitude = formData.get("longitude") ? parseFloat(formData.get("longitude") as string) : null;
+
+  const is_featured = formData.get("is_featured") === "on";
 
   let image_url = formData.get("existing_image_url") as string || null;
 
@@ -63,7 +66,8 @@ export async function upsertDestination(formData: FormData) {
     key_wildlife,
     size,
     latitude,
-    longitude
+    longitude,
+    is_featured
   };
 
   let error;
@@ -83,6 +87,7 @@ export async function upsertDestination(formData: FormData) {
   if (!error) {
     revalidatePath("/admin/destinations");
     revalidatePath("/[locale]/destinations", "page");
+    revalidatePath("/", "layout");
   }
   return { success: !error, error: error?.message };
 }
@@ -96,6 +101,22 @@ export async function deleteDestination(id: string) {
 
   if (!error) {
     revalidatePath("/admin/destinations");
+    revalidatePath("/", "layout");
+  }
+  return { success: !error, error: error?.message };
+}
+
+export async function toggleFeaturedDestination(id: string, currentlyFeatured: boolean) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("destinations")
+    .update({ is_featured: !currentlyFeatured })
+    .eq("id", id);
+
+  if (!error) {
+    revalidatePath("/admin/destinations");
+    revalidatePath("/[locale]/destinations", "page");
+    revalidatePath("/", "layout");
   }
   return { success: !error, error: error?.message };
 }

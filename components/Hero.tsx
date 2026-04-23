@@ -10,6 +10,7 @@ import RustlingButton from "./RustlingButton";
 import BookingFunnel from "./BookingFunnel";
 import { useLoading } from "@/providers/LoadingProvider";
 import Image from "next/image";
+import Link from "next/link";
 
 function FallingLeaves() {
   const [leaves, setLeaves] = useState<Array<{ id: number, x: number }>>([]);
@@ -49,7 +50,7 @@ function FallingLeaves() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ featuredPackages = [] }: { featuredPackages?: any[] }) {
   const { theme, setTheme } = useTheme();
   const t = useTranslations("Hero");
   
@@ -64,6 +65,18 @@ export default function Hero() {
   const [error, setError] = useState<string | null>(null);
   const [showFunnel, setShowFunnel] = useState(false);
   const { setIsLoading: setGlobalLoading } = useLoading();
+
+  // Carousel Logic
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentFeatured = featuredPackages[currentIndex];
+
+  useEffect(() => {
+    if (featuredPackages.length <= 1) return;
+    const interval = setInterval(() => {
+       setCurrentIndex((prev) => (prev + 1) % featuredPackages.length);
+    }, 8000); // 8 seconds per masterpiece
+    return () => clearInterval(interval);
+  }, [featuredPackages.length]);
 
   const handlePlanSafari = async () => {
     if (!location) return;
@@ -90,26 +103,58 @@ export default function Hero() {
       {/* Background layer */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
          <div className={`absolute inset-0 ${theme === 'jungle' ? 'bg-[#0a140d]/80' : 'bg-[#e2d5c3]/60'} z-10 transition-colors duration-1000`} />
-         <Image 
-            src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80" 
-            alt="Safari Background"
-            fill
-            priority
-            className="w-full h-full object-cover filter brightness-[0.8]"
-         />
+         <AnimatePresence mode="wait">
+           <motion.div
+             key={currentFeatured?.id || "default"}
+             initial={{ opacity: 0, scale: 1.1 }}
+             animate={{ opacity: 1, scale: 1 }}
+             exit={{ opacity: 0, scale: 0.95 }}
+             transition={{ duration: 2, ease: "easeInOut" }}
+             className="absolute inset-0"
+           >
+             <Image 
+                src={currentFeatured?.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
+                alt={currentFeatured?.title || "Safari Background"}
+                fill
+                priority
+                className="w-full h-full object-cover filter brightness-[0.8]"
+             />
+           </motion.div>
+         </AnimatePresence>
       </div>
 
       {theme === "jungle" && <FallingLeaves />}
 
       <div className="relative z-30 container mx-auto px-6 text-center text-foreground flex flex-col items-center">
-        <motion.span 
+        <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="px-5 py-2 rounded-full border border-primary/40 text-sm font-semibold text-primary mb-6 inline-block bg-background/50 backdrop-blur-md uppercase tracking-widest shadow-sm"
+          className="relative mb-8"
         >
-          {theme === 'jungle' ? t("venture_jungle") : t("venture")}
-        </motion.span>
+          {currentFeatured ? (
+             <div className="flex flex-col items-center gap-4">
+                <span className="px-5 py-2 rounded-full border border-amber-500/40 text-[10px] font-black text-amber-500 bg-black/40 backdrop-blur-xl uppercase tracking-[0.4em] shadow-2xl flex items-center gap-2">
+                   <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Masterpiece Selection
+                </span>
+                <h2 className="text-4xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-2xl">
+                   {currentFeatured.title}
+                </h2>
+                <div className="flex items-center gap-6 text-white/60 text-xs font-bold tracking-widest uppercase">
+                   <span className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md italic">
+                      {currentFeatured.duration_days} Days of Immersion
+                   </span>
+                   <Link href={`/packages?expedition=${currentFeatured.id}`} className="text-amber-500 border-b border-amber-500 pb-0.5 hover:text-white hover:border-white transition-all">
+                      View Expedition Details
+                   </Link>
+                </div>
+             </div>
+          ) : (
+             <span className="px-5 py-2 rounded-full border border-primary/40 text-sm font-semibold text-primary inline-block bg-background/50 backdrop-blur-md uppercase tracking-widest shadow-sm">
+                {theme === 'jungle' ? t("venture_jungle") : t("venture")}
+             </span>
+          )}
+        </motion.div>
         
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}

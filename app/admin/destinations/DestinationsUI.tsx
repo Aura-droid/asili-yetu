@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2, Edit, Loader2, MapPin, Sun, Compass, RefreshCw } from "lucide-react";
-import { upsertDestination, deleteDestination } from "@/app/actions/destinations";
+import { Plus, Trash2, Edit, Loader2, MapPin, Sun, Compass, RefreshCw, Star } from "lucide-react";
+import { upsertDestination, deleteDestination, toggleFeaturedDestination } from "@/app/actions/destinations";
 import { useRouter } from "next/navigation";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 
@@ -15,6 +15,7 @@ export default function DestinationsUI({ initialDestinations }: { initialDestina
   const [deleteTitle, setDeleteTitle] = useState("");
   const [editing, setEditing] = useState<any | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [toggling, setToggling] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +51,14 @@ export default function DestinationsUI({ initialDestinations }: { initialDestina
     setDeleting(false);
   };
 
+  const handleToggle = async (id: string, current: boolean) => {
+    setToggling(id);
+    const res = await toggleFeaturedDestination(id, current);
+    if (res?.error) alert(res.error);
+    setToggling(null);
+    router.refresh();
+  };
+
   return (
     <div className="flex flex-col xl:flex-row gap-10">
       {/* Destinations List */}
@@ -82,21 +91,35 @@ export default function DestinationsUI({ initialDestinations }: { initialDestina
                 />
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute top-6 right-6 flex gap-3">
-                   <button 
-                     onClick={() => setEditing(dest)}
-                     className="p-3 bg-white/10 backdrop-blur-lg hover:bg-white text-white hover:text-black rounded-full border border-white/20 transition-all shadow-lg"
-                   >
-                     <Edit className="w-5 h-5" />
-                   </button>
-                   <button 
-                     onClick={() => {
-                        setDeleteId(dest.id);
-                        setDeleteTitle(dest.name);
-                     }}
-                     className="p-3 bg-red-500/80 hover:bg-red-600 text-white rounded-full backdrop-blur-lg border border-white/20 transition-all shadow-lg"
-                   >
-                     <Trash2 className="w-5 h-5" />
-                   </button>
+                    <button 
+                      disabled={toggling === dest.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggle(dest.id, dest.is_featured);
+                      }} 
+                      className={`p-3 backdrop-blur-lg rounded-full border border-white/20 transition-all shadow-lg ${dest.is_featured ? 'bg-primary text-black' : 'bg-white/10 text-white hover:bg-white hover:text-black'}`}
+                    >
+                        {toggling === dest.id ? (
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                        ) : (
+                          <Star className="w-5 h-5" fill={dest.is_featured ? "currentColor" : "none"} />
+                        )}
+                    </button>
+                    <button 
+                      onClick={() => setEditing(dest)}
+                      className="p-3 bg-white/10 backdrop-blur-lg hover:bg-white text-white hover:text-black rounded-full border border-white/20 transition-all shadow-lg"
+                    >
+                      <Edit className="w-5 h-5" />
+                    </button>
+                    <button 
+                      onClick={() => {
+                          setDeleteId(dest.id);
+                          setDeleteTitle(dest.name);
+                      }}
+                      className="p-3 bg-red-500/80 hover:bg-red-600 text-white rounded-full backdrop-blur-lg border border-white/20 transition-all shadow-lg"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
                 </div>
                 <div className="absolute bottom-6 left-8">
                    <span className="bg-primary text-black px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
@@ -200,6 +223,24 @@ export default function DestinationsUI({ initialDestinations }: { initialDestina
                     <input type="hidden" name="existing_image_url" value={editing.image_url} />
                  )}
               </div>
+
+              <div className="p-6 bg-foreground/5 rounded-[2rem] border border-foreground/10 space-y-4">
+                  <label className="flex items-center justify-between cursor-pointer group">
+                      <span className="text-[10px] font-black text-foreground uppercase tracking-tight italic group-hover:text-primary transition-colors">Feature Masterpiece</span>
+                      <div className="relative inline-flex items-center">
+                        <input 
+                          key={`featured-${editing?.id}`}
+                          name="is_featured" 
+                          type="checkbox" 
+                          defaultChecked={editing?.is_featured} 
+                          value="on" 
+                          className="sr-only peer" 
+                        />
+                        <div className="w-10 h-5 bg-foreground/10 peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                      </div>
+                  </label>
+                  <p className="text-[9px] font-bold text-foreground/40 italic leading-tight">Highlight this destination in the global discovery carousel.</p>
+               </div>
               
               <div className="flex gap-4 pt-4">
                  {editing && (

@@ -8,6 +8,7 @@ export async function getCultureStories() {
   const { data, error } = await supabase
     .from("culture_stories")
     .select("*")
+    .order("is_featured", { ascending: false })
     .order("order_index", { ascending: true });
 
   if (error) return [];
@@ -22,6 +23,8 @@ export async function createCultureStory(formData: FormData) {
   const category = formData.get('category') as string;
   const accent_color = formData.get('accent_color') as string;
   const file = formData.get('image') as File | null;
+
+  const is_featured = formData.get('is_featured') === 'on';
 
   if (!title || !description) return { error: "Title and description are required" };
 
@@ -47,12 +50,23 @@ export async function createCultureStory(formData: FormData) {
     category: category || 'Traditions',
     accent_color: accent_color || '#a3cc4c',
     image_url,
-    is_active: true
+    is_active: true,
+    is_featured
   });
 
   if (error) return { error: error.message };
   revalidatePath("/admin/culture");
   revalidatePath("/culture");
+  revalidatePath("/", "layout");
+  return { success: true };
+}
+
+export async function toggleFeaturedStory(id: string, current: boolean) {
+  const supabase = await createClient();
+  await supabase.from('culture_stories').update({ is_featured: !current }).eq('id', id);
+  revalidatePath("/admin/culture");
+  revalidatePath("/culture");
+  revalidatePath("/", "layout");
   return { success: true };
 }
 
@@ -61,6 +75,7 @@ export async function toggleStoryStatus(id: string, current: boolean) {
   await supabase.from('culture_stories').update({ is_active: !current }).eq('id', id);
   revalidatePath("/admin/culture");
   revalidatePath("/culture");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteStory(id: string) {
@@ -69,5 +84,6 @@ export async function deleteStory(id: string) {
   if (error) return { error: error.message };
   revalidatePath("/admin/culture");
   revalidatePath("/culture");
+  revalidatePath("/", "layout");
   return { success: true };
 }

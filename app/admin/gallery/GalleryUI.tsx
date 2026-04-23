@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Camera, Plus, Trash2, Eye, EyeOff, Loader2, Image as ImageIcon, ExternalLink, RefreshCw, AlertTriangle } from "lucide-react";
-import { addGalleryItem, deleteGalleryItem, toggleGalleryItem } from "@/app/actions/gallery";
+import { addGalleryItem, deleteGalleryItem, toggleGalleryItem, toggleFeaturedGallery } from "@/app/actions/gallery";
+import { Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -27,6 +29,7 @@ export default function GalleryUI({ manualItems, instagramItems, instaError }: {
   instagramItems: any[],
   instaError: string | null 
 }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -57,6 +60,14 @@ export default function GalleryUI({ manualItems, instagramItems, instaError }: {
     setToggling(id);
     await toggleGalleryItem(id, active);
     setToggling(null);
+    router.refresh();
+  };
+
+  const handleToggleMasterpiece = async (id: string, current: boolean) => {
+    setToggling(id + "-featured");
+    await toggleFeaturedGallery(id, current);
+    setToggling(null);
+    router.refresh();
   };
 
   return (
@@ -162,6 +173,21 @@ export default function GalleryUI({ manualItems, instagramItems, instaError }: {
                      className="w-full bg-foreground/5 border border-foreground/10 rounded-2xl p-5 text-foreground focus:outline-none focus:border-primary transition-all text-xs h-32 resize-none font-bold italic"
                    />
                  </div>
+                 <div className="p-5 bg-foreground/5 rounded-2xl border border-foreground/10 space-y-4">
+                    <label className="flex items-center justify-between cursor-pointer group">
+                        <span className="text-[10px] font-black text-foreground uppercase tracking-tight italic group-hover:text-primary transition-colors">Feature Masterpiece</span>
+                        <div className="relative inline-flex items-center">
+                          <input 
+                            name="is_featured" 
+                            type="checkbox" 
+                            value="on" 
+                            className="sr-only peer" 
+                          />
+                          <div className="w-10 h-5 bg-foreground/10 peer-focus:outline-none rounded-full peer peer-checked:bg-primary transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                        </div>
+                    </label>
+                    <p className="text-[9px] font-bold text-foreground/40 italic leading-tight">Elevate this photo to the homepage masterpiece gallery.</p>
+                 </div>
 
                  <button 
                    type="submit" 
@@ -230,6 +256,13 @@ export default function GalleryUI({ manualItems, instagramItems, instaError }: {
                              className={`p-4 rounded-full backdrop-blur-md border border-white/20 transition-all ${item.is_active ? 'bg-primary text-black' : 'bg-black text-white'}`}
                            >
                              {toggling === item.id ? <Loader2 className="w-5 h-5 animate-spin" /> : (item.is_active ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />)}
+                           </button>
+                           <button 
+                             onClick={() => handleToggleMasterpiece(item.id, item.is_featured)}
+                             disabled={toggling === item.id + "-featured"}
+                             className={`p-4 rounded-full backdrop-blur-md border border-white/20 transition-all ${item.is_featured ? 'bg-primary text-black' : 'bg-black text-white'}`}
+                           >
+                              {toggling === item.id + "-featured" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Star className="w-5 h-5" fill={item.is_featured ? "currentColor" : "none"} />}
                            </button>
                            <button 
                              onClick={() => setDeleteId(item.id)}

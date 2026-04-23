@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
-import { getPackages, getDestinations } from "@/app/actions/packages";
+import { getPackages } from "@/app/actions/packages";
+import { getDestinations } from "@/app/actions/destinations";
 import PackagesUI from "./PackagesUI";
 import { Package, AlertTriangle } from "lucide-react";
 
@@ -11,7 +12,7 @@ export default async function AdminPackagesPage() {
   const { data: packages, error } = await getPackages();
   const { data: destinations, error: destError } = await getDestinations();
 
-  if (error === 'needs_migration' || destError) {
+  if (error || destError) {
     return (
       <div className="p-12 text-center max-w-2xl mx-auto mt-20 bg-red-500/10 border border-red-500/30 rounded-3xl">
         <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-6" />

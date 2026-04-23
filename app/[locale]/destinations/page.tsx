@@ -72,9 +72,9 @@ export default async function DestinationsPage() {
   ];
 
   // Use DB destinations if available, otherwise fallback to static for zero-downtime transition
-  const displayDestinations = dbDestinations && dbDestinations.length > 0 
+  const displayDestinations = (dbDestinations && dbDestinations.length > 0 
     ? dbDestinations 
-    : staticDestinations;
+    : staticDestinations).sort((a: any, b: any) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
 
   return <DestinationsClient destinations={displayDestinations} />;
 }

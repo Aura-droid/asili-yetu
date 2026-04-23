@@ -124,11 +124,16 @@ export default function SafariShowcase() {
         
         {/* Animated Marquee Strip Overlay */}
         <div className="mt-20 py-8 border-y border-foreground/5 flex overflow-hidden group/marquee">
-           <motion.div 
-             animate={{ x: [0, -1000] }}
-             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-             className="flex gap-24 whitespace-nowrap text-foreground/[0.15] font-black text-8xl italic uppercase select-none transition-colors duration-1000 group-hover/marquee:text-primary/[0.2]"
-           >
+            <motion.div 
+              animate={{ x: [0, -300, -300, -600, -600, -900, -900, -1200] }}
+              transition={{ 
+                duration: 20, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                times: [0, 0.1, 0.25, 0.35, 0.5, 0.6, 0.75, 1] 
+              }}
+              className="flex gap-24 whitespace-nowrap text-foreground/[0.08] font-black text-8xl italic uppercase select-none transition-colors duration-1000 group-hover/marquee:text-amber-500/[0.15]"
+            >
               <span>{t("marquee.fleet")}</span>
               <span>•</span>
               <span>{t("marquee.rangers")}</span>

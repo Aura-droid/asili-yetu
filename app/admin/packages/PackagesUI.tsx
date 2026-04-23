@@ -106,6 +106,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
     const res = await toggleFeatured(id, currentlyFeatured);
     if (!res.success) alert(res.error);
     setToggling(null);
+    router.refresh();
   };
 
   return (
