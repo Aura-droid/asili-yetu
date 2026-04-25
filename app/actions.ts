@@ -123,7 +123,7 @@ export async function generateItinerary(query: { location: string, dates: string
 
         // 3. Fallback to AI Generation for unique requests
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17" });
 
         const prompt = `
           You are an expert luxury safari planner for "Asili Yetu Safaris". 
@@ -150,7 +150,14 @@ export async function generateItinerary(query: { location: string, dates: string
         if (!text) throw new Error("No response from AI system");
         const cleanJson = text.replace(/```json/g, "").replace(/```/g, "").trim();
 
-        return { success: true, data: { ...JSON.parse(cleanJson), isPredefined: false } };
+        let parsed;
+        try {
+            parsed = JSON.parse(cleanJson);
+        } catch {
+            throw new Error("AI returned malformed JSON — please try again.");
+        }
+
+        return { success: true, data: { ...parsed, isPredefined: false } };
     } catch (e: any) {
         console.error("Itinerary Gen Error:", e);
         return { success: false, error: e.message };
