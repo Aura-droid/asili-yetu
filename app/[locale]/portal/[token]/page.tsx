@@ -91,6 +91,8 @@ export default function GuestPortalPage() {
     }
   };
 
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const handleAuthorize = async () => {
     if (!inquiry) return;
     setLoading(true);
@@ -98,7 +100,7 @@ export default function GuestPortalPage() {
     const res = await confirmInquiry(inquiry.id);
     if (res.success) {
       fetchInquiry(); // Refresh state
-      alert("EXPEDITION AUTHORIZED: Your dossier has been officially confirmed. Check your email for next steps.");
+      setShowSuccessModal(true);
     } else {
       alert("Authorization Link Error: " + res.error);
     }
@@ -256,6 +258,32 @@ export default function GuestPortalPage() {
            <p className="text-[10px] text-center text-black/30 font-bold uppercase tracking-widest px-8">Direct high-fidelity communication with your private concierge team.</p>
         </div>
       </div>
-    </div>
-  );
+    
+    {/* Success Modal Overlay */}
+    {showSuccessModal && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-500">
+         <div className="bg-white rounded-[3rem] max-w-lg w-full p-12 text-center shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in-95 duration-500 delay-150">
+            <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/30 relative">
+               <ShieldCheck className="text-primary w-12 h-12 relative z-10" />
+               <div className="absolute inset-0 bg-primary/40 rounded-full animate-ping opacity-20" />
+            </div>
+            
+            <h2 className="text-3xl font-black italic uppercase tracking-tighter mb-4 text-black">Expedition Authorized</h2>
+            <p className="text-black/60 leading-relaxed mb-10 font-medium">
+              Your safari dossier has been officially confirmed. Our rangers are now locking in your logistics and preparing the fleet for departure. 
+              <br/><br/>
+              <span className="text-primary font-black uppercase tracking-widest text-[10px]">Check your email for the next signal.</span>
+            </p>
+            
+            <button 
+              onClick={() => setShowSuccessModal(false)}
+              className="w-full py-5 bg-black text-white font-black uppercase tracking-[0.2em] text-xs hover:bg-primary hover:text-black transition-all rounded-2xl shadow-xl"
+            >
+              Continue to Dashboard
+            </button>
+         </div>
+      </div>
+    )}
+  </div>
+);
 }
