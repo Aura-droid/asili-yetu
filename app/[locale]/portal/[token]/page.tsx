@@ -150,15 +150,23 @@ export default function GuestPortalPage() {
           </section>
 
           {inquiry.quoted_price > 0 && (
-            <section className="bg-primary/10 border border-primary/20 rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8">
-               <div>
-                  <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-2">Final Quoted Price</h3>
-                  <div className="flex items-baseline gap-2 text-black">
-                     <span className="text-5xl font-black italic">$ {inquiry.quoted_price.toLocaleString()}</span>
-                     <span className="text-xs font-bold uppercase tracking-widest opacity-40">USD Total</span>
+            <section className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-10 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-all" />
+               <div className="relative z-10">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4">Financial Authorization Required</h3>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-baseline gap-3 text-black">
+                       <span className="text-6xl font-black italic tracking-tighter">$ {(inquiry.quoted_price * (inquiry.party_size || 1)).toLocaleString()}</span>
+                       <span className="text-sm font-black uppercase tracking-widest opacity-30 italic">USD Total</span>
+                    </div>
+                    {inquiry.party_size > 1 && (
+                      <p className="text-xs font-bold text-black/40 uppercase tracking-widest">
+                        Based on <span className="text-black">${inquiry.quoted_price.toLocaleString()}</span> per person for <span className="text-black">{inquiry.party_size} guests</span>
+                      </p>
+                    )}
                   </div>
                </div>
-               <button className="px-10 py-5 bg-black text-white font-black uppercase tracking-[0.2em] text-xs skew-x-[-12deg] hover:bg-primary hover:text-black transition-all shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+               <button className="relative z-10 w-full lg:w-auto px-12 py-6 bg-black text-white font-black uppercase tracking-[0.2em] text-xs skew-x-[-10deg] hover:bg-primary hover:text-black hover:scale-105 active:scale-95 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.15)] group-hover:shadow-primary/20">
                  Authorize Expedition
                </button>
             </section>
