@@ -208,8 +208,8 @@ export async function confirmInquiry(inquiryId: string) {
   const { error } = await supabase
     .from("inquiries")
     .update({ 
-      status: 'confirmed',
-      confirmed_at: new Date().toISOString()
+      status: 'confirmed'
+      // confirmed_at: new Date().toISOString() // Note: Pending migration to add this column
     })
     .eq("id", inquiryId);
 
