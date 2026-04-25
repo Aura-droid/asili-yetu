@@ -60,7 +60,7 @@ export async function submitBookingInquiry(payload: any) {
         const { getAcknowledgmentEmailHtml, getAdminNotificationHtml } = await import('@/utils/emailTemplates');
 
         await resend.emails.send({
-            from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
+            from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
             to: ['bookings@asiliyetusafaris.com'], // Admin
             subject: `New Safari Quote Request: ${payload.name}`,
             html: getAdminNotificationHtml(payload),
@@ -68,7 +68,7 @@ export async function submitBookingInquiry(payload: any) {
 
         // 3. Email the User acknowledging the inquiry with Magic Link
         await resend.emails.send({
-            from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
+            from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
             to: [payload.email],
             subject: 'Your Tanzanian Expedition: Inquiry Received',
             html: getAcknowledgmentEmailHtml({ ...payload, access_token: newInquiry.access_token }, payload.locale || 'en'),
@@ -85,22 +85,57 @@ export async function generateItinerary(query: { location: string, dates: string
     try {
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) throw new Error("Gemini API Key missing");
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
-        // 1. Fetch available packages from Supabase
-        const { data: packages, error: dbError } = await supabase.from('packages').select('id, title, duration_days, price_usd, discount_price, difficulty_level, destinations(name)');
+        
+        // 1. Fetch all active packages with their destinations
+        const { data: packages, error: dbError } = await supabase
+            .from('packages')
+            .select(`
+                *,
+                destinations (*)
+            `)
+            .eq('is_active', true);
 
         if (dbError) throw new Error(dbError.message);
 
-        // 2. Formulate prompt
+        // 2. Intelligence Layer: Semantic Match Check
+        // If a package name or its destination matches the query location, we prioritize it
+        const locationLower = query.location.toLowerCase();
+        const directMatch = packages?.find(pkg => 
+            pkg.title.toLowerCase().includes(locationLower) || 
+            pkg.destinations?.some((d: any) => d.name.toLowerCase().includes(locationLower))
+        );
+
+        if (directMatch) {
+            console.log("🎯 DIRECT PACKAGE MATCH FOUND:", directMatch.title);
+            // Return a structured response that mimics AI but points to the real package
+            return { 
+                success: true, 
+                data: {
+                    packageId: directMatch.id,
+                    recommendedTitle: directMatch.title,
+                    strategy: `We found a perfect match! This curated expedition is specifically designed for explorers heading to ${query.location}.`,
+                    dailyBreakdown: directMatch.itinerary || [
+                        { day: 1, description: directMatch.description || "Begin your adventure..." }
+                    ],
+                    isPredefined: true
+                } 
+            };
+        }
+
+        // 3. Fallback to AI Generation for unique requests
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+
         const prompt = `
-          You are an expert luxury safari planner. The user wants to go to: ${query.location}. Dates: ${query.dates}. Guests: ${query.guests}. 
-          Here are our available packages: ${JSON.stringify(packages)}. 
-          Recommend the best package from this list. If none fit perfectly, adapt the closest one.
-          Provide a strategy and a fun daily breakdown. 
+          You are an expert luxury safari planner for "Asili Yetu Safaris". 
+          The user wants to go to: ${query.location}. Dates: ${query.dates}. Guests: ${query.guests}. 
+          Our standard packages (for reference): ${JSON.stringify(packages?.map(p => ({ title: p.title, duration: p.duration_days }))) || "None"}. 
+          
+          Since we don't have a direct package for this specific location, create a custom high-end itinerary.
+          Provide a strategy and a detailed daily breakdown. 
           Return ONLY a JSON response in the following schema:
           { 
-             "packageId": "UUID string of the chosen package (or null if no packages provided)", 
+             "packageId": null, 
              "recommendedTitle": "Title of your custom itinerary suggestion",
              "strategy": "Why this is perfect for them (1-2 sentences)", 
              "dailyBreakdown": [
@@ -113,15 +148,12 @@ export async function generateItinerary(query: { location: string, dates: string
         const response = await result.response;
         const text = response.text();
 
-        if (!text) {
-            throw new Error("No response from system");
-        }
-
-        // Robust JSON extraction (removes markdown backticks if present)
+        if (!text) throw new Error("No response from AI system");
         const cleanJson = text.replace(/```json/g, "").replace(/```/g, "").trim();
 
-        return { success: true, data: JSON.parse(cleanJson) };
+        return { success: true, data: { ...JSON.parse(cleanJson), isPredefined: false } };
     } catch (e: any) {
+        console.error("Itinerary Gen Error:", e);
         return { success: false, error: e.message };
     }
 }
@@ -180,5 +212,31 @@ export async function saveGlobalNotice(payload: { message: string, type: string,
         return { success: true };
     } catch (e: any) {
         return { success: false, error: e.message };
+    }
+}
+
+export async function reportError(payload: { message: string, digest?: string, url?: string }) {
+    try {
+        await resend.emails.send({
+            from: 'Asili Yetu Sentinel <sentinel@asiliyetusafaris.com>',
+            to: ['info@asiliyetusafaris.com'],
+            subject: '🚨 CRITICAL SIGNAL LOSS: Intelligence Report',
+            html: `
+                <div style="font-family: sans-serif; padding: 40px; color: #1a1a1a;">
+                    <h1 style="color: #ef4444;">Sentinel Intercept: Signal Lost</h1>
+                    <p>An explorer encountered a digital storm on the platform.</p>
+                    <hr/>
+                    <p><strong>Error Message:</strong> ${payload.message}</p>
+                    <p><strong>Digest:</strong> ${payload.digest || 'N/A'}</p>
+                    <p><strong>Location:</strong> ${payload.url || 'Unknown'}</p>
+                    <hr/>
+                    <p style="font-size: 10px; color: #999;">Automated technical report from Asili Yetu Command.</p>
+                </div>
+            `
+        });
+        return { success: true };
+    } catch (e) {
+        console.error("Error reporting failed:", e);
+        return { success: false };
     }
 }

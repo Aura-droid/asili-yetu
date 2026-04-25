@@ -86,7 +86,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
             <Search className={`absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/30 transition-all ${isCondensed ? 'scale-75' : ''}`} />
             <input 
               type="text"
-              placeholder={isCondensed ? "Quick Search..." : "Search by biome, vibe, or destination (e.g. 'Savannah', 'Tropical', 'Extreme')..."}
+              placeholder={isCondensed ? t("quick_search") : t("search_placeholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className={`w-full bg-foreground/5 border-none rounded-full font-bold text-foreground focus:ring-2 focus:ring-primary transition-all shadow-inner ${isCondensed ? 'py-4 pl-12 pr-6 text-sm' : 'py-6 pl-16 pr-8 text-lg'}`}
@@ -105,7 +105,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
             className={`flex items-center justify-center gap-3 rounded-full font-black uppercase tracking-widest transition-all shrink-0 ${showFilters ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'} ${isCondensed ? 'w-12 h-12 p-0' : 'px-8 py-6 text-sm'}`}
           >
             <SlidersHorizontal className={`w-5 h-5 ${isCondensed ? 'mr-0' : ''}`} />
-            {!isCondensed && (showFilters ? 'Lock Filters' : 'Refine')}
+            {!isCondensed && (showFilters ? t("lock_filters") : t("refine"))}
             {(selectedBiome || selectedIntensity || selectedDuration || priceSort) && (
                <span className={`bg-white text-black rounded-full flex items-center justify-center text-[10px] animate-pulse ${isCondensed ? 'absolute -top-1 -right-1 w-4 h-4' : 'w-5 h-5'}`}>!</span>
             )}
@@ -130,7 +130,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
                       onClick={() => setSelectedBiome(null)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!selectedBiome ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      All Biomes
+                      {t("all_biomes")}
                     </button>
                     {biomes.map(biome => (
                       <button 
@@ -153,7 +153,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
                       onClick={() => setSelectedIntensity(null)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!selectedIntensity ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      All Levels
+                      {t("all_levels")}
                     </button>
                     {intensities.map(vibe => (
                       <button 
@@ -176,7 +176,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
                       onClick={() => setSelectedDuration(null)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!selectedDuration ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      Any Days
+                      {t("any_days")}
                     </button>
                     <button 
                       onClick={() => setSelectedDuration("short")}
@@ -208,19 +208,19 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
                       onClick={() => setPriceSort(null)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${!priceSort ? 'bg-foreground text-background' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      Default
+                      {t("default")}
                     </button>
                     <button 
                       onClick={() => setPriceSort("low")}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${priceSort === "low" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      Lowest First
+                      {t("lowest_first")}
                     </button>
                     <button 
                       onClick={() => setPriceSort("high")}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${priceSort === "high" ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/40 hover:bg-foreground/10'}`}
                     >
-                      Highest First
+                      {t("highest_first")}
                     </button>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
       <div className="flex items-center gap-4 px-6 md:px-0">
          <div className="h-px bg-foreground/10 flex-1"></div>
          <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.4em] italic">
-           {filteredPackages.length} {filteredPackages.length === 1 ? 'Expedition' : 'Expeditions'} Located
+           {filteredPackages.length} {filteredPackages.length === 1 ? t("expedition") : t("expeditions")} {t("located")}
          </p>
          <div className="h-px bg-foreground/10 flex-1"></div>
       </div>
@@ -248,8 +248,8 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
         ) : (
           <div className="text-center py-40 bg-foreground/5 rounded-[4rem] border border-dashed border-foreground/10">
             <Info className="w-20 h-20 mx-auto mb-6 text-foreground/10" />
-            <h3 className="text-4xl font-black text-foreground/40 italic uppercase tracking-tighter">No Expeditions Fit This Criteria</h3>
-            <p className="text-foreground/30 mt-4 font-bold uppercase tracking-widest text-xs">Try broadening your horizon or clearing filters</p>
+            <h3 className="text-4xl font-black text-foreground/40 italic uppercase tracking-tighter">{t("no_results_title")}</h3>
+            <p className="text-foreground/30 mt-4 font-bold uppercase tracking-widest text-xs">{t("no_results_sub")}</p>
             <button 
               onClick={() => {
                 setSearchQuery("");
@@ -260,7 +260,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
               }}
               className="mt-10 px-10 py-5 bg-foreground text-background rounded-full font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-2xl"
             >
-              Reset Global Search
+              {t("reset_search")}
             </button>
           </div>
         )}

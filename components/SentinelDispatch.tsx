@@ -38,7 +38,7 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, 
     <div className="p-8 bg-foreground/[0.03] rounded-[2.5rem] border border-foreground/5 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-2xl font-black text-foreground italic tracking-tighter uppercase leading-none">Ranger <span className="text-primary">Sentinel</span></h3>
+          <h3 className="text-2xl font-black text-foreground italic tracking-tighter uppercase leading-none">Tour Guide <span className="text-primary">Sentinel</span></h3>
           <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.4em] mt-2">Field Mobilization Terminal</p>
         </div>
         <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
@@ -60,7 +60,7 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, 
               }`}
           >
             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : activeMission ? <ShieldCheck className="w-5 h-5" /> : <Zap className="w-5 h-5 fill-current" />}
-            {activeMission ? `Ranger Locked: ${activeMission.guides?.name}` : signalStatus === 'success' ? 'Sentinel Record Primed' : 'Authorize Ranger Signal'}
+            {activeMission ? `Tour Guide Locked: ${activeMission.guides?.name}` : signalStatus === 'success' ? 'Sentinel Record Primed' : 'Authorize Tour Guide Signal'}
           </button>
 
           {signalStatus === 'success' && (
@@ -96,8 +96,8 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, 
 
       <div className="p-6 bg-black/5 border border-black/5 rounded-3xl">
         <p className="text-[9px] font-bold text-foreground/40 leading-relaxed italic">
-          <b>Ranger Protocol:</b> Authorizing the signal registers a secure mission token in the Sentinel Database.
-          The Field Rangers will receive a unique cryptographic link to the mission briefing where they can accept the expedition
+          <b>Tour Guide Protocol:</b> Authorizing the signal registers a secure mission token in the Sentinel Database.
+          The Tour Guides will receive a unique cryptographic link to the mission briefing where they can accept the expedition
           with first-strike protection.
         </p>
       </div>

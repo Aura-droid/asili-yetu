@@ -193,6 +193,14 @@ export default function DestinationsUI({ initialDestinations }: { initialDestina
                     <label className="block text-[10px] font-black text-foreground/40 uppercase tracking-widest mb-2 ml-2">Scale / Size</label>
                     <input name="size" defaultValue={editing?.size || ""} placeholder="260 sq km" className="w-full bg-foreground/5 border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold" />
                  </div>
+                 <div>
+                    <label className="block text-[10px] font-black text-foreground/40 uppercase tracking-widest mb-2 ml-2">Latitude</label>
+                    <input name="latitude" type="number" step="any" defaultValue={editing?.latitude || ""} placeholder="-2.3333" className="w-full bg-foreground/5 border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold" />
+                 </div>
+                 <div>
+                    <label className="block text-[10px] font-black text-foreground/40 uppercase tracking-widest mb-2 ml-2">Longitude</label>
+                    <input name="longitude" type="number" step="any" defaultValue={editing?.longitude || ""} placeholder="34.8333" className="w-full bg-foreground/5 border border-foreground/10 rounded-2xl px-6 py-4 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold" />
+                 </div>
               </div>
 
               <div>

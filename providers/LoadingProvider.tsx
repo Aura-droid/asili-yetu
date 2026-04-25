@@ -62,10 +62,10 @@ export default function LoadingProvider({ children }: { children: React.ReactNod
                  className="relative w-full h-full flex flex-col items-center justify-center"
                >
                  <Image 
-                   src="/logo.png"
+                   src="/brand/asili-yetu-brand-no-bg.png"
                    alt="Asili Yetu"
-                   width={180}
-                   height={180}
+                   width={220}
+                   height={220}
                    className="object-contain"
                    priority
                  />

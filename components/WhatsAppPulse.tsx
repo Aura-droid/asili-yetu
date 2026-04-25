@@ -36,7 +36,7 @@ export default function WhatsAppPulse() {
           >
             <p className="text-xs font-black text-primary uppercase tracking-widest mb-1">Live Concierge</p>
             <p className="text-[10px] font-medium text-foreground/70 leading-relaxed">
-              Our rangers are available for real-time expedition planning.
+              Our tour guides are available for real-time expedition planning.
             </p>
           </motion.div>
         )}

@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  compress: true,
+  poweredByHeader: false,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: '20mb',

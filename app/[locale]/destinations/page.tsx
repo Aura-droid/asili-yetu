@@ -58,6 +58,18 @@ export default async function DestinationsPage() {
       longitude: 37.3556
     },
     {
+      id: "manyara",
+      name: t("Data.manyara.name"),
+      type: t("Data.manyara.type"),
+      image: "https://images.unsplash.com/photo-1547407139-3c921a661958?auto=format&fit=crop&q=80",
+      description: t("Data.manyara.desc"),
+      best_time: t("Data.manyara.time"),
+      key_wildlife: t("Data.manyara.wildlife"),
+      size: "330 sq km",
+      latitude: -3.4287,
+      longitude: 35.8083
+    },
+    {
       id: "zanzibar",
       name: t("Data.zanzibar.name"),
       type: t("Data.zanzibar.type"),

@@ -7,7 +7,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { useLoading } from "@/providers/LoadingProvider";
 
 export default function Navbar() {
@@ -15,6 +15,13 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = useTranslations("Navbar");
   const { setIsLoading } = useLoading();
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   const menuLinks = [
     { href: "/packages", label: t("safaris") },
@@ -34,17 +41,26 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between px-6 py-4 md:px-12 backdrop-blur-md border-b border-foreground/10 bg-background/50"
       >
-        <Link href="/" className="flex items-center gap-3">
-          <Image 
-            src="/logo.png" 
-            alt="Asili Yetu Safaris Logo" 
-            width={40} 
-            height={40} 
-            className="w-10 h-10 object-contain"
-            priority
-          />
+        {/* Progress Bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary origin-left z-[70]"
+          style={{ scaleX }}
+        />
+
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative">
+             <Image 
+               src="/brand/logo-mark-no-bg.png" 
+               alt="Asili Yetu Safaris Logo" 
+               width={40} 
+               height={40} 
+               className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-500"
+               priority
+             />
+             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
           <span className="text-2xl font-bold tracking-tighter text-foreground hidden sm:block">
-            Asili Yetu <span className="text-primary italic">Safaris and Tours</span>
+            Asili Yetu <span className="bg-linear-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-shimmer italic">Safaris</span>
           </span>
         </Link>
 
@@ -82,7 +98,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[55] bg-background/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center p-8 pt-24"
+            className="fixed inset-0 z-[55] bg-background/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-start p-8 pt-32 overflow-y-auto"
           >
             <div className="flex flex-col items-center gap-8 w-full">
               {menuLinks.map((link, idx) => (

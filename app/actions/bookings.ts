@@ -87,7 +87,7 @@ export async function sendBrandedEmail(inquiryId: string, customMessage?: string
 
     // STAMP: 2026-04-17-PULSE-CHECK: Ensuring build sync
     const { data: finalResendData, error: finalResendError } = await resend.emails.send({
-      from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
+      from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
       to: [inquiry.client_email],
       subject: `Update on your Asili Yetu Expedition: ${inquiry.status.replace('_', ' ').toUpperCase()}`,
       html: html,
@@ -174,11 +174,13 @@ export async function sendInvoiceEmail(inquiryId: string, manualPrice?: number) 
     inquiry.itinerary_details?.recommendedTitle || "Custom Safari Expedition",
     finalPrice,
     siteUrl,
-    inquiry.access_token
+    inquiry.access_token,
+    inquiry.locale || 'en',
+    inquiry
   );
 
   await resend.emails.send({
-    from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
+    from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
     to: [inquiry.client_email],
     subject: `Expedition Authorization: Final Quote for ${inquiry.itinerary_details?.recommendedTitle || "Your Safari"}`,
     html: html,
@@ -195,6 +197,31 @@ export async function updateInquiryDossier(inquiryId: string, updates: any) {
   const { error } = await supabase
     .from("inquiries")
     .update(updates)
+    .eq("id", inquiryId);
+  
+  revalidatePath("/admin/bookings");
+  return { success: !error, error: error?.message };
+}
+
+export async function updateInquiryItinerary(inquiryId: string, dailyBreakdown: any[]) {
+  const supabase = await createClient();
+  
+  // Fetch current details to preserve title and strategy
+  const { data: inquiry } = await supabase
+    .from("inquiries")
+    .select("itinerary_details")
+    .eq("id", inquiryId)
+    .single();
+
+  const currentItinerary = inquiry?.itinerary_details || {};
+  const updatedItinerary = {
+    ...currentItinerary,
+    dailyBreakdown: dailyBreakdown
+  };
+
+  const { error } = await supabase
+    .from("inquiries")
+    .update({ itinerary_details: updatedItinerary })
     .eq("id", inquiryId);
   
   revalidatePath("/admin/bookings");
@@ -235,7 +262,7 @@ export async function sendSignalNotification(inquiryId: string, content: string)
   );
 
   await resend.emails.send({
-    from: 'Asili Yetu Safaris and Tours <bookings@asiliyetusafaris.com>',
+    from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
     to: [inquiry.client_email],
     subject: `New Message from Asili Yetu Agent`,
     html: html,

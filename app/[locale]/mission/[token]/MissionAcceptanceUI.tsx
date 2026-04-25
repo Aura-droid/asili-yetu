@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { claimMission } from "@/app/actions/missions";
+import { claimMission, completeMission } from "@/app/actions/missions";
 import { 
   Users, Clock, Zap, ChevronRight, Briefcase, Map,
-  AlertCircle, Activity, Phone, MessageSquare, ShieldCheck, Loader2
+  AlertCircle, Activity, Phone, MessageSquare, ShieldCheck, Loader2,
+  CheckCircle2, Flag
 } from "lucide-react";
 import Image from "next/image";
 import { useLoading } from "@/providers/LoadingProvider";
@@ -18,6 +19,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
   const [trackingStatus, setTrackingStatus] = useState<"idle" | "searching" | "pulsing" | "denied">("idle");
 
   const isAccepted = mission.status === 'accepted';
+  const isCompleted = mission.status === 'completed';
   const inquiry = mission.inquiry; 
   
   // High-Fidelity Itinerary Extraction Pulse
@@ -40,7 +42,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
     const res = await claimMission(mission.id, selectedGuideId);
     
     if (res.success) {
-       // Save 'Ranger Key' to device for zero-link access later
+       // Save 'Tour Guide Key' to device for zero-link access later
        localStorage.setItem('asili_ranger_id', selectedGuideId);
        window.location.reload(); 
     } else {
@@ -49,6 +51,21 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
     setLoading(false);
     setGlobalLoading(false);
   };
+
+  const handleComplete = async () => {
+    if (!confirm("Are you sure you want to finalize this mission? This will notify the base that the expedition is complete.")) return;
+    
+    setLoading(true);
+    setGlobalLoading(true);
+    const res = await completeMission(mission.id);
+    if (res.success) {
+      window.location.reload();
+    } else {
+      setError(res.error || "Failed to complete mission.");
+    }
+    setLoading(false);
+    setGlobalLoading(false);
+  }
 
   // --- THE HEARTBEAT (Telemetry Engine) ---
   useEffect(() => {
@@ -97,9 +114,9 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
     <div className="max-w-md mx-auto min-h-screen flex flex-col pb-20 p-6 pt-12 text-white bg-[#0a0a0a]">
        {/* Identity Header */}
        <div className="flex flex-col items-center text-center mb-10">
-          <Image src="/logo.png" alt="Asili Yetu" width={80} height={80} className="mb-6 drop-shadow-[0_0_20_rgba(163,204,76,0.3)]" />
-          <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Ranger <span className="text-primary">Dispatch</span></h1>
-          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mt-3">Mission Sentinel V2.4</p>
+          <Image src="/brand/logo-mark-no-bg.png" alt="Asili Yetu" width={80} height={80} className="mb-6 drop-shadow-[0_0_20_rgba(163,204,76,0.3)]" />
+          <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Tour Guide <span className="text-primary">Dispatch</span></h1>
+          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mt-3">Mission Sentinel V2.5</p>
        </div>
 
        {/* Briefing Card */}
@@ -147,20 +164,20 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                 </div>
                 <div className="bg-white/5 p-4 rounded-2xl border border-white/5">
                    <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Status</p>
-                   <p className={`text-xs font-black uppercase italic ${isAccepted ? 'text-green-400' : 'text-primary animate-pulse'}`}>
+                   <p className={`text-xs font-black uppercase italic ${isAccepted ? 'text-green-400' : isCompleted ? 'text-blue-400' : 'text-primary animate-pulse'}`}>
                       {mission.status}
                    </p>
                 </div>
              </div>
 
-             {isAccepted && (
-                <div className="bg-green-500/10 border border-green-500/30 p-5 rounded-2xl flex items-center gap-4 text-green-400">
-                   <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
-                      <ShieldCheck className="w-6 h-6" />
+             {(isAccepted || isCompleted) && (
+                <div className={`${isCompleted ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' : 'bg-green-500/10 border-green-500/30 text-green-400'} border p-5 rounded-2xl flex items-center gap-4`}>
+                   <div className={`w-12 h-12 ${isCompleted ? 'bg-blue-500/20' : 'bg-green-500/20'} rounded-full flex items-center justify-center`}>
+                      {isCompleted ? <CheckCircle2 className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
                    </div>
                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1">Assigned Ranger</p>
-                      <p className="font-black text-lg italic leading-none">{mission.guides?.name || "Active Ranger"}</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1">Assigned Tour Guide</p>
+                      <p className="font-black text-lg italic leading-none">{mission.guides?.name || "Active Guide"}</p>
                    </div>
                 </div>
              )}
@@ -188,34 +205,36 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                 </div>
              </div>
 
-             <div className="pt-6 border-t border-white/5 space-y-4">
-                <p className="text-[8px] font-black text-white/20 uppercase tracking-widest">Field Communications</p>
-                <div className="grid grid-cols-1 gap-3">
-                   {mission.inquiry?.client_phone ? (
-                      <div className="flex gap-2">
-                         <a 
-                            href={`tel:${mission.inquiry.client_phone}`}
-                            className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all"
-                         >
-                            <Phone className="w-4 h-4 text-primary" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Signal Base</span>
-                         </a>
-                         <a 
-                            href={`https://wa.me/${mission.inquiry.client_phone.replace(/\D/g, '')}`}
-                            target="_blank"
-                            className="flex-1 bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/30 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all"
-                         >
-                            <MessageSquare className="w-4 h-4 text-[#25D366]" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">WhatsApp</span>
-                         </a>
-                      </div>
-                   ) : (
-                      <div className="p-4 bg-white/5 rounded-2xl text-center">
-                         <p className="text-[9px] font-bold text-white/30 italic uppercase">Direct Signal Offline • Use Base Relay</p>
-                      </div>
-                   )}
+             {!isCompleted && (
+                <div className="pt-6 border-t border-white/5 space-y-4">
+                    <p className="text-[8px] font-black text-white/20 uppercase tracking-widest">Field Communications</p>
+                    <div className="grid grid-cols-1 gap-3">
+                    {mission.inquiry?.client_phone ? (
+                        <div className="flex gap-2">
+                            <a 
+                                href={`tel:${mission.inquiry.client_phone}`}
+                                className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all"
+                            >
+                                <Phone className="w-4 h-4 text-primary" />
+                                <span className="text-[10px] font-black uppercase tracking-widest">Signal Base</span>
+                            </a>
+                            <a 
+                                href={`https://wa.me/${mission.inquiry.client_phone.replace(/\D/g, '')}`}
+                                target="_blank"
+                                className="flex-1 bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/30 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all"
+                            >
+                                <MessageSquare className="w-4 h-4 text-[#25D366]" />
+                                <span className="text-[10px] font-black uppercase tracking-widest">WhatsApp</span>
+                            </a>
+                        </div>
+                    ) : (
+                        <div className="p-4 bg-white/5 rounded-2xl text-center">
+                            <p className="text-[9px] font-bold text-white/30 italic uppercase">Direct Signal Offline • Use Base Relay</p>
+                        </div>
+                    )}
+                    </div>
                 </div>
-             </div>
+             )}
           </div>
        </div>
 
@@ -246,10 +265,21 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
        </div>
 
        {/* Action Section */}
-       {!isAccepted ? (
+       {isCompleted ? (
+          <div className="text-center py-10 space-y-6">
+             <div className="w-24 h-24 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto border border-blue-500/30 text-blue-400">
+                <Flag className="w-10 h-10" />
+             </div>
+             <div>
+                <h3 className="text-2xl font-black italic uppercase tracking-tighter mb-2">Expedition Concluded</h3>
+                <p className="text-white/40 text-xs font-medium leading-relaxed">This mission has been officially marked as complete. Thank you for your service in the field.</p>
+             </div>
+             <button onClick={() => window.close()} className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline italic">Exit Sentinel</button>
+          </div>
+       ) : !isAccepted ? (
           <div className="space-y-6">
              <div className="space-y-3">
-                <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-2 italic">01. Identify Ranger</label>
+                <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-2 italic">01. Identify Tour Guide</label>
                 <div className="grid grid-cols-1 gap-2 overflow-y-auto max-h-64 pr-2">
                    {guides.filter(g => g.is_active).map(guide => (
                       <button 
@@ -284,15 +314,22 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
              </button>
           </div>
        ) : (
-          <div className="text-center py-10 space-y-6">
-             <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto border border-white/10">
-                <Clock className="w-10 h-10 text-white/20" />
+          <div className="space-y-6">
+             <div className="text-center py-6">
+                <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-2 leading-none italic">Mission in Progress</p>
+                <p className="text-sm font-medium text-white/60">Telemetry is active. Securely conclude the expedition below.</p>
              </div>
-             <div>
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-2 leading-none">Stand Down</p>
-                <p className="text-sm font-medium text-white/60">This mission is currently being undertaken. Await next signal from base.</p>
-             </div>
-             <button onClick={() => window.close()} className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline italic">Exit Sentinel</button>
+             
+             <button 
+               onClick={handleComplete}
+               disabled={loading}
+               className="w-full bg-white text-black py-6 rounded-[2rem] font-black uppercase text-xl shadow-2xl hover:bg-green-400 transition-all flex items-center justify-center gap-4 disabled:opacity-50 italic tracking-tighter"
+             >
+                {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Flag className="w-6 h-6" />}
+                Complete Mission
+             </button>
+
+             <button onClick={() => window.close()} className="w-full text-white/20 text-[10px] font-black uppercase tracking-widest hover:text-white/40 italic mt-4">Exit Sentinel (Stay Active)</button>
           </div>
        )}
     </div>

@@ -19,10 +19,11 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
 };
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function GuidesRoster({ guides }: { guides: any[] }) {
   const locale = useLocale();
+  const t = useTranslations("Guides");
 
   const getLocalizedGuide = (g: any) => {
     if (!g.translations?.[locale]) return { role: g.role, specialty: g.specialty, bio: g.bio };
@@ -75,7 +76,7 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-3 text-primary font-bold tracking-widest uppercase text-sm mb-6"
           >
-            <Binoculars className="w-5 h-5" /> The Heart of the Safari
+            <Binoculars className="w-5 h-5" /> {t("badge")}
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -83,7 +84,9 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black text-foreground tracking-tighter leading-[1.1] mb-8"
           >
-            Meet Your <span className="text-foreground/50 italic font-serif">Rangers.</span>
+            {t.rich("title", {
+              p: (chunks) => <span className="text-foreground/50 italic font-serif">{chunks}</span>
+            })}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -91,8 +94,7 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
             transition={{ delay: 0.2 }}
             className="text-xl text-foreground/70 font-medium leading-relaxed"
           >
-            A luxury lodge is only a building. A customized 4x4 is only a vehicle. 
-            The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.
+            {t("sub")}
           </motion.p>
         </div>
 
@@ -139,8 +141,8 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
                           <Award className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Experience</p>
-                          <p className="font-bold text-foreground">{guide.experience_years || guide.experience} Years in the Field</p>
+                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("experience_label")}</p>
+                          <p className="font-bold text-foreground">{t("years_in_field", { years: guide.experience_years || guide.experience })}</p>
                         </div>
                       </div>
 
@@ -149,7 +151,7 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
                           <MapIcon className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Specialty</p>
+                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("specialty_label")}</p>
                           <p className="font-bold text-foreground">{local.specialty}</p>
                         </div>
                       </div>
@@ -159,7 +161,7 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
                         <Languages className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">Languages</p>
+                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("languages_label")}</p>
                         <p className="font-bold text-foreground">
                           {Array.isArray(guide.languages) ? guide.languages.join(", ") : guide.languages}
                         </p>
@@ -182,16 +184,16 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
         >
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/20 blur-3xl rounded-full pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-6 relative z-10">
-            Ready to explore with the best?
+            {t("cta_title")}
           </h2>
           <p className="text-black/70 font-medium text-lg mb-10 max-w-xl mx-auto relative z-10">
-            Every Asili Yetu expedition includes a dedicated senior ranger. Let's find the perfect expert to lead your journey.
+            {t("cta_sub")}
           </p>
           <Link 
             href="/"
             className="inline-flex items-center gap-3 bg-black text-white px-8 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-black hover:scale-105 active:scale-95 transition-all outline-none border border-black/10 relative z-10 shadow-xl"
           >
-            Start Planning <ArrowRight className="w-5 h-5" />
+            {t("cta_btn")} <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>
       </div>

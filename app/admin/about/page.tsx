@@ -70,8 +70,8 @@ export default function AdminAboutPage() {
           </div>
         ) : errorStatus === "VAULT_EMPTY" ? (
           <div className="text-center space-y-8 animate-in zoom-in duration-500 max-w-md">
-             <div className="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto">
-                <DatabaseBackup className="w-10 h-10 text-amber-500" />
+             <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                <DatabaseBackup className="w-10 h-10 text-primary" />
              </div>
              <div>
                 <h3 className="text-xl font-black uppercase tracking-tight italic mb-3">Database Row Missing</h3>

@@ -21,13 +21,13 @@ export default function AdminAboutEditor({ initialData }: { initialData: any }) 
       const fileExt = file.name.split('.').pop();
       const fileName = `${field}_${Date.now()}.${fileExt}`;
       const { data: uploadData, error } = await supabase.storage
-        .from('site_assets')
+        .from('asili-images')
         .upload(fileName, file);
 
       if (error) throw error;
 
       const { data: { publicUrl } } = supabase.storage
-        .from('site_assets')
+        .from('asili-images')
         .getPublicUrl(fileName);
 
       setData({ ...data, [field]: publicUrl });
@@ -99,39 +99,11 @@ export default function AdminAboutEditor({ initialData }: { initialData: any }) 
                    </div>
                 </div>
 
-                {/* FOUNDER PHOTO */}
-                <div className="space-y-4">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">Founder Portrait (Jeyson)</p>
-                   <div className="relative group aspect-square rounded-3xl overflow-hidden bg-foreground/5 border-2 border-dashed border-foreground/10 hover:border-primary/50 transition-all">
-                      {uploading === 'founder_image' && (
-                        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
-                           <Loader2 className="w-10 h-10 text-primary animate-spin mb-4" />
-                           <p className="text-[10px] font-black text-white uppercase tracking-[0.4em] animate-pulse">Syncing Portrait...</p>
-                        </div>
-                      )}
-                      {data.founder_image ? (
-                        <>
-                          <img src={data.founder_image} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                             <label className="cursor-pointer bg-white text-black px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
-                                Replace Photo
-                                <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'founder_image')} />
-                             </label>
-                          </div>
-                        </>
-                      ) : (
-                        <label className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center gap-4 text-foreground/20">
-                           {uploading === 'founder_image' ? <Loader2 className="w-8 h-8 animate-spin text-primary" /> : <Upload className="w-8 h-8" />}
-                           <span className="text-xs font-black uppercase">Click to Upload Legacy Photo</span>
-                           <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'founder_image')} />
-                        </label>
-                      )}
-                   </div>
-                </div>
+
 
                 {/* LEGACY PHOTO */}
                 <div className="space-y-4">
-                   <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">Origin Story Background</p>
+                   <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">Origin Story Background (Legacy)</p>
                    <div className="relative group aspect-video rounded-3xl overflow-hidden bg-foreground/5 border-2 border-dashed border-foreground/10 hover:border-primary/50 transition-all">
                       {uploading === 'legacy_image' && (
                         <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
@@ -154,6 +126,66 @@ export default function AdminAboutEditor({ initialData }: { initialData: any }) 
                            {uploading === 'legacy_image' ? <Loader2 className="w-8 h-8 animate-spin text-primary" /> : <Upload className="w-8 h-8" />}
                            <span className="text-xs font-black uppercase">Click to Upload Background</span>
                            <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'legacy_image')} />
+                        </label>
+                      )}
+                   </div>
+                </div>
+
+                {/* STORY IMAGE 1 */}
+                <div className="space-y-4">
+                   <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">Story Image 1 (Who We Are)</p>
+                   <div className="relative group aspect-4/5 rounded-3xl overflow-hidden bg-foreground/5 border-2 border-dashed border-foreground/10 hover:border-primary/50 transition-all">
+                      {uploading === 'story_image_1' && (
+                        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
+                           <Loader2 className="w-10 h-10 text-primary animate-spin mb-4" />
+                           <p className="text-[10px] font-black text-white uppercase tracking-[0.4em] animate-pulse">Syncing Visual...</p>
+                        </div>
+                      )}
+                      {data.story_image_1 ? (
+                        <>
+                          <img src={data.story_image_1} className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <label className="cursor-pointer bg-white text-black px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
+                                Replace Photo
+                                <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'story_image_1')} />
+                             </label>
+                          </div>
+                        </>
+                      ) : (
+                        <label className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center gap-4 text-foreground/20">
+                           {uploading === 'story_image_1' ? <Loader2 className="w-8 h-8 animate-spin text-primary" /> : <Upload className="w-8 h-8" />}
+                           <span className="text-xs font-black uppercase">Click to Upload Story Image 1</span>
+                           <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'story_image_1')} />
+                        </label>
+                      )}
+                   </div>
+                </div>
+
+                {/* STORY IMAGE 2 */}
+                <div className="space-y-4">
+                   <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40 italic">Story Image 2 (Name Meaning)</p>
+                   <div className="relative group aspect-video rounded-3xl overflow-hidden bg-foreground/5 border-2 border-dashed border-foreground/10 hover:border-primary/50 transition-all">
+                      {uploading === 'story_image_2' && (
+                        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-300">
+                           <Loader2 className="w-10 h-10 text-primary animate-spin mb-4" />
+                           <p className="text-[10px] font-black text-white uppercase tracking-[0.4em] animate-pulse">Syncing Visual...</p>
+                        </div>
+                      )}
+                      {data.story_image_2 ? (
+                        <>
+                          <img src={data.story_image_2} className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <label className="cursor-pointer bg-white text-black px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">
+                                Replace Photo
+                                <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'story_image_2')} />
+                             </label>
+                          </div>
+                        </>
+                      ) : (
+                        <label className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center gap-4 text-foreground/20">
+                           {uploading === 'story_image_2' ? <Loader2 className="w-8 h-8 animate-spin text-primary" /> : <Upload className="w-8 h-8" />}
+                           <span className="text-xs font-black uppercase">Click to Upload Story Image 2</span>
+                           <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'story_image_2')} />
                         </label>
                       )}
                    </div>

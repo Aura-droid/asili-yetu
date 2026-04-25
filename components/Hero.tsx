@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
-import { MapPin, Calendar, Users, Sparkles, X, Car } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { MapPin, Calendar, Users, Sparkles, X, Car, ArrowRight } from "lucide-react";
 import { generateItinerary } from "@/app/actions";
 import RustlingButton from "./RustlingButton";
 import BookingFunnel from "./BookingFunnel";
@@ -12,37 +12,40 @@ import { useLoading } from "@/providers/LoadingProvider";
 import Image from "next/image";
 import Link from "next/link";
 
-function FallingLeaves() {
-  const [leaves, setLeaves] = useState<Array<{ id: number, x: number }>>([]);
+function FloatingGlimmer() {
+  const [particles, setParticles] = useState<Array<{ id: number, x: number, y: number, size: number }>>([]);
 
   useEffect(() => {
-    const newLeaves = Array.from({ length: 20 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 1 + Math.random() * 3,
     }));
-    setLeaves(newLeaves);
+    setParticles(newParticles);
   }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
-      {leaves.map((leaf) => (
+      {particles.map((p) => (
         <motion.div
-          key={leaf.id}
-          className="absolute top-[-50px] w-5 h-5 rounded-[50%] bg-[#4ade80]/40"
-          initial={{ y: -50, x: `${leaf.x}vw`, rotate: 0 }}
+          key={p.id}
+          className="absolute rounded-full bg-primary/20 backdrop-blur-sm border border-white/10"
+          initial={{ opacity: 0, x: `${p.x}vw`, y: `${p.y}vh` }}
           animate={{
-            y: "120vh",
-            x: [`${leaf.x}vw`, `${leaf.x + (Math.random() * 15 - 7.5)}vw`, `${leaf.x}vw`],
-            rotate: 360,
+            y: [`${p.y}vh`, `${p.y - 10}vh`, `${p.y}vh`],
+            x: [`${p.x}vw`, `${p.x + 5}vw`, `${p.x}vw`],
+            opacity: [0, 0.4, 0],
+            scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: 8 + Math.random() * 12,
+            duration: 10 + Math.random() * 20,
             repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "linear",
+            ease: "easeInOut",
           }}
           style={{
-             clipPath: 'polygon(100% 0, 100% 100%, 0 100%, 0 50%, 50% 0)' 
+            width: p.size,
+            height: p.size,
           }}
         />
       ))}
@@ -53,6 +56,7 @@ function FallingLeaves() {
 export default function Hero({ featuredPackages = [] }: { featuredPackages?: any[] }) {
   const { theme, setTheme } = useTheme();
   const t = useTranslations("Hero");
+  const locale = useLocale();
   
   // Form State
   const [location, setLocation] = useState("");
@@ -77,6 +81,18 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
     }, 8000); // 8 seconds per masterpiece
     return () => clearInterval(interval);
   }, [featuredPackages.length]);
+
+  // Mouse Tracking for Interactive Glow
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const handlePlanSafari = async () => {
     if (!location) return;
@@ -112,13 +128,17 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
              transition={{ duration: 2, ease: "easeInOut" }}
              className="absolute inset-0"
            >
-             <Image 
-                src={currentFeatured?.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
-                alt={currentFeatured?.title || "Safari Background"}
-                fill
-                priority
-                className="w-full h-full object-cover filter brightness-[0.8]"
-             />
+             <motion.div
+                className="absolute -inset-[20%]"
+             >
+                <Image 
+                   src={currentFeatured?.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
+                   alt={currentFeatured?.title || "Safari Background"}
+                   fill
+                   priority
+                   className="w-full h-full object-cover filter brightness-[0.8]"
+                />
+             </motion.div>
            </motion.div>
          </AnimatePresence>
       </div>
@@ -133,22 +153,77 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           className="relative mb-8"
         >
           {currentFeatured ? (
-             <div className="flex flex-col items-center gap-4">
-                <span className="px-5 py-2 rounded-full border border-amber-500/40 text-[10px] font-black text-amber-500 bg-black/40 backdrop-blur-xl uppercase tracking-[0.4em] shadow-2xl flex items-center gap-2">
-                   <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Masterpiece Selection
-                </span>
-                <h2 className="text-4xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-2xl">
-                   {currentFeatured.title}
-                </h2>
-                <div className="flex items-center gap-6 text-white/60 text-xs font-bold tracking-widest uppercase">
-                   <span className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md italic">
-                      {currentFeatured.duration_days} Days of Immersion
-                   </span>
-                   <Link href={`/packages?expedition=${currentFeatured.id}`} className="text-amber-500 border-b border-amber-500 pb-0.5 hover:text-white hover:border-white transition-all">
-                      View Expedition Details
-                   </Link>
+             <motion.div 
+               whileHover={{ scale: 1.02 }}
+               className="group relative cursor-pointer flex flex-col md:flex-row items-center gap-8 md:gap-16"
+               onClick={() => window.location.href = `/${locale}/packages?expedition=${currentFeatured.id}`}
+             >
+                {/* Floating Cinematic Portal */}
+                <motion.div 
+                   initial={{ opacity: 0, x: -50, rotate: -10 }}
+                   animate={{ opacity: 1, x: 0, rotate: -5 }}
+                   whileHover={{ rotate: 0, scale: 1.1, z: 50 }}
+                   className="relative w-32 h-40 md:w-64 md:h-80 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 transition-all duration-700 shrink-0"
+                >
+                   <Image 
+                      src={currentFeatured.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
+                      alt="Portal View"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                   />
+                   <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                   <div className="absolute inset-0 border border-primary/30 rounded-[1.5rem] md:rounded-[2.5rem] pointer-events-none" />
+                </motion.div>
+
+                <div className="flex flex-col items-center md:items-start gap-4 md:gap-6 relative z-10 text-center md:text-left">
+                   {/* Cinematic Badge */}
+                   <motion.span 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="px-6 py-2.5 rounded-full border border-primary/50 text-[10px] md:text-[11px] font-black text-primary bg-black/40 backdrop-blur-2xl uppercase tracking-[0.5em] shadow-[0_0_40px_rgba(212,175,55,0.2)] flex items-center gap-3 transition-all group-hover:border-primary"
+                   >
+                      <Sparkles className="w-4 h-4 animate-pulse text-primary" /> 
+                      <span className="bg-linear-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent animate-shimmer">
+                        {t("masterpiece_badge")}
+                      </span>
+                   </motion.span>
+
+                   {/* Title with 3D Depth */}
+                   <div className="relative">
+                      <h2 className="text-4xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all group-hover:scale-105 group-hover:-translate-y-2 group-hover:rotate-[-1deg]">
+                         {currentFeatured.title}
+                      </h2>
+                      <div className="absolute -inset-x-12 -inset-y-6 bg-primary/10 blur-[120px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                   </div>
+
+                   {/* Cinematic Subtitle / Vibe */}
+                   <p className="text-white/80 text-sm md:text-lg font-medium italic max-w-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 translate-y-4 group-hover:translate-y-0">
+                      {currentFeatured.description?.split('.')[0]}.
+                   </p>
+
+                   {/* Immersive Metadata */}
+                   <div className="flex items-center gap-6 md:gap-8 text-white/70 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">
+                      <motion.span 
+                        className="flex items-center gap-3 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-full backdrop-blur-3xl border border-white/10 italic group-hover:bg-primary/20 group-hover:border-primary/30 transition-all"
+                      >
+                         <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+                         {currentFeatured.duration_days} {t("days_immersion")}
+                      </motion.span>
+                      
+                      <div className="flex items-center gap-2 group/btn">
+                         <span className="text-primary border-b-2 border-primary/30 pb-1 group-hover/btn:border-primary transition-all flex items-center gap-2">
+                            {t("view_details")}
+                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                         </span>
+                      </div>
+                   </div>
                 </div>
-             </div>
+
+                {/* Mouse Follow Glow (CSS handled) */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(212,175,55,0.15)_0%,transparent_50%)]" />
+                </div>
+             </motion.div>
           ) : (
              <span className="px-5 py-2 rounded-full border border-primary/40 text-sm font-semibold text-primary inline-block bg-background/50 backdrop-blur-md uppercase tracking-widest shadow-sm">
                 {theme === 'jungle' ? t("venture_jungle") : t("venture")}
@@ -163,7 +238,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 max-w-5xl leading-[1.1] drop-shadow-lg"
         >
           {t.rich("title", {
-             p: (chunks) => <span className="text-primary inline-block transition-colors duration-500">{chunks}</span>
+             p: (chunks) => <span className="bg-linear-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-shimmer inline-block transition-colors duration-500">{chunks}</span>
           })}
         </motion.h1>
 

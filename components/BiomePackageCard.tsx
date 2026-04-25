@@ -87,7 +87,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
         <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-16 lg:p-24">
           {pkg.is_featured && (
             <div className="mb-4 inline-block bg-primary text-[#0f172a] text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit">
-              Masterpiece Edition
+              {pt("masterpiece_edition")}
             </div>
           )}
 
@@ -121,7 +121,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               </div>
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                 <Clock className="w-5 h-5 text-primary" />
-                <span>{pkg.duration_days} Days / {pkg.duration_days - 1} Nights</span>
+                <span>{pkg.duration_days} {pt("days")} / {pkg.duration_days - 1} {pt("nights")}</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                 <span className="font-bold tracking-widest uppercase text-xs text-primary">{pkg.difficulty_level}</span>
@@ -137,7 +137,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/20 mt-auto">
             <div>
-              <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">Investment</p>
+              <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">{pt("investment")}</p>
               <div className="flex items-center text-white">
                 <DollarSign className="w-6 h-6 text-primary -ml-1" />
                 {pkg.discount_price ? (
@@ -167,7 +167,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 onClick={() => setIsOpen(true)}
                 className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform w-full sm:w-auto text-center shrink-0"
               >
-                Explore Itinerary
+                {pt("explore_itinerary")}
               </RustlingButton>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 <div className="flex items-center justify-between mb-12">
                    <div>
                       <h2 className="text-4xl md:text-6xl font-black text-foreground italic uppercase tracking-tighter leading-none mb-2">
-                         Expedition <span className="text-primary italic">Dossier</span>
+                         {pt("expedition")} <span className="text-primary italic">{pt("dossier")}</span>
                       </h2>
                       <p className="text-foreground/50 font-bold uppercase tracking-[0.3em] text-[10px]">{pkg.title}</p>
                    </div>
@@ -232,7 +232,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                        <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
                           <Compass className="w-6 h-6" />
                        </div>
-                       <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Expedition Concept</h3>
+                       <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">{pt("concept")}</h3>
                     </div>
                    <p className="text-xl md:text-2xl font-medium text-foreground/80 leading-relaxed mb-12">
                       {pkg.description}
@@ -241,7 +241,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                       onClick={() => setShowBooking(true)}
                       className="bg-primary text-black px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-lg shadow-xl hover:shadow-primary/20 transition-all active:scale-95"
                     >
-                      Book This Masterpiece
+                      {pt("book_masterpiece")}
                    </RustlingButton>
                 </div>
              </div>

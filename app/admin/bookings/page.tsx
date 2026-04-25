@@ -2,7 +2,7 @@
 
 import { useTransition, useState, useEffect } from "react";
 import { Briefcase, AlertTriangle, ChevronDown, ChevronUp, Mail, Phone, Calendar, Save, MessageCircle, RefreshCw, Loader2 } from "lucide-react";
-import { getInquiries, updateInquiryStatus, updateInquiryNotes, updateQuotedPrice, getMessages, sendMessage, clearUnreadCount, sendInvoiceEmail, updateInquiryDossier, sendSignalNotification, deleteInquiry } from "@/app/actions/bookings";
+import { getInquiries, updateInquiryStatus, updateInquiryNotes, updateQuotedPrice, getMessages, sendMessage, clearUnreadCount, sendInvoiceEmail, updateInquiryDossier, updateInquiryItinerary, sendSignalNotification, deleteInquiry } from "@/app/actions/bookings";
 import QuickReplies from "@/components/QuickReplies";
 import SentinelDispatch from "@/components/SentinelDispatch";
 import { createClient } from "@/utils/supabase/client";
@@ -136,7 +136,7 @@ export default function AdminBookingsPage() {
   const [inquiries, setInquiries] = useState<any[]>([]);
   const [needsMigration, setNeedsMigration] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [activeTabs, setActiveTabs] = useState<Record<string, 'dossier' | 'chat' | 'sentinel' | 'logistics'>>({});
+  const [activeTabs, setActiveTabs] = useState<Record<string, 'dossier' | 'chat' | 'sentinel' | 'logistics' | 'itinerary'>>({});
   const [isPending, startTransition] = useTransition();
   const [loadingInitial, setLoadingInitial] = useState(true);
   const [tabLoading, setTabLoading] = useState<string | null>(null);
@@ -300,7 +300,7 @@ export default function AdminBookingsPage() {
               {isExpanded && (
                 <div className="border-t border-foreground/10 bg-foreground/1">
                    <div className="flex border-b border-foreground/10 px-6">
-                      {(['dossier', 'chat', 'sentinel', 'logistics'] as const).map((tab) => (
+                      {(['dossier', 'itinerary', 'chat', 'sentinel', 'logistics'] as const).map((tab) => (
                         <button 
                           key={tab} 
                           onClick={() => {
@@ -326,7 +326,7 @@ export default function AdminBookingsPage() {
                       )}
                       {(activeTabs[inquiry.id] || 'dossier') === 'sentinel' && <SentinelDispatch inquiry={inquiry} onUpdate={loadInquiries} />}
                       {(activeTabs[inquiry.id] || 'dossier') === 'chat' && <ChatTerminal inquiry={inquiry} onNewMessage={loadInquiries} />}
-                      {(activeTabs[inquiry.id] || 'dossier') === 'dossier' && (
+                       {(activeTabs[inquiry.id] || 'dossier') === 'dossier' && (
                         <div className="space-y-6 animate-in fade-in duration-500">
                           <div className="grid grid-cols-2 gap-4">
                              <div className="bg-white p-4 rounded-xl border border-foreground/10"><p className="text-[10px] font-bold opacity-30 mb-1">Guests</p><p className="font-bold">{inquiry.party_size || 0}</p></div>
@@ -336,6 +336,44 @@ export default function AdminBookingsPage() {
                              <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-2">Itinerary Strategy</p>
                              <p className="text-sm font-medium leading-relaxed italic">"{inquiry.itinerary_details?.strategy || inquiry.itinerary_details?.rationale || "Base strategy pending..."}"</p>
                           </div>
+                        </div>
+                      )}
+                      {(activeTabs[inquiry.id] || 'dossier') === 'itinerary' && (
+                        <div className="space-y-6 animate-in fade-in duration-500">
+                           <div className="flex justify-between items-center mb-4">
+                              <h4 className="text-[10px] font-black uppercase tracking-widest opacity-40">Expedition Roadmap Editor</h4>
+                              <p className="text-[9px] font-bold text-primary italic">Live Bargaining Sync Active</p>
+                           </div>
+                           
+                           <div className="space-y-4">
+                              {(inquiry.itinerary_details?.dailyBreakdown || []).map((day: any, idx: number) => (
+                                <div key={idx} className="bg-white border border-foreground/10 rounded-2xl p-4 flex gap-4 hover:border-primary/30 transition-all group/day">
+                                   <div className="w-10 h-10 rounded-full bg-foreground/5 text-foreground/40 flex items-center justify-center font-black text-xs shrink-0 group-hover/day:bg-primary group-hover/day:text-black transition-colors">
+                                      {day.day || day.Day}
+                                   </div>
+                                   <div className="flex-1">
+                                      <textarea 
+                                        defaultValue={day.description || day.Description || day.Activity}
+                                        onBlur={async (e) => {
+                                          const newBreakdown = [...(inquiry.itinerary_details?.dailyBreakdown || [])];
+                                          newBreakdown[idx] = { ...day, description: e.target.value };
+                                          await updateInquiryItinerary(inquiry.id, newBreakdown);
+                                          loadInquiries();
+                                        }}
+                                        className="w-full bg-transparent border-none outline-none resize-none text-sm font-medium leading-relaxed text-foreground placeholder:text-foreground/20"
+                                        rows={2}
+                                      />
+                                   </div>
+                                </div>
+                              ))}
+                              
+                              {(!inquiry.itinerary_details?.dailyBreakdown || inquiry.itinerary_details.dailyBreakdown.length === 0) && (
+                                <div className="text-center py-10 border-2 border-dashed border-foreground/10 rounded-3xl">
+                                   <AlertTriangle className="w-8 h-8 text-amber-500 mx-auto mb-3 opacity-30" />
+                                   <p className="text-[10px] font-black uppercase tracking-widest opacity-20">No Itinerary Pulse Detected</p>
+                                </div>
+                              )}
+                           </div>
                         </div>
                       )}
                       {(activeTabs[inquiry.id] || 'dossier') === 'logistics' && (

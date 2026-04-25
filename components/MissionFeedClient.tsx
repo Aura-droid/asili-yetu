@@ -54,7 +54,7 @@ export default function MissionFeedClient({ initialMissions }: MissionFeedClient
               </div>
             </div>
             <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.2em] mb-2 leading-none">
-              {mission.status === 'accepted' ? 'Ranger on Point' : 'Dispatch Pending'}
+              {mission.status === 'accepted' ? 'Tour Guide on Point' : 'Dispatch Pending'}
             </p>
             <h4 className="text-xl font-black text-foreground italic mb-4 leading-none truncate">
               {mission.guides?.name || 'Awaiting Response'}

@@ -25,21 +25,56 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Asili Yetu Safaris and Tours",
-    template: "%s | Asili Yetu Safaris and Tours"
-  },
-  description: "Premium safari experiences and authentic Tanzanian adventures with Asili Yetu Safaris and Tours.",
-  applicationName: "Asili Yetu Safaris and Tours",
-  appleWebApp: {
-    title: "Asili Yetu Safaris and Tours",
-  },
-  openGraph: {
-    type: "website",
-    siteName: "Asili Yetu Safaris and Tours",
-  }
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  
+  // This would ideally come from a translation file, but for the root layout, we provide a high-fidelity mapped default
+  const descriptions: Record<string, string> = {
+    en: "Premium safari experiences and authentic Tanzanian adventures with Asili Yetu Safaris.",
+    sw: "Uzoefu wa safari za daraja la juu na matukio halisi ya Kitanzania na Asili Yetu Safaris.",
+    es: "Experiencias de safari premium y auténticas aventuras tanzanas con Asili Yetu Safaris.",
+    fr: "Expériences de safari premium et aventures tanzaniennes authentiques avec Asili Yetu Safaris.",
+    de: "Premium-Safari-Erlebnisse und authentische tansanische Abenteuer mit Asili Yetu Safaris.",
+    zh: "通过 Asili Yetu Safaris 获得优质的游猎体验和真实的坦桑尼亚冒险。",
+    ar: "تجارب سفاري متميزة ومغامرات تنزانية أصيلة مع أسيلي يتو سفاريز."
+  };
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: "Asili Yetu Safaris",
+      template: "%s | Asili Yetu Safaris"
+    },
+    description: descriptions[locale] || descriptions.en,
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        en: `${baseUrl}/en`,
+        sw: `${baseUrl}/sw`,
+        es: `${baseUrl}/es`,
+        fr: `${baseUrl}/fr`,
+        de: `${baseUrl}/de`,
+        zh: `${baseUrl}/zh`,
+        ar: `${baseUrl}/ar`,
+        'x-default': `${baseUrl}/en`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Asili Yetu Safaris",
+      images: [
+        {
+          url: "/brand/asili-yetu-brand.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Asili Yetu Safaris - Premium Tanzanian Expeditions",
+        },
+      ],
+    },
+  };
+}
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
@@ -72,7 +107,7 @@ export default async function RootLayout(props: {
              __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "name": "Asili Yetu Safaris and Tours",
+                "name": "Asili Yetu Safaris",
                 "url": "https://asiliyetusafaris.com",
                 "potentialAction": {
                   "@type": "SearchAction",

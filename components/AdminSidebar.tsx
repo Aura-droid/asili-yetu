@@ -42,7 +42,7 @@ export default function AdminSidebar() {
         { href: "/admin/destinations", label: "Destinations", icon: MapPin },
         { href: "/admin/packages", label: "Packages", icon: Map },
         { href: "/admin/fleet", label: "Fleet Showroom", icon: Car },
-        { href: "/admin/guides", label: "Ranger Roster", icon: Users },
+        { href: "/admin/guides", label: "Tour Guide Roster", icon: Users },
       ]
     },
     {
@@ -70,8 +70,8 @@ export default function AdminSidebar() {
     <div className="w-72 bg-[#0a0a0a] text-white flex flex-col h-full sticky top-0 min-h-screen border-r border-white/5">
         <div className="p-8 border-b border-white/5 flex flex-col items-start gap-4">
           <Image 
-            src="/logo.png" 
-            alt="Asili Yetu Safaris and Tours Admin" 
+            src="/brand/logo-mark-no-bg.png" 
+            alt="Asili Yetu Safaris Admin" 
             width={56} 
             height={56} 
             className="w-14 h-14 object-contain brightness-110 drop-shadow-[0_0_15px_rgba(255,183,0,0.3)]"
@@ -80,7 +80,7 @@ export default function AdminSidebar() {
           {mounted ? (
             <div>
               <h2 className="text-2xl font-black tracking-tighter text-white uppercase italic">Command <span className="text-primary italic">Center</span></h2>
-              <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Safaris and Tours Ops</p>
+              <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.4em] mt-1 leading-none">Asili Yetu Safaris Ops</p>
             </div>
           ) : (
             <div className="h-12 w-32 bg-white/5 animate-pulse rounded-lg" />

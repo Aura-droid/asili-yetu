@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function FeaturedDestinations({ destinations }: { destinations: any[] }) {
+  const t = useTranslations("Destinations");
   const [index, setIndex] = React.useState(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -34,14 +36,14 @@ export default function FeaturedDestinations({ destinations }: { destinations: a
     <section className="py-24 bg-background overflow-hidden border-t border-foreground/5">
       <div className="container mx-auto px-6 mb-12 flex justify-between items-end">
         <div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-500 mb-4 block">Destinations Atlas</span>
-          <h2 className="text-4xl md:text-6xl font-black text-foreground italic uppercase tracking-tighter leading-none">Elite <span className="text-amber-500 italic">Territories</span></h2>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block">{t("badge")}</span>
+          <h2 className="text-4xl md:text-6xl font-black text-foreground italic uppercase tracking-tighter leading-none">{t.rich("title", { p: (chunks) => <span className="text-primary italic">{chunks}</span> })}</h2>
         </div>
         <div className="flex gap-2">
            {destinations.map((_, i) => (
              <div 
-               key={i} 
-               className={`h-1 transition-all duration-500 rounded-full ${index === i ? 'w-8 bg-amber-500' : 'w-2 bg-foreground/10'}`} 
+                key={i} 
+                className={`h-1 transition-all duration-500 rounded-full ${index === i ? 'w-8 bg-primary' : 'w-2 bg-foreground/10'}`} 
              />
            ))}
         </div>
@@ -66,15 +68,15 @@ export default function FeaturedDestinations({ destinations }: { destinations: a
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               
               <div className="absolute top-6 right-6">
-                 <div className="bg-amber-500/20 backdrop-blur-md border border-amber-500/30 p-2 rounded-full">
-                    <MapPin className="w-4 h-4 text-amber-500" />
+                 <div className="bg-primary/20 backdrop-blur-md border border-primary/30 p-2 rounded-full">
+                    <MapPin className="w-4 h-4 text-primary" />
                  </div>
               </div>
 
               <div className="absolute inset-x-8 bottom-8">
-                <span className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-2 block">{dest.type}</span>
+                <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-2 block">{dest.type}</span>
                 <h3 className="text-3xl font-black text-white italic uppercase tracking-tighter mb-4">{dest.name}</h3>
-                <Link href="/destinations" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-amber-500 transition-colors">
+                <Link href="/destinations" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-primary transition-colors">
                    Details <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

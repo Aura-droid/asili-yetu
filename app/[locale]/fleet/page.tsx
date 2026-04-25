@@ -12,7 +12,9 @@ export default async function FleetPage() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 md:mb-24">
           <h1 className="text-6xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] mb-8 uppercase">
-             {t("title")}
+             {t.rich("title", {
+               p: (chunks) => <span className="bg-linear-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-shimmer italic">{chunks}</span>
+             })}
           </h1>
           <p className="text-foreground/50 text-base md:text-lg max-w-2xl mx-auto font-medium tracking-tight">
             {t("sub")}

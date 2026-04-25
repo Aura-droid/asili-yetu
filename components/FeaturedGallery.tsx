@@ -33,17 +33,17 @@ export default function FeaturedGallery({ items }: { items: any[] }) {
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 text-center mb-20">
-         <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.5em] text-amber-500 mb-6">
+         <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.5em] text-primary mb-6">
             <Compass className="w-4 h-4" /> Visual Masterpieces
          </span>
          <h2 className="text-6xl md:text-8xl font-black text-foreground italic uppercase tracking-tighter leading-[0.8] mb-8">
-            Caught in <br/> <span className="text-amber-500 italic">Infinity</span>
+            Caught in <br/> <span className="text-primary italic">Infinity</span>
          </h2>
          <div className="flex gap-2 justify-center mb-12">
             {items.map((_, i) => (
               <div 
                 key={i} 
-                className={`h-1 transition-all duration-700 rounded-full ${index === i ? 'w-12 bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)]' : 'w-2 bg-foreground/10'}`} 
+                className={`h-1 transition-all duration-700 rounded-full ${index === i ? 'w-12 bg-primary shadow-[0_0_15px_rgba(245,158,11,0.5)]' : 'w-2 bg-foreground/10'}`} 
               />
             ))}
          </div>
@@ -59,9 +59,9 @@ export default function FeaturedGallery({ items }: { items: any[] }) {
              className="min-w-full md:min-w-[calc(33.333%-1rem)] h-[500px] relative rounded-[4rem] overflow-hidden group shadow-2xl snap-center"
            >
               <div className="absolute top-8 left-8 z-20">
-                 <div className="bg-amber-500/20 backdrop-blur-md border border-amber-500/30 px-4 py-1.5 rounded-full flex items-center gap-2">
-                    <Sparkles className="w-3 h-3 text-amber-500" />
-                    <span className="text-[8px] font-black uppercase text-amber-500 tracking-widest">Masterpiece Selection</span>
+                 <div className="bg-primary/20 backdrop-blur-md border border-primary/30 px-4 py-1.5 rounded-full flex items-center gap-2">
+                    <Sparkles className="w-3 h-3 text-primary" />
+                    <span className="text-[8px] font-black uppercase text-primary tracking-widest">Masterpiece Selection</span>
                  </div>
               </div>
 

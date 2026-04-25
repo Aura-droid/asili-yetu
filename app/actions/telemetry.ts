@@ -49,7 +49,10 @@ export async function getLatestFleetTelemetry() {
         guides (
           name,
           fleet_assigned,
-          image_url
+          image_url,
+          missions:missions!missions_assigned_ranger_id_fkey (
+            status
+          )
         )
       `)
       .order('timestamp', { ascending: false });
@@ -65,7 +68,13 @@ export async function getLatestFleetTelemetry() {
     const uniqueGuides = new Map();
     data.forEach(record => {
       if (record.guide_id && !uniqueGuides.has(record.guide_id)) {
-        uniqueGuides.set(record.guide_id, record);
+        // Determine operational status from linked missions
+        const hasAcceptedMission = record.guides?.missions?.some((m: any) => m.status === 'accepted');
+        
+        uniqueGuides.set(record.guide_id, {
+          ...record,
+          status: hasAcceptedMission ? 'Active' : 'Idle'
+        });
       }
     });
 

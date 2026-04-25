@@ -6,7 +6,7 @@ import LoadingProvider from "@/providers/LoadingProvider";
 
 export const metadata: Metadata = {
   title: "Asili Yetu | Admin Console",
-  description: "Administrative dashboard for safari concierge.",
+  description: "Administrative dashboard for Asili Yetu Safaris.",
 };
 
 export default function AdminRootLayout({

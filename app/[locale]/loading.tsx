@@ -31,7 +31,7 @@ export default function Loading() {
             className="relative w-full h-full flex flex-col items-center justify-center"
           >
             <Image 
-              src="/logo.png"
+              src="/brand/logo-mark-no-bg.png"
               alt="Asili Yetu"
               width={120}
               height={120}

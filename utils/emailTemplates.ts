@@ -9,10 +9,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 // In dev, localhost isn't reachable by emails, so we use a high-fidelity branded fallback
 const logoImg = siteUrl.includes('localhost') 
-    ? 'https://raw.githubusercontent.com/Aura-droid/asili-yetu/main/public/logo.png' // Direct high-fidelity proxy
-    : `${siteUrl}/logo.png`;
+    ? 'https://raw.githubusercontent.com/Aura-droid/asili-yetu/main/public/brand/text-brand-no-bg.png' 
+    : `${siteUrl}/brand/text-brand-no-bg.png`;
 
-export const safariEmailTemplate = (clientName: string, itineraryTitle: string, status: string, customMessage?: string, accessToken?: string, locale: string = 'en', btnText?: string) => {
+const markImg = siteUrl.includes('localhost')
+    ? 'https://raw.githubusercontent.com/Aura-droid/asili-yetu/main/public/brand/logo-mark-no-bg.png'
+    : `${siteUrl}/brand/logo-mark-no-bg.png`;
+
+export const safariEmailTemplate = (clientName: string, itineraryTitle: string, status: string, customMessage?: string, accessToken?: string, locale: string = 'en', btnText?: string, payload?: any) => {
     // Using high-fidelity public fallbacks for dev stability
     const bannerImg = `https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=1200`;
     
@@ -55,13 +59,11 @@ export const safariEmailTemplate = (clientName: string, itineraryTitle: string, 
             .logo-container { width: 64px; height: 64px; background: #1a1a1a; border-radius: 16px; display: inline-block; text-align: center; vertical-align: middle; padding: 10px; border: 1.5px solid ${accentColor}; box-sizing: border-box; }
             .logo-container img { width: 100%; height: 100%; object-fit: contain; display: block; margin: 0 auto; }
             
-            .guide-section { margin-top: 40px; padding-top: 35px; border-top: 2px solid #f0f0f0; }
-            .guide-section h3 { font-size: 20px; font-weight: 900; color: #1a1a1a; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.5px; }
-            .guide-card { background: #fdfaf0; border-radius: 20px; padding: 28px; margin-bottom: 20px; border: 1px solid #f2e6c4; }
-            .guide-card h4 { margin: 0 0 12px 0; font-size: 14px; font-weight: 900; color: ${accentColor}; text-transform: uppercase; letter-spacing: 1px; }
-            .guide-card ul { margin: 10px 0 0 0; padding-left: 20px; }
-            .guide-card li { font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 10px; }
-            .guide-card b { color: #1a1a1a; }
+            .roadmap-container { margin-top: 40px; padding-top: 35px; border-top: 2px solid #f0f0f0; }
+            .roadmap-container h3 { font-size: 20px; font-weight: 900; color: #1a1a1a; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.5px; }
+            .day-card { display: flex; gap: 20px; margin-bottom: 25px; }
+            .day-num { width: 40px; height: 40px; background: #1a1a1a; color: #ffffff; border-radius: 50%; display: flex; items-center; justify-center; font-weight: 900; font-size: 14px; flex-shrink: 0; }
+            .day-desc { padding-top: 10px; font-size: 14px; color: #555555; line-height: 1.6; }
 
             .footer { padding: 40px; text-align: center; background: #fdfdfd; font-size: 11px; color: #cccccc; letter-spacing: 1px; }
         </style>
@@ -84,72 +86,53 @@ export const safariEmailTemplate = (clientName: string, itineraryTitle: string, 
                     <h3>${itineraryTitle}</h3>
                 </div>
 
+                ${payload?.itinerary?.dailyBreakdown ? `
+                <div class="roadmap-container">
+                    <h3>Expedition Roadmap</h3>
+                    ${payload.itinerary.dailyBreakdown.map((day: any) => `
+                        <div class="day-card">
+                            <div class="day-num">${day.day || day.Day}</div>
+                            <div class="day-desc">${day.description || day.Description || day.Activity || 'Activity details being finalized...'}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+
                 <div style="text-align: center; margin-top: 40px;">
                     <a href="${portalUrl}" class="btn">${btnText || 'Access Terminal'}</a>
                 </div>
 
                 ${status === 'confirmed' ? `
-                <div class="guide-section">
+                <div class="roadmap-container">
                     <h3>Essential Expedition Checklist</h3>
                     <p style="font-size: 14px; color: #666666; font-style: italic; margin-bottom: 25px;">To ensure your journey is as comfortable and seamless as possible, we have put together this essential guide on health, security, and packing. Please take a few moments to review these precautions before you fly.</p>
                     
-                    <div class="guide-card">
-                        <h4>1. Health & Vaccinations</h4>
-                        <ul>
-                            <li><b>Malaria Prevention:</b> Tanzania is a malaria-risk area. We strongly recommend consulting your doctor for anti-malarial prophylaxis before departure.</li>
-                            <li><b>Vaccinations:</b> Ensure routine vaccines (Hepatitis A/B, Typhoid) are up to date. A Yellow Fever Certificate is mandatory if you are arriving from an endemic country.</li>
-                            <li><b>Hydration:</b> Only drink bottled or filtered water. Avoid tap water, even for brushing your teeth.</li>
-                            <li><b>Sun Protection:</b> The equatorial sun is intense. Pack high-SPF sunscreen, a wide-brimmed hat, and polarized sunglasses.</li>
+                    <div style="background: #fdfaf0; border-radius: 20px; padding: 28px; margin-bottom: 20px; border: 1px solid #f2e6c4;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 900; color: ${accentColor}; text-transform: uppercase; letter-spacing: 1px;">1. Health & Vaccinations</h4>
+                        <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+                            <li style="font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 10px;"><b style="color: #1a1a1a;">Malaria Prevention:</b> Tanzania is a malaria-risk area. We strongly recommend consulting your doctor for anti-malarial prophylaxis before departure.</li>
+                            <li style="font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 10px;"><b style="color: #1a1a1a;">Vaccinations:</b> Ensure routine vaccines (Hepatitis A/B, Typhoid) are up to date. A Yellow Fever Certificate is mandatory if you are arriving from an endemic country.</li>
+                            <li style="font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 10px;"><b style="color: #1a1a1a;">Hydration:</b> Only drink bottled or filtered water. Avoid tap water, even for brushing your teeth.</li>
                         </ul>
                     </div>
-
-                    <div class="guide-card">
-                        <h4>2. Packing for the Wild</h4>
-                        <ul>
-                            <li><b>Colors Matter:</b> For safaris, stick to neutral tones (khaki, beige, olive). Avoid dark blue or black, as they attract tsetse flies, and avoid bright red, which can startle wildlife.</li>
-                            <li><b>Layer Up:</b> Mornings in the Serengeti or Ngorongoro can be very chilly, while afternoons are hot. Bring a light fleece or windbreaker.</li>
-                            <li><b>Plastic Ban:</b> Tanzania has a strict ban on plastic bags. Please use reusable cloth bags or dry bags for your electronics.</li>
-                            <li><b>Power:</b> We use Type G (British style) plugs. Bring a universal adapter and a power bank, as electricity in bush camps can be solar-dependent.</li>
-                        </ul>
-                    </div>
-
-                    <div class="guide-card">
-                        <h4>3. Safety & Security</h4>
-                        <ul>
-                            <li><b>Valuables:</b> Leave expensive jewelry at home. Keep your passport, extra cash, and electronics in your hotel safe or a secure money belt.</li>
-                            <li><b>Night Safety:</b> Avoid walking alone after dark in urban areas like Arusha or Stone Town. Always use a reputable taxi or rideshare app recommended by our team.</li>
-                            <li><b>Photography:</b> Tanzanians are very friendly, but please always ask for permission before taking photos of people or their homes. Note that photographing government or military buildings is prohibited.</li>
-                        </ul>
-                    </div>
-
-                    <div class="guide-card">
-                        <h4>4. Cultural Etiquette</h4>
-                        <ul>
-                            <li><b>Dress Modestly:</b> Especially in Zanzibar and rural villages, please keep shoulders and knees covered to respect local customs.</li>
-                            <li><b>Plastic-Free:</b> As part of our commitment to conservation, we encourage you to bring a reusable water bottle which can be refilled at our safari vehicles.</li>
-                        </ul>
-                    </div>
-                    
-                    <p style="font-size: 14px; color: #1a1a1a; font-weight: 700; margin-top: 30px;">
-                        We are here to look after you every step of the way. If you have any specific health concerns or questions about your gear, simply reply to this email!
-                    </p>
                 </div>
                 ` : ''}
 
                 <div class="signature">
                     <div class="sig-title">Expedition Strategist</div>
                     <div class="logo-container" style="margin-right: 15px;">
-                        <img src="${logoImg}" alt="AY" />
+                        <img src="${markImg}" alt="AY" />
                     </div>
                     <div style="display: inline-block; vertical-align: middle;">
                         <span style="display: block; font-size: 14px; font-weight: 900; color: #1a1a1a;">Asili Yetu Command</span>
                         <span style="display: block; font-size: 10px; font-weight: 800; color: #D4AF37; text-transform: uppercase;">Lead Signal Terminal</span>
+                        <span style="display: block; font-size: 9px; font-weight: 700; color: #999; margin-top: 4px;">Registered BRELA Firm</span>
                     </div>
                 </div>
             </div>
             <div class="footer">
                 AUTHENTIC • PRIVATE • VISIONARY<br>
-                &copy; 2026 ASILI YETU SAFARIS AND TOURS
+                &copy; 2026 Asili Yetu Safaris
             </div>
         </div>
     </body>
@@ -167,7 +150,9 @@ export const getAcknowledgmentEmailHtml = (payload: any, locale: string = 'en') 
         'inquiry_received',
         undefined,
         payload.access_token,
-        locale
+        locale,
+        undefined,
+        payload
     );
 };
 
@@ -189,7 +174,16 @@ export const getAdminNotificationHtml = (payload: any) => {
         
         <div style="margin-top: 30px; padding: 20px; background: #ffffff; border-left: 4px solid ${accentColor}; border-radius: 8px;">
             <h4 style="margin-top: 0; text-transform: uppercase; font-size: 10px; color: ${accentColor};">Expedition Strategy</h4>
-            <p style="margin-bottom: 0; font-style: italic;">"${payload.itinerary?.strategy || payload.itinerary?.rationale || 'No automated strategy provided.'}"</p>
+            <p style="margin-bottom: 20px; font-style: italic;">"${payload.itinerary?.strategy || payload.itinerary?.rationale || 'No automated strategy provided.'}"</p>
+            
+            <h4 style="text-transform: uppercase; font-size: 10px; color: #1a1a1a; margin-bottom: 10px;">Daily Breakdown</h4>
+            <div style="font-size: 12px; line-height: 1.6;">
+                ${payload.itinerary?.dailyBreakdown?.map((day: any) => `
+                    <div style="margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 8px;">
+                        <b style="color: ${accentColor};">Day ${day.day || day.Day}:</b> ${day.description || day.Description || day.Activity}
+                    </div>
+                `).join('') || '<p>Detailed breakdown pending.</p>'}
+            </div>
         </div>
 
         <p style="margin-top: 40px; font-size: 10px; color: #999;">Sent from Asili Yetu Command Center.</p>
@@ -205,13 +199,15 @@ export const getAdminNotificationHtml = (payload: any) => {
     `;
 };
 
-export const getInvoiceEmailHtml = (clientName: string, itineraryTitle: string, price: number, siteUrl: string, accessToken?: string, locale: string = 'en') => {
+export const getInvoiceEmailHtml = (clientName: string, itineraryTitle: string, price: number, siteUrl: string, accessToken?: string, locale: string = 'en', payload?: any) => {
     return safariEmailTemplate(
         clientName,
         itineraryTitle,
         'invoice_generated',
         `Your personalized safari expedition is ready for final authorization. We have finalized the strategy and secured the logistics. The total quoted price for this private voyage is <b>$${price.toLocaleString()} USD</b>. You can review the full breakdown and secure your dates via the terminal below.`,
         accessToken,
-        locale
+        locale,
+        undefined,
+        payload
     );
 };

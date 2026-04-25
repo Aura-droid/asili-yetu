@@ -52,6 +52,21 @@ export async function claimMission(missionId: string, rangerId: string) {
   return { success: !error, error: error?.message };
 }
 
+export async function completeMission(missionId: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("missions")
+    .update({
+      status: 'completed',
+      completed_at: new Date().toISOString()
+    })
+    .eq("id", missionId);
+
+  if (!error) revalidatePath(`/mission/${missionId}`);
+  return { success: !error, error: error?.message };
+}
+
 export async function deleteMission(id: string) {
   const supabase = await createClient();
   const { error } = await supabase

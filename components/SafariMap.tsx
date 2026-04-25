@@ -31,7 +31,7 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/satellite-v9", // Using a more standard satellite style
+      style: "mapbox://styles/mapbox/satellite-streets-v12", 
       center: [34.8333, -2.3333], // Default to Serengeti Center
       zoom: 6.5,
       pitch: 45,
@@ -110,10 +110,11 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
       <AnimatePresence>
         {selectedDest && (
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            className="absolute top-8 bottom-8 right-8 w-80 md:w-96 bg-black/80 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 p-8 z-20 flex flex-col shadow-2xl"
+            key="selected-dest-popup"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="absolute bottom-4 left-4 right-4 md:top-8 md:bottom-8 md:right-8 md:left-auto md:w-96 bg-black/80 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 p-6 md:p-8 z-20 flex flex-col shadow-2xl max-h-[70vh] md:max-h-none"
           >
             <button 
               onClick={() => setSelectedDest(null)}
@@ -122,7 +123,7 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
               <X className="w-6 h-6" />
             </button>
 
-            <div className="relative h-48 rounded-2xl overflow-hidden mb-6 shadow-lg">
+            <div className="relative h-48 rounded-2xl overflow-hidden mb-6 shadow-lg shrink-0">
                <img src={selectedDest.image_url || selectedDest.image} alt={selectedDest.name} className="w-full h-full object-cover" />
                <div className="absolute top-4 left-4 bg-primary px-3 py-1 rounded-full text-[10px] font-black uppercase text-black">
                   {selectedDest.type}
@@ -130,9 +131,9 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
             </div>
 
             <h3 className="text-white text-3xl font-black mb-4 tracking-tighter leading-tight italic">{selectedDest.name}</h3>
-            <p className="text-white/70 text-sm leading-relaxed mb-8 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+            <div className="text-white/70 text-sm leading-relaxed mb-8 flex-1 overflow-y-auto pr-2 custom-scrollbar">
                {selectedDest.description}
-            </p>
+            </div>
 
             <Link 
               href={`/packages?q=${selectedDest.name}`}

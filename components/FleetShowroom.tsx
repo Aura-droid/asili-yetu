@@ -59,9 +59,9 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
   };
 
   const defaultHotspots = [
-    { id: 1, top: "25%", left: "45%", title: "Pop-Up Roof", desc: "Unobstructed 360° views for photography and wildlife spotting." },
-    { id: 2, top: "60%", left: "30%", title: "Heavy-Duty Suspension", desc: "Smooth ride across the toughest terrains." },
-    { id: 3, top: "45%", left: "70%", title: "Comfortable Seating", desc: "Spacious window seats for every passenger." },
+    { id: 1, top: "25%", left: "45%", title: t("hotspots.roof_title"), desc: t("hotspots.roof_desc") },
+    { id: 2, top: "60%", left: "30%", title: t("hotspots.susp_title"), desc: t("hotspots.susp_desc") },
+    { id: 3, top: "45%", left: "70%", title: t("hotspots.seat_title"), desc: t("hotspots.seat_desc") },
   ];
 
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
@@ -105,7 +105,7 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                       <div className="relative h-96 rounded-[3rem] overflow-hidden bg-foreground/5 shadow-sm group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.2)] transition-all duration-700">
                         {!vehicle.is_available && (
                           <div className="absolute inset-0 bg-background/80 backdrop-blur-3xl z-30 flex items-center justify-center">
-                            <span className="bg-primary text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">Deployment Readying</span>
+                            <span className="bg-primary text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg">{t("readying")}</span>
                           </div>
                         )}
                         <motion.img
@@ -123,8 +123,8 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                             {local.name}
                           </motion.h3>
                           <div className="mt-4 flex gap-4">
-                             <span className="text-white/60 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">Explorer Grade</span>
-                             <span className="text-white/60 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">{vehicle.capacity} Seats</span>
+                             <span className="text-white/60 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">{t("grade")}</span>
+                             <span className="text-white/60 text-[10px] font-black uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">{t("seats", { count: vehicle.capacity })}</span>
                           </div>
                         </div>
                       </div>
@@ -157,7 +157,7 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                   }}
                   className="absolute top-10 left-10 z-50 bg-white/20 hover:bg-white backdrop-blur-2xl border border-white/20 px-6 py-3 rounded-2xl text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-3 transition-all shadow-2xl active:scale-95"
                 >
-                  <ChevronLeft className="w-4 h-4" /> Exit Showroom
+                  <ChevronLeft className="w-4 h-4" /> {t("exit")}
                 </button>
 
                 <motion.img
@@ -217,7 +217,7 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                    className="w-full md:w-1/3 flex flex-col justify-center"
                  >
                     <div className="flex items-center gap-3 text-primary font-black uppercase text-[10px] tracking-[0.4em] mb-6">
-                       <Shield className="w-4 h-4" /> Technical Dossier
+                       <Shield className="w-4 h-4" /> {t("dossier")}
                     </div>
                     
                     <motion.h3 
@@ -232,8 +232,8 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                           <Users className="w-8 h-8" />
                        </div>
                        <div>
-                          <span className="block text-[10px] uppercase font-black text-foreground/50 tracking-[0.2em] mb-1">Payload Capacity</span>
-                          <span className="font-extrabold text-foreground text-3xl italic tracking-tighter">{selectedVehicle?.capacity || 6} Explorers</span>
+                          <span className="block text-[10px] uppercase font-black text-foreground/50 tracking-[0.2em] mb-1">{t("payload")}</span>
+                          <span className="font-extrabold text-foreground text-3xl italic tracking-tighter">{t("explorers", { count: selectedVehicle?.capacity || 6 })}</span>
                        </div>
                     </div>
 

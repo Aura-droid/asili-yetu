@@ -132,7 +132,7 @@ export default function SafariShowcase() {
                 ease: "easeInOut",
                 times: [0, 0.1, 0.25, 0.35, 0.5, 0.6, 0.75, 1] 
               }}
-              className="flex gap-24 whitespace-nowrap text-foreground/[0.08] font-black text-8xl italic uppercase select-none transition-colors duration-1000 group-hover/marquee:text-amber-500/[0.15]"
+              className="flex gap-24 whitespace-nowrap text-foreground/[0.08] font-black text-8xl italic uppercase select-none transition-colors duration-1000 group-hover/marquee:text-primary/[0.15]"
             >
               <span>{t("marquee.fleet")}</span>
               <span>•</span>

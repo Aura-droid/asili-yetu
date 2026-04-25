@@ -86,7 +86,7 @@ export async function broadcastNewsletter(subject: string, title: string, conten
       );
 
       await resend.emails.send({
-        from: 'Asili Yetu Safaris and Tours <info@asiliyetusafaris.com>',
+        from: 'Asili Yetu Safaris <info@asiliyetusafaris.com>',
         to: [sub.email],
         subject: subject,
         html: html,

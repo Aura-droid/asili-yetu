@@ -86,7 +86,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
     <div className="max-w-md mx-auto min-h-screen flex flex-col pb-20 p-6 pt-12 text-white bg-[#0a0a0a]">
        {/* Identity Header */}
        <div className="flex flex-col items-center text-center mb-10">
-          <Image src="/logo.png" alt="Asili Yetu" width={80} height={80} className="mb-6 drop-shadow-[0_0_20px_rgba(163,204,76,0.3)]" />
+          <Image src="/brand/logo-mark-no-bg.png" alt="Asili Yetu" width={80} height={80} className="mb-6 drop-shadow-[0_0_20px_rgba(163,204,76,0.3)]" />
           <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Ranger <span className="text-primary">Dispatch</span></h1>
           <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mt-3">Mission Sentinel V1.0</p>
        </div>
