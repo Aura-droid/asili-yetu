@@ -6,6 +6,7 @@ import Link from "next/link";
 import DynamicSentinelMap from "@/components/DynamicSentinelMap";
 import AIReportGenerator from "@/components/AIReportGenerator";
 import MissionFeedClient from "@/components/MissionFeedClient";
+import RangerStatusClient from "@/components/RangerStatusClient";
 import DashboardBookingsClient from "@/components/DashboardBookingsClient";
 import DashboardNoticesClient from "@/components/DashboardNoticesClient";
 
@@ -152,15 +153,19 @@ export default async function AdminDashboard() {
         />
       </div>
 
-      {/* MISSION SENTINEL FEED */}
+      {/* TACTICAL GRID OVERVIEW */}
       <h2 className="text-2xl font-black text-foreground mb-8 mt-16 tracking-tighter uppercase italic flex items-center gap-4">
-        Live Mission <span className="text-primary italic underline decoration-4 decoration-primary/30">Sentinel</span>
+        Tactical <span className="text-primary italic underline decoration-4 decoration-primary/30">Sentinel</span> Grid
         <div className="flex-1 h-px bg-black/5"></div>
       </h2>
 
-      {/* MAP TERMINAL */}
-      <div className="mb-16">
-        <DynamicSentinelMap telemetry={latestTelemetry} />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="lg:col-span-2">
+          <DynamicSentinelMap telemetry={latestTelemetry} />
+        </div>
+        <div className="lg:col-span-1">
+          <RangerStatusClient rangers={latestTelemetry} />
+        </div>
       </div>
 
       <MissionFeedClient initialMissions={missions || []} />
@@ -195,11 +200,6 @@ export default async function AdminDashboard() {
             <div className={`ml-auto w-2 h-2 rounded-full ${vehicle.is_available ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : 'bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.3)]'}`} />
           </div>
         ))}
-        {!vehicles?.length && (
-          <div className="col-span-full py-12 text-center bg-foreground/[0.02] rounded-[2rem] border border-dashed border-foreground/10">
-            <p className="text-[10px] font-black text-foreground/20 uppercase tracking-widest italic">No assets registered in the digital garage.</p>
-          </div>
-        )}
       </div>
     </div>
   );
