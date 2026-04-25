@@ -192,6 +192,71 @@ export async function sendInvoiceEmail(inquiryId: string, manualPrice?: number) 
   return { success: true };
 }
 
+export async function confirmInquiry(inquiryId: string) {
+  const supabase = await createClient();
+  
+  // 1. Fetch details for notification
+  const { data: inquiry } = await supabase
+    .from("inquiries")
+    .select("*")
+    .eq("id", inquiryId)
+    .single();
+
+  if (!inquiry) return { success: false, error: "Expedition not found" };
+
+  // 2. Update status
+  const { error } = await supabase
+    .from("inquiries")
+    .update({ 
+      status: 'confirmed',
+      confirmed_at: new Date().toISOString()
+    })
+    .eq("id", inquiryId);
+
+  if (error) return { success: false, error: error.message };
+
+  // 3. Send confirmation email to client
+  const { safariEmailTemplate } = await import("@/utils/emailTemplates");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://asiliyetusafaris.com';
+  
+  const html = safariEmailTemplate(
+    inquiry.client_name,
+    inquiry.itinerary_details?.recommendedTitle || "Your Safari Expedition",
+    'confirmed',
+    `<b>EXPEDITION AUTHORIZED.</b><br/><br/>Jambo! Your safari has been officially confirmed and moved into the active deployment phase. Our rangers are now securing your logistics and preparing the fleet. Please find the essential expedition checklist below to prepare for your journey.`,
+    inquiry.access_token,
+    inquiry.locale || 'en',
+    'View Official Itinerary'
+  );
+
+  await resend.emails.send({
+    from: 'Asili Yetu Safaris <bookings@asiliyetusafaris.com>',
+    to: [inquiry.client_email],
+    subject: `Expedition Confirmed: ${inquiry.itinerary_details?.recommendedTitle || "Your Safari"}`,
+    html: html,
+  });
+
+  // 4. Send notification to admin
+  await resend.emails.send({
+    from: 'Asili Yetu Sentinel <sentinel@asiliyetusafaris.com>',
+    to: ['info@asiliyetusafaris.com'],
+    subject: `🚨 BOOKING CONFIRMED: ${inquiry.client_name}`,
+    html: `<div style="font-family: sans-serif; padding: 20px;">
+      <h1 style="color: #D4AF37;">Booking Confirmed!</h1>
+      <p><b>Explorer:</b> ${inquiry.client_name}</p>
+      <p><b>Itinerary:</b> ${inquiry.itinerary_details?.recommendedTitle}</p>
+      <p><b>Value:</b> $${(inquiry.quoted_price * (inquiry.party_size || 1)).toLocaleString()} USD</p>
+      <hr/>
+      <p>Action required: Contact guide to finalize fleet preparation.</p>
+    </div>`
+  });
+
+  revalidatePath("/admin/bookings");
+  revalidatePath("/admin");
+  
+  return { success: true };
+}
+
 export async function updateInquiryDossier(inquiryId: string, updates: any) {
   const supabase = await createClient();
   const { error } = await supabase

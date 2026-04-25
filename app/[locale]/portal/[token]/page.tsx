@@ -89,9 +89,21 @@ export default function GuestPortalPage() {
     } else {
       alert("Terminal Signal Error: " + error.message);
     }
+  const handleAuthorize = async () => {
+    if (!inquiry) return;
+    setLoading(true);
+    const { confirmInquiry } = await import("@/app/actions/bookings");
+    const res = await confirmInquiry(inquiry.id);
+    if (res.success) {
+      fetchInquiry(); // Refresh state
+      alert("EXPEDITION AUTHORIZED: Your dossier has been officially confirmed. Check your email for next steps.");
+    } else {
+      alert("Authorization Link Error: " + res.error);
+    }
+    setLoading(false);
   };
 
-  if (loading) return <div className="min-h-screen bg-black flex items-center justify-center text-primary font-black animate-pulse">Initializing Terminal...</div>;
+  if (loading) return <div className="min-h-screen bg-black flex items-center justify-center text-primary font-black animate-pulse uppercase tracking-[0.5em]">Initializing Terminal...</div>;
   if (!inquiry) return <div className="min-h-screen bg-black flex items-center justify-center text-white/50 italic">Invalid access token. Contact your concierge.</div>;
 
   return (
@@ -149,7 +161,7 @@ export default function GuestPortalPage() {
             )}
           </section>
 
-          {inquiry.quoted_price > 0 && (
+          {inquiry.quoted_price > 0 && inquiry.status !== 'confirmed' && (
             <section className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-10 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden group">
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-all" />
                <div className="relative z-10">
@@ -166,9 +178,24 @@ export default function GuestPortalPage() {
                     )}
                   </div>
                </div>
-               <button className="relative z-10 w-full lg:w-auto px-12 py-6 bg-black text-white font-black uppercase tracking-[0.2em] text-xs skew-x-[-10deg] hover:bg-primary hover:text-black hover:scale-105 active:scale-95 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.15)] group-hover:shadow-primary/20">
+               <button 
+                onClick={handleAuthorize}
+                className="relative z-10 w-full lg:w-auto px-12 py-6 bg-black text-white font-black uppercase tracking-[0.2em] text-xs skew-x-[-10deg] hover:bg-primary hover:text-black hover:scale-105 active:scale-95 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.15)] group-hover:shadow-primary/20"
+               >
                  Authorize Expedition
                </button>
+            </section>
+          )}
+
+          {inquiry.status === 'confirmed' && (
+            <section className="bg-green-50 border border-green-100 rounded-[2.5rem] p-10 flex items-center gap-6 shadow-sm">
+               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-200">
+                  <ShieldCheck className="text-white w-8 h-8" />
+               </div>
+               <div>
+                  <h3 className="text-lg font-black uppercase tracking-tight italic">Expedition Confirmed</h3>
+                  <p className="text-sm text-green-700 font-medium">Your voyage has been officially authorized. Logistics and fleet preparation are in progress.</p>
+               </div>
             </section>
           )}
         </div>
