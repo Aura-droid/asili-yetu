@@ -249,14 +249,16 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
           </div>
 
           <div className="space-y-3">
-             {itinerary.length > 0 ? itinerary.map((day: any) => (
-                <div key={day.day} className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex gap-4 items-start group hover:bg-white/5 transition-colors">
+             {itinerary.length > 0 ? itinerary.map((day: any, i: number) => (
+                <div key={i} className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex gap-4 items-start group hover:bg-white/5 transition-colors">
                    <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center font-black italic text-primary shrink-0">
-                      D{day.day}
+                      D{day.day || (i + 1)}
                    </div>
-                   <div className="space-y-1">
-                      <p className="text-xs font-black uppercase italic tracking-tighter">{day.destination}</p>
-                      <p className="text-[10px] text-white/40 font-medium leading-relaxed italic">{day.accommodation}</p>
+                   <div className="space-y-1 flex-1">
+                      {day.destination && <p className="text-xs font-black uppercase italic tracking-tighter">{day.destination}</p>}
+                      <p className="text-[10px] text-white/70 font-medium leading-relaxed italic">
+                         {day.description || day.accommodation || "Expedition details being finalized..."}
+                      </p>
                    </div>
                 </div>
              )) : (
