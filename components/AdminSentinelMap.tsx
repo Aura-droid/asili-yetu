@@ -62,7 +62,7 @@ export default function AdminSentinelMap({ initialData }: { initialData: Telemet
     });
 
     initialData.forEach(point => {
-      const { guide_id, lat, lng, guides, status, battery_level } = point;
+      const { guide_id, lat, lng, guides, status, is_offline } = point;
 
       if (markers.current[guide_id]) {
         // Update existing marker position
@@ -73,17 +73,19 @@ export default function AdminSentinelMap({ initialData }: { initialData: Telemet
         el.className = 'sentinel-marker';
         
         // Define color based on status
-        const color = status === 'Active' ? '#a3cc4c' : '#fbbf24';
+        let color = '#fbbf24'; // Default Idle
+        if (status === 'On Mission') color = '#a3cc4c';
+        if (is_offline) color = '#444';
         
         el.innerHTML = `
-          <div style="position: relative; display: flex; flex-direction: column; items-center;">
+          <div style="position: relative; display: flex; flex-direction: column; items-center; ${is_offline ? 'filter: grayscale(1); opacity: 0.6;' : ''}">
              <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.8); border: 2px solid ${color}; display: flex; items-center; justify-center; overflow: hidden; box-shadow: 0 0 20px ${color}44;">
                 ${guides?.image_url 
                   ? `<img src="${guides.image_url}" style="width: 100%; height: 100%; object-fit: cover;" />`
                   : `<div style="color: ${color}; font-weight: 900; font-size: 10px;">${guides?.name.substring(0,2).toUpperCase()}</div>`
                 }
              </div>
-             <div style="background: ${color}; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #000; position: absolute; bottom: 0; right: 0;"></div>
+             <div style="background: ${color}; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #000; position: absolute; bottom: 0; right: 0; ${status === 'On Mission' ? 'animation: pulse 2s infinite;' : ''}"></div>
           </div>
         `;
 
@@ -119,7 +121,7 @@ export default function AdminSentinelMap({ initialData }: { initialData: Telemet
            </div>
            <div>
               <h3 className="text-xs font-black text-white uppercase tracking-widest italic">Savannah-Eye <span className="text-primary italic">Live</span></h3>
-              <p className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">{initialData.length} Rangers Reporting</p>
+              <p className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">{initialData.length} Rangers Integrated</p>
            </div>
         </div>
       </div>
@@ -141,7 +143,10 @@ export default function AdminSentinelMap({ initialData }: { initialData: Telemet
                    </div>
                    <div>
                       <h4 className="text-xl font-black text-white italic tracking-tight">{activeGuide.guides?.name}</h4>
-                      <p className="text-[9px] font-black text-primary uppercase tracking-widest">{activeGuide.guides?.fleet_assigned}</p>
+                      <p className="text-[9px] font-black text-primary uppercase tracking-widest flex items-center gap-2">
+                        {activeGuide.status} 
+                        {activeGuide.is_offline && <span className="text-white/20 ml-2">(OFF-GRID)</span>}
+                      </p>
                    </div>
                 </div>
                 <button onClick={() => setActiveGuideId(null)} className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/40 transition-colors">
@@ -162,7 +167,9 @@ export default function AdminSentinelMap({ initialData }: { initialData: Telemet
                       <Signal className="w-3.5 h-3.5 text-primary" />
                       <span className="text-[8px] font-black text-white/30 uppercase tracking-widest">Scout Signal</span>
                    </div>
-                   <p className="text-lg font-black text-white italic">Strong</p>
+                   <p className="text-lg font-black text-white italic">
+                      {activeGuide.is_offline ? 'Lost' : 'Strong'}
+                   </p>
                 </div>
              </div>
 
