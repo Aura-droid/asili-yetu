@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TreePine, Diamond, ShieldCheck, HeartHandshake, Loader2 } from "lucide-react";
+import { TreePine, Diamond, ShieldCheck, HeartHandshake } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -167,46 +167,49 @@ export default function AboutPage() {
         </motion.div>
       </div>
 
-      {/* CEO Message Section */}
-      <div className="max-w-5xl mx-auto px-6 md:px-12 py-32 bg-primary/5 rounded-[4rem] my-24 border border-primary/10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[120px] -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] -ml-48 -mb-48" />
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-12 text-center relative z-10"
-        >
-          <div className="flex flex-col items-center gap-6">
-            <div className="inline-flex items-center gap-3 text-primary font-bold tracking-widest uppercase text-sm border border-primary/20 px-6 py-2 rounded-full bg-primary/5">
-               {t("ceo_badge")}
-            </div>
-            <h2 className="text-4xl md:text-7xl font-black text-foreground tracking-tighter uppercase italic leading-none">
-               {t.rich("ceo_title", {
-                 p: (chunks) => <span className="text-primary italic font-serif">{chunks}</span>
-               })}
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-8 text-foreground/70 text-xl md:text-2xl leading-relaxed italic font-medium">
-            {localized.ceo_message ? localized.ceo_message.map((p: string, i: number) => (
-              <p key={i}>{p}</p>
-            )) : (
-              <>
-                <p>{t("ceo_p1")}</p>
-                <p>{t("ceo_p2")}</p>
-                <p>{t("ceo_p3")}</p>
-              </>
+      {/* Leadership Message Section - 100% DB driven */}
+      {(content.leader_message_paragraphs?.length > 0 || content.en?.leader_message?.length > 0 || content.leader_name) && (
+        <div className="max-w-5xl mx-auto px-6 md:px-12 py-32 bg-primary/5 rounded-[4rem] my-24 border border-primary/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[120px] -mr-48 -mt-48" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] -ml-48 -mb-48" />
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-12 text-center relative z-10"
+          >
+            {/* Leader photo if provided */}
+            {content.leader_photo && (
+              <div className="flex justify-center">
+                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl">
+                  <img src={content.leader_photo} alt={content.leader_name || "Leadership"} className="w-full h-full object-cover" />
+                </div>
+              </div>
             )}
-          </div>
 
-          <div className="pt-8 flex flex-col items-center gap-4">
-             <div className="w-24 h-1 bg-primary" />
-             <p className="text-2xl font-black text-foreground tracking-tight">{t("ceo_signature")}</p>
-          </div>
-        </motion.div>
-      </div>
+            {/* Message paragraphs */}
+            <div className="max-w-3xl mx-auto space-y-8 text-foreground/70 text-xl md:text-2xl leading-relaxed italic font-medium">
+              {(localized.leader_message || []).map((p: string, i: number) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+
+            {/* Leader name & role - only shown if filled in */}
+            {(content.leader_name || content.leader_role) && (
+              <div className="pt-8 flex flex-col items-center gap-2">
+                <div className="w-24 h-1 bg-primary mb-4" />
+                {content.leader_name && (
+                  <p className="text-2xl font-black text-foreground tracking-tight">{content.leader_name}</p>
+                )}
+                {content.leader_role && (
+                  <p className="text-sm font-bold text-foreground/40 uppercase tracking-widest">{content.leader_role}</p>
+                )}
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
 
       {/* Philosophy & Presence (Remaining) */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">

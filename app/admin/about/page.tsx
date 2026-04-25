@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getAboutContent, updateAboutContent, initializeAboutVault } from "@/app/actions/content";
+import { getAboutContent, updateAboutContent, initializeAboutVault, migrateAboutVault } from "@/app/actions/content";
 import AdminAboutEditor from "@/components/AdminAboutEditor";
 import { BookOpen, RefreshCw, DatabaseBackup, AlertTriangle, Zap, CheckCircle2 } from "lucide-react";
 
@@ -21,6 +21,15 @@ export default function AdminAboutPage() {
       const res = await getAboutContent();
       if (!res) {
         setErrorStatus("VAULT_EMPTY");
+      } else {
+        // Silently migrate to new schema if needed (adds leader fields, preserves old data)
+        if (!res.leader_name && !res.leader_message) {
+          await migrateAboutVault();
+          const migrated = await getAboutContent();
+          setAboutContent(migrated);
+          setLoading(false);
+          return;
+        }
       }
       setAboutContent(res);
     } catch (e: any) {
