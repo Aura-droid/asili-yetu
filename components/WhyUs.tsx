@@ -51,7 +51,7 @@ export default function WhyUs() {
             viewport={{ once: true }}
             className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block"
           >
-            The Asili Advantage
+            {t("advantage")}
           </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}

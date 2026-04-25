@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface LoadingContextType {
   setIsLoading: (loading: boolean) => void;
@@ -19,6 +20,7 @@ export default function LoadingProvider({ children }: { children: React.ReactNod
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useTranslations();
 
   // Trigger loader on route changes
   useEffect(() => {
@@ -72,7 +74,7 @@ export default function LoadingProvider({ children }: { children: React.ReactNod
                  
                  <div className="mt-8 flex flex-col items-center gap-2">
                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40 italic">
-                       Expedition
+                      {t("Loading.expedition")}
                     </span>
                     <div className="flex gap-1">
                        <motion.div 

@@ -1,18 +1,16 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useLocale } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function WhatsAppPulse() {
+  const t = useTranslations("WhatsApp");
   const [showTooltip, setShowTooltip] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const whatsappNumber = "491751159881";
   const locale = useLocale();
 
   useEffect(() => {
-    setIsMounted(true);
     // Show tooltip after 3 seconds for engagement
     const timer = setTimeout(() => setShowTooltip(true), 3000);
     const hideTimer = setTimeout(() => setShowTooltip(false), 8000);
@@ -21,8 +19,6 @@ export default function WhatsAppPulse() {
       clearTimeout(hideTimer);
     };
   }, []);
-
-  if (!isMounted) return null;
 
   return (
     <div className="fixed bottom-8 left-8 z-[100] flex items-center gap-4">
@@ -34,9 +30,9 @@ export default function WhatsAppPulse() {
             exit={{ opacity: 0, x: -20, scale: 0.8 }}
             className="bg-background/90 backdrop-blur-xl border border-primary/20 p-4 rounded-2xl shadow-2xl hidden md:block max-w-[200px]"
           >
-            <p className="text-xs font-black text-primary uppercase tracking-widest mb-1">Live Concierge</p>
+            <p className="text-xs font-black text-primary uppercase tracking-widest mb-1">{t("concierge")}</p>
             <p className="text-[10px] font-medium text-foreground/70 leading-relaxed">
-              Our tour guides are available for real-time expedition planning.
+              {t("concierge_desc")}
             </p>
           </motion.div>
         )}

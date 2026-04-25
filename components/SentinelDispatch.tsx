@@ -2,26 +2,40 @@
 
 import React, { useState } from "react";
 import { Zap, Radio, CheckCircle2, Loader2, ExternalLink, ShieldCheck } from "lucide-react";
-import { signalRangers } from "@/app/actions/signals";
+import { signalGuides } from "@/app/actions/signals";
 import { useLoading } from "@/providers/LoadingProvider";
 
-export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, onUpdate: () => void }) {
+interface MissionGuide {
+  name?: string | null;
+}
+
+interface InquiryMission {
+  status?: string | null;
+  guides?: MissionGuide | null;
+}
+
+interface DispatchInquiry {
+  id: string;
+  missions?: InquiryMission[] | null;
+}
+
+export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: DispatchInquiry, onUpdate: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const [signalStatus, setSignalStatus] = useState<'success' | 'error' | null>(null);
   const [waLink, setWaLink] = useState<string | null>(null);
   const { setIsLoading: setGlobalLoading } = useLoading();
 
-  const activeMission = inquiry.missions?.find((m: any) => m.status === 'accepted');
+  const activeMission = inquiry.missions?.find((mission) => mission.status === 'accepted');
   const isLocked = !!activeMission || signalStatus === 'success';
 
-  const handleSignalRangers = async () => {
+  const handleSignalGuides = async () => {
     setIsLoading(true);
     setGlobalLoading(true);
     setSignalStatus(null);
     setWaLink(null);
 
-    // Defaulting to English portal for rangers
-    const res = await signalRangers(inquiry.id, 'en');
+    // Defaulting to English portal for guides
+    const res = await signalGuides(inquiry.id, 'en');
     setIsLoading(false);
     setGlobalLoading(false);
 
@@ -52,7 +66,7 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, 
           <p className="text-[10px] font-black text-foreground/30 uppercase tracking-[0.2em] italic">01. Authorization Registry</p>
 
           <button
-            onClick={handleSignalRangers}
+            onClick={handleSignalGuides}
             disabled={isLoading || isLocked}
             className={`w-full py-6 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-4 transition-all ${isLocked
               ? 'bg-foreground/5 text-foreground/40 cursor-default border border-dashed border-foreground/10'
@@ -104,4 +118,3 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, 
     </div>
   );
 }
-

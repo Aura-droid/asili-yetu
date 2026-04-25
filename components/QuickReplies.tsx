@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { MessageCircle, Copy, Check, Send, Zap, CheckCircle2, Loader2, Radio } from "lucide-react";
 import { sendBrandedEmail } from "@/app/actions/bookings";
-import { signalRangers } from "@/app/actions/signals";
+import { signalGuides } from "@/app/actions/signals";
 import { useLoading } from "@/providers/LoadingProvider";
 
 interface QuickRepliesProps {
@@ -32,7 +32,7 @@ export default function QuickReplies({ inquiry }: QuickRepliesProps) {
     {
        id: "confirmed",
        label: "Booking Confirmed",
-       text: `It's official, ${inquiry.client_name}! Your voyage is locked in. Our fleet of custom 4x4 Land Cruisers and elite rangers are standing by. We will see you at the gates of the Savannah! 🦒`
+       text: `It's official, ${inquiry.client_name}! Your voyage is locked in. Our fleet of custom 4x4 Land Cruisers and expert tour guides are standing by. We will see you at the gates of the Savannah! 🦒`
     }
   ];
 
@@ -63,11 +63,11 @@ export default function QuickReplies({ inquiry }: QuickRepliesProps) {
   const [signalStatus, setSignalStatus] = useState<null | 'success' | 'error'>(null);
   const [waLink, setWaLink] = useState<string | null>(null);
 
-  const handleSignalRangers = async () => {
+  const handleSignalGuides = async () => {
     setIsLoading(true);
     setSignalStatus(null);
     setWaLink(null);
-    const res = await signalRangers(inquiry.id, 'en');
+    const res = await signalGuides(inquiry.id, 'en');
     setIsLoading(false);
     
     if (res.success) {
@@ -122,7 +122,7 @@ export default function QuickReplies({ inquiry }: QuickRepliesProps) {
           </div>
 
           <button 
-            onClick={handleSignalRangers}
+            onClick={handleSignalGuides}
             disabled={isLoading || signalStatus === 'success'}
             className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-3 transition-all ${
               signalStatus === 'success' 
@@ -131,7 +131,7 @@ export default function QuickReplies({ inquiry }: QuickRepliesProps) {
             }`}
           >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 fill-current" />}
-            {signalStatus === 'success' ? 'Sentinel Record Primed' : 'Authorize Ranger Signal'}
+            {signalStatus === 'success' ? 'Sentinel Record Primed' : 'Authorize Tour Guide Signal'}
           </button>
 
           {signalStatus === 'success' && (

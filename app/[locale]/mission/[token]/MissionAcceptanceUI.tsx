@@ -11,7 +11,10 @@ import Image from "next/image";
 import { useLoading } from "@/providers/LoadingProvider";
 import { pulseLocation } from "@/app/actions/telemetry";
 
+import { useTranslations } from "next-intl";
+
 export default function MissionAcceptanceUI({ mission, guides }: { mission: any, guides: any[] }) {
+  const t = useTranslations("Sentinel");
   const [loading, setLoading] = useState(false);
   const [selectedGuideId, setSelectedGuideId] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -115,8 +118,8 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
        {/* Identity Header */}
        <div className="flex flex-col items-center text-center mb-10">
           <Image src="/brand/logo-mark-no-bg.png" alt="Asili Yetu" width={80} height={80} className="mb-6 drop-shadow-[0_0_20_rgba(163,204,76,0.3)]" />
-          <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Tour Guide <span className="text-primary">Dispatch</span></h1>
-          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mt-3">Mission Sentinel V2.5</p>
+          <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">{t("identify")} <span className="text-primary">{t("dispatch")}</span></h1>
+          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mt-3">{t("version")}</p>
        </div>
 
        {/* Briefing Card */}
@@ -125,7 +128,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
           
           <div className="relative z-10 space-y-6">
              <div className="flex items-center gap-3 text-primary text-[10px] font-black uppercase tracking-widest italic">
-                <Zap className="w-4 h-4" /> Priority Expedition Briefing
+                <Zap className="w-4 h-4" /> {t("briefing")}
              </div>
 
              <h2 className="text-3xl font-black leading-tight tracking-tighter italic">
@@ -145,12 +148,12 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                       )}
                    </div>
                    <div className="flex-1">
-                      <p className="text-[8px] font-black uppercase text-white/30 tracking-widest leading-none mb-1">Telemetry Status</p>
+                      <p className="text-[8px] font-black uppercase text-white/30 tracking-widest leading-none mb-1">{t("telemetry")}</p>
                       <p className="text-[10px] font-bold uppercase tracking-tight">
-                         {trackingStatus === 'idle' && "Establishing Uplink..."}
-                         {trackingStatus === 'searching' && "Acquiring Satellites..."}
-                         {trackingStatus === 'pulsing' && "Broadcasting Signal to Base"}
-                         {trackingStatus === 'denied' && "GPS PERMISSION BLOCKED"}
+                         {trackingStatus === 'idle' && t("uplink")}
+                         {trackingStatus === 'searching' && t("satellites")}
+                         {trackingStatus === 'pulsing' && t("broadcasting")}
+                         {trackingStatus === 'denied' && t("gps_denied")}
                       </p>
                    </div>
                    {trackingStatus === 'pulsing' && <Activity className="w-4 h-4 text-primary animate-bounce" />}
@@ -159,11 +162,11 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
 
              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/5 p-4 rounded-2xl border border-white/5">
-                   <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Explorer</p>
+                   <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">{t("explorer")}</p>
                    <p className="text-xs font-bold truncate">{inquiry?.client_name || "Confidential"}</p>
                 </div>
                 <div className="bg-white/5 p-4 rounded-2xl border border-white/5">
-                   <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">Status</p>
+                   <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">{t("status")}</p>
                    <p className={`text-xs font-black uppercase italic ${isAccepted ? 'text-green-400' : isCompleted ? 'text-blue-400' : 'text-primary animate-pulse'}`}>
                       {mission.status}
                    </p>
@@ -176,8 +179,8 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                       {isCompleted ? <CheckCircle2 className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
                    </div>
                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1">Assigned Tour Guide</p>
-                      <p className="font-black text-lg italic leading-none">{mission.guides?.name || "Active Guide"}</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-1">{t("assigned_guide")}</p>
+                      <p className="font-black text-lg italic leading-none">{mission.guides?.name || t("active_guide")}</p>
                    </div>
                 </div>
              )}
@@ -188,26 +191,26 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
        <div className="space-y-4 mb-8">
           <div className="flex items-center gap-3 ml-4 mb-4">
              <Users className="w-4 h-4 text-primary" />
-             <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] leading-none">Crew Manifest</p>
+             <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] leading-none">{t("crew_manifest")}</p>
           </div>
 
           <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 space-y-8">
              <div className="grid grid-cols-2 gap-6">
                 <div>
-                   <p className="text-[8px] font-black text-white/20 uppercase tracking-widest mb-1">Headcount</p>
-                   <p className="text-xl font-black italic">{mission.inquiry?.party_size || "1"} Explorers</p>
+                   <p className="text-[8px] font-black text-white/20 uppercase tracking-widest mb-1">{t("headcount")}</p>
+                   <p className="text-xl font-black italic">{mission.inquiry?.party_size || "1"} {t("explorers")}</p>
                 </div>
                 <div>
-                   <p className="text-[8px] font-black text-white/20 uppercase tracking-widest mb-1">Dietary Alert</p>
+                   <p className="text-[8px] font-black text-white/20 uppercase tracking-widest mb-1">{t("dietary_alert")}</p>
                    <p className={`text-sm font-black italic ${mission.inquiry?.special_requests ? 'text-amber-400' : 'text-white/40'}`}>
-                      {mission.inquiry?.special_requests || "Standard Provisioning"}
+                      {mission.inquiry?.special_requests || t("provisioning")}
                    </p>
                 </div>
              </div>
 
              {!isCompleted && (
                 <div className="pt-6 border-t border-white/5 space-y-4">
-                    <p className="text-[8px] font-black text-white/20 uppercase tracking-widest">Field Communications</p>
+                    <p className="text-[8px] font-black text-white/20 uppercase tracking-widest">{t("comms")}</p>
                     <div className="grid grid-cols-1 gap-3">
                     {mission.inquiry?.client_phone ? (
                         <div className="flex gap-2">
@@ -216,7 +219,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                                 className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all"
                             >
                                 <Phone className="w-4 h-4 text-primary" />
-                                <span className="text-[10px] font-black uppercase tracking-widest">Signal Base</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest">{t("base")}</span>
                             </a>
                             <a 
                                 href={`https://wa.me/${mission.inquiry.client_phone.replace(/\D/g, '')}`}
@@ -229,7 +232,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                         </div>
                     ) : (
                         <div className="p-4 bg-white/5 rounded-2xl text-center">
-                            <p className="text-[9px] font-bold text-white/30 italic uppercase">Direct Signal Offline • Use Base Relay</p>
+                            <p className="text-[9px] font-bold text-white/30 italic uppercase">{t("offline")}</p>
                         </div>
                     )}
                     </div>
@@ -242,7 +245,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
        <div className="space-y-4 mb-8">
           <div className="flex items-center gap-3 ml-4 mb-4">
              <Map className="w-4 h-4 text-primary" />
-             <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] leading-none">Mission Route</p>
+             <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] leading-none">{t("route")}</p>
           </div>
 
           <div className="space-y-3">
@@ -258,7 +261,7 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                 </div>
              )) : (
                 <div className="text-center py-6 bg-white/5 rounded-2xl border border-dashed border-white/10 italic text-white/20 text-xs uppercase tracking-widest font-black">
-                   Consult base for real-time route telemetry.
+                   {t("telemetry_hint")}
                 </div>
              )}
           </div>
@@ -271,15 +274,15 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                 <Flag className="w-10 h-10" />
              </div>
              <div>
-                <h3 className="text-2xl font-black italic uppercase tracking-tighter mb-2">Expedition Concluded</h3>
-                <p className="text-white/40 text-xs font-medium leading-relaxed">This mission has been officially marked as complete. Thank you for your service in the field.</p>
+                <h3 className="text-2xl font-black italic uppercase tracking-tighter mb-2">{t("concluded")}</h3>
+                <p className="text-white/40 text-xs font-medium leading-relaxed">{t("concluded_desc")}</p>
              </div>
-             <button onClick={() => window.close()} className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline italic">Exit Sentinel</button>
+             <button onClick={() => window.close()} className="text-primary text-[10px] font-black uppercase tracking-widest hover:underline italic">{t("exit")}</button>
           </div>
        ) : !isAccepted ? (
           <div className="space-y-6">
              <div className="space-y-3">
-                <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-2 italic">01. Identify Tour Guide</label>
+                <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-2 italic">{t("identify_label")}</label>
                 <div className="grid grid-cols-1 gap-2 overflow-y-auto max-h-64 pr-2">
                    {guides.filter(g => g.is_active).map(guide => (
                       <button 
@@ -310,14 +313,14 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                className="w-full bg-primary text-black py-6 rounded-[2rem] font-black uppercase text-xl shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-4 disabled:opacity-50 italic tracking-tighter"
              >
                 {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Briefcase className="w-6 h-6" />}
-                Confirm Assignment
+                {t("confirm")}
              </button>
           </div>
        ) : (
           <div className="space-y-6">
              <div className="text-center py-6">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-2 leading-none italic">Mission in Progress</p>
-                <p className="text-sm font-medium text-white/60">Telemetry is active. Securely conclude the expedition below.</p>
+                <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-2 leading-none italic">{t("in_progress")}</p>
+                <p className="text-sm font-medium text-white/60">{t("in_progress_desc")}</p>
              </div>
              
              <button 
@@ -326,10 +329,10 @@ export default function MissionAcceptanceUI({ mission, guides }: { mission: any,
                className="w-full bg-white text-black py-6 rounded-[2rem] font-black uppercase text-xl shadow-2xl hover:bg-green-400 transition-all flex items-center justify-center gap-4 disabled:opacity-50 italic tracking-tighter"
              >
                 {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Flag className="w-6 h-6" />}
-                Complete Mission
+                {t("complete")}
              </button>
 
-             <button onClick={() => window.close()} className="w-full text-white/20 text-[10px] font-black uppercase tracking-widest hover:text-white/40 italic mt-4">Exit Sentinel (Stay Active)</button>
+             <button onClick={() => window.close()} className="w-full text-white/20 text-[10px] font-black uppercase tracking-widest hover:text-white/40 italic mt-4">{t("exit_active")}</button>
           </div>
        )}
     </div>

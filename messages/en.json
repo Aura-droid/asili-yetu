@@ -25,7 +25,79 @@
     "guides": "Our Guides",
     "about": "About Us",
     "savannah_mode": "Savannah Mode",
-    "jungle_mode": "Jungle Mode"
+    "jungle_mode": "Jungle Mode",
+    "expedition_settings": "Expedition Settings"
+  },
+  "Loading": {
+    "expedition": "Expedition"
+  },
+  "WhatsApp": {
+    "concierge": "Live Concierge",
+    "concierge_desc": "Our tour guides are available for real-time expedition planning."
+  },
+  "Sentinel": {
+    "dispatch": "Tour Guide Dispatch",
+    "version": "Mission Sentinel V2.5",
+    "briefing": "Priority Expedition Briefing",
+    "telemetry": "Telemetry Status",
+    "uplink": "Establishing Uplink...",
+    "satellites": "Acquiring Satellites...",
+    "broadcasting": "Broadcasting Signal to Base",
+    "gps_denied": "GPS PERMISSION BLOCKED",
+    "explorer": "Explorer",
+    "status": "Status",
+    "assigned_guide": "Assigned Tour Guide",
+    "active_guide": "Active Guide",
+    "crew_manifest": "Crew Manifest",
+    "headcount": "Headcount",
+    "explorers": "Explorers",
+    "dietary_alert": "Dietary Alert",
+    "provisioning": "Standard Provisioning",
+    "comms": "Field Communications",
+    "base": "Signal Base",
+    "offline": "Direct Signal Offline • Use Base Relay",
+    "route": "Mission Route",
+    "telemetry_hint": "Consult base for real-time route telemetry.",
+    "concluded": "Expedition Concluded",
+    "concluded_desc": "This mission has been officially marked as complete. Thank you for your service in the field.",
+    "exit": "Exit Sentinel",
+    "exit_active": "Exit Sentinel (Stay Active)",
+    "identify": "Identify Tour Guide",
+    "confirm": "Confirm Assignment",
+    "in_progress": "Mission in Progress",
+    "in_progress_desc": "Telemetry is active. Securely conclude the expedition below.",
+    "complete": "Complete Mission",
+    "identify_label": "01. Identify Tour Guide",
+    "stand_down": "Stand Down",
+    "undertaken": "This mission is currently being undertaken. Await next signal from base."
+  },
+  "ResponsibleTourism": {
+    "title": "Responsible Tourism",
+    "sub": "We believe tourism must protect the future it benefits from today.",
+    "commitments_title": "Our Commitments",
+    "env": "Environmental protection practices",
+    "waste": "Sustainable waste management",
+    "economy": "Support for local economies",
+    "wildlife": "Wildlife conservation partnerships",
+    "ethical": "Ethical cultural interactions",
+    "impact": "We measure success not only in visitors, but in impact.",
+    "ethical_promise": "Our Ethical Promise"
+  },
+  "WhyUs": {
+    "title": "Why Travel With Us",
+    "sub": "Choosing Asili Yetu Safaris means choosing depth, responsibility, and authenticity.",
+    "quality_title": "QUALITY AND SAFETY",
+    "quality_desc": "We maintain strict standards with licensed professional guides and regular vehicle inspections.",
+    "responsible_title": "RESPONSIBLE TOURISM",
+    "responsible_desc": "We prioritize wildlife conservation, environmental protection, and ethical tourism practices.",
+    "community_title": "COMMUNITY IMPACT",
+    "community_desc": "We ensure tourism benefits reach local communities through local employment and fair partnerships.",
+    "authentic_title": "AUTHENTIC EXPERIENCES",
+    "authentic_desc": "We avoid artificial tourism setups. What you experience is real Tanzania.",
+    "professional_title": "PROFESSIONAL SERVICE",
+    "professional_desc": "We combine African warmth with international service standards.",
+    "badge": "The Asili Advantage",
+    "advantage": "The Asili Advantage"
   },
   "Booking": {
     "booking": "Booking",
@@ -214,7 +286,8 @@
     "contact_base": "Contact Base",
     "rights": "All Rights Reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
   },
   "Packages": {
     "title": "Our Journeys",

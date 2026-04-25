@@ -124,7 +124,7 @@ export default function Navbar() {
             </div>
             
             <div className="mt-12 w-full pt-12 border-t border-foreground/10 flex flex-col items-center gap-6">
-               <div className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/30 mb-2">Expedition Settings</div>
+               <div className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/30 mb-2">{t("expedition_settings")}</div>
                <button
                   onClick={() => {
                     setTheme(theme === "standard" ? "jungle" : "standard");

@@ -31,7 +31,7 @@ export default function ResponsibleTourism() {
               viewport={{ once: true }}
               className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block"
             >
-              Our Ethical Promise
+              {t("ethical_promise")}
             </motion.span>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}

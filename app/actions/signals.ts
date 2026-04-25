@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 
-export async function signalRangers(inquiryId: string, locale: string = 'en') {
+export async function signalGuides(inquiryId: string, locale: string = 'en') {
     const supabase = await createClient();
 
     // 1. Fetch Inquiry details
@@ -14,13 +14,13 @@ export async function signalRangers(inquiryId: string, locale: string = 'en') {
 
     if (!inquiry) return { success: false, error: "Expedition not found" };
 
-    // 2. Fetch Active Rangers
-    const { data: rangers } = await supabase
-        .from("guides")
-        .select("name, phone_number")
-        .eq("is_active", true);
+    // 2. Fetch Active Guides
+        const { data: guides } = await supabase
+            .from("guides")
+            .select("name, phone_number")
+            .eq("is_active", true);
 
-    const rangerNumbers = rangers?.filter(r => r.phone_number).map(r => r.phone_number) || [];
+    const guideNumbers = guides?.filter((guide) => guide.phone_number).map((guide) => guide.phone_number) || [];
 
     try {
         // 3. Create Mission Record (Mission Sentinel Registry)
@@ -40,7 +40,7 @@ export async function signalRangers(inquiryId: string, locale: string = 'en') {
 
         console.log("------------------------------------------");
         console.log("MISSION SENTINEL TRANSMISSION:");
-        console.log(`POLLING: ${rangers?.length || 0} active guides found.`);
+        console.log(`POLLING: ${guides?.length || 0} active guides found.`);
         console.log(`LINK: ${missionLink}`);
         console.log("------------------------------------------");
 
@@ -56,10 +56,10 @@ export async function signalRangers(inquiryId: string, locale: string = 'en') {
 
         return { 
             success: true, 
-            message: `Mission dispatched to ${rangerNumbers.length} rangers. Acceptance link active.`,
+            message: `Mission dispatched to ${guideNumbers.length} guides. Acceptance link active.`,
             whatsappLink: waLink
         };
-    } catch (err: any) {
+    } catch (err) {
         console.error("Signal Error:", err);
         return { success: false, error: "Signal interference. Manual contact required." };
     }
