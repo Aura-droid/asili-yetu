@@ -89,6 +89,8 @@ export default function GuestPortalPage() {
     } else {
       alert("Terminal Signal Error: " + error.message);
     }
+  };
+
   const handleAuthorize = async () => {
     if (!inquiry) return;
     setLoading(true);
