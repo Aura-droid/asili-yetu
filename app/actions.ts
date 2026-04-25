@@ -92,8 +92,7 @@ export async function generateItinerary(query: { location: string, dates: string
             .select(`
                 *,
                 destinations (*)
-            `)
-            .eq('is_active', true);
+            `);
 
         if (dbError) throw new Error(dbError.message);
 
