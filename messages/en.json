@@ -327,32 +327,7 @@
     "concept": "Expedition Concept",
     "book_masterpiece": "Book This Masterpiece"
   },
-  "WhyUs": {
-    "title": "Why Travel With Us",
-    "sub": "Choosing Asili Yetu Safaris means choosing depth, responsibility, and authenticity.",
-    "quality_title": "QUALITY AND SAFETY",
-    "quality_desc": "We maintain strict standards with licensed professional guides and regular vehicle inspections.",
-    "responsible_title": "RESPONSIBLE TOURISM",
-    "responsible_desc": "We prioritize wildlife conservation, environmental protection, and ethical tourism practices.",
-    "community_title": "COMMUNITY IMPACT",
-    "community_desc": "We ensure tourism benefits reach local communities through local employment and fair partnerships.",
-    "authentic_title": "AUTHENTIC EXPERIENCES",
-    "authentic_desc": "We avoid artificial tourism setups. What you experience is real Tanzania.",
-    "professional_title": "PROFESSIONAL SERVICE",
-    "professional_desc": "We combine African warmth with international service standards.",
-    "badge": "The Asili Advantage"
-  },
-  "ResponsibleTourism": {
-    "title": "Responsible Tourism",
-    "sub": "We believe tourism must protect the future it benefits from today.",
-    "commitments_title": "Our Commitments",
-    "env": "Environmental protection practices",
-    "waste": "Sustainable waste management",
-    "economy": "Support for local economies",
-    "wildlife": "Wildlife conservation partnerships",
-    "ethical": "Ethical cultural interactions",
-    "impact": "We measure success not only in visitors, but in impact."
-  },
+
   "Culture": {
     "badge": "Living Traditions",
     "title": "The <p>Maasai</p> <br/> <p>Bloodline</p>",
