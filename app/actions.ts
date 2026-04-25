@@ -223,26 +223,16 @@ export async function saveGlobalNotice(payload: { message: string, type: string,
 
 export async function reportError(payload: { message: string, digest?: string, url?: string }) {
     try {
+        const { getReportErrorEmailHtml } = await import("@/utils/emailTemplates");
+        
         await resend.emails.send({
             from: 'Asili Yetu Sentinel <sentinel@asiliyetusafaris.com>',
             to: ['info@asiliyetusafaris.com'],
             subject: '🚨 CRITICAL SIGNAL LOSS: Intelligence Report',
-            html: `
-                <div style="font-family: sans-serif; padding: 40px; color: #1a1a1a;">
-                    <h1 style="color: #ef4444;">Sentinel Intercept: Signal Lost</h1>
-                    <p>An explorer encountered a digital storm on the platform.</p>
-                    <hr/>
-                    <p><strong>Error Message:</strong> ${payload.message}</p>
-                    <p><strong>Digest:</strong> ${payload.digest || 'N/A'}</p>
-                    <p><strong>Location:</strong> ${payload.url || 'Unknown'}</p>
-                    <hr/>
-                    <p style="font-size: 10px; color: #999;">Automated technical report from Asili Yetu Command.</p>
-                </div>
-            `
+            html: getReportErrorEmailHtml(payload)
         });
         return { success: true };
-    } catch (e) {
-        console.error("Error reporting failed:", e);
-        return { success: false };
+    } catch (e: any) {
+        return { success: false, error: e.message };
     }
 }
