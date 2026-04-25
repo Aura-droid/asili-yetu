@@ -36,7 +36,7 @@ export async function signalGuides(inquiryId: string, locale: string = 'en') {
         const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
         const missionLink = `${baseUrl}/${locale}/mission/${mission.secret_token}`;
 
-        const message = `🚨 NEW ASILI MISSION ALERT!\n\nPROSPECT: ${inquiry.client_name}\nSAFARI: ${inquiry.itinerary_details?.recommendedTitle || 'Custom Expedition'}\n\nACTION REQUIRED: Read briefing & claim mission below:\n🔗 ${missionLink}\n\nPrepare the fleet! 🦒🚙`;
+        const message = `🚨 NEW ASILI MISSION ALERT!\n\nPROSPECT: ${inquiry.client_name}\nSAFARI: ${inquiry.itinerary_details?.recommendedTitle || 'Custom Expedition'}\n\nACTION REQUIRED:\nRead briefing and claim mission here:\n\n${missionLink}\n\nPrepare the fleet! 🦒🚙`;
 
         console.log("------------------------------------------");
         console.log("MISSION SENTINEL TRANSMISSION:");
