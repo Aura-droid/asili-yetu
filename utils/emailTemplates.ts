@@ -216,11 +216,18 @@ export const getReportErrorEmailHtml = (payload: { message: string, digest?: str
 };
 
 export const getInvoiceEmailHtml = (clientName: string, itineraryTitle: string, price: number, siteUrl: string, accessToken?: string, locale: string = 'en', payload?: any) => {
+    const partySize = payload?.party_size || 1;
+    const totalValue = price * partySize;
+    
+    const pricingLogic = partySize > 1 
+        ? `The price per person is <b>$${price.toLocaleString()} USD</b>. The total quoted value for your party of ${partySize} is <b>$${totalValue.toLocaleString()} USD</b>.`
+        : `The total quoted price for this private voyage is <b>$${price.toLocaleString()} USD</b>.`;
+
     return safariEmailTemplate(
         clientName,
         itineraryTitle,
         'invoice_generated',
-        `Your personalized safari expedition is ready for final authorization. We have finalized the strategy and secured the logistics. The total quoted price for this private voyage is <b>$${price.toLocaleString()} USD</b>. You can review the full breakdown and secure your dates via the terminal below.`,
+        `Your personalized safari expedition is ready for final authorization. We have finalized the strategy and secured the logistics. ${pricingLogic} You can review the full breakdown and secure your dates via the terminal below.`,
         accessToken,
         locale,
         undefined,
