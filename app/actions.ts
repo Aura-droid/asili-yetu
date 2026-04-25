@@ -123,7 +123,7 @@ export async function generateItinerary(query: { location: string, dates: string
 
         // 3. Fallback to AI Generation for unique requests
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const prompt = `
           You are an expert luxury safari planner for "Asili Yetu Safaris". 
