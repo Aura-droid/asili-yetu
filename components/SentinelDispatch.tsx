@@ -5,27 +5,13 @@ import { Zap, Radio, CheckCircle2, Loader2, ExternalLink, ShieldCheck } from "lu
 import { signalGuides } from "@/app/actions/signals";
 import { useLoading } from "@/providers/LoadingProvider";
 
-interface MissionGuide {
-  name?: string | null;
-}
-
-interface InquiryMission {
-  status?: string | null;
-  guides?: MissionGuide | null;
-}
-
-interface DispatchInquiry {
-  id: string;
-  missions?: InquiryMission[] | null;
-}
-
-export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: DispatchInquiry, onUpdate: () => void }) {
+export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: any, onUpdate: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const [signalStatus, setSignalStatus] = useState<'success' | 'error' | null>(null);
   const [waLink, setWaLink] = useState<string | null>(null);
   const { setIsLoading: setGlobalLoading } = useLoading();
 
-  const activeMission = inquiry.missions?.find((mission) => mission.status === 'accepted');
+  const activeMission = inquiry.missions?.find((m: any) => m.status === 'accepted');
   const isLocked = !!activeMission || signalStatus === 'success';
 
   const handleSignalGuides = async () => {
@@ -49,7 +35,7 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: Dispa
   };
 
   return (
-    <div className="p-8 bg-foreground/[0.03] rounded-[2.5rem] border border-foreground/5 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="p-8 bg-foreground/3 rounded-[2.5rem] border border-foreground/5 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-2xl font-black text-foreground italic tracking-tighter uppercase leading-none">Tour Guide <span className="text-primary">Sentinel</span></h3>
@@ -118,3 +104,4 @@ export default function SentinelDispatch({ inquiry, onUpdate }: { inquiry: Dispa
     </div>
   );
 }
+

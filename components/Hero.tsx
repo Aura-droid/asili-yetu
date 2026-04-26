@@ -163,7 +163,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
                    initial={{ opacity: 0, x: -50, rotate: -10 }}
                    animate={{ opacity: 1, x: 0, rotate: -5 }}
                    whileHover={{ rotate: 0, scale: 1.1, z: 50 }}
-                   className="relative w-32 h-40 md:w-64 md:h-80 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 transition-all duration-700 shrink-0"
+                   className="relative w-24 h-32 md:w-64 md:h-80 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 transition-all duration-700 shrink-0"
                 >
                    <Image 
                       src={currentFeatured.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
@@ -190,7 +190,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
 
                    {/* Title with 3D Depth */}
                    <div className="relative">
-                      <h2 className="text-4xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all group-hover:scale-105 group-hover:-translate-y-2 group-hover:rotate-[-1deg]">
+                      <h2 className="text-3xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all group-hover:scale-105 group-hover:-translate-y-2 group-hover:rotate-[-1deg]">
                          {currentFeatured.title}
                       </h2>
                       <div className="absolute -inset-x-12 -inset-y-6 bg-primary/10 blur-[120px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
@@ -235,7 +235,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 max-w-5xl leading-[1.1] drop-shadow-lg"
+          className="text-4xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 max-w-5xl leading-[1.1] drop-shadow-lg"
         >
           {t.rich("title", {
              p: (chunks) => <span className="bg-linear-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-shimmer inline-block transition-colors duration-500">{chunks}</span>
@@ -246,7 +246,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="text-xl md:text-2xl mb-14 max-w-3xl text-foreground font-medium drop-shadow-md"
+          className="text-lg md:text-2xl mb-14 max-w-3xl text-foreground font-medium drop-shadow-md"
         >
           {t("subtitle")}
         </motion.p>

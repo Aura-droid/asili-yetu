@@ -53,31 +53,8 @@ export default function InstagramClient({ posts }: InstagramClientProps) {
     });
   }, [index, comments.length, controls]);
 
-  // For the grid marquee on mobile
-  const gridControls = useAnimationControls();
-  const [gridIndex, setGridIndex] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth >= 768) {
-      setGridIndex(0);
-      return;
-    }
-    const interval = setInterval(() => {
-      setGridIndex(prev => (prev + 1) % posts.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [posts.length]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth >= 768) {
-      gridControls.set({ x: 0 });
-      return;
-    }
-    gridControls.start({
-      x: `calc(-${gridIndex * 100}% - ${gridIndex * 1.5}rem)`,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    });
-  }, [gridIndex, gridControls]);
+  // Doubled posts for infinite effect
+  const marqueePosts = [...posts, ...posts];
 
   return (
     <div className="relative z-10">
@@ -102,57 +79,86 @@ export default function InstagramClient({ posts }: InstagramClientProps) {
         </div>
       )}
 
-      {/* Grid - Marquee on Mobile */}
-      <div className="relative overflow-hidden md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
-        <motion.div 
-          animate={gridControls}
-          className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
-        >
-          {posts.map((post) => (
-            <Link 
-              key={post.id} 
-              href={post.permalink} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg w-full shrink-0 md:shrink md:w-auto"
-            >
-              <Image 
-                src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
-                alt={post.caption || "Safari moment by Asili Yetu"} 
-                fill 
-                className="object-cover transition-transform duration-1000 group-hover:scale-110" 
-              />
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-sm font-medium line-clamp-3 drop-shadow-md">
-                    {post.caption || "A breathtaking moment captured in the wild."}
+      {/* DESKTOP GRID */}
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <Link 
+            key={post.id} 
+            href={post.permalink} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg"
+          >
+            <Image 
+              src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
+              alt={post.caption || "Safari moment by Asili Yetu"} 
+              fill 
+              className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+            />
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
+              <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <p className="text-sm font-medium line-clamp-3 drop-shadow-md">
+                  {post.caption || "A breathtaking moment captured in the wild."}
+                </p>
+                <div className="flex items-center justify-between mt-4">
+                  <p className="text-xs text-white/70 font-semibold tracking-wider">
+                    {new Date(post.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                   </p>
-                  <div className="flex items-center justify-between mt-4">
-                    <p className="text-xs text-white/70 font-semibold tracking-wider">
-                      {new Date(post.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-                    </p>
-                    
-                    <div className="flex items-center gap-4">
-                       <div className="flex items-center gap-1.5 opacity-90">
-                         <Heart className="w-4 h-4 fill-white text-white" />
-                         <span className="text-xs font-bold">{post.like_count || 0}</span>
-                       </div>
-                       <div className="flex items-center gap-1.5 opacity-90">
-                         <MessageCircle className="w-4 h-4 fill-white text-white" />
-                         <span className="text-xs font-bold">{post.comments_count || 0}</span>
-                       </div>
-                    </div>
+                  
+                  <div className="flex items-center gap-4">
+                     <div className="flex items-center gap-1.5 opacity-90">
+                       <Heart className="w-4 h-4 fill-white text-white" />
+                       <span className="text-xs font-bold">{post.like_count || 0}</span>
+                     </div>
+                     <div className="flex items-center gap-1.5 opacity-90">
+                       <MessageCircle className="w-4 h-4 fill-white text-white" />
+                       <span className="text-xs font-bold">{post.comments_count || 0}</span>
+                     </div>
                   </div>
                 </div>
               </div>
-              
-              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider">
-                {post.media_type === 'VIDEO' ? t('video') : post.media_type === 'CAROUSEL_ALBUM' ? t('carousel') : t('photo')}
+            </div>
+            
+            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-white uppercase tracking-wider">
+              {post.media_type === 'VIDEO' ? t('video') : post.media_type === 'CAROUSEL_ALBUM' ? t('carousel') : t('photo')}
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* MOBILE CONTINUOUS MARQUEE */}
+      <div className="md:hidden relative w-screen -ml-6 overflow-hidden">
+        <motion.div 
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex gap-4 w-max px-4"
+        >
+          {marqueePosts.map((post, i) => (
+            <Link 
+              key={`${post.id}-${i}`} 
+              href={post.permalink} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="relative block w-72 aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg shrink-0"
+            >
+              <Image 
+                src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
+                alt={post.caption || "Safari moment"} 
+                fill 
+                className="object-cover" 
+              />
+              <div className="absolute bottom-4 left-4 right-4 bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                 <p className="text-[10px] text-white font-medium line-clamp-2 leading-tight">
+                    {post.caption || "The spirit of the wild..."}
+                 </p>
               </div>
             </Link>
           ))}
         </motion.div>
+        {/* Fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10" />
       </div>
     </div>
   );

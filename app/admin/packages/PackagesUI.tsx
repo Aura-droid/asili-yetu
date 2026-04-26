@@ -1,12 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2, Star, Loader2, MapPin, Clock, DollarSign, Package, CheckCircle2, Pin, Image as ImageIcon, AlertCircle, RefreshCw, Edit2, XCircle, ShieldCheck, Thermometer, Zap, Layers, Wind, Droplets } from "lucide-react";
+import { Plus, Trash2, Star, Loader2, MapPin, Clock, DollarSign, Package, CheckCircle2, Pin, Image as ImageIcon, AlertCircle, RefreshCw, Edit2, XCircle, ShieldCheck, Thermometer, Zap, Layers, Wind, Droplets, Plane, Bed, Utensils, Ticket, Car, User, HeartPulse, Eye, Wifi } from "lucide-react";
 import { createPackage, deletePackage, toggleFeatured, updatePackage } from "@/app/actions/packages";
 import AdminRouteMap from "@/components/AdminRouteMap";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 import { useRouter } from "next/navigation";
 import { useLoading } from "@/providers/LoadingProvider";
+
+const AVAILABLE_INCLUSIONS = [
+  { id: 'airport', label: 'Airport Transfers', icon: Plane },
+  { id: 'accommodation', label: 'Luxury Accommodation', icon: Bed },
+  { id: 'meals', label: 'Full Board Meals', icon: Utensils },
+  { id: 'park_fees', label: 'National Park Fees', icon: Ticket },
+  { id: 'vehicle', label: '4x4 Land Cruiser', icon: Car },
+  { id: 'guide', label: 'Professional Guide', icon: User },
+  { id: 'water', label: 'Bottled Water', icon: Droplets },
+  { id: 'insurance', label: 'Emergency Evacuation', icon: HeartPulse },
+  { id: 'binoculars', label: 'High-End Binoculars', icon: Eye },
+  { id: 'wifi', label: 'Onboard Wi-Fi', icon: Wifi },
+];
 
 export default function PackagesUI({ initialPackages, destinations }: { initialPackages: any[], destinations: any[] }) {
   const router = useRouter();
@@ -20,6 +33,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
   const { setIsLoading: setGlobalLoading } = useLoading();
 
   const [itineraryDays, setItineraryDays] = useState<any[]>([]);
+  const [selectedInclusions, setSelectedInclusions] = useState<string[]>([]);
   const [editingPkg, setEditingPkg] = useState<any | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -27,6 +41,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
     setEditingPkg(pkg);
     setPreviewUrl(pkg.main_image || null);
     setItineraryDays(pkg.itinerary || []);
+    setSelectedInclusions(pkg.inclusions || []);
     // We'll scroll to the top to see the form
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -35,6 +50,13 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
     setEditingPkg(null);
     setPreviewUrl(null);
     setItineraryDays([]);
+    setSelectedInclusions([]);
+  };
+
+  const toggleInclusion = (id: string) => {
+    setSelectedInclusions(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +82,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
     setGlobalLoading(true);
     const formData = new FormData(e.currentTarget);
     formData.append("itinerary", JSON.stringify(itineraryDays));
+    formData.append("inclusions", JSON.stringify(selectedInclusions));
 
     try {
       const res = editingPkg 
@@ -70,6 +93,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
         if (editingPkg) setEditingPkg(null);
         else e.currentTarget.reset();
         setItineraryDays([]);
+        setSelectedInclusions([]);
         router.refresh();
       } else {
         setError(res.error || "Mission failed.");
@@ -239,7 +263,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
             {/* Float-UP Deployment Form */}
             <div className="p-10 bg-[#fafafa] border-t border-foreground/5">
                 {error && <div className="mb-8 p-6 bg-red-50 text-red-600 rounded-[2rem] text-sm font-bold border border-red-100 flex items-center gap-4 italic shadow-sm">
-                  <AlertCircle className="w-6 h-6" /> {error}
+                   <AlertCircle className="w-6 h-6" /> {error}
                 </div>}
                 <form key={editingPkg?.id || 'new'} onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <div className="lg:col-span-8 space-y-12 bg-foreground/5 p-10 rounded-[3.5rem] border border-foreground/5 shadow-inner">
@@ -278,7 +302,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                                   <option value="Primeval Jungle">Primeval Jungle (Lush Canopy)</option>
                                   <option value="Equatorial Alpine">Equatorial Alpine (Glacial Peaks)</option>
                                   <option value="Tropical Turquoise">Tropical Turquoise (Coastal Reefs)</option>
-                               </select>
+                                </select>
                             </div>
                             <div className="space-y-3">
                                <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-2 flex items-center gap-2"><Thermometer className="w-4 h-4 text-primary" /> Thermal Profile</label>
@@ -301,12 +325,43 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                             <input type="hidden" name="destination_id" value={editingPkg?.destination_id || ""} />
                          </div>
 
+                         {/* EXPEDITION INCLUSIONS SELECTOR */}
+                         <div className="space-y-6 bg-white p-10 rounded-[4rem] border border-foreground/5 shadow-sm">
+                            <div className="flex flex-col gap-1">
+                               <label className="text-[10px] font-black text-foreground/40 uppercase tracking-[0.3em] ml-1">Expedition Inclusions</label>
+                               <p className="text-[9px] font-bold text-foreground/20 italic tracking-wide">Select the services integrated into this safari strategy.</p>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+                               {AVAILABLE_INCLUSIONS.map((item) => {
+                                 const Icon = item.icon;
+                                 const isSelected = selectedInclusions.includes(item.id);
+                                 return (
+                                   <button
+                                     key={item.id}
+                                     type="button"
+                                     onClick={() => toggleInclusion(item.id)}
+                                     className={`flex flex-col items-center justify-center p-5 rounded-[2rem] border transition-all gap-3 ${
+                                       isSelected 
+                                         ? 'bg-primary border-primary shadow-lg shadow-primary/20 scale-[1.02]' 
+                                         : 'bg-foreground/[0.03] border-foreground/5 hover:border-foreground/10 grayscale opacity-60 hover:opacity-100 hover:grayscale-0'
+                                     }`}
+                                   >
+                                      <Icon className={`w-6 h-6 ${isSelected ? 'text-black' : 'text-foreground/40'}`} />
+                                      <span className={`text-[8px] font-black uppercase tracking-widest text-center leading-tight ${isSelected ? 'text-black' : 'text-foreground/30'}`}>
+                                         {item.label}
+                                      </span>
+                                   </button>
+                                 );
+                               })}
+                            </div>
+                         </div>
+
                          <div className="space-y-2">
                             <label className="text-[10px] font-black text-foreground/40 uppercase tracking-widest ml-1">The Narrative</label>
                             <textarea name="description" defaultValue={editingPkg?.description} required rows={4} placeholder="Describe the soul of this expedition..." className="w-full bg-white border border-foreground/10 rounded-[3rem] px-10 py-8 text-foreground focus:ring-2 focus:ring-primary focus:outline-none transition-all font-bold italic text-base leading-relaxed resize-none shadow-sm" />
                          </div>
 
-                       <div className="grid grid-cols-1 gap-6 pt-4">
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                           {[
                             { label: 'Standard Yield (USD)', name: 'price_usd', def: editingPkg?.price_usd || 2500, type: 'number' },
                             { label: 'Discounted Yield (USD) - Optional', name: 'discount_price', def: editingPkg?.discount_price || "", type: 'number' },

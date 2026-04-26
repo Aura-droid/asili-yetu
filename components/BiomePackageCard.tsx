@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import { MapPin, Clock, DollarSign, X, Compass, Layers, Thermometer, Zap } from "lucide-react";
+import { MapPin, Clock, DollarSign, X, Compass, Layers, Thermometer, Zap, Plane, Bed, Utensils, Ticket, Car, User, Droplets, HeartPulse, Eye, Wifi, CheckCircle2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useTranslations } from "next-intl";
 import RustlingButton from "./RustlingButton";
@@ -11,6 +11,19 @@ import ShareButton from "./ShareButton";
 import ItineraryMap from "./ItineraryMap";
 import PackageReviewModal from "./PackageReviewModal";
 import BookingFunnel from "./BookingFunnel";
+
+const INCLUSION_META: Record<string, { label: string, icon: any }> = {
+  airport: { label: 'Airport Transfers', icon: Plane },
+  accommodation: { label: 'Luxury Accommodation', icon: Bed },
+  meals: { label: 'Full Board Meals', icon: Utensils },
+  park_fees: { label: 'National Park Fees', icon: Ticket },
+  vehicle: { label: '4x4 Land Cruiser', icon: Car },
+  guide: { label: 'Professional Guide', icon: User },
+  water: { label: 'Bottled Water', icon: Droplets },
+  insurance: { label: 'Emergency Evacuation', icon: HeartPulse },
+  binoculars: { label: 'High-End Binoculars', icon: Eye },
+  wifi: { label: 'Onboard Wi-Fi', icon: Wifi },
+};
 
 export default function BiomePackageCard({ pkg }: { pkg: any }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -237,6 +250,34 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                    <p className="text-xl md:text-2xl font-medium text-foreground/80 leading-relaxed mb-12">
                       {pkg.description}
                    </p>
+
+                   {/* STRATEGIC INCLUSIONS GRID */}
+                   {pkg.inclusions && pkg.inclusions.length > 0 && (
+                     <div className="mb-16">
+                        <div className="flex items-center gap-3 mb-8">
+                           <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
+                              <CheckCircle2 className="w-6 h-6" />
+                           </div>
+                           <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Strategic Inclusions</h3>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                           {pkg.inclusions.map((incId: string) => {
+                             const meta = INCLUSION_META[incId];
+                             if (!meta) return null;
+                             const Icon = meta.icon;
+                             return (
+                               <div key={incId} className="bg-foreground/[0.03] border border-foreground/5 p-6 rounded-[2rem] flex flex-col items-center justify-center gap-4 text-center group hover:bg-primary transition-all duration-500">
+                                  <Icon className="w-8 h-8 text-primary group-hover:text-black transition-colors" />
+                                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground/40 group-hover:text-black leading-tight transition-colors">
+                                     {meta.label}
+                                  </span>
+                               </div>
+                             );
+                           })}
+                        </div>
+                     </div>
+                   )}
+
                    <RustlingButton 
                       onClick={() => setShowBooking(true)}
                       className="bg-primary text-black px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-lg shadow-xl hover:shadow-primary/20 transition-all active:scale-95"

@@ -28,11 +28,14 @@ export async function createPackage(formData: FormData) {
   const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
   const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
   const itineraryRaw = formData.get("itinerary") as string;
+  const inclusionsRaw = formData.get("inclusions") as string;
   let itinerary = [];
+  let inclusions = [];
   try {
     itinerary = JSON.parse(itineraryRaw || "[]");
+    inclusions = JSON.parse(inclusionsRaw || "[]");
   } catch (e) {
-    console.warn("Invalid itinerary JSON.");
+    console.warn("Invalid JSON for itinerary or inclusions.");
   }
 
   if (!title || !description || isNaN(price_usd) || !file) {
@@ -52,7 +55,7 @@ export async function createPackage(formData: FormData) {
     });
 
   if (uploadError) {
-    return { success: false, error: `Upload failed: ${uploadError.message}` };
+    return { success: false, error: `Image upload failed: ${uploadError.message}. Check your storage permissions or session.` };
   }
 
   const { data: publicData } = supabase.storage
@@ -72,6 +75,7 @@ export async function createPackage(formData: FormData) {
         main_image: publicData.publicUrl,
         is_featured,
         itinerary,
+        inclusions,
         discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
         biome_orientation,
         temperature_profile,
@@ -115,11 +119,14 @@ export async function updatePackage(id: string, formData: FormData) {
   const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
   const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
   const itineraryRaw = formData.get("itinerary") as string;
+  const inclusionsRaw = formData.get("inclusions") as string;
   let itinerary = [];
+  let inclusions = [];
   try {
     itinerary = JSON.parse(itineraryRaw || "[]");
+    inclusions = JSON.parse(inclusionsRaw || "[]");
   } catch (e) {
-    console.warn("Invalid itinerary JSON.");
+    console.warn("Invalid JSON for itinerary or inclusions.");
   }
 
   const updateData: any = {
@@ -131,6 +138,7 @@ export async function updatePackage(id: string, formData: FormData) {
     destination_id: destination_id || null,
     is_featured,
     itinerary,
+    inclusions,
     discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
     biome_orientation,
     temperature_profile,
@@ -149,12 +157,14 @@ export async function updatePackage(id: string, formData: FormData) {
         upsert: false
       });
 
-    if (!uploadError) {
-      const { data: publicData } = supabase.storage
-        .from('asili-images')
-        .getPublicUrl(filePath);
-      updateData.main_image = publicData.publicUrl;
+    if (uploadError) {
+      return { success: false, error: `Image upload failed: ${uploadError.message}. Check your permissions or session.` };
     }
+
+    const { data: publicData } = supabase.storage
+      .from('asili-images')
+      .getPublicUrl(filePath);
+    updateData.main_image = publicData.publicUrl;
   }
 
   const { error } = await supabase
@@ -166,7 +176,10 @@ export async function updatePackage(id: string, formData: FormData) {
     revalidatePath("/admin/packages");
     revalidatePath("/", "layout");
   }
-  return { success: !error, error: error?.message };
+  
+  // If we get an error here, it's likely the missing column 'inclusions' 
+  // or an RLS issue. We return the message clearly.
+  return { success: !error, error: error?.message || (error ? "Database update rejected." : null) };
 }
 
 export async function deletePackage(id: string) {
