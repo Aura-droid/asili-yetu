@@ -81,7 +81,8 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-10%" }}
         transition={{ duration: 0.8 }}
-        className="relative w-full h-[80vh] min-h-[600px] mb-32 rounded-[3rem] overflow-hidden group shadow-2xl scroll-mt-32"
+        className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] md:min-h-[600px] mb-12 md:mb-32 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden group shadow-2xl scroll-mt-32 cursor-pointer"
+        onClick={() => setIsOpen(true)}
       >
         {/* Background Parallax Image */}
         <div className="absolute inset-0 z-0 bg-background/5 overflow-hidden">
@@ -111,7 +112,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
           )}
           
           <div className="max-w-3xl">
-            <h2 className="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-[1.1] drop-shadow-lg">
+            <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-4 leading-[1.1] drop-shadow-lg">
               {pkg.title}
             </h2>
 
@@ -136,8 +137,8 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 <Clock className="w-5 h-5 text-primary" />
                 <span>{pkg.duration_days} {pt("days")} / {pkg.duration_days - 1} {pt("nights")}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                <span className="font-bold tracking-widest uppercase text-xs text-primary">{pkg.difficulty_level}</span>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20">
+                <span className="font-bold tracking-widest uppercase text-[10px] text-primary">{pkg.difficulty_level}</span>
               </div>
               {pkg.biome_orientation && (
                   <div className="hidden md:flex items-center gap-2 bg-primary/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30">
@@ -149,24 +150,26 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/20 mt-auto">
-            <div>
-              <p className="text-xs font-bold text-white/50 uppercase tracking-widest mb-2">{pt("investment")}</p>
-              <div className="flex items-center text-white">
-                <DollarSign className="w-6 h-6 text-primary -ml-1" />
-                {pkg.discount_price ? (
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-black line-through text-white/40 mb-[-4px]">${pkg.price_usd}</span>
-                    <div className="flex items-center">
-                      <span className="text-5xl font-black text-primary">{pkg.discount_price}</span>
-                      <span className="text-white/50 ml-2 font-medium">/ {pt("per_person")}</span>
+            <div className="flex items-center gap-4">
+              <div>
+                <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">{pt("investment")}</p>
+                <div className="flex items-center text-white">
+                  <DollarSign className="w-5 h-5 text-primary -ml-1" />
+                  {pkg.discount_price ? (
+                    <div className="flex flex-col">
+                      <span className="text-[9px] font-black line-through text-white/40 mb-[-4px]">${pkg.price_usd}</span>
+                      <div className="flex items-center">
+                        <span className="text-3xl md:text-5xl font-black text-primary">{pkg.discount_price}</span>
+                        <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <>
-                    <span className="text-5xl font-black">{pkg.price_usd}</span>
-                    <span className="text-white/50 ml-2 font-medium">/ {pt("per_person")}</span>
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
+                      <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
             

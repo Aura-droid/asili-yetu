@@ -210,20 +210,21 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
       {theme === "jungle" ? <FallingLeaves /> : <SavannahSpark />}
 
       <div className="relative z-30 container mx-auto px-6 text-center text-foreground flex flex-col items-center">
-        {/* FLOATING MASTERPIECE BADGE (Minimized & Attention-Grabbing) */}
+        {/* FLOATING MASTERPIECE BADGE (Optimized for both Desktop & Mobile) */}
         {currentFeatured && (
            <motion.div 
-             initial={{ opacity: 0, x: 50 }}
-             animate={{ opacity: 1, x: 0 }}
-             className="fixed top-24 right-6 md:right-12 z-50 group hidden lg:block"
+             initial={{ opacity: 0, y: -20 }}
+             animate={{ opacity: 1, y: 0 }}
+             className="fixed top-24 md:top-28 right-4 left-4 md:left-auto md:right-12 z-50 group"
            >
               <motion.div 
-                whileHover={{ scale: 1.05 }}
-                className="relative cursor-pointer bg-black/40 backdrop-blur-2xl border border-primary/30 p-2 rounded-[2rem] shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center gap-4 group-hover:border-primary transition-all duration-500 overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative cursor-pointer bg-black/60 backdrop-blur-2xl border border-primary/40 p-1.5 md:p-2 rounded-full md:rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center gap-3 md:gap-4 group-hover:border-primary transition-all duration-500 overflow-hidden max-w-fit mx-auto md:mx-0"
                 onClick={() => window.location.href = `/${locale}/packages?expedition=${currentFeatured.id}`}
               >
-                 {/* Portal */}
-                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-white/20 shrink-0">
+                 {/* Portal Icon - Compact on Mobile */}
+                 <div className="relative w-10 h-10 md:w-16 md:h-16 rounded-full md:rounded-2xl overflow-hidden border border-white/20 shrink-0">
                     <Image 
                        src={currentFeatured.main_image || ""} 
                        alt="Portal"
@@ -232,15 +233,15 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
                     />
                  </div>
 
-                 <div className="pr-6 max-w-[200px]">
-                    <div className="flex items-center gap-2 mb-1">
+                 <div className="pr-4 md:pr-6">
+                    <div className="flex items-center gap-1.5 mb-0.5 md:mb-1">
                        <Sparkles className="w-3 h-3 text-primary animate-pulse" />
-                       <span className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Masterpiece Edition</span>
+                       <span className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.2em] md:tracking-[0.3em]">{t("masterpiece_badge")}</span>
                     </div>
-                    <h4 className="text-xs font-black text-white uppercase tracking-tighter truncate leading-none">
+                    <h4 className="text-[10px] md:text-xs font-black text-white uppercase tracking-tighter truncate leading-none">
                        {currentFeatured.title}
                     </h4>
-                    <p className="text-[9px] font-bold text-white/40 uppercase mt-1 tracking-widest">
+                    <p className="hidden md:block text-[9px] font-bold text-white/40 uppercase mt-1 tracking-widest">
                        {currentFeatured.duration_days} Days Immersion
                     </p>
                  </div>
@@ -253,24 +254,22 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
 
         {/* Hero Branding / Subtle Indicator */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6"
+          className="mb-4 md:mb-6"
         >
-           <span className="px-5 py-2 rounded-full border border-primary/20 text-[10px] font-black text-primary inline-block bg-black/10 backdrop-blur-md uppercase tracking-[0.4em] shadow-sm">
+           <span className="px-4 md:px-5 py-1.5 md:py-2 rounded-full border border-primary/20 text-[9px] md:text-[10px] font-black text-primary inline-block bg-black/20 backdrop-blur-md uppercase tracking-[0.3em] md:tracking-[0.4em] shadow-sm">
               {theme === 'jungle' ? "The Deep Exploration" : "Arusha Command Center"}
            </span>
         </motion.div>
         
         <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-4xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 max-w-5xl leading-[1.1] drop-shadow-lg"
+          transition={{ delay: 0.1 }}
+          className="text-4xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] md:leading-none mb-4 md:mb-6 uppercase italic"
         >
-          {t.rich("title", {
-             p: (chunks) => <span className="bg-linear-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-shimmer inline-block transition-colors duration-500">{chunks}</span>
-          })}
+           {t("title_start")} <span className="text-primary">{t("title_accent")}</span>
         </motion.h1>
 
         <motion.p 
@@ -343,6 +342,46 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               )}
            </div>
         </motion.div>
+
+        {/* MOBILE QUICK EXPLORER (Eliminates scrolling fatigue) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 md:hidden flex items-center justify-center gap-4 w-full px-6"
+        >
+           {[
+              { label: "Destinations", href: "/destinations", icon: MapPin },
+              { label: "Expeditions", href: "/packages", icon: Compass },
+              { label: "Our Fleet", href: "/fleet", icon: Car }
+           ].map((item, i) => (
+              <Link 
+                key={i} 
+                href={item.href}
+                className="flex flex-col items-center gap-2 flex-1 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-primary transition-all group"
+              >
+                 <item.icon className="w-5 h-5 text-primary group-hover:text-black transition-colors" />
+                 <span className="text-[8px] font-black text-white/40 uppercase tracking-widest group-hover:text-black transition-colors">{item.label}</span>
+              </Link>
+           ))}
+        </motion.div>
+      </div>
+
+      {/* Hero Branding / Subtle Indicator (Desktop Bottom) */}
+      <div className="absolute bottom-10 left-12 hidden lg:flex items-center gap-6 z-30">
+         <div className="flex flex-col">
+            <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.5em] mb-2">Operational Status</span>
+            <div className="flex items-center gap-3">
+               <div className="flex -space-x-2">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-background bg-foreground/10 overflow-hidden relative">
+                       <Image src={`https://i.pravatar.cc/100?u=${i+10}`} alt="Active Guide" fill className="object-cover grayscale hover:grayscale-0 transition-all cursor-crosshair" />
+                    </div>
+                  ))}
+               </div>
+               <span className="text-xs font-bold text-white/60 italic">14 Guides active in-field</span>
+            </div>
+         </div>
       </div>
 
       {/* AI Result Modal */}

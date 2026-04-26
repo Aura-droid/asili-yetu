@@ -73,6 +73,12 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Mission Pulse Indicator */}
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
+             <span className="text-[9px] font-black text-primary uppercase tracking-widest">Live Operations</span>
+          </div>
+
           <LanguageSwitcher />
 
           <button
