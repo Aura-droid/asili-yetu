@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Privacy' });
   
   return {
-    title: t('title').replace(/<[^>]*>/g, ''),
+    title: t.raw('title').replace(/<[^>]*>/g, ''),
     description: t('sub')
   };
 }
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           
           <h1 
             className="text-5xl md:text-7xl font-black text-foreground tracking-tight mb-6"
-            dangerouslySetInnerHTML={{ __html: t("title") }}
+            dangerouslySetInnerHTML={{ __html: t.raw("title") }}
           />
           <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed italic">
             "{t("sub")}"
