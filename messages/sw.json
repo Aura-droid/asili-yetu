@@ -415,31 +415,31 @@
     }
   },
   "Privacy": {
-    "title": "Privacy <p>Policy</p>",
-    "sub": "How we safeguard your digital presence while you explore the physical wild.",
-    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
-    "section1_title": "Information Collection",
-    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
-    "section2_title": "Use of Information",
-    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
-    "section3_title": "Data Security",
-    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+    "title": "Sera ya <p>Faragha</p>",
+    "sub": "Jinsi tunavyolinda uwepo wako wa kidijitali wakati unachunguza pori la asili.",
+    "intro": "Katika Asili Yetu Safaris, tumejitolea kulinda faragha yako na kuhakikisha habari zako za kibinafsi zinashughulikiwa kwa njia salama na ya kuwajibika.",
+    "section1_title": "Ukusanyaji wa Habari",
+    "section1_desc": "Tunakusanya habari unazotoa moja kwa moja kwetu unapotumia huduma zetu za safari, unajisajili kwenye jarida letu, au unapowasiliana na mratibu wetu.",
+    "section2_title": "Matumizi ya Habari",
+    "section2_desc": "Data zako zinatumiwa tu kurahisisha safari zako, kushughulikia malipo, na kutoa taarifa za kina kuhusu pori la Tanzania.",
+    "section3_title": "Usalama wa Data",
+    "section3_desc": "Tunatekeleza hatua za usalama za kisasa ili kulinda utambulisho wako wa kidijitali dhidi ya ufikiaji usioidhinishwa."
   },
   "Terms": {
-    "title": "Terms of <p>Service</p>",
-    "sub": "The protocol for our shared journey into the wild.",
-    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
-    "section1_title": "Booking Protocols",
-    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
-    "section2_title": "Liability",
-    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
-    "section3_title": "Code of Conduct",
-    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+    "title": "Masharti ya <p>Huduma</p>",
+    "sub": "Itifaki ya safari yetu ya pamoja kwenye pori la asili.",
+    "intro": "Kwa kupata jukwaa letu na kuhifadhi safari, unakubali itifaki na viwango vifuatavyo.",
+    "section1_title": "Itifaki za Kuhifadhi",
+    "section1_desc": "Safari zote zinategemea upatikanaji na zinathibitishwa tu baada ya kupokea amana.",
+    "section2_title": "Dhima",
+    "section2_desc": "Ingawa tunapea kipaumbele usalama wako juu ya yote, safari za porini zinahusisha hatari za asili ambazo washiriki lazima wakiri.",
+    "section3_title": "Kanuni za Maadili",
+    "section3_desc": "Tunatarajia wagunduzi wote kuheshimu wanyamapori, mazingira, na jamii za asili wakati wa safari zetu."
   },
   "Cookies": {
-    "title": "Digital Pulse Tracking",
-    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
-    "accept": "Accept Pulse",
-    "decline": "Decline Non-Essential"
+    "title": "Ufuatiliaji wa Mapigo ya Kidijitali",
+    "desc": "Tunatumia kuki muhimu ili kusawazisha kipindi chako na uzoefu uliowekwa ndani kwenye savannah.",
+    "accept": "Kubali Mapigo",
+    "decline": "Kataa Zisizo Muhimu"
   }
 }

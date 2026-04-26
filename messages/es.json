@@ -418,31 +418,31 @@
     "cta_btn": "Start Planning"
   },
   "Privacy": {
-    "title": "Privacy <p>Policy</p>",
-    "sub": "How we safeguard your digital presence while you explore the physical wild.",
-    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
-    "section1_title": "Information Collection",
-    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
-    "section2_title": "Use of Information",
-    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
-    "section3_title": "Data Security",
-    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+    "title": "Política de <p>Privacidad</p>",
+    "sub": "Cómo salvaguardamos su presencia digital mientras explora la naturaleza física.",
+    "intro": "En Asili Yetu Safaris, nos comprometemos a proteger su privacidad y a garantizar que su información personal se maneje de manera segura y responsable.",
+    "section1_title": "Recolección de Información",
+    "section1_desc": "Recopilamos la información que usted nos proporciona directamente cuando reserva un safari, se suscribe a nuestro boletín o contacta con nuestra conserjería.",
+    "section2_title": "Uso de la Información",
+    "section2_desc": "Sus datos se utilizan únicamente para facilitar sus expediciones, procesar pagos y proporcionar actualizaciones de alta fidelidad sobre la naturaleza tanzana.",
+    "section3_title": "Seguridad de Datos",
+    "section3_desc": "Implementamos medidas de seguridad de vanguardia para proteger su identidad digital de accesos no autorizados."
   },
   "Terms": {
-    "title": "Terms of <p>Service</p>",
-    "sub": "The protocol for our shared journey into the wild.",
-    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
-    "section1_title": "Booking Protocols",
-    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
-    "section2_title": "Liability",
-    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
-    "section3_title": "Code of Conduct",
-    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+    "title": "Términos de <p>Servicio</p>",
+    "sub": "El protocolo para nuestro viaje compartido a la naturaleza.",
+    "intro": "Al acceder a nuestra plataforma y reservar una expedición, usted acepta los siguientes protocolos y estándares.",
+    "section1_title": "Protocolos de Reserva",
+    "section1_desc": "Todas las expediciones están sujetas a disponibilidad y se confirman solo tras la recepción del depósito.",
+    "section2_title": "Responsabilidad",
+    "section2_desc": "Si bien priorizamos su seguridad por encima de todo, las expediciones a la naturaleza implican riesgos inherentes que los participantes deben reconocer.",
+    "section3_title": "Código de Conducta",
+    "section3_desc": "Esperamos que todos los exploradores respeten la vida silvestre, el medio ambiente y las comunidades locales durante nuestros viajes."
   },
   "Cookies": {
-    "title": "Digital Pulse Tracking",
-    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
-    "accept": "Accept Pulse",
-    "decline": "Decline Non-Essential"
+    "title": "Seguimiento del Pulso Digital",
+    "desc": "Utilizamos cookies esenciales para sincronizar su sesión y experiencia localizada a través de la sabana.",
+    "accept": "Aceptar Pulso",
+    "decline": "Rechazar No Esenciales"
   }
 }

@@ -415,31 +415,31 @@
     "cta_btn": "Start Planning"
   },
   "Privacy": {
-    "title": "Privacy <p>Policy</p>",
-    "sub": "How we safeguard your digital presence while you explore the physical wild.",
-    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
-    "section1_title": "Information Collection",
-    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
-    "section2_title": "Use of Information",
-    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
-    "section3_title": "Data Security",
-    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+    "title": "Datenschutz<p>erklärung</p>",
+    "sub": "Wie wir Ihre digitale Präsenz schützen, während Sie die physische Wildnis erkunden.",
+    "intro": "Bei Asili Yetu Safaris verpflichten wir uns, Ihre Privatsphäre zu schützen und sicherzustellen, dass Ihre persönlichen Daten sicher und verantwortungsbewusst behandelt werden.",
+    "section1_title": "Informationserhebung",
+    "section1_desc": "Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen, wenn Sie eine Safari buchen, unseren Newsletter abonnieren oder unseren Concierge kontaktieren.",
+    "section2_title": "Verwendung von Informationen",
+    "section2_desc": "Ihre Daten werden ausschließlich dazu verwendet, Ihre Expeditionen zu ermöglichen, Zahlungen zu verarbeiten und High-Fidelity-Updates zur tansanischen Wildnis bereitzustellen.",
+    "section3_title": "Datensicherheit",
+    "section3_desc": "Wir setzen modernste Sicherheitsmaßnahmen ein, um Ihre digitale Identität vor unbefugtem Zugriff zu schützen."
   },
   "Terms": {
-    "title": "Terms of <p>Service</p>",
-    "sub": "The protocol for our shared journey into the wild.",
-    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
-    "section1_title": "Booking Protocols",
-    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
-    "section2_title": "Liability",
-    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
-    "section3_title": "Code of Conduct",
-    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+    "title": "Nutzungs<p>bedingungen</p>",
+    "sub": "Das Protokoll für unsere gemeinsame Reise in die Wildnis.",
+    "intro": "Durch den Zugriff auf unsere Plattform und die Buchung einer Expedition erklären Sie sich mit den folgenden Protokollen und Standards einverstanden.",
+    "section1_title": "Buchungsprotokolle",
+    "section1_desc": "Alle Expeditionen unterliegen der Verfügbarkeit und werden erst nach Erhalt der Anzahlung bestätigt.",
+    "section2_title": "Haftung",
+    "section2_desc": "Obwohl wir Ihre Sicherheit über alles priorisieren, bringen Expeditionen in die Wildnis inhärente Risiken mit sich, die die Teilnehmer anerkennen müssen.",
+    "section3_title": "Verhaltenskodex",
+    "section3_desc": "Wir erwarten von allen Entdeckern, dass sie während unserer Reisen die Tierwelt, die Umwelt und die lokalen Gemeinschaften respektieren."
   },
   "Cookies": {
-    "title": "Digital Pulse Tracking",
-    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
-    "accept": "Accept Pulse",
-    "decline": "Decline Non-Essential"
+    "title": "Digitale Puls-Verfolgung",
+    "desc": "Wir verwenden essenzielle Cookies, um Ihre Sitzung und Ihr lokalisiertes Erlebnis in der Savanne zu synchronisieren.",
+    "accept": "Puls akzeptieren",
+    "decline": "Nicht-essenzielle ablehnen"
   }
 }

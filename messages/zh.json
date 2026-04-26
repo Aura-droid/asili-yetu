@@ -415,31 +415,31 @@
     "cta_btn": "Start Planning"
   },
   "Privacy": {
-    "title": "Privacy <p>Policy</p>",
-    "sub": "How we safeguard your digital presence while you explore the physical wild.",
-    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
-    "section1_title": "Information Collection",
-    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
-    "section2_title": "Use of Information",
-    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
-    "section3_title": "Data Security",
-    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+    "title": "隐私<p>政策</p>",
+    "sub": "在您探索自然荒野的同时，我们如何保护您的数字存在。",
+    "intro": "在 Asili Yetu Safaris，我们致力于保护您的隐私，并确保以安全负责的方式处理您的个人信息。",
+    "section1_title": "信息收集",
+    "section1_desc": "当您预订野生动物园、订阅我们的新闻通讯或联系我们的礼宾部时，我们会收集您直接提供给我们的信息。",
+    "section2_title": "信息使用",
+    "section2_desc": "您的数据仅用于协助您的探险、处理付款以及提供有关坦桑尼亚荒野的高保真更新。",
+    "section3_title": "数据安全",
+    "section3_desc": "我们实施最先进的安全措施，以保护您的数字身份免受未经授权的访问。"
   },
   "Terms": {
-    "title": "Terms of <p>Service</p>",
-    "sub": "The protocol for our shared journey into the wild.",
-    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
-    "section1_title": "Booking Protocols",
-    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
-    "section2_title": "Liability",
-    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
-    "section3_title": "Code of Conduct",
-    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+    "title": "服务<p>条款</p>",
+    "sub": "我们共同进入荒野之旅的协议。",
+    "intro": "通过访问我们的平台并预订探险，您同意以下协议和标准。",
+    "section1_title": "预订协议",
+    "section1_desc": "所有探险均视供应情况而定，且仅在收到定金后予以确认。",
+    "section2_title": "责任",
+    "section2_desc": "虽然我们将您的安全放在首位，但进入荒野的探险涉及参与者必须承认的内在风险。",
+    "section3_title": "行为准则",
+    "section3_desc": "我们希望所有探险者在旅途中尊重野生动物、环境和当地社区。"
   },
   "Cookies": {
-    "title": "Digital Pulse Tracking",
-    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
-    "accept": "Accept Pulse",
-    "decline": "Decline Non-Essential"
+    "title": "数字脉搏追踪",
+    "desc": "我们使用必要的 Cookie 来同步您在稀树草原上的会话和本地化体验。",
+    "accept": "接受脉搏",
+    "decline": "拒绝非必要"
   }
 }

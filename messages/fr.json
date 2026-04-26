@@ -415,31 +415,31 @@
     "cta_btn": "Start Planning"
   },
   "Privacy": {
-    "title": "Privacy <p>Policy</p>",
-    "sub": "How we safeguard your digital presence while you explore the physical wild.",
-    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
-    "section1_title": "Information Collection",
-    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
-    "section2_title": "Use of Information",
-    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
-    "section3_title": "Data Security",
-    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+    "title": "Politique de <p>Confidentialité</p>",
+    "sub": "Comment nous protégeons votre présence numérique pendant que vous explorez la nature sauvage physique.",
+    "intro": "Chez Asili Yetu Safaris, nous nous engageons à protéger votre vie privée et à garantir que vos informations personnelles sont traitées de manière sûre et responsable.",
+    "section1_title": "Collecte d'Informations",
+    "section1_desc": "Nous collectons les informations que vous nous fournissez directement lorsque vous réservez un safari, vous abonnez à notre newsletter ou contactez notre conciergerie.",
+    "section2_title": "Utilisation des Informations",
+    "section2_desc": "Vos données sont utilisées uniquement pour faciliter vos expéditions, traiter les paiements et fournir des mises à jour haute fidélité sur la nature sauvage tanzanienne.",
+    "section3_title": "Sécurité des Données",
+    "section3_desc": "Nous mettons en œuvre des mesures de sécurité de pointe pour protéger votre identité numérique contre tout accès non autorisé."
   },
   "Terms": {
-    "title": "Terms of <p>Service</p>",
-    "sub": "The protocol for our shared journey into the wild.",
-    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
-    "section1_title": "Booking Protocols",
-    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
-    "section2_title": "Liability",
-    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
-    "section3_title": "Code of Conduct",
-    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+    "title": "Conditions de <p>Service</p>",
+    "sub": "Le protocole pour notre voyage partagé dans la nature.",
+    "intro": "En accédant à notre plateforme et en réservant une expédition, vous acceptez les protocoles et normes suivants.",
+    "section1_title": "Protocoles de Réservation",
+    "section1_desc": "Toutes les expéditions sont soumTises à disponibilité et ne sont confirmées qu'à réception de l'acompte.",
+    "section2_title": "Responsabilité",
+    "section2_desc": "Bien que nous priorisions votre sécurité avant tout, les expéditions dans la nature impliquent des risques inhérents que les participants doivent reconnaître.",
+    "section3_title": "Code de Conduite",
+    "section3_desc": "Nous attendons de tous les explorateurs qu'ils respectent la faune, l'environnement et les communautés locales lors de nos voyages."
   },
   "Cookies": {
-    "title": "Digital Pulse Tracking",
-    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
-    "accept": "Accept Pulse",
-    "decline": "Decline Non-Essential"
+    "title": "Suivi du Pouls Numérique",
+    "desc": "Nous utilisons des cookies essentiels pour synchroniser votre session et votre expérience localisée à travers la savane.",
+    "accept": "Accepter le Pouls",
+    "decline": "Refuser les Non-Essentiels"
   }
 }
