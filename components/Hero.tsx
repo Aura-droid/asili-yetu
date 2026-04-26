@@ -274,9 +274,28 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-4xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] md:leading-none mb-4 md:mb-6 uppercase italic"
+          className="text-4xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] md:leading-none mb-4 md:mb-6 uppercase"
         >
-           {t("title_start")} <span className="text-primary">{t("title_accent")}</span> {t("title_end")}
+           {t("title_start")}{" "}
+           <motion.span 
+             className="bg-linear-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent animate-shimmer italic relative inline-block"
+             animate={{ 
+               filter: [
+                 "drop-shadow(0 0 0px rgba(222, 157, 62, 0))",
+                 "drop-shadow(0 0 15px rgba(222, 157, 62, 0.4))",
+                 "drop-shadow(0 0 0px rgba(222, 157, 62, 0))"
+               ]
+             }}
+             transition={{
+               duration: 3,
+               repeat: Infinity,
+               ease: "easeInOut"
+             }}
+           >
+             {t("title_accent")}
+           </motion.span>
+           {" "}
+           {t("title_end")}
         </motion.h1>
 
         <motion.p 
