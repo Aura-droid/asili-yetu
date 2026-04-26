@@ -413,5 +413,33 @@
     "cta_title": "Ready to explore with the best?",
     "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
     "cta_btn": "Start Planning"
+  },
+  "Privacy": {
+    "title": "Privacy <p>Policy</p>",
+    "sub": "How we safeguard your digital presence while you explore the physical wild.",
+    "intro": "At Asili Yetu Safaris, we are committed to protecting your privacy and ensuring your personal information is handled in a safe and responsible manner.",
+    "section1_title": "Information Collection",
+    "section1_desc": "We collect information you provide directly to us when you book a safari, subscribe to our newsletter, or contact our concierge.",
+    "section2_title": "Use of Information",
+    "section2_desc": "Your data is used solely to facilitate your expeditions, process payments, and provide high-fidelity updates on the Tanzanian wild.",
+    "section3_title": "Data Security",
+    "section3_desc": "We implement state-of-the-art security measures to protect your digital identity from unauthorized access."
+  },
+  "Terms": {
+    "title": "Terms of <p>Service</p>",
+    "sub": "The protocol for our shared journey into the wild.",
+    "intro": "By accessing our platform and booking an expedition, you agree to the following protocols and standards.",
+    "section1_title": "Booking Protocols",
+    "section1_desc": "All expeditions are subject to availability and confirmed only upon receipt of the deposit.",
+    "section2_title": "Liability",
+    "section2_desc": "While we prioritize your safety above all, expeditions into the wild involve inherent risks that participants must acknowledge.",
+    "section3_title": "Code of Conduct",
+    "section3_desc": "We expect all explorers to respect the wildlife, the environment, and the local communities during our journeys."
+  },
+  "Cookies": {
+    "title": "Digital Pulse Tracking",
+    "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
+    "accept": "Accept Pulse",
+    "decline": "Decline Non-Essential"
   }
 }

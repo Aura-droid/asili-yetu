@@ -126,8 +126,14 @@ export default function Footer() {
                {t("Footer.brela")}
              </a>
           </div>
-          <div className="flex items-center gap-6 text-xs font-bold text-foreground/40 hover:text-foreground transition-colors uppercase tracking-widest cursor-pointer">
-            {t("Footer.privacy")} • {t("Footer.terms")}
+          <div className="flex items-center gap-6 text-[10px] md:text-xs font-bold text-foreground/40 uppercase tracking-widest">
+            <Link href="/privacy" className="hover:text-primary transition-colors">
+              {t("Footer.privacy")}
+            </Link>
+            <span className="opacity-20">•</span>
+            <Link href="/terms" className="hover:text-primary transition-colors">
+              {t("Footer.terms")}
+            </Link>
           </div>
         </div>
       </div>

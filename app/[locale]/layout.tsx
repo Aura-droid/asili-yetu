@@ -14,6 +14,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import LoadingProvider from "@/providers/LoadingProvider";
+import CookieConsent from "@/components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -137,6 +138,7 @@ export default async function RootLayout(props: {
             <ThemeProvider>
               <GlobalNoticeBanner initialNotice={activeNotice} />
               <PublicAIWidget />
+              <CookieConsent />
               <Spotlight />
               <JungleTransitionOverlay />
               <Navbar />
