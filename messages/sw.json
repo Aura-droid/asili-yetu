@@ -16,7 +16,6 @@
     "gearing_up": "Tunajiandaa...",
     "modal_title": "Mshauri wa AI wa Safari",
     "proceed": "Endelea na Uhifadhi",
-    "masterpiece_badge": "Chaguo la Kipekee",
     "days_immersion": "Siku za Uzoefu",
     "view_details": "Angalia Maelezo ya Safari"
   },
@@ -175,7 +174,9 @@
       "susp_desc": "Safari laini kwenye mazingira magumu zaidi.",
       "seat_title": "Viti vya Kustarehesha",
       "seat_desc": "Viti vya kutosha pembeni ya dirisha kwa kila abiria."
-    }
+    },
+    "readying": "Deployment Readying",
+    "explorers": "{count} Explorers"
   },
   "Instagram": {
     "title": "Mubashara kutoka Nyikani",
@@ -307,7 +308,7 @@
     ]
   },
   "About": {
-    "title": "Tulizaliwa \u003cp\u003ePorini.\u003c/p\u003e",
+    "title": "Tulizaliwa <p>Porini.</p>",
     "subtitle": "Hatukupeleka Afrika tu. Tunaingiza Afrika ndani ya roho yako.",
     "who_we_are": "Asili Yetu Safaris ni kampuni ya usafiri inayomilikiwa na wenyeji, inayoendeshwa kwa maadili, na kuongozwa kitaalamu, yenye makao yake makuu Arusha, Tanzania, na ofisi ya uwakilishi Köln, Ujerumani.",
     "origin": "Tulizaliwa kutoka kwa upendo wa kina kwa Tanzania na hamu ya kubadilisha jinsi dunia inavyopata uzoefu wa Afrika.",
@@ -316,7 +317,7 @@
     "storytellers": "Lakini zaidi ya huduma, sisi ni wasimulizi wa hadithi, walimu, na mabalozi wa kitamaduni.",
     "responsibility": "Tunaamini usafiri ni jukumu, si huduma tu. Kila mgeni tunayemhudumia anakuwa sehemu ya familia yetu iliyopanuliwa.",
     "ceo_badge": "Ujumbe kutoka kwa Mwanzilishi Wetu",
-    "ceo_title": "Mizizi inayokwenda \u003cp\u003ekina.\u003c/p\u003e",
+    "ceo_title": "Mizizi inayokwenda <p>kina.</p>",
     "ceo_p1": "Nilizaliwa na kukulia Tanzania. Ardhi hii iliunda kila kitu kuhusu mimi.",
     "ceo_p2": "Nilianzisha Asili Yetu kwa sababu nilihisi kitu kilikuwa kinakosekana katika utalii.",
     "ceo_p3": "Leo, tumekua, lakini hakuna kilichobadilika ndani yetu. Bado tumekita katika maadili yale yale na upendo ule ule kwa nchi yetu.",
@@ -347,7 +348,7 @@
   },
   "Destinations": {
     "badge": "Ardhi za Hadithi",
-    "title": "Gundua \u003cp\u003eTanzania.\u003c/p\u003e",
+    "title": "Gundua <p>Tanzania.</p>",
     "sub": "Katika Asili Yetu Safaris, tunaunda safari zinazozidi kuona tu. Tunaunda uzoefu wa kuzamika unaoruhusu wasafiri kuhisi Tanzania, si kuiona tu.",
     "wildlife_safaris_title": "SAFARI ZA WANYAMAPORI",
     "wildlife_safaris_desc": "Tanzania ni moja ya vivutio maarufu zaidi vya wanyamapori duniani.",
@@ -364,23 +365,53 @@
     "scale": "Kiwango",
     "view": "Angalia Safari Hapa",
     "Data": {
-      "serengeti": { "name": "Hifadhi ya Taifa ya Serengeti", "type": "Tambarare Zisizo na Mwisho", "desc": "Lulu ya taji ya Tanzania. Makazi ya Uhamaji Mkuu maarufu.", "time": "Juni hadi Oktoba", "wildlife": "Simba, Chui, Duma, Wildebeest" },
-      "ngorongoro": { "name": "Hifadhi ya Ngorongoro", "type": "Caldera ya Volkano", "desc": "Ukumbi wa asili unaopendeza. Volkano hii iliyoanguka inafanya kazi kama uzio wa asili.", "time": "Mwaka Mzima", "wildlife": "Kifaru Nyeusi, Simba, Kiboko, Flamingo" },
-      "tarangire": { "name": "Hifadhi ya Taifa ya Tarangire", "type": "Pori la Baobab", "desc": "Ufalme wa tembo na miti ya baobab ya kale.", "time": "Julai hadi Novemba", "wildlife": "Makundi Makubwa ya Tembo, Chui, Nyoka" },
-      "kilimanjaro": { "name": "Mlima Kilimanjaro", "type": "Kilele Cha Juu Zaidi cha Afrika", "desc": "Dari la Afrika. Ikisimama peke yake kutoka katika tambarare zinazozunguka.", "time": "Januari hadi Machi / Agosti hadi Oktoba", "wildlife": "Nyani wa Colobus, Ikolojia ya Alpine" },
-      "manyara": { "name": "Hifadhi ya Taifa ya Ziwa Manyara", "type": "Ziwa la Alkali", "desc": "Inajulikana kwa simba wake wanaopanda miti na makundi makubwa ya flamingo.", "time": "Mwaka Mzima", "wildlife": "Simba Wanaopanda Miti, Tembo, Flamingo" },
-      "zanzibar": { "name": "Kisiwa cha Zanzibar", "type": "Paradiso ya Tropiki", "desc": "Visiwa vya Spice. Mchanganyiko wa kuvutia wa fukwe za mchanga mweupe na maji ya buluu.", "time": "Juni hadi Oktoba", "wildlife": "Nyani wa Colobus Wekundu, Kasa wa Bahari, Pomboo" }
+      "serengeti": {
+        "name": "Hifadhi ya Taifa ya Serengeti",
+        "type": "Tambarare Zisizo na Mwisho",
+        "desc": "Lulu ya taji ya Tanzania. Makazi ya Uhamaji Mkuu maarufu.",
+        "time": "Juni hadi Oktoba",
+        "wildlife": "Simba, Chui, Duma, Wildebeest"
+      },
+      "ngorongoro": {
+        "name": "Hifadhi ya Ngorongoro",
+        "type": "Caldera ya Volkano",
+        "desc": "Ukumbi wa asili unaopendeza. Volkano hii iliyoanguka inafanya kazi kama uzio wa asili.",
+        "time": "Mwaka Mzima",
+        "wildlife": "Kifaru Nyeusi, Simba, Kiboko, Flamingo"
+      },
+      "tarangire": {
+        "name": "Hifadhi ya Taifa ya Tarangire",
+        "type": "Pori la Baobab",
+        "desc": "Ufalme wa tembo na miti ya baobab ya kale.",
+        "time": "Julai hadi Novemba",
+        "wildlife": "Makundi Makubwa ya Tembo, Chui, Nyoka"
+      },
+      "kilimanjaro": {
+        "name": "Mlima Kilimanjaro",
+        "type": "Kilele Cha Juu Zaidi cha Afrika",
+        "desc": "Dari la Afrika. Ikisimama peke yake kutoka katika tambarare zinazozunguka.",
+        "time": "Januari hadi Machi / Agosti hadi Oktoba",
+        "wildlife": "Nyani wa Colobus, Ikolojia ya Alpine"
+      },
+      "manyara": {
+        "name": "Hifadhi ya Taifa ya Ziwa Manyara",
+        "type": "Ziwa la Alkali",
+        "desc": "Inajulikana kwa simba wake wanaopanda miti na makundi makubwa ya flamingo.",
+        "time": "Mwaka Mzima",
+        "wildlife": "Simba Wanaopanda Miti, Tembo, Flamingo"
+      },
+      "zanzibar": {
+        "name": "Kisiwa cha Zanzibar",
+        "type": "Paradiso ya Tropiki",
+        "desc": "Visiwa vya Spice. Mchanganyiko wa kuvutia wa fukwe za mchanga mweupe na maji ya buluu.",
+        "time": "Juni hadi Oktoba",
+        "wildlife": "Nyani wa Colobus Wekundu, Kasa wa Bahari, Pomboo"
+      }
     },
     "Map": {
       "discovery_mode": "Hali ya Ugunduzi",
       "discovery_sub": "Elekeza nyika ya Tanzania. Bonyeza alama ya dhahabu kugundua siri za hifadhi zetu.",
       "explore_packages": "Gundua Vifurushi"
     }
-  },
-  "Reviews": {
-    "title": "Sauti kutoka \u003cp\u003eNyikani\u003c/p\u003e",
-    "sub": "Hadithi za mabadiliko kutoka kwa wasafiri wetu wa kimataifa.",
-    "ig_label": "Mstahiki wa Instagram",
-    "verified_label": "Mstahiki Aliyethibitishwa"
   }
 }

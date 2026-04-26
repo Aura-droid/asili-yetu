@@ -4,7 +4,7 @@
     "title_start": "Entdecken Sie die Magie von",
     "title_accent": "Tansania",
     "title_end": "",
-    "masterpiece_badge": "Meisterwerk-Auswahl",
+    "masterpiece_badge": "Meisterwerk Auswahl",
     "subtitle": "Entdecken Sie die Wildnis ohne auf Luxus zu verzichten.",
     "plan_safari": "Safari Planen",
     "view_fleet": "Flotte Ansehen",
@@ -16,7 +16,6 @@
     "gearing_up": "Vorbereitung...",
     "modal_title": "KI-Expeditionsstratege",
     "proceed": "Zur Buchung fortfahren",
-    "masterpiece_badge": "Meisterwerk Auswahl",
     "days_immersion": "Tage des Eintauchens",
     "view_details": "Expeditionsdetails anzeigen"
   },
@@ -88,8 +87,8 @@
     "authentic_desc": "Wir vermeiden künstliche Touristen-Setups. Was Sie erleben, ist das echte Tansania.",
     "professional_title": "PROFESSIONELLER SERVICE",
     "professional_desc": "Wir kombinieren afrikanische Herzlichkeit mit internationalen Servicestandards.",
-    "badge": "Der Asili-Vorteil",
-    "advantage": "Der Asili-Vorteil"
+    "badge": "The Asili Advantage",
+    "advantage": "The Asili Advantage"
   },
   "ResponsibleTourism": {
     "title": "Verantwortungsbewusster Tourismus",
@@ -101,7 +100,7 @@
     "wildlife": "Partnerschaften zum Schutz von Wildtieren",
     "ethical": "Ethische kulturelle Interaktionen",
     "impact": "Wir messen Erfolg nicht nur an Besuchern, sondern an der Wirkung.",
-    "ethical_promise": "Unser ethisches Versprechen"
+    "ethical_promise": "Our Ethical Promise"
   },
   "Footer": {
     "whatsapp_title": "Direkter Kontakt",
@@ -114,7 +113,7 @@
     "rights": "Alle Rechte vorbehalten.",
     "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen",
-    "brela": "Lizenziertes & Registriertes BRELA-Unternehmen (Tansania)"
+    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
   },
   "Booking": {
     "booking": "Buchung",
@@ -189,7 +188,11 @@
     "p_safe": "Kompromisslose Sicherheit",
     "p_safe_sub": "Ihre Seelenruhe ist unsere Priorität. Wir halten bei jeder Expedition die höchsten Sicherheitsstandards ein.",
     "p_cons": "Bewusstes Reisen",
-    "p_cons_sub": "Jede Reise trägt zur lokalen Gemeinschaftsentwicklung und zu Bemühungen zum Schutz der Wildtiere bei."
+    "p_cons_sub": "Jede Reise trägt zur lokalen Gemeinschaftsentwicklung und zu Bemühungen zum Schutz der Wildtiere bei.",
+    "mission_title": "MISSION",
+    "vision_title": "VISION",
+    "presence_arusha_title": "Arusha, Tanzania",
+    "presence_koln_title": "Köln, Germany"
   },
   "Destinations": {
     "badge": "Länder der Legenden",
@@ -277,7 +280,21 @@
     "seats": "Sitze",
     "ac": "Klima",
     "fridge": "Kühlschrank",
-    "specs": "Fahrzeugspezifikationen"
+    "specs": "Fahrzeugspezifikationen",
+    "readying": "Deployment Readying",
+    "grade": "Explorer Grade",
+    "exit": "Exit Showroom",
+    "dossier": "Technical Dossier",
+    "payload": "Payload Capacity",
+    "explorers": "{count} Explorers",
+    "hotspots": {
+      "roof_title": "Pop-Up Roof",
+      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
+      "susp_title": "Heavy-Duty Suspension",
+      "susp_desc": "Smooth ride across the toughest terrains.",
+      "seat_title": "Comfortable Seating",
+      "seat_desc": "Spacious window seats for every passenger."
+    }
   },
   "Instagram": {
     "title": "Live aus der Wildnis",
@@ -323,18 +340,6 @@
     "success_sub": "Expeditions-Puls etabliert.",
     "error": "Beitritt zum Register fehlgeschlagen."
   },
-  "Footer": {
-    "whatsapp_title": "Direkter Kontakt",
-    "whatsapp_desc": "Sprechen Sie direkt mit unseren Expeditionskoordinatoren für eine sofortige Planung.",
-    "whatsapp_btn": "Gespräch beginnen",
-    "address": "Arusha, Tansania",
-    "region": "Ostafrika",
-    "expeditions": "Expeditionen",
-    "contact_base": "Kontaktbasis",
-    "rights": "Alle Rechte vorbehalten.",
-    "privacy": "Datenschutzrichtlinie",
-    "terms": "Nutzungsbedingungen"
-  },
   "Packages": {
     "title": "Unsere Reisen",
     "subtitle": "Unsere Reiserouten sind keine festen Produkte. Sie sind flexible Rahmenbedingungen, die auf individuelle Bedürfnisse zugeschnitten werden können.",
@@ -373,31 +378,6 @@
     "concept": "Expeditionskonzept",
     "book_masterpiece": "Dieses Meisterwerk buchen"
   },
-  "WhyUs": {
-    "title": "Warum mit uns reisen",
-    "sub": "Sich für Asili Yetu Safaris zu entscheiden bedeutet Tiefe, Verantwortung und Authentizität zu wählen.",
-    "quality_title": "QUALITÄT UND SICHERHEIT",
-    "quality_desc": "Wir halten strenge Standards mit lizenzierten professionellen Guides und regelmäßigen Fahrzeugkontrollen ein.",
-    "responsible_title": "VERANTWORTUNGSVOLLER TOURISMUS",
-    "responsible_desc": "Wir priorisieren den Schutz der Tierwelt, den Umweltschutz und ethische Tourismuspraktiken.",
-    "community_title": "GEMEINSCHAFTSNUTZEN",
-    "community_desc": "Wir stellen sicher, dass die Vorteile des Tourismus die lokalen Gemeinschaften erreichen.",
-    "authentic_title": "AUTHENTISCHE ERLEBNISSE",
-    "authentic_desc": "Wir vermeiden künstliche Touristen-Setups. Was Sie erleben, ist das echte Tansania.",
-    "professional_title": "PROFESSIONELLER SERVICE",
-    "professional_desc": "Wir kombinieren afrikanische Herzlichkeit mit internationalen Servicestandards."
-  },
-  "ResponsibleTourism": {
-    "title": "Verantwortungsbewusster Tourismus",
-    "sub": "Wir glauben, dass der Tourismus die Zukunft schützen muss, von der er heute profitiert.",
-    "commitments_title": "Unsere Verpflichtungen",
-    "env": "Umweltschutzpraktiken",
-    "waste": "Nachhaltiges Abfallmanagement",
-    "economy": "Unterstützung lokaler Wirtschaftskreisläufe",
-    "wildlife": "Partnerschaften zum Schutz von Wildtieren",
-    "ethical": "Ethische kulturelle Interaktionen",
-    "impact": "Wir messen Erfolg nicht nur an Besuchern, sondern an der Wirkung."
-  },
   "Culture": {
     "badge": "Lebendige Traditionen",
     "title": "Die <p>Maasai</p> <br/> <p>Blutlinie</p>",
@@ -416,6 +396,22 @@
     "story_2_desc": "Komplizierte Perlenarbeit ist nicht nur Kunst – sie ist eine Erzählung. Die Farben erzählen Geschichten über Alter, Status und Familiengeschichte.",
     "story_3_label": "Geschichte III",
     "story_3_title": "Hüter der Ebenen",
-    "story_3_desc": "Seit Jahrhunderten koexistieren die Maasai mit Löwen und Elefanten und verkörpern die ultimative Partnerschaft zwischen Mensch und Natur."
+    "story_3_desc": "Seit Jahrhunderten koexistieren die Maasai mit Löwen und Elefanten und verkörpern die ultimative Partnerschaft zwischen Mensch und Natur.",
+    "ritual_label": "Ritual",
+    "ritual_name": "Adammu Dance",
+    "kinship_label": "Kinship",
+    "kinship_name": "Manyatta Life"
+  },
+  "Guides": {
+    "badge": "The Heart of the Safari",
+    "title": "Meet Your <p>Tour Guides.</p>",
+    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
+    "experience_label": "Experience",
+    "specialty_label": "Specialty",
+    "languages_label": "Languages",
+    "years_in_field": "{years} Years in the Field",
+    "cta_title": "Ready to explore with the best?",
+    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
+    "cta_btn": "Start Planning"
   }
 }

@@ -15,7 +15,9 @@
     "guests": "Huéspedes",
     "gearing_up": "Preparando...",
     "modal_title": "Estratega de Expedición de IA",
-    "proceed": "Continuar con la reserva"
+    "proceed": "Continuar con la reserva",
+    "days_immersion": "Days of Immersion",
+    "view_details": "View Expedition Details"
   },
   "Navbar": {
     "safaris": "Nuestros Safaris",
@@ -101,17 +103,17 @@
     "ethical_promise": "Nuestra Promesa Ética"
   },
   "Footer": {
-    "whatsapp_title": "Contacto Directo",
-    "whatsapp_desc": "Hable directamente con nuestros coordinadores de expedición para una planificación inmediata.",
-    "whatsapp_btn": "Iniciar Conversación",
+    "whatsapp_title": "¿Prefieres chatear?",
+    "whatsapp_desc": "Nuestros conserjes están disponibles en WhatsApp para consultas directas y respuestas rápidas.",
+    "whatsapp_btn": "Contáctanos por WhatsApp",
     "address": "Arusha, Tanzania",
-    "region": "África Oriental",
-    "expeditions": "Expediciones",
-    "contact_base": "Base de Contacto",
-    "rights": "Todos los derechos reservados.",
-    "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio",
-    "brela": "Empresa BRELA autorizada y registrada (Tanzania)"
+    "region": "East Africa",
+    "expeditions": "Expeditions",
+    "contact_base": "Contact Base",
+    "rights": "All Rights Reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
   },
   "Booking": {
     "booking": "Reserva",
@@ -190,7 +192,10 @@
     "p_safe": "Seguridad sin Compromisos",
     "p_safe_sub": "Tu tranquilidad es nuestra prioridad. Mantenemos los más altos estándares de seguridad en cada expedición.",
     "p_cons": "Viaje Consciente",
-    "p_cons_sub": "Cada viaje contribuye al desarrollo de las comunidades locales y a los esfuerzos de conservación de la vida silvestre."
+    "p_cons_sub": "Cada viaje contribuye al desarrollo de las comunidades locales y a los esfuerzos de conservación de la vida silvestre.",
+    "vision_title": "VISION",
+    "presence_arusha_title": "Arusha, Tanzania",
+    "presence_koln_title": "Köln, Germany"
   },
   "Destinations": {
     "badge": "Tierras de Leyenda",
@@ -235,13 +240,30 @@
         "desc": "Las Islas de las Especias. Una mezcla hipnotizante de playas de arena blanca, aguas turquesas y la historia antigua de Stone Town. El santuario perfecto para relajarse después del safari.",
         "time": "Junio a Octubre",
         "wildlife": "Monos Colobos Rojos, Tortugas Marinas, Delfines"
+      },
+      "manyara": {
+        "name": "Lake Manyara National Park",
+        "type": "Alkaline Lake",
+        "desc": "Famous for its tree-climbing lions and vast flocks of flamingos, this park offers a diverse landscape from groundwater forests to the lake shores.",
+        "time": "Year-Round",
+        "wildlife": "Tree-climbing Lions, Elephants, Flamingos"
       }
     },
     "Map": {
       "discovery_mode": "Modo Descubrimiento",
       "discovery_sub": "Navega por la naturaleza de Tanzania. Haz clic en un marcador dorado para explorar los secretos de nuestras reservas privadas.",
       "explore_packages": "Explorar Paquetes"
-    }
+    },
+    "wildlife_safaris_title": "WILDLIFE SAFARIS",
+    "wildlife_safaris_desc": "Tanzania is one of the most iconic wildlife destinations in the world. Home to the Great Migration, vast savannahs, and rich biodiversity, it offers unmatched safari experiences.",
+    "cultural_immersion_title": "CULTURAL IMMERSION",
+    "cultural_immersion_desc": "Culture is the heartbeat of Tanzania. We connect travelers with communities in ways that are respectful, educational, and meaningful.",
+    "mountain_adventures_title": "MOUNTAIN ADVENTURES",
+    "mountain_adventures_desc": "For adventure seekers, Tanzania offers some of Africa’s most iconic peaks like Kilimanjaro and Meru.",
+    "coastal_experiences_title": "COASTAL AND ISLAND EXPERIENCES",
+    "coastal_experiences_desc": "Tanzania’s coastline offers a completely different world of relaxation and culture.",
+    "customized_title": "CUSTOMIZED TRAVEL EXPERIENCES",
+    "customized_desc": "We understand that every traveler is different. Every itinerary is carefully built around your purpose, time, and expectations."
   },
   "Gallery": {
     "badge": "La Lente",
@@ -261,7 +283,21 @@
     "seats": "Asientos",
     "ac": "Clima",
     "fridge": "Refrigerador",
-    "specs": "Especificaciones del Vehículo"
+    "specs": "Especificaciones del Vehículo",
+    "readying": "Deployment Readying",
+    "grade": "Explorer Grade",
+    "exit": "Exit Showroom",
+    "dossier": "Technical Dossier",
+    "payload": "Payload Capacity",
+    "explorers": "{count} Explorers",
+    "hotspots": {
+      "roof_title": "Pop-Up Roof",
+      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
+      "susp_title": "Heavy-Duty Suspension",
+      "susp_desc": "Smooth ride across the toughest terrains.",
+      "seat_title": "Comfortable Seating",
+      "seat_desc": "Spacious window seats for every passenger."
+    }
   },
   "Instagram": {
     "title": "En vivo desde lo salvaje",
@@ -307,17 +343,43 @@
     "success_sub": "Pulso de expedición establecido.",
     "error": "Error al unirse al registro."
   },
-  "Footer": {
-    "whatsapp_title": "¿Prefieres chatear?",
-    "whatsapp_desc": "Nuestros conserjes están disponibles en WhatsApp para consultas directas y respuestas rápidas.",
-    "whatsapp_btn": "Contáctanos por WhatsApp"
-  },
   "Packages": {
     "title": "Nuestros Viajes",
     "subtitle": "Explora aventuras magníficas y asombrosas totalmente adaptadas para lo salvaje.",
     "no_packages": "No hay paquetes disponibles",
     "check_back": "Vuelve pronto para nuevas aventuras increíbles.",
-    "per_person": "por persona"
+    "per_person": "por persona",
+    "classic": "CLASSIC SAFARI JOURNEYS",
+    "luxury": "LUXURY PRIVATE SAFARIS",
+    "budget": "BUDGET AND GROUP TOURS",
+    "honeymoon": "HONEYMOON AND ROMANTIC SAFARIS",
+    "photography": "PHOTOGRAPHY SAFARIS",
+    "educational": "EDUCATIONAL AND RESEARCH TOURS",
+    "corporate": "CORPORATE AND INCENTIVE TRAVEL",
+    "quick_search": "Quick Search...",
+    "search_placeholder": "Search by biome, vibe, or destination (e.g. 'Savannah', 'Tropical', 'Extreme')...",
+    "lock_filters": "Lock Filters",
+    "refine": "Refine",
+    "all_biomes": "All Biomes",
+    "all_levels": "All Levels",
+    "any_days": "Any Days",
+    "default": "Default",
+    "lowest_first": "Lowest First",
+    "highest_first": "Highest First",
+    "expedition": "Expedition",
+    "expeditions": "Expeditions",
+    "located": "Located",
+    "no_results_title": "No Expeditions Fit This Criteria",
+    "no_results_sub": "Try broadening your horizon or clearing filters",
+    "reset_search": "Reset Global Search",
+    "masterpiece_edition": "Masterpiece Edition",
+    "days": "Days",
+    "nights": "Nights",
+    "investment": "Investment",
+    "explore_itinerary": "Explore Itinerary",
+    "dossier": "Dossier",
+    "concept": "Expedition Concept",
+    "book_masterpiece": "Book This Masterpiece"
   },
   "Culture": {
     "badge": "Tradiciones Vivantes",
@@ -337,6 +399,22 @@
     "story_2_desc": "El intrincado trabajo de perlas no es solo arte, es una narrativa. Los colores cuentan historias de edad, estatus e historia familiar.",
     "story_3_label": "Historia III",
     "story_3_title": "Guardianes de las Llanuras",
-    "story_3_desc": "Coexistiendo con leones y elefantes durante siglos, los Maasai encarnan la asociación definitiva entre el hombre y la naturaleza."
+    "story_3_desc": "Coexistiendo con leones y elefantes durante siglos, los Maasai encarnan la asociación definitiva entre el hombre y la naturaleza.",
+    "ritual_label": "Ritual",
+    "ritual_name": "Adammu Dance",
+    "kinship_label": "Kinship",
+    "kinship_name": "Manyatta Life"
+  },
+  "Guides": {
+    "badge": "The Heart of the Safari",
+    "title": "Meet Your <p>Tour Guides.</p>",
+    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
+    "experience_label": "Experience",
+    "specialty_label": "Specialty",
+    "languages_label": "Languages",
+    "years_in_field": "{years} Years in the Field",
+    "cta_title": "Ready to explore with the best?",
+    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
+    "cta_btn": "Start Planning"
   }
 }

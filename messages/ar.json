@@ -4,7 +4,7 @@
     "title_start": "اكتشف سحر",
     "title_accent": "تنزانيا",
     "title_end": "",
-    "masterpiece_badge": "اختيار التحفة",
+    "masterpiece_badge": "مجموعة التحف",
     "subtitle": "اكتشف البرية دون المساومة على الفخامة.",
     "plan_safari": "خطط لرحلة السفاري",
     "view_fleet": "شاهد أسطولنا",
@@ -16,7 +16,6 @@
     "gearing_up": "جارٍ التجهيز...",
     "modal_title": "خبير استراتيجيات الرحلات بالذكاء الاصطناعي",
     "proceed": "المتابعة للحجز",
-    "masterpiece_badge": "مجموعة التحف",
     "days_immersion": "أيام من الانغماس",
     "view_details": "عرض تفاصيل الرحلة"
   },
@@ -112,7 +111,11 @@
     "p_safe": "سلامة لا هوادة فيها",
     "p_safe_sub": "راحة بالك هي أولويتنا. نحن نحافظ على أعلى معايير السلامة في كل رحلة.",
     "p_cons": "سفر واعٍ",
-    "p_cons_sub": "تساهم كل رحلة في تنمية المجتمع المحلي وجهود الحفاظ على الحياة البرية."
+    "p_cons_sub": "تساهم كل رحلة في تنمية المجتمع المحلي وجهود الحفاظ على الحياة البرية.",
+    "mission_title": "MISSION",
+    "vision_title": "VISION",
+    "presence_arusha_title": "Arusha, Tanzania",
+    "presence_koln_title": "Köln, Germany"
   },
   "Destinations": {
     "badge": "أراضي الأساطير",
@@ -302,7 +305,21 @@
     "seats": "مقاعد",
     "ac": "مكيف",
     "fridge": "ثلاجة",
-    "specs": "مواصفات المركبة"
+    "specs": "مواصفات المركبة",
+    "readying": "Deployment Readying",
+    "grade": "Explorer Grade",
+    "exit": "Exit Showroom",
+    "dossier": "Technical Dossier",
+    "payload": "Payload Capacity",
+    "explorers": "{count} Explorers",
+    "hotspots": {
+      "roof_title": "Pop-Up Roof",
+      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
+      "susp_title": "Heavy-Duty Suspension",
+      "susp_desc": "Smooth ride across the toughest terrains.",
+      "seat_title": "Comfortable Seating",
+      "seat_desc": "Spacious window seats for every passenger."
+    }
   },
   "Instagram": {
     "title": "مباشر من البرية",
@@ -360,5 +377,41 @@
     "privacy": "سياسة الخصوصية",
     "terms": "شروط الخدمة",
     "brela": "شركة بريلا مرخصة ومسجلة (تنزانيا)"
+  },
+  "Culture": {
+    "badge": "Living Traditions",
+    "title": "The <p>Maasai</p> <br/> <p>Bloodline</p>",
+    "subtitle": "Step into the ancient rhythms of the savannah. We invite you to experience the deep-rooted wisdom, vibrant tapestry, and enduring strength of the Maasai people.",
+    "ritual_label": "Ritual",
+    "ritual_name": "Adammu Dance",
+    "kinship_label": "Kinship",
+    "kinship_name": "Manyatta Life",
+    "values_title": "Values of the Savannah",
+    "v_guardianship_title": "Guardianship",
+    "v_guardianship_desc": "Coexisting with the wildlife as the ultimate stewards of the ecosystem for millennia.",
+    "v_ancestry_title": "Ancestry",
+    "v_ancestry_desc": "Stories passed down through oral tradition, echoing from the dawn of humanity.",
+    "v_expression_title": "Expression",
+    "v_expression_desc": "Every colored bead, every rhythmic jump, a celebration of the spirit of Africa.",
+    "story_1_label": "Story I",
+    "story_1_title": "The Jump of Adumu",
+    "story_1_desc": "A rhythmic test of strength and grace, the celebrated jump of the Maasai youth symbolizes the spirit of the savannah.",
+    "story_2_title": "The Language of Beads",
+    "story_2_desc": "Intricate beadwork isn't just art—it's a narrative. Colors tell stories of age, status, and family history.",
+    "story_3_label": "Story III",
+    "story_3_title": "Guardians of the Plains",
+    "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature."
+  },
+  "Guides": {
+    "badge": "The Heart of the Safari",
+    "title": "Meet Your <p>Tour Guides.</p>",
+    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
+    "experience_label": "Experience",
+    "specialty_label": "Specialty",
+    "languages_label": "Languages",
+    "years_in_field": "{years} Years in the Field",
+    "cta_title": "Ready to explore with the best?",
+    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
+    "cta_btn": "Start Planning"
   }
 }

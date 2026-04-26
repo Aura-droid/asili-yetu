@@ -16,7 +16,6 @@
     "gearing_up": "准备中...",
     "modal_title": "AI 探险策略顾问",
     "proceed": "继续预订",
-    "masterpiece_badge": "杰作精选",
     "days_immersion": "天的沉浸式体验",
     "view_details": "查看探险详情"
   },
@@ -79,42 +78,42 @@
     "title": "为什么选择我们",
     "sub": "选择 Asili Yetu Safaris 意味着选择深度、责任和真实性。",
     "quality_title": "质量与安全",
-    "quality_desc": "我们拥有持证专业导游并定期进行车辆检查，维持严格标准。",
+    "quality_desc": "我们保持严格标准，配备专业持证导游并定期检查车辆。",
     "responsible_title": "负责任的旅游",
     "responsible_desc": "我们优先考虑野生动物保护、环境保护和道德旅游实践。",
     "community_title": "社区影响",
-    "community_desc": "我们通过当地就业和公平伙伴关系，确保旅游收益惠及当地社区。",
-    "authentic_title": "真实体验",
-    "authentic_desc": "我们避免人造的旅游环境。您体验到的是真实的坦桑尼亚。",
+    "community_desc": "我们通过本地就业和公平合作，确保旅游收益惠及当地社区。",
+    "authentic_title": "真实的体验",
+    "authentic_desc": "我们避免人造旅游设置。您所体验的是真实的坦桑尼亚。",
     "professional_title": "专业服务",
-    "professional_desc": "我们将非洲式的热情与国际服务标准相结合。",
-    "badge": "Asili 的优势",
-    "advantage": "Asili 的优势"
+    "professional_desc": "我们将非洲的热情与国际服务标准相结合。",
+    "badge": "The Asili Advantage",
+    "advantage": "The Asili Advantage"
   },
   "ResponsibleTourism": {
     "title": "负责任的旅游",
-    "sub": "我们相信旅游业必须保护其今天受益的未来。",
+    "sub": "我们相信旅游业必须保护它今天受益的未来。",
     "commitments_title": "我们的承诺",
     "env": "环境保护实践",
     "waste": "可持续废物管理",
     "economy": "支持当地经济",
     "wildlife": "野生动物保护伙伴关系",
-    "ethical": "道德文化交流",
-    "impact": "我们不仅衡量游客数量，还衡量影响。",
-    "ethical_promise": "我们的道德承诺"
+    "ethical": "道德文化互动",
+    "impact": "我们衡量成功的标准不仅是游客数量，更是影响力。",
+    "ethical_promise": "Our Ethical Promise"
   },
   "Footer": {
     "whatsapp_title": "直接联系",
-    "whatsapp_desc": "直接与我们的探险协调员联系，进行即时规划。",
+    "whatsapp_desc": "直接与我们的探险协调员沟通，立即开始规划。",
     "whatsapp_btn": "开始对话",
     "address": "坦桑尼亚，阿鲁沙",
     "region": "东非",
-    "expeditions": "探险",
+    "expeditions": "探险项目",
     "contact_base": "联系基地",
-    "rights": "版权所有。",
+    "rights": "保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款",
-    "brela": "BRELA 许可及注册公司（坦桑尼亚）"
+    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
   },
   "Booking": {
     "booking": "预订",
@@ -189,7 +188,11 @@
     "p_safe": "不妥协的安全",
     "p_safe_sub": "您的安心是我们的首要任务。我们在每一次探险中都保持最高的安全标准。",
     "p_cons": "有意识的旅行",
-    "p_cons_sub": "每一次旅行都为当地社区发展和野生动物保护工作做出贡献。"
+    "p_cons_sub": "每一次旅行都为当地社区发展和野生动物保护工作做出贡献。",
+    "mission_title": "MISSION",
+    "vision_title": "VISION",
+    "presence_arusha_title": "Arusha, Tanzania",
+    "presence_koln_title": "Köln, Germany"
   },
   "Destinations": {
     "badge": "传奇之地",
@@ -277,7 +280,21 @@
     "seats": "座位",
     "ac": "空调",
     "fridge": "冰箱",
-    "specs": "车辆规格"
+    "specs": "车辆规格",
+    "readying": "Deployment Readying",
+    "grade": "Explorer Grade",
+    "exit": "Exit Showroom",
+    "dossier": "Technical Dossier",
+    "payload": "Payload Capacity",
+    "explorers": "{count} Explorers",
+    "hotspots": {
+      "roof_title": "Pop-Up Roof",
+      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
+      "susp_title": "Heavy-Duty Suspension",
+      "susp_desc": "Smooth ride across the toughest terrains.",
+      "seat_title": "Comfortable Seating",
+      "seat_desc": "Spacious window seats for every passenger."
+    }
   },
   "Instagram": {
     "title": "来自荒野的现场",
@@ -323,18 +340,6 @@
     "success_sub": "探险脉动已建立。",
     "error": "加入登记册失败。"
   },
-  "Footer": {
-    "whatsapp_title": "直接联系",
-    "whatsapp_desc": "直接与我们的探险协调员沟通，立即开始规划。",
-    "whatsapp_btn": "开始对话",
-    "address": "坦桑尼亚，阿鲁沙",
-    "region": "东非",
-    "expeditions": "探险项目",
-    "contact_base": "联系基地",
-    "rights": "保留所有权利。",
-    "privacy": "隐私政策",
-    "terms": "服务条款"
-  },
   "Packages": {
     "title": "我们的旅程",
     "subtitle": "我们的行程不是固定的产品。它们是灵活的框架，旨在适应个人需求。",
@@ -373,31 +378,6 @@
     "concept": "探险理念",
     "book_masterpiece": "预订此杰作"
   },
-  "WhyUs": {
-    "title": "为什么选择我们",
-    "sub": "选择 Asili Yetu Safaris 意味着选择深度、责任和真实性。",
-    "quality_title": "质量与安全",
-    "quality_desc": "我们保持严格标准，配备专业持证导游并定期检查车辆。",
-    "responsible_title": "负责任的旅游",
-    "responsible_desc": "我们优先考虑野生动物保护、环境保护和道德旅游实践。",
-    "community_title": "社区影响",
-    "community_desc": "我们通过本地就业和公平合作，确保旅游收益惠及当地社区。",
-    "authentic_title": "真实的体验",
-    "authentic_desc": "我们避免人造旅游设置。您所体验的是真实的坦桑尼亚。",
-    "professional_title": "专业服务",
-    "professional_desc": "我们将非洲的热情与国际服务标准相结合。"
-  },
-  "ResponsibleTourism": {
-    "title": "负责任的旅游",
-    "sub": "我们相信旅游业必须保护它今天受益的未来。",
-    "commitments_title": "我们的承诺",
-    "env": "环境保护实践",
-    "waste": "可持续废物管理",
-    "economy": "支持当地经济",
-    "wildlife": "野生动物保护伙伴关系",
-    "ethical": "道德文化互动",
-    "impact": "我们衡量成功的标准不仅是游客数量，更是影响力。"
-  },
   "Culture": {
     "badge": "活着的传统",
     "title": "<p>马赛</p> <br/> <p>血脉</p>",
@@ -416,6 +396,22 @@
     "story_2_desc": "复杂的珠饰工作不仅是艺术——它是一个叙事。颜色讲述了年龄、地位和家族史的故事。",
     "story_3_label": "故事 III",
     "story_3_title": "平原守望者",
-    "story_3_desc": "马赛人与狮子和大象共存了几个世纪，体现了人与自然之间终极的伙伴关系。"
+    "story_3_desc": "马赛人与狮子和大象共存了几个世纪，体现了人与自然之间终极的伙伴关系。",
+    "ritual_label": "Ritual",
+    "ritual_name": "Adammu Dance",
+    "kinship_label": "Kinship",
+    "kinship_name": "Manyatta Life"
+  },
+  "Guides": {
+    "badge": "The Heart of the Safari",
+    "title": "Meet Your <p>Tour Guides.</p>",
+    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
+    "experience_label": "Experience",
+    "specialty_label": "Specialty",
+    "languages_label": "Languages",
+    "years_in_field": "{years} Years in the Field",
+    "cta_title": "Ready to explore with the best?",
+    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
+    "cta_btn": "Start Planning"
   }
 }
