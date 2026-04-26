@@ -110,8 +110,13 @@ export default function WhyUs() {
 
               {/* Content Overlay */}
               <div className="absolute inset-0 p-10 flex flex-col justify-end z-10">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white mb-6 border border-white/20 group-hover:bg-primary group-hover:text-black transition-all duration-500 shadow-xl">
-                  {feature.icon}
+                <div className="relative mb-6">
+                  <div className="w-16 h-16 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center text-white border border-white/20 group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all duration-700 shadow-2xl group-hover:shadow-[0_0_30px_rgba(222,157,62,0.6)] relative z-20 overflow-hidden">
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    {feature.icon}
+                  </div>
+                  {/* Outer Glow Ring */}
+                  <div className="absolute inset-0 bg-primary/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
                 <h3 className="text-3xl font-black text-white mb-4 uppercase tracking-tighter italic drop-shadow-lg leading-none">{feature.title}</h3>
                 <p className="text-white/70 leading-relaxed font-bold text-lg drop-shadow-md">{feature.desc}</p>
