@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function CookieConsent() {
   const [show, setShow] = useState(false);
@@ -62,20 +61,19 @@ export default function CookieConsent() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button 
+                <button 
                   onClick={handleAccept}
-                  className="flex-1 rounded-xl h-12 font-bold bg-primary hover:bg-primary/90 text-primary-foreground group/btn shadow-lg shadow-primary/20"
+                  className="flex-1 rounded-xl h-12 font-bold bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98]"
                 >
-                  <CheckCircle2 className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                  <CheckCircle2 className="w-4 h-4 mr-2" />
                   {t("accept")}
-                </Button>
-                <Button 
-                  variant="ghost"
+                </button>
+                <button 
                   onClick={handleDecline}
-                  className="flex-1 rounded-xl h-12 font-bold hover:bg-foreground/5"
+                  className="flex-1 rounded-xl h-12 font-bold bg-foreground/5 hover:bg-foreground/10 text-foreground transition-all duration-300 active:scale-[0.98]"
                 >
                   {t("decline")}
-                </Button>
+                </button>
               </div>
             </div>
           </div>
