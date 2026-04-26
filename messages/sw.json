@@ -1,6 +1,8 @@
 {
   "Hero": {
     "title": "Gundua Maajabu ya <p>Tanzania</p>",
+    "title_start": "Gundua Maajabu ya",
+    "title_accent": "Tanzania",
     "subtitle": "Gundua pori bila kupoteza starehe ya kifahari.",
     "plan_safari": "Panga Safari",
     "view_fleet": "Angalia Magari",

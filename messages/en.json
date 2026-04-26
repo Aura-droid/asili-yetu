@@ -1,6 +1,8 @@
 {
   "Hero": {
     "title": "Discover the Magic of <p>Tanzania</p>",
+    "title_start": "Discover the Magic of",
+    "title_accent": "Tanzania",
     "subtitle": "Discover the wild without compromising luxury.",
     "plan_safari": "Plan Safari",
     "view_fleet": "View The Fleet",

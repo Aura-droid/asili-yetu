@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { MapPin, Calendar, Users, Sparkles, X, Car, ArrowRight } from "lucide-react";
+import { MapPin, Calendar, Users, Sparkles, X, Car, ArrowRight, Compass } from "lucide-react";
 import { generateItinerary } from "@/app/actions";
 import RustlingButton from "./RustlingButton";
 import BookingFunnel from "./BookingFunnel";
@@ -210,21 +210,22 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
       {theme === "jungle" ? <FallingLeaves /> : <SavannahSpark />}
 
       <div className="relative z-30 container mx-auto px-6 text-center text-foreground flex flex-col items-center">
-        {/* FLOATING MASTERPIECE BADGE (Optimized for both Desktop & Mobile) */}
+        {/* FIELD INTELLIGENCE SPOTLIGHT (Non-intrusive, High-End Stack) */}
         {currentFeatured && (
            <motion.div 
-             initial={{ opacity: 0, y: -20 }}
-             animate={{ opacity: 1, y: 0 }}
-             className="fixed top-24 md:top-28 right-4 left-4 md:left-auto md:right-12 z-50 group"
+             key={currentFeatured.id}
+             initial={{ opacity: 0, scale: 0.8, x: 20 }}
+             animate={{ opacity: 1, scale: 1, x: 0 }}
+             exit={{ opacity: 0, scale: 0.8, x: 20 }}
+             className="fixed bottom-32 right-6 md:right-12 z-50 pointer-events-auto"
            >
               <motion.div 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="relative cursor-pointer bg-black/60 backdrop-blur-2xl border border-primary/40 p-1.5 md:p-2 rounded-full md:rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.3)] flex items-center gap-3 md:gap-4 group-hover:border-primary transition-all duration-500 overflow-hidden max-w-fit mx-auto md:mx-0"
+                whileHover={{ scale: 1.05, x: -10 }}
+                className="relative cursor-pointer bg-black/80 backdrop-blur-2xl border border-primary/30 p-1.5 md:p-2 pr-6 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center gap-4 group transition-all duration-500 max-w-[280px] md:max-w-md border-r-4 border-r-primary"
                 onClick={() => window.location.href = `/${locale}/packages?expedition=${currentFeatured.id}`}
               >
-                 {/* Portal Icon - Compact on Mobile */}
-                 <div className="relative w-10 h-10 md:w-16 md:h-16 rounded-full md:rounded-2xl overflow-hidden border border-white/20 shrink-0">
+                 {/* Mini Portal */}
+                 <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-white/20 shrink-0 shadow-inner">
                     <Image 
                        src={currentFeatured.main_image || ""} 
                        alt="Portal"
@@ -233,21 +234,27 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
                     />
                  </div>
 
-                 <div className="pr-4 md:pr-6">
-                    <div className="flex items-center gap-1.5 mb-0.5 md:mb-1">
-                       <Sparkles className="w-3 h-3 text-primary animate-pulse" />
-                       <span className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.2em] md:tracking-[0.3em]">{t("masterpiece_badge")}</span>
+                 <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                       <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                       <span className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.3em]">{t("masterpiece_badge")}</span>
                     </div>
-                    <h4 className="text-[10px] md:text-xs font-black text-white uppercase tracking-tighter truncate leading-none">
+                    <h4 className="text-[10px] md:text-xs font-black text-white uppercase tracking-tighter truncate leading-tight">
                        {currentFeatured.title}
                     </h4>
-                    <p className="hidden md:block text-[9px] font-bold text-white/40 uppercase mt-1 tracking-widest">
-                       {currentFeatured.duration_days} Days Immersion
+                    <p className="text-[8px] md:text-[9px] font-bold text-white/30 uppercase mt-0.5 tracking-widest flex items-center gap-2">
+                       {currentFeatured.duration_days}D Immersion • <span className="text-primary italic">Live Selection</span>
                     </p>
                  </div>
 
-                 {/* Shimmer Effect */}
-                 <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                 {/* Indicators for "Stack" */}
+                 {featuredPackages.length > 1 && (
+                    <div className="absolute -left-2 top-1/2 -translate-y-1/2 flex flex-col gap-1">
+                       {featuredPackages.map((_, i) => (
+                          <div key={i} className={`w-1 h-3 rounded-full transition-all duration-500 ${currentIndex === i ? 'bg-primary scale-y-125' : 'bg-white/10'}`} />
+                       ))}
+                    </div>
+                 )}
               </motion.div>
            </motion.div>
         )}
