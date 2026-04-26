@@ -1,6 +1,8 @@
 {
   "Hero": {
     "title": "Découvrez la Magie de la <p>Tanzanie</p>",
+    "title_start": "Découvrez la Magie de la",
+    "title_accent": "Tanzanie",
     "subtitle": "Découvrez la nature sauvage sans compromis sur le luxe.",
     "plan_safari": "Planifier Safari",
     "view_fleet": "Voir Les Véhicules",
