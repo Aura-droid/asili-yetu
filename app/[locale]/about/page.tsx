@@ -214,42 +214,78 @@ export default function AboutPage() {
       {/* Philosophy & Presence (Remaining) */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-           <div className="p-12 rounded-[2.5rem] bg-foreground text-background shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/40 transition-colors" />
-              <h3 className="text-3xl font-black mb-6 flex items-center gap-4 text-primary">
-                 <div className="w-1.5 h-8 bg-primary" /> {t("mission_title")}
-              </h3>
-              <p className="text-xl leading-relaxed opacity-90">{t("mission_desc")}</p>
+           <div className="p-12 rounded-[3rem] bg-foreground text-background shadow-2xl relative overflow-hidden group min-h-[400px] flex flex-col justify-end">
+              <div className="absolute inset-0 z-0">
+                 <Image 
+                   src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80" 
+                   alt="Mission" 
+                   fill 
+                   className="object-cover opacity-20 group-hover:scale-105 transition-transform duration-1000" 
+                 />
+              </div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] -mr-32 -mt-32 group-hover:bg-primary/40 transition-colors" />
+              <div className="relative z-10">
+                <h3 className="text-4xl font-black mb-6 flex items-center gap-4 text-primary italic uppercase tracking-tighter">
+                   <div className="w-2 h-10 bg-primary" /> {t("mission_title")}
+                </h3>
+                <p className="text-2xl leading-relaxed opacity-90 font-medium drop-shadow-md">{t("mission_desc")}</p>
+              </div>
            </div>
 
-           <div className="p-12 rounded-[2.5rem] bg-background border border-foreground/10 shadow-lg relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-colors" />
-              <h3 className="text-3xl font-black mb-6 flex items-center gap-4 text-primary">
-                 <div className="w-1.5 h-8 bg-primary" /> {t("vision_title")}
-              </h3>
-              <p className="text-xl leading-relaxed text-foreground/70">{t("vision_desc")}</p>
+           <div className="p-12 rounded-[3rem] bg-background border border-foreground/10 shadow-lg relative overflow-hidden group min-h-[400px] flex flex-col justify-end">
+              <div className="absolute inset-0 z-0">
+                 <Image 
+                   src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80" 
+                   alt="Vision" 
+                   fill 
+                   className="object-cover opacity-5 group-hover:opacity-10 transition-opacity duration-1000" 
+                 />
+              </div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -mr-32 -mt-32 group-hover:bg-primary/20 transition-colors" />
+              <div className="relative z-10">
+                <h3 className="text-4xl font-black mb-6 flex items-center gap-4 text-primary italic uppercase tracking-tighter">
+                   <div className="w-2 h-10 bg-primary" /> {t("vision_title")}
+                </h3>
+                <p className="text-2xl leading-relaxed text-foreground/70 font-medium">{t("vision_desc")}</p>
+              </div>
            </div>
         </div>
 
         {/* Arusha & Köln */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-           <div className="flex flex-col md:flex-row gap-8 items-center bg-background p-8 rounded-[2rem] border border-foreground/5 shadow-sm">
-               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                  <Image src="https://flagcdn.com/tz.svg" alt="Tanzania" width={40} height={30} className="rounded" />
+           <div className="group relative flex flex-col md:flex-row gap-8 items-center bg-background p-10 rounded-[3rem] border border-foreground/5 shadow-xl overflow-hidden">
+               <div className="absolute inset-0 z-0">
+                  <Image 
+                    src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80" 
+                    alt="Arusha" 
+                    fill 
+                    className="object-cover opacity-0 group-hover:opacity-10 transition-opacity duration-1000" 
+                  />
                </div>
-               <div>
-                  <h4 className="text-2xl font-black text-foreground mb-2">{t("presence_arusha_title")}</h4>
-                  <p className="text-foreground/60 leading-relaxed font-medium">{t("presence_arusha")}</p>
+               <div className="w-24 h-24 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0 relative z-10 shadow-inner group-hover:bg-primary transition-colors">
+                  <Image src="https://flagcdn.com/tz.svg" alt="Tanzania" width={50} height={35} className="rounded shadow-lg" />
+               </div>
+               <div className="relative z-10">
+                  <h4 className="text-3xl font-black text-foreground mb-2 italic uppercase tracking-tighter">{t("presence_arusha_title")}</h4>
+                  <p className="text-foreground/60 text-lg leading-relaxed font-medium">{t("presence_arusha")}</p>
                </div>
            </div>
 
-           <div className="flex flex-col md:flex-row gap-8 items-center bg-background p-8 rounded-[2rem] border border-foreground/5 shadow-sm">
-               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                  <Image src="https://flagcdn.com/de.svg" alt="Germany" width={40} height={30} className="rounded" />
+           <div className="group relative flex flex-col md:flex-row gap-8 items-center bg-background p-10 rounded-[3rem] border border-foreground/5 shadow-xl overflow-hidden">
+               <div className="absolute inset-0 z-0">
+                  <Image 
+                    src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80" 
+                    alt="Köln" 
+                    fill 
+                    className="object-cover opacity-0 group-hover:opacity-10 transition-opacity duration-1000" 
+                  />
                </div>
-               <div>
-                  <h4 className="text-2xl font-black text-foreground mb-2">{t("presence_koln_title")}</h4>
-                  <p className="text-foreground/60 leading-relaxed font-medium">{t("presence_koln")}</p>
+               <div className="w-24 h-24 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0 relative z-10 shadow-inner group-hover:bg-primary transition-colors">
+                  <Image src="https://flagcdn.com/de.svg" alt="Germany" width={50} height={35} className="rounded shadow-lg" />
+               </div>
+               <div className="relative z-10">
+                  <h4 className="text-3xl font-black text-foreground mb-2 italic uppercase tracking-tighter">{t("presence_koln_title")}</h4>
+                  <p className="text-foreground/60 text-lg leading-relaxed font-medium">{t("presence_koln")}</p>
                </div>
            </div>
         </div>
@@ -261,15 +297,31 @@ export default function AboutPage() {
              <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tighter">{t("values_title")}</h2>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
-              {[ "auth", "integ", "prof", "resp", "sust" ].map((v) => (
-                <div key={v} className="flex flex-col items-center gap-4 group">
-                    <div className="w-1 w-1 bg-primary/30 group-hover:w-full group-hover:h-0.5 transition-all duration-500 rounded-full" />
-                    <span className="text-xl md:text-3xl font-black text-foreground/40 group-hover:text-primary transition-colors cursor-default">
-                      {t(`v_${v}`)}
-                    </span>
-                    <div className="w-1 w-1 bg-primary/30 group-hover:w-full group-hover:h-0.5 transition-all duration-500 rounded-full" />
-                </div>
+          <div className="flex flex-wrap justify-center gap-x-16 gap-y-12">
+              {[ "auth", "integ", "prof", "resp", "sust" ].map((v, i) => (
+                <motion.div 
+                  key={v} 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.1, rotate: 2 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative group cursor-default"
+                >
+                    {/* Tribal Shield Motif */}
+                    <div className="absolute inset-0 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/20 transition-all scale-150" />
+                    
+                    <div className="relative z-10 flex flex-col items-center gap-4">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full group-hover:scale-y-[10] group-hover:bg-amber-400 transition-all duration-500" />
+                        <span className="text-3xl md:text-5xl font-black text-foreground/30 group-hover:text-primary transition-all duration-500 uppercase tracking-tighter italic">
+                          {t(`v_${v}`)}
+                        </span>
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full group-hover:scale-y-[10] group-hover:bg-amber-400 transition-all duration-500" />
+                    </div>
+
+                    {/* Animated Underline */}
+                    <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.div>
               ))}
           </div>
       </div>
@@ -288,47 +340,78 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-background/5 p-10 rounded-3xl border border-background/10 hover:bg-background/10 transition-colors"
-            >
-              <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mb-8">
-                <Diamond className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{t("p_lux")}</h3>
-              <p className="text-background/70 leading-relaxed font-medium">{t("p_lux_sub")}</p>
-            </motion.div>
+            {[
+              { 
+                key: "lux", 
+                icon: <Diamond className="w-6 h-6 text-black" />, 
+                img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80",
+                color: "from-primary/80 to-transparent"
+              },
+              { 
+                key: "safe", 
+                icon: <ShieldCheck className="w-6 h-6 text-black" />, 
+                img: "https://images.unsplash.com/photo-1533241242371-d60232230302?auto=format&fit=crop&q=80",
+                color: "from-blue-500/80 to-transparent"
+              },
+              { 
+                key: "cons", 
+                icon: <HeartHandshake className="w-6 h-6 text-black" />, 
+                img: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&q=80",
+                color: "from-green-500/80 to-transparent"
+              }
+            ].map((pillar, i) => (
+              <motion.div 
+                key={pillar.key}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -15, scale: 1.02 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative h-[500px] rounded-[3rem] overflow-hidden border border-background/10 shadow-2xl bg-black"
+              >
+                {/* Immersive Background */}
+                <Image 
+                  src={pillar.img}
+                  alt={t(`p_${pillar.key}`)}
+                  fill
+                  className="object-cover opacity-50 group-hover:opacity-70 transition-all duration-700 group-hover:scale-110"
+                />
+                
+                {/* Color Gradient Overlay */}
+                <div className={`absolute inset-0 bg-linear-to-b ${pillar.color} opacity-40 group-hover:opacity-60 transition-opacity`} />
+                
+                {/* Tribal Pattern Border (Maasai-inspired) */}
+                <div className="absolute bottom-0 left-0 right-0 h-4 opacity-40 group-hover:opacity-80 transition-opacity flex">
+                   {Array.from({ length: 40 }).map((_, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`flex-1 h-full ${idx % 2 === 0 ? 'bg-primary' : 'bg-white'} ${idx % 3 === 0 ? 'scale-y-150' : 'scale-y-100'} transition-transform duration-500`} 
+                      />
+                   ))}
+                </div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-background/5 p-10 rounded-3xl border border-background/10 hover:bg-background/10 transition-colors"
-            >
-              <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mb-8">
-                <ShieldCheck className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{t("p_safe")}</h3>
-              <p className="text-background/70 leading-relaxed font-medium">{t("p_safe_sub")}</p>
-            </motion.div>
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-10 flex flex-col justify-end z-20">
+                   <motion.div 
+                     className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-primary/20 group-hover:rotate-[360deg] transition-transform duration-1000"
+                   >
+                     {pillar.icon}
+                   </motion.div>
+                   
+                   <h3 className="text-3xl font-black mb-4 text-white drop-shadow-lg italic uppercase tracking-tighter">
+                     {t(`p_${pillar.key}`)}
+                   </h3>
+                   <p className="text-white/80 leading-relaxed font-bold text-lg drop-shadow-md">
+                     {t(`p_${pillar.key}_sub`)}
+                   </p>
+                </div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-background/5 p-10 rounded-3xl border border-background/10 hover:bg-background/10 transition-colors"
-            >
-              <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mb-8">
-                <HeartHandshake className="w-6 h-6 text-black" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{t("p_cons")}</h3>
-              <p className="text-background/70 leading-relaxed font-medium">{t("p_cons_sub")}</p>
-            </motion.div>
+                {/* Subtle Glow Pulse */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+                   <div className="absolute inset-0 bg-primary/10 blur-[60px]" />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
