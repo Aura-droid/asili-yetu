@@ -92,8 +92,8 @@ export default function TermsPage() {
           <div className="mt-24 p-12 rounded-[3rem] bg-primary text-primary-foreground text-center relative overflow-hidden shadow-2xl shadow-primary/20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
             <div className="relative z-10">
-              <p className="text-sm uppercase tracking-[0.4em] font-bold mb-4 opacity-80">Acknowledgment</p>
-              <p className="text-3xl font-black mb-6 leading-tight">By proceeding, you honor the ancient rhythms and modern standards of the Tanzanian wilderness.</p>
+              <p className="text-sm uppercase tracking-[0.4em] font-bold mb-4 opacity-80">{t("ack_label")}</p>
+              <p className="text-3xl font-black mb-6 leading-tight">{t("ack_text")}</p>
               <div className="h-1 w-24 bg-white/30 mx-auto rounded-full" />
             </div>
           </div>

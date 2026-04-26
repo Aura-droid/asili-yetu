@@ -423,7 +423,9 @@
     "section2_title": "Matumizi ya Habari",
     "section2_desc": "Data zako zinatumiwa tu kurahisisha safari zako, kushughulikia malipo, na kutoa taarifa za kina kuhusu pori la Tanzania.",
     "section3_title": "Usalama wa Data",
-    "section3_desc": "Tunatekeleza hatua za usalama za kisasa ili kulinda utambulisho wako wa kidijitali dhidi ya ufikiaji usioidhinishwa."
+    "section3_desc": "Tunatekeleza hatua za usalama za kisasa ili kulinda utambulisho wako wa kidijitali dhidi ya ufikiaji usioidhinishwa.",
+    "last_sync_label": "Mawasiliano ya Mwisho",
+    "office_label": "Ofisi ya Ulinzi wa Data ya Asili Yetu Safaris, Arusha, Tanzania"
   },
   "Terms": {
     "title": "Masharti ya <p>Huduma</p>",
@@ -434,7 +436,9 @@
     "section2_title": "Dhima",
     "section2_desc": "Ingawa tunapea kipaumbele usalama wako juu ya yote, safari za porini zinahusisha hatari za asili ambazo washiriki lazima wakiri.",
     "section3_title": "Kanuni za Maadili",
-    "section3_desc": "Tunatarajia wagunduzi wote kuheshimu wanyamapori, mazingira, na jamii za asili wakati wa safari zetu."
+    "section3_desc": "Tunatarajia wagunduzi wote kuheshimu wanyamapori, mazingira, na jamii za asili wakati wa safari zetu.",
+    "ack_label": "Shukrani na Kukiri",
+    "ack_text": "Kwa kuendelea, unaheshimu miondoko ya kale na viwango vya kisasa vya pori la Tanzania."
   },
   "Cookies": {
     "title": "Ufuatiliaji wa Mapigo ya Kidijitali",

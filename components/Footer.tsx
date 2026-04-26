@@ -8,14 +8,17 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import NewsletterCapture from "./NewsletterCapture";
 import { useLoading } from "@/providers/LoadingProvider";
 
-export default function Footer() {
+export default function Footer({ settings }: { settings?: any }) {
   const t = useTranslations();
   const locale = useLocale();
   const { setIsLoading } = useLoading();
   
-  // Official Production Identity
-  const whatsappNumber = "491751159881"; 
-  const email = "info@asiliyetusafaris.com";
+  // Official Production Identity (with fallbacks)
+  const whatsappNumber = settings?.whatsapp_number || "491751159881"; 
+  const email = settings?.contact_email || "info@asiliyetusafaris.com";
+  const instagramUrl = settings?.instagram_url || "https://instagram.com/asiliyetusafaris";
+  const facebookUrl = settings?.facebook_url || "https://facebook.com/asiliyetusafaris";
+  const address = settings?.office_location || "Arusha, Tanzania";
 
   return (
     <footer className="bg-background border-t border-foreground/10 pt-20 pb-10 relative overflow-hidden">
@@ -68,7 +71,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-foreground/60 text-sm font-semibold">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                <span>{t("Footer.address")}<br/>{t("Footer.region")}</span>
+                <span>{address}</span>
               </li>
               <li className="flex items-center gap-3 text-foreground/60 text-sm font-semibold">
                 <Mail className="w-4 h-4 text-primary shrink-0" />

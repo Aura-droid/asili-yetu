@@ -426,7 +426,9 @@
     "section2_title": "Uso de la Información",
     "section2_desc": "Sus datos se utilizan únicamente para facilitar sus expediciones, procesar pagos y proporcionar actualizaciones de alta fidelidad sobre la naturaleza tanzana.",
     "section3_title": "Seguridad de Datos",
-    "section3_desc": "Implementamos medidas de seguridad de vanguardia para proteger su identidad digital de accesos no autorizados."
+    "section3_desc": "Implementamos medidas de seguridad de vanguardia para proteger su identidad digital de accesos no autorizados.",
+    "last_sync_label": "Última Sincronización",
+    "office_label": "Oficina de Protección de Datos de Asili Yetu Safaris, Arusha, Tanzania"
   },
   "Terms": {
     "title": "Términos de <p>Servicio</p>",
@@ -437,7 +439,9 @@
     "section2_title": "Responsabilidad",
     "section2_desc": "Si bien priorizamos su seguridad por encima de todo, las expediciones a la naturaleza implican riesgos inherentes que los participantes deben reconocer.",
     "section3_title": "Código de Conducta",
-    "section3_desc": "Esperamos que todos los exploradores respeten la vida silvestre, el medio ambiente y las comunidades locales durante nuestros viajes."
+    "section3_desc": "Esperamos que todos los exploradores respeten la vida silvestre, el medio ambiente y las comunidades locales durante nuestros viajes.",
+    "ack_label": "Reconocimiento",
+    "ack_text": "Al proceder, usted honra los ritmos ancestrales y los estándares modernos de la naturaleza tanzana."
   },
   "Cookies": {
     "title": "Seguimiento del Pulso Digital",

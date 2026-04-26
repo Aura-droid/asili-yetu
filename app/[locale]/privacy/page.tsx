@@ -91,9 +91,9 @@ export default function PrivacyPage() {
           </div>
 
           <div className="mt-24 p-8 rounded-3xl bg-foreground/5 border border-foreground/10 text-center">
-            <p className="text-sm text-muted-foreground uppercase tracking-widest font-bold mb-2">Last Synchronized</p>
+            <p className="text-sm text-muted-foreground uppercase tracking-widest font-bold mb-2">{t("last_sync_label")}</p>
             <p className="text-2xl font-black">April 27, 2026</p>
-            <p className="text-xs text-muted-foreground mt-4 italic">Asili Yetu Safaris Data Protection Office, Arusha, Tanzania</p>
+            <p className="text-xs text-muted-foreground mt-4 italic">{t("office_label")}</p>
           </div>
         </div>
       </div>

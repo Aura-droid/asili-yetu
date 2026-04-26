@@ -423,7 +423,9 @@
     "section2_title": "Verwendung von Informationen",
     "section2_desc": "Ihre Daten werden ausschließlich dazu verwendet, Ihre Expeditionen zu ermöglichen, Zahlungen zu verarbeiten und High-Fidelity-Updates zur tansanischen Wildnis bereitzustellen.",
     "section3_title": "Datensicherheit",
-    "section3_desc": "Wir setzen modernste Sicherheitsmaßnahmen ein, um Ihre digitale Identität vor unbefugtem Zugriff zu schützen."
+    "section3_desc": "Wir setzen modernste Sicherheitsmaßnahmen ein, um Ihre digitale Identität vor unbefugtem Zugriff zu schützen.",
+    "last_sync_label": "Zuletzt Synchronisiert",
+    "office_label": "Asili Yetu Safaris Datenschutzbüro, Arusha, Tansania"
   },
   "Terms": {
     "title": "Nutzungs<p>bedingungen</p>",
@@ -434,7 +436,9 @@
     "section2_title": "Haftung",
     "section2_desc": "Obwohl wir Ihre Sicherheit über alles priorisieren, bringen Expeditionen in die Wildnis inhärente Risiken mit sich, die die Teilnehmer anerkennen müssen.",
     "section3_title": "Verhaltenskodex",
-    "section3_desc": "Wir erwarten von allen Entdeckern, dass sie während unserer Reisen die Tierwelt, die Umwelt und die lokalen Gemeinschaften respektieren."
+    "section3_desc": "Wir erwarten von allen Entdeckern, dass sie während unserer Reisen die Tierwelt, die Umwelt und die lokalen Gemeinschaften respektieren.",
+    "ack_label": "Anerkennung",
+    "ack_text": "Indem Sie fortfahren, ehren Sie die alten Rhythmen und modernen Standards der tansanischen Wildnis."
   },
   "Cookies": {
     "title": "Digitale Puls-Verfolgung",

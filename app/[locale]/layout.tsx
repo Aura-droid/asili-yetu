@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import LoadingProvider from "@/providers/LoadingProvider";
 import CookieConsent from "@/components/CookieConsent";
+import { getSettings } from "@/app/actions/settings";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -93,6 +94,7 @@ export default async function RootLayout(props: {
   // Providing all messages to the client side
   const messages = await getMessages();
   const activeNotice = await getActiveNotice();
+  const { data: settings } = await getSettings();
 
   return (
     <html
@@ -143,7 +145,7 @@ export default async function RootLayout(props: {
               <JungleTransitionOverlay />
               <Navbar />
               {children}
-              <Footer />
+              <Footer settings={settings} />
             </ThemeProvider>
           </LoadingProvider>
         </NextIntlClientProvider>

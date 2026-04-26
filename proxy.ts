@@ -2,10 +2,33 @@ import { type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { createClient } from "@/utils/supabase/server";
 
 const handleI18nRouting = createIntlMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  // 0. Check Maintenance Mode
+  const isMaintenancePage = pathname.includes('/maintenance');
+  const isAdminPath = pathname.startsWith('/admin') || pathname.startsWith('/login') || pathname.startsWith('/portal');
+
+  if (!isAdminPath && !isMaintenancePage) {
+    const supabase = await createClient();
+    const { data: settings } = await supabase
+      .from("settings")
+      .select("is_maintenance_mode")
+      .eq("id", 1)
+      .single();
+
+    if (settings?.is_maintenance_mode) {
+      // Find current locale from pathname or default to 'en'
+      const segments = pathname.split('/');
+      const locale = routing.locales.includes(segments[1] as any) ? segments[1] : 'en';
+      return Response.redirect(new URL(`/${locale}/maintenance`, request.url));
+    }
+  }
+
   // 1. Run Supabase Auth Logic
   const supabaseResponse = await updateSession(request);
 

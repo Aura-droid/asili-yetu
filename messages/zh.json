@@ -423,7 +423,9 @@
     "section2_title": "信息使用",
     "section2_desc": "您的数据仅用于协助您的探险、处理付款以及提供有关坦桑尼亚荒野的高保真更新。",
     "section3_title": "数据安全",
-    "section3_desc": "我们实施最先进的安全措施，以保护您的数字身份免受未经授权的访问。"
+    "section3_desc": "我们实施最先进的安全措施，以保护您的数字身份免受未经授权的访问。",
+    "last_sync_label": "最后同步时间",
+    "office_label": "Asili Yetu Safaris 数据保护办公室，坦桑尼亚阿鲁沙"
   },
   "Terms": {
     "title": "服务<p>条款</p>",
@@ -434,7 +436,9 @@
     "section2_title": "责任",
     "section2_desc": "虽然我们将您的安全放在首位，但进入荒野的探险涉及参与者必须承认的内在风险。",
     "section3_title": "行为准则",
-    "section3_desc": "我们希望所有探险者在旅途中尊重野生动物、环境和当地社区。"
+    "section3_desc": "我们希望所有探险者在旅途中尊重野生动物、环境和当地社区。",
+    "ack_label": "确认",
+    "ack_text": "通过继续，您尊重坦桑尼亚荒野的古老节奏和现代标准。"
   },
   "Cookies": {
     "title": "数字脉搏追踪",
