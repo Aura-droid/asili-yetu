@@ -11,6 +11,70 @@ import BookingFunnel from "./BookingFunnel";
 import { useLoading } from "@/providers/LoadingProvider";
 import Image from "next/image";
 import Link from "next/link";
+import { Leaf, Snowflake } from "lucide-react";
+
+function FallingLeaves() {
+  const [leaves, setLeaves] = useState<Array<{ id: number, x: number, delay: number, duration: number, rotate: number, size: number }>>([]);
+  useEffect(() => {
+    setLeaves(Array.from({ length: 15 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      delay: Math.random() * 10,
+      duration: 10 + Math.random() * 10,
+      rotate: Math.random() * 360,
+      size: 15 + Math.random() * 20
+    })));
+  }, []);
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+      {leaves.map((leaf) => (
+        <motion.div
+          key={leaf.id}
+          initial={{ y: -50, x: `${leaf.x}vw`, rotate: leaf.rotate, opacity: 0 }}
+          animate={{ 
+            y: "110vh", 
+            x: [`${leaf.x}vw`, `${leaf.x + 5}vw`, `${leaf.x - 5}vw`, `${leaf.x}vw`],
+            rotate: leaf.rotate + 720,
+            opacity: [0, 0.4, 0.4, 0]
+          }}
+          transition={{ duration: leaf.duration, delay: leaf.delay, repeat: Infinity, ease: "linear" }}
+          className="absolute text-primary/20"
+        >
+          <Leaf size={leaf.size} />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function SavannahSpark() {
+  const [sparks, setSparks] = useState<Array<{ id: number, x: number, y: number, delay: number }>>([]);
+  useEffect(() => {
+    setSparks(Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 5
+    })));
+  }, []);
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+      {sparks.map((spark) => (
+        <motion.div
+          key={spark.id}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ 
+            opacity: [0, 0.8, 0],
+            scale: [0, 1.5, 0],
+          }}
+          transition={{ duration: 3, delay: spark.delay, repeat: Infinity, ease: "easeInOut" }}
+          style={{ left: `${spark.x}%`, top: `${spark.y}%` }}
+          className="absolute w-1 h-1 bg-primary rounded-full blur-[1px] shadow-[0_0_10px_rgba(212,175,55,1)]"
+        />
+      ))}
+    </div>
+  );
+}
 
 function FloatingGlimmer() {
   const [particles, setParticles] = useState<Array<{ id: number, x: number, y: number, size: number }>>([]);
@@ -143,92 +207,59 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
          </AnimatePresence>
       </div>
 
-      {theme === "jungle" && <FallingLeaves />}
+      {theme === "jungle" ? <FallingLeaves /> : <SavannahSpark />}
 
       <div className="relative z-30 container mx-auto px-6 text-center text-foreground flex flex-col items-center">
+        {/* FLOATING MASTERPIECE BADGE (Minimized & Attention-Grabbing) */}
+        {currentFeatured && (
+           <motion.div 
+             initial={{ opacity: 0, x: 50 }}
+             animate={{ opacity: 1, x: 0 }}
+             className="fixed top-24 right-6 md:right-12 z-50 group hidden lg:block"
+           >
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="relative cursor-pointer bg-black/40 backdrop-blur-2xl border border-primary/30 p-2 rounded-[2rem] shadow-[0_0_50px_rgba(212,175,55,0.15)] flex items-center gap-4 group-hover:border-primary transition-all duration-500 overflow-hidden"
+                onClick={() => window.location.href = `/${locale}/packages?expedition=${currentFeatured.id}`}
+              >
+                 {/* Portal */}
+                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-white/20 shrink-0">
+                    <Image 
+                       src={currentFeatured.main_image || ""} 
+                       alt="Portal"
+                       fill
+                       className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                 </div>
+
+                 <div className="pr-6 max-w-[200px]">
+                    <div className="flex items-center gap-2 mb-1">
+                       <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+                       <span className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Masterpiece Edition</span>
+                    </div>
+                    <h4 className="text-xs font-black text-white uppercase tracking-tighter truncate leading-none">
+                       {currentFeatured.title}
+                    </h4>
+                    <p className="text-[9px] font-bold text-white/40 uppercase mt-1 tracking-widest">
+                       {currentFeatured.duration_days} Days Immersion
+                    </p>
+                 </div>
+
+                 {/* Shimmer Effect */}
+                 <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </motion.div>
+           </motion.div>
+        )}
+
+        {/* Hero Branding / Subtle Indicator */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="relative mb-8"
+          className="mb-6"
         >
-          {currentFeatured ? (
-             <motion.div 
-               whileHover={{ scale: 1.02 }}
-               className="group relative cursor-pointer flex flex-col md:flex-row items-center gap-8 md:gap-16"
-               onClick={() => window.location.href = `/${locale}/packages?expedition=${currentFeatured.id}`}
-             >
-                {/* Floating Cinematic Portal */}
-                <motion.div 
-                   initial={{ opacity: 0, x: -50, rotate: -10 }}
-                   animate={{ opacity: 1, x: 0, rotate: -5 }}
-                   whileHover={{ rotate: 0, scale: 1.1, z: 50 }}
-                   className="relative w-24 h-32 md:w-64 md:h-80 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 transition-all duration-700 shrink-0"
-                >
-                   <Image 
-                      src={currentFeatured.main_image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"} 
-                      alt="Portal View"
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                   />
-                   <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-                   <div className="absolute inset-0 border border-primary/30 rounded-[1.5rem] md:rounded-[2.5rem] pointer-events-none" />
-                </motion.div>
-
-                <div className="flex flex-col items-center md:items-start gap-4 md:gap-6 relative z-10 text-center md:text-left">
-                   {/* Cinematic Badge */}
-                   <motion.span 
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="px-6 py-2.5 rounded-full border border-primary/50 text-[10px] md:text-[11px] font-black text-primary bg-black/40 backdrop-blur-2xl uppercase tracking-[0.5em] shadow-[0_0_40px_rgba(212,175,55,0.2)] flex items-center gap-3 transition-all group-hover:border-primary"
-                   >
-                      <Sparkles className="w-4 h-4 animate-pulse text-primary" /> 
-                      <span className="bg-linear-to-r from-primary via-amber-200 to-primary bg-clip-text text-transparent animate-shimmer">
-                        {t("masterpiece_badge")}
-                      </span>
-                   </motion.span>
-
-                   {/* Title with 3D Depth */}
-                   <div className="relative">
-                      <h2 className="text-3xl md:text-8xl font-black text-white italic uppercase tracking-tighter leading-none mb-2 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all group-hover:scale-105 group-hover:-translate-y-2 group-hover:rotate-[-1deg]">
-                         {currentFeatured.title}
-                      </h2>
-                      <div className="absolute -inset-x-12 -inset-y-6 bg-primary/10 blur-[120px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                   </div>
-
-                   {/* Cinematic Subtitle / Vibe */}
-                   <p className="text-white/80 text-sm md:text-lg font-medium italic max-w-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 translate-y-4 group-hover:translate-y-0">
-                      {currentFeatured.description?.split('.')[0]}.
-                   </p>
-
-                   {/* Immersive Metadata */}
-                   <div className="flex items-center gap-6 md:gap-8 text-white/70 text-[9px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase">
-                      <motion.span 
-                        className="flex items-center gap-3 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-full backdrop-blur-3xl border border-white/10 italic group-hover:bg-primary/20 group-hover:border-primary/30 transition-all"
-                      >
-                         <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
-                         {currentFeatured.duration_days} {t("days_immersion")}
-                      </motion.span>
-                      
-                      <div className="flex items-center gap-2 group/btn">
-                         <span className="text-primary border-b-2 border-primary/30 pb-1 group-hover/btn:border-primary transition-all flex items-center gap-2">
-                            {t("view_details")}
-                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                         </span>
-                      </div>
-                   </div>
-                </div>
-
-                {/* Mouse Follow Glow (CSS handled) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(212,175,55,0.15)_0%,transparent_50%)]" />
-                </div>
-             </motion.div>
-          ) : (
-             <span className="px-5 py-2 rounded-full border border-primary/40 text-sm font-semibold text-primary inline-block bg-background/50 backdrop-blur-md uppercase tracking-widest shadow-sm">
-                {theme === 'jungle' ? t("venture_jungle") : t("venture")}
-             </span>
-          )}
+           <span className="px-5 py-2 rounded-full border border-primary/20 text-[10px] font-black text-primary inline-block bg-black/10 backdrop-blur-md uppercase tracking-[0.4em] shadow-sm">
+              {theme === 'jungle' ? "The Deep Exploration" : "Arusha Command Center"}
+           </span>
         </motion.div>
         
         <motion.h1 
