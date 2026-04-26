@@ -1,6 +1,10 @@
 {
   "Hero": {
     "title": "اكتشف سحر <p>تنزانيا</p>",
+    "title_start": "اكتشف سحر",
+    "title_accent": "تنزانيا",
+    "title_end": "",
+    "masterpiece_badge": "اختيار التحفة",
     "subtitle": "اكتشف البرية دون المساومة على الفخامة.",
     "plan_safari": "خطط لرحلة السفاري",
     "view_fleet": "شاهد أسطولنا",

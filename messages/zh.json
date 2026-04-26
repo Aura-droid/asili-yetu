@@ -1,6 +1,10 @@
 {
   "Hero": {
     "title": "探索<p>坦桑尼亚</p>的魔力",
+    "title_start": "探索",
+    "title_accent": "坦桑尼亚",
+    "title_end": "的魔力",
+    "masterpiece_badge": "杰作精选",
     "subtitle": "在不牺牲奢华的情况下探索荒野。",
     "plan_safari": "计划您的狩猎之旅",
     "view_fleet": "查看车队",

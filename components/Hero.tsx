@@ -276,7 +276,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
           transition={{ delay: 0.1 }}
           className="text-4xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] md:leading-none mb-4 md:mb-6 uppercase italic"
         >
-           {t("title_start")} <span className="text-primary">{t("title_accent")}</span>
+           {t("title_start")} <span className="text-primary">{t("title_accent")}</span> {t("title_end")}
         </motion.h1>
 
         <motion.p 
