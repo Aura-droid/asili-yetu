@@ -14,35 +14,35 @@ export default function WhyUs() {
       title: t("quality_title"),
       desc: t("quality_desc"),
       color: "from-primary/80 to-transparent",
-      img: "https://images.unsplash.com/photo-1533241242371-d60232230302?auto=format&fit=crop&q=80"
+      img: "/others/toyota-land-cruiser.jpg"
     },
     {
       icon: <Leaf className="w-8 h-8" />,
       title: t("responsible_title"),
       desc: t("responsible_desc"),
       color: "from-emerald-600/80 to-transparent",
-      img: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80"
+      img: "/images/Gallery/Wildebeasts.jpeg"
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: t("community_title"),
       desc: t("community_desc"),
       color: "from-blue-600/80 to-transparent",
-      img: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&q=80"
+      img: "/images/Gallery/Zanzibar.jpeg"
     },
     {
       icon: <Star className="w-8 h-8" />,
       title: t("authentic_title"),
       desc: t("authentic_desc"),
       color: "from-purple-600/80 to-transparent",
-      img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"
+      img: "/images/Gallery/Lion.jpeg"
     },
     {
       icon: <Award className="w-8 h-8" />,
       title: t("professional_title"),
       desc: t("professional_desc"),
       color: "from-rose-600/80 to-transparent",
-      img: "https://images.unsplash.com/photo-1616527027589-91307b2ab138?auto=format&fit=crop&q=80"
+      img: "/images/Gallery/Twiga.jpeg"
     }
   ];
 

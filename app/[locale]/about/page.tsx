@@ -217,7 +217,7 @@ export default function AboutPage() {
            <div className="p-12 rounded-[3rem] bg-foreground text-background shadow-2xl relative overflow-hidden group min-h-[400px] flex flex-col justify-end">
               <div className="absolute inset-0 z-0">
                  <Image 
-                   src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80" 
+                   src="/images/Gallery/Lion-2.jpeg" 
                    alt="Mission" 
                    fill 
                    className="object-cover opacity-20 group-hover:scale-105 transition-transform duration-1000" 
@@ -235,7 +235,7 @@ export default function AboutPage() {
            <div className="p-12 rounded-[3rem] bg-background border border-foreground/10 shadow-lg relative overflow-hidden group min-h-[400px] flex flex-col justify-end">
               <div className="absolute inset-0 z-0">
                  <Image 
-                   src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80" 
+                   src="/images/Gallery/Zebra.jpeg" 
                    alt="Vision" 
                    fill 
                    className="object-cover opacity-5 group-hover:opacity-10 transition-opacity duration-1000" 
@@ -256,7 +256,7 @@ export default function AboutPage() {
            <div className="group relative flex flex-col md:flex-row gap-8 items-center bg-background p-10 rounded-[3rem] border border-foreground/5 shadow-xl overflow-hidden">
                <div className="absolute inset-0 z-0">
                   <Image 
-                    src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80" 
+                    src="/images/Gallery/Kilimanjaro View.jpeg" 
                     alt="Arusha" 
                     fill 
                     className="object-cover opacity-0 group-hover:opacity-10 transition-opacity duration-1000" 
@@ -274,7 +274,7 @@ export default function AboutPage() {
            <div className="group relative flex flex-col md:flex-row gap-8 items-center bg-background p-10 rounded-[3rem] border border-foreground/5 shadow-xl overflow-hidden">
                <div className="absolute inset-0 z-0">
                   <Image 
-                    src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80" 
+                    src="/images/Gallery/Zznzibar-3.jpeg" 
                     alt="Köln" 
                     fill 
                     className="object-cover opacity-0 group-hover:opacity-10 transition-opacity duration-1000" 
@@ -344,19 +344,19 @@ export default function AboutPage() {
               { 
                 key: "lux", 
                 icon: <Diamond className="w-6 h-6 text-black" />, 
-                img: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80",
+                img: "/images/Gallery/Kilimanjaro View.jpeg",
                 color: "from-primary/80 to-transparent"
               },
               { 
                 key: "safe", 
                 icon: <ShieldCheck className="w-6 h-6 text-black" />, 
-                img: "https://images.unsplash.com/photo-1533241242371-d60232230302?auto=format&fit=crop&q=80",
+                img: "/others/toyota-land-cruiser.jpg",
                 color: "from-blue-500/80 to-transparent"
               },
               { 
                 key: "cons", 
                 icon: <HeartHandshake className="w-6 h-6 text-black" />, 
-                img: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&q=80",
+                img: "/images/Gallery/Zanzibar-2.jpeg",
                 color: "from-green-500/80 to-transparent"
               }
             ].map((pillar, i) => (
