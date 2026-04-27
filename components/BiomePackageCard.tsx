@@ -164,6 +164,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                       </div>
                     </div>
                   ) : (
+                    <>
                       <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
                       <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
                     </>
