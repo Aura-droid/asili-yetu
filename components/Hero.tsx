@@ -328,7 +328,19 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               <input 
                 value={dates} onChange={(e) => setDates(e.target.value)}
                 type="text"
-                onFocus={(e) => (e.target.type = "date")}
+                onFocus={(e) => {
+                   e.target.type = "date";
+                   if ('showPicker' in e.target) {
+                      try { (e.target as any).showPicker(); } catch (err) {}
+                   }
+                }}
+                onClick={(e) => {
+                   const target = e.target as HTMLInputElement;
+                   target.type = "date";
+                   if ('showPicker' in target) {
+                      try { target.showPicker(); } catch (err) {}
+                   }
+                }}
                 onBlur={(e) => {
                    if (!e.target.value) e.target.type = "text";
                 }}
