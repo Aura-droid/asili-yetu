@@ -81,8 +81,13 @@ export default function FeaturedCulture({ stories }: { stories: any[] }) {
                      <ShieldCheck className="w-6 h-6 text-primary" />
                      <span className="text-xs font-black uppercase tracking-[0.3em] text-primary">{story.category}</span>
                   </div>
-                  <h3 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-8 bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">
-                    {story.title}
+                  <h3 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-8 bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent leading-[0.9]">
+                    {story.title?.split(/<br\s*\/?>/i).map((part: string, i: number, arr: any[]) => (
+                      <React.Fragment key={i}>
+                        {part}
+                        {i < arr.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
                   </h3>
                   <p className="text-background/40 text-xl font-medium italic leading-relaxed mb-12 border-l-2 border-primary/30 pl-8">
                     "{story.description}"

@@ -66,6 +66,10 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
 
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
 
+  const handleHotspotClick = (id: number) => {
+    setActiveHotspot(prev => prev === id ? null : id);
+  };
+
   return (
     <div className="relative w-full py-24 min-h-[80vh]">
       <AnimatePresence mode="wait" initial={false}>
@@ -178,12 +182,23 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                     style={{ top: spot.top, left: spot.left }}
                   >
                     <button
-                      onMouseEnter={() => setActiveHotspot(spot.id)}
-                      onMouseLeave={() => setActiveHotspot(null)}
+                      onClick={() => handleHotspotClick(spot.id)}
+                      onMouseEnter={() => {
+                        // Only auto-open on hover for desktop if none is manually locked
+                        if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                           setActiveHotspot(spot.id);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        // Only auto-close on leave for desktop
+                        if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                           setActiveHotspot(null);
+                        }
+                      }}
                       className="relative flex items-center justify-center group"
                     >
                       <span className="absolute inline-flex h-12 w-12 rounded-full bg-primary opacity-50 animate-ping" />
-                      <span className="relative inline-flex rounded-full h-10 w-10 bg-primary text-black shadow-2xl border border-white/50 items-center justify-center">
+                      <span className={`relative inline-flex rounded-full h-10 w-10 ${activeHotspot === spot.id ? 'bg-white text-primary' : 'bg-primary text-black'} shadow-2xl border border-white/50 items-center justify-center transition-colors duration-300`}>
                         <Search className="w-5 h-5" />
                       </span>
                     </button>

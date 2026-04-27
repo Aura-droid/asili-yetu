@@ -35,9 +35,14 @@ export default function ClientCultureView({ stories = [] }: { stories?: any[] })
                    >
                       {story.category}
                    </div>
-                   <h3 className="text-4xl md:text-5xl font-black text-foreground italic uppercase tracking-tighter mb-6 leading-none">
-                      {story.title}
-                   </h3>
+                    <h3 className="text-4xl md:text-5xl font-black text-foreground italic uppercase tracking-tighter mb-6 leading-[0.9]">
+                      {story.title?.split(/<br\s*\/?>/i).map((part: string, i: number, arr: any[]) => (
+                        <React.Fragment key={i}>
+                          {part}
+                          {i < arr.length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
+                    </h3>
                    <p className="text-lg md:text-xl font-medium text-foreground/60 leading-relaxed mb-8">
                       {story.description}
                    </p>
