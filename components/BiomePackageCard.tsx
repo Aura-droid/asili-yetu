@@ -164,12 +164,14 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                       </div>
                     </div>
                   ) : (
-                    <>
                       <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
                       <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
                     </>
                   )}
                 </div>
+                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse">
+                   ★ Negotiable & Tailor-made
+                </p>
               </div>
             </div>
             
@@ -281,12 +283,17 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                      </div>
                    )}
 
-                   <RustlingButton 
-                      onClick={() => setShowBooking(true)}
-                      className="bg-primary text-black px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-lg shadow-xl hover:shadow-primary/20 transition-all active:scale-95"
-                    >
-                      {pt("book_masterpiece")}
-                   </RustlingButton>
+                    <div className="flex flex-col sm:flex-row items-center gap-6 mt-12">
+                       <RustlingButton 
+                          onClick={() => setShowBooking(true)}
+                          className="bg-primary text-black px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-lg shadow-xl hover:shadow-primary/20 transition-all active:scale-95 w-full sm:w-auto text-center"
+                        >
+                          {pt("book_masterpiece")}
+                       </RustlingButton>
+                       <p className="text-sm font-medium text-foreground/40 italic max-w-xs text-center sm:text-left">
+                          {pt("negotiable_note")}
+                       </p>
+                    </div>
                 </div>
              </div>
           </motion.div>
@@ -301,6 +308,8 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 rationale: pkg.description,
                 dailyBreakdown: itinerary
               }} 
+              packagePrice={pkg.price_usd}
+              packageDiscount={pkg.discount_price}
               onClose={() => setShowBooking(false)} 
             />
          )}

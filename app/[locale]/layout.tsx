@@ -7,7 +7,7 @@ import JungleTransitionOverlay from "@/components/JungleTransitionOverlay";
 import Spotlight from "@/components/Spotlight";
 import GlobalNoticeBanner from "@/components/GlobalNoticeBanner";
 import Footer from "@/components/Footer";
-import PublicAIWidget from "@/components/PublicAIWidget";
+import PublicExpeditionWidget from "@/components/PublicExpeditionWidget";
 import { getActiveNotice } from "@/app/actions/notices";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -139,7 +139,7 @@ export default async function RootLayout(props: {
           <LoadingProvider>
             <ThemeProvider>
               <GlobalNoticeBanner initialNotice={activeNotice} />
-              <PublicAIWidget />
+              <PublicExpeditionWidget />
               <CookieConsent />
               <Spotlight />
               <JungleTransitionOverlay />

@@ -62,8 +62,8 @@ body::after {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Hide Jotform AI on Admin pages */
-.hide-jotform-ai iframe[src*='jotfor.ms'] { 
+/* Hide Jotform Widget on Admin pages */
+.hide-jotform-widget iframe[src*='jotfor.ms'] { 
   display: none !important; 
 }
 

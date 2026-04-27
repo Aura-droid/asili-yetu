@@ -14,10 +14,11 @@
     "dates": "日期",
     "guests": "客人",
     "gearing_up": "准备中...",
-    "modal_title": "AI 探险策略顾问",
+    "modal_title": "探险策略顾问",
     "proceed": "继续预订",
     "days_immersion": "天的沉浸式体验",
-    "view_details": "查看探险详情"
+    "view_details": "查看探险详情",
+    "negotiable_note": "这次探险的每一个细节都可以商议，并完全根据您的喜好进行定制。"
   },
   "Navbar": {
     "safaris": "我们的行程",

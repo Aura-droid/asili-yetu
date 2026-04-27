@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import FeaturedPackagesMarquee from "@/components/FeaturedPackagesMarquee";
 import InstagramFeed from "@/components/InstagramFeed";
 import FunFactBanner from "@/components/FunFactBanner";
 import ReviewMarquee from "@/components/ReviewMarquee";
@@ -39,6 +40,10 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col w-full">
       <Hero featuredPackages={featuredPackages || []} />
+      
+      <ScrollReveal>
+        <FeaturedPackagesMarquee packages={featuredPackages || []} />
+      </ScrollReveal>
       
       <ScrollReveal>
         <FeaturedDestinations destinations={featuredDestinations || []} />

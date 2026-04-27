@@ -14,10 +14,11 @@
     "dates": "Tarehe",
     "guests": "Wageni",
     "gearing_up": "Tunajiandaa...",
-    "modal_title": "Mshauri wa AI wa Safari",
+    "modal_title": "Mshauri wa Safari",
     "proceed": "Endelea na Uhifadhi",
     "days_immersion": "Siku za Uzoefu",
-    "view_details": "Angalia Maelezo ya Safari"
+    "view_details": "Tazama Maelezo ya Safari",
+    "negotiable_note": "Kila kipengele cha safari hii kinaweza kujadiliwa na kubadilishwa kulingana na matakwa yako."
   },
   "Navbar": {
     "safaris": "Safari Zetu",
@@ -237,7 +238,8 @@
     "explore_itinerary": "Gundua Ratiba",
     "dossier": "Dossier",
     "concept": "Wazo la Safari",
-    "book_masterpiece": "Weka Uhifadhi wa Safari Hii"
+    "book_masterpiece": "Weka Nafasi ya Safari Hii",
+    "negotiable_note": "Kila kipengele cha safari hii kinaweza kujadiliwa na kubadilishwa kulingana na matakwa yako."
   },
   "Reviews": {
     "title": "Sauti kutoka <p>Nyikani</p>",
@@ -294,8 +296,9 @@
     "finalizing": "Inakamilika...",
     "initialize": "Anzisha Safari",
     "welcome": "Karibu Nyikani.",
-    "confirmed": "Asante kwa kuchagua Asili Yetu Safaris. Uthibitisho wa kiotomatiki umetumwa kwa barua pepe yako. Mwakilishi wetu atawasiliana nawe hivi karibuni.",
-    "return": "Rudi Kituoni"
+    "confirmed": "Asante kwa kuchagua Asili Yetu Safaris. Barua pepe ya uthibitisho imetumwa kwako. Mwakilishi wetu atawasiliana nawe hivi karibuni.",
+    "return": "Rudi Mwanzo",
+    "negotiable_note": "Kila kipengele cha safari hii kinaweza kujadiliwa na kubadilishwa kulingana na matakwa yako."
   },
   "FunFact": {
     "label": "UKWELI WA NYIKA",

@@ -116,6 +116,8 @@ export async function generateItinerary(query: { location: string, dates: string
                     dailyBreakdown: directMatch.itinerary || [
                         { day: 1, description: directMatch.description || "Begin your adventure..." }
                     ],
+                    price_usd: directMatch.price_usd,
+                    discount_price: directMatch.discount_price,
                     isPredefined: true
                 } 
             };

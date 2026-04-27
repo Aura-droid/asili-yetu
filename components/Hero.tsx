@@ -417,13 +417,13 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[80] flex items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm"
           >
             <motion.div 
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-background text-foreground w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl p-8 relative"
+              className="bg-background text-foreground w-full max-w-2xl h-full sm:h-auto sm:max-h-[85vh] overflow-y-auto sm:rounded-3xl shadow-2xl p-8 relative"
             >
               <button 
                 onClick={() => setResult(null)}
@@ -433,7 +433,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               </button>
 
               <div className="flex items-center gap-3 mb-4 text-primary font-bold">
-                <Sparkles className="w-6 h-6" />
+                <Compass className="w-6 h-6" />
                 <span>{t("modal_title")}</span>
               </div>
 
@@ -442,31 +442,46 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
 
               <div className="space-y-6">
                 {result.dailyBreakdown?.map((day: any, i: number) => (
-                  <div key={i} className="flex gap-4">
+                  <div key={i} className="flex gap-6">
                     <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                      <div className="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-black italic text-lg shadow-inner border border-primary/10">
                         {day.day}
                       </div>
                       {i !== result.dailyBreakdown.length - 1 && (
-                        <div className="w-0.5 h-full bg-primary/10 my-2" />
+                        <div className="w-1 h-full bg-linear-to-b from-primary/20 to-transparent my-2 rounded-full" />
                       )}
                     </div>
-                    <div className="pt-2 pb-6">
-                      <p className="font-medium text-foreground">{day.description}</p>
+                    <div className="pt-1 pb-8 flex-1">
+                      {day.destination ? (
+                        <div className="space-y-2">
+                          <h4 className="text-xl font-black text-foreground uppercase tracking-tight italic">{day.destination}</h4>
+                          <p className="text-foreground/60 font-medium leading-relaxed">
+                             {day.accommodation && <span className="text-primary font-bold">Lodge: {day.accommodation}</span>}
+                             {day.description && <span className="block mt-2">{day.description}</span>}
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-lg font-medium text-foreground/80 leading-relaxed">{day.description}</p>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <RustlingButton 
-                onClick={() => {
-                   setTheme("jungle");
-                   setShowFunnel(true);
-                }}
-                className="mt-8 w-full bg-foreground text-background font-bold py-4 rounded-xl hover:opacity-90 transition-opacity"
-              >
-                {t("proceed")}
-              </RustlingButton>
+              <div className="mt-12 flex flex-col sm:flex-row items-center gap-6">
+                <RustlingButton 
+                  onClick={() => {
+                     setTheme("jungle");
+                     setShowFunnel(true);
+                  }}
+                  className="w-full sm:w-auto bg-foreground text-background font-black px-12 py-5 rounded-2xl hover:opacity-90 transition-opacity uppercase tracking-widest text-sm shadow-xl"
+                >
+                  {t("proceed")}
+                </RustlingButton>
+                <p className="text-sm font-medium text-foreground/40 italic max-w-xs text-center sm:text-left">
+                   {t("negotiable_note")}
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -478,6 +493,8 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               itinerary={result} 
               initialGuests={guests}
               initialDates={dates}
+              packagePrice={result.price_usd}
+              packageDiscount={result.discount_price}
               onClose={() => {
                 setShowFunnel(false);
                 setResult(null); // Clear everything only when done

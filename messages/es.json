@@ -14,10 +14,11 @@
     "dates": "Fechas",
     "guests": "Huéspedes",
     "gearing_up": "Preparando...",
-    "modal_title": "Estratega de Expedición de IA",
+    "modal_title": "Estratega de Expedición",
     "proceed": "Continuar con la reserva",
     "days_immersion": "Days of Immersion",
-    "view_details": "View Expedition Details"
+    "view_details": "View Expedition Details",
+    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias."
   },
   "Navbar": {
     "safaris": "Nuestros Safaris",
@@ -379,7 +380,8 @@
     "explore_itinerary": "Explore Itinerary",
     "dossier": "Dossier",
     "concept": "Expedition Concept",
-    "book_masterpiece": "Book This Masterpiece"
+    "book_masterpiece": "Book This Masterpiece",
+    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias."
   },
   "Culture": {
     "badge": "Tradiciones Vivantes",
@@ -414,7 +416,9 @@
     "languages_label": "Languages",
     "years_in_field": "{years} Years in the Field",
     "cta_title": "Ready to explore with the best?",
-    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
+    "confirmed": "Gracias por elegir Asili Yetu Safaris. Se ha enviado un acuse de recibo automático a su correo electrónico. Nuestro representante se pondrá en contacto con usted pronto.",
+    "return": "Return to Base",
+    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias.",
     "cta_btn": "Start Planning"
   },
   "Privacy": {

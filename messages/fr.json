@@ -14,10 +14,11 @@
     "dates": "Dates",
     "guests": "Invités",
     "gearing_up": "Préparation...",
-    "modal_title": "Stratège d'expédition IA",
+    "modal_title": "Stratège d'expédition",
     "proceed": "Procéder à la réservation",
     "days_immersion": "Days of Immersion",
-    "view_details": "View Expedition Details"
+    "view_details": "View Expedition Details",
+    "negotiable_note": "Chaque détail de cette expédition est négociable et entièrement personnalisable selon vos préférences."
   },
   "Navbar": {
     "safaris": "Nos Safaris",

@@ -4,7 +4,7 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-export default function PublicAIWidget() {
+export default function PublicExpeditionWidget() {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
 
@@ -13,9 +13,9 @@ export default function PublicAIWidget() {
     // If we transition to an admin route, we should hide their injected container.
     // Jotform agents typically use an iframe or a specific div ID. We'll add a global class to the body.
     if (isAdmin) {
-      document.body.classList.add("hide-jotform-ai");
+      document.body.classList.add("hide-jotform-widget");
     } else {
-      document.body.classList.remove("hide-jotform-ai");
+      document.body.classList.remove("hide-jotform-widget");
     }
   }, [isAdmin]);
 

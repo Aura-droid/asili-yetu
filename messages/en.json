@@ -14,11 +14,12 @@
     "dates": "Dates",
     "guests": "Guests",
     "gearing_up": "Gearing up...",
-    "modal_title": "AI Expedition Strategist",
+    "modal_title": "Expedition Strategist",
     "proceed": "Proceed to Booking",
     "masterpiece_badge": "Masterpiece Selection",
     "days_immersion": "Days of Immersion",
-    "view_details": "View Expedition Details"
+    "view_details": "View Expedition Details",
+    "negotiable_note": "Every detail of this expedition is negotiable and fully customizable to your preferences."
   },
   "Navbar": {
     "safaris": "Our Safaris",
@@ -131,7 +132,8 @@
     "initialize": "Initialize Expedition",
     "welcome": "Welcome to the Wild.",
     "confirmed": "Thank you for choosing Asili Yetu Safaris. An automated acknowledgment has been sent to your email. Our representative will get in touch with you soon.",
-    "return": "Return to Base"
+    "return": "Return to Base",
+    "negotiable_note": "Every detail of this expedition is negotiable and fully customizable to your preferences."
   },
   "FunFact": {
     "label": "THE WILD TRUTH",
@@ -251,24 +253,34 @@
     }
   },
   "Gallery": {
-    "badge": "The Lens",
-    "title": "Immersion <p>Gallery.</p>",
-    "sub": "A curated visual exhibition streaming live from our expeditions. No filters, just the raw majesty of our world.",
-    "awaiting": "Awaiting Signals",
-    "connect": "Connect your Instagram in the Admin Dashboard to stream live expedition photos here.",
-    "video": "Video",
-    "photo": "Photo",
-    "carousel": "Carousel"
+    "badge": "Visual Archive",
+    "title": "Through the <p>Lens</p>",
+    "sub": "A high-fidelity record of raw beauty and cinematic encounters across the Tanzanian wild.",
+    "awaiting": "Awaiting Visuals",
+    "connect": "Connect with our Instagram to populate the live archive.",
+    "video": "Cinematic",
+    "photo": "Stills"
   },
   "Fleet": {
-    "title": "The Fleet",
-    "sub": "Travel in supreme comfort and safety with our customized 4x4 safari vehicles.",
-    "select": "SELECT A VEHICLE TO INSPECT",
-    "open": "Open Roof",
-    "seats": "Seats",
-    "ac": "Climate",
-    "fridge": "Fridge",
-    "specs": "Vehicle Specifications"
+    "title": "The Elite <p>Fleet</p>",
+    "sub": "Our customized 4x4 Land Cruisers are more than just vehicles—they are mobile observation platforms designed for the raw Tanzanian wild.",
+    "select": "Select a Vessel for Technical Inspection",
+    "readying": "Deployment Readying",
+    "grade": "Explorer Grade",
+    "seats": "{count} Seats",
+    "exit": "Exit Showroom",
+    "dossier": "Technical Dossier",
+    "payload": "Payload Capacity",
+    "explorers": "{count} Explorers",
+    "specs": "Vehicle Specifications",
+    "hotspots": {
+      "roof_title": "Pop-Up Roof",
+      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
+      "susp_title": "Heavy-Duty Suspension",
+      "susp_desc": "Smooth ride across the toughest terrains.",
+      "seat_title": "Comfortable Seating",
+      "seat_desc": "Spacious window seats for every passenger."
+    }
   },
   "Instagram": {
     "title": "Live from the Wild",
@@ -329,7 +341,8 @@
     "explore_itinerary": "Explore Itinerary",
     "dossier": "Dossier",
     "concept": "Expedition Concept",
-    "book_masterpiece": "Book This Masterpiece"
+    "book_masterpiece": "Book This Masterpiece",
+    "negotiable_note": "Every detail of this expedition is negotiable and fully customizable to your preferences."
   },
 
   "Culture": {

@@ -14,10 +14,11 @@
     "dates": "Daten",
     "guests": "Gäste",
     "gearing_up": "Vorbereitung...",
-    "modal_title": "KI-Expeditionsstratege",
+    "modal_title": "Expeditionsstratege",
     "proceed": "Zur Buchung fortfahren",
     "days_immersion": "Tage des Eintauchens",
-    "view_details": "Expeditionsdetails anzeigen"
+    "view_details": "Expeditionsdetails anzeigen",
+    "negotiable_note": "Jedes Detail dieser Expedition ist verhandelbar und kann vollständig an Ihre Wünsche angepasst werden."
   },
   "Navbar": {
     "safaris": "Unsere Safaris",

@@ -14,15 +14,24 @@ interface BookingFunnelProps {
   onClose: () => void;
   initialGuests?: string;
   initialDates?: string;
+  packagePrice?: number;
+  packageDiscount?: number;
 }
 
-export default function BookingFunnel({ itinerary, onClose, initialGuests, initialDates }: BookingFunnelProps) {
+export default function BookingFunnel({ itinerary, onClose, initialGuests, initialDates, packagePrice, packageDiscount }: BookingFunnelProps) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const t = useTranslations("Booking");
   const locale = useLocale();
   const { setIsLoading: setGlobalLoading } = useLoading();
+
+  const nextStep = (s: number) => {
+    setStep(s);
+    // Scroll form container to top on mobile for better visibility
+    const formContainer = document.getElementById("funnel-form-container");
+    if (formContainer) formContainer.scrollTop = 0;
+  };
 
   // Form State
   const [formData, setFormData] = useState({
@@ -95,15 +104,20 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-6"
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 backdrop-blur-md p-0 sm:p-6"
     >
-      <div className="w-full max-w-4xl h-[85vh] sm:h-[600px] bg-background border border-foreground/10 rounded-[2.5rem] shadow-2xl relative overflow-hidden flex flex-col md:flex-row">
+      <div className="w-full max-w-4xl h-full sm:h-[85vh] sm:max-h-[750px] bg-background sm:border sm:border-foreground/10 sm:rounded-[2.5rem] shadow-2xl relative overflow-hidden flex flex-col md:flex-row">
         
         {/* Left Side: Summary Panel */}
-        <div className="w-full md:w-1/3 bg-foreground/5 p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-foreground/10">
+        <div className="w-full md:w-1/3 bg-foreground/5 p-6 md:p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-foreground/10 shrink-0">
           <div>
-            <h3 className="text-sm uppercase tracking-widest font-bold text-primary mb-2">{t("booking")}</h3>
-            <h2 className="text-3xl font-extrabold text-foreground leading-tight mb-4">
+            <div className="flex items-center justify-between md:block mb-4 md:mb-0">
+               <h3 className="text-xs md:text-sm uppercase tracking-widest font-bold text-primary mb-2">{t("booking")}</h3>
+               <div className="md:hidden flex items-center gap-2">
+                  <div className="text-[10px] font-black text-foreground/40 uppercase tracking-widest">Step {step}/3</div>
+               </div>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight mb-4">
               {itinerary?.recommendedTitle || "Custom Safari"}
             </h2>
             <div className="space-y-4">
@@ -114,6 +128,38 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
               <div className="flex items-center gap-3 text-foreground/80">
                 <Flag className="w-5 h-5 text-primary" />
                 <span className="font-medium text-sm">{t("private_guide")}</span>
+              </div>
+
+              {packagePrice && (
+                <div className="pt-6 border-t border-foreground/10 space-y-4">
+                   <div>
+                      <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] mb-1">Price Per Person</p>
+                      <div className="flex items-baseline gap-2">
+                         <span className="text-2xl font-black text-foreground">$ {(packageDiscount || packagePrice).toLocaleString()}</span>
+                         {packageDiscount && <span className="text-xs line-through text-foreground/30 font-bold">${packagePrice.toLocaleString()}</span>}
+                      </div>
+                   </div>
+                   
+                   {formData.guests && parseInt(formData.guests) > 0 && (
+                     <div className="bg-primary/10 p-4 rounded-2xl border border-primary/20">
+                        <p className="text-[8px] font-black text-primary uppercase tracking-[0.2em] mb-1">Total Investment</p>
+                        <div className="flex items-baseline gap-1">
+                           <span className="text-xl font-black text-primary">$ {((packageDiscount || packagePrice) * parseInt(formData.guests)).toLocaleString()}</span>
+                           <span className="text-[10px] font-bold text-primary/60 uppercase">USD Total</span>
+                        </div>
+                        <p className="text-[8px] font-bold text-primary/40 uppercase mt-1 italic">Based on {formData.guests} explorers</p>
+                     </div>
+                   )}
+                </div>
+              )}
+
+              <div className="pt-4 border-t border-foreground/10">
+                 <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse italic">
+                    ★ Negotiable & Tailor-made
+                 </p>
+                 <p className="text-[10px] text-foreground/40 font-medium leading-relaxed mt-2">
+                    {t("negotiable_note")}
+                 </p>
               </div>
             </div>
           </div>
@@ -134,10 +180,10 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
         </div>
 
         {/* Right Side: Interactive Forms */}
-        <div className="w-full md:w-2/3 p-8 md:p-12 relative flex flex-col justify-center overflow-y-auto">
+        <div id="funnel-form-container" className="w-full md:w-2/3 p-6 md:p-12 relative flex flex-col justify-start md:justify-center overflow-y-auto">
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors z-50 text-foreground"
+            className="absolute top-4 right-4 md:top-6 md:right-6 p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors z-50 text-foreground"
           >
             <X className="w-5 h-5" />
           </button>
@@ -180,7 +226,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-foreground/50 mb-2">{t("whatsapp_phone")}</label>
                     <input
-                      type="text"
+                      type="tel"
                       className="w-full bg-foreground/5 border-none outline-none focus:ring-2 focus:ring-primary rounded-xl px-5 py-4 text-foreground font-semibold placeholder:text-foreground/30"
                       placeholder={t("phone_placeholder")}
                       value={formData.phone}
@@ -189,7 +235,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                   </div>
                 </div>
                 <button
-                  onClick={() => setStep(2)}
+                  onClick={() => nextStep(2)}
                   disabled={!formData.name || !formData.email || !formData.phone}
                   className="mt-8 w-full bg-foreground text-background font-bold py-4 rounded-xl hover:opacity-90 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2"
                 >
@@ -209,7 +255,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                 exit="exit"
                 className="w-full max-w-md mx-auto space-y-6"
               >
-                <button onClick={() => setStep(1)} className="text-xs font-bold uppercase tracking-widest flex items-center text-foreground/50 hover:text-foreground mb-4">
+                <button onClick={() => nextStep(1)} className="text-xs font-bold uppercase tracking-widest flex items-center text-foreground/50 hover:text-foreground mb-4">
                   <ChevronLeft className="w-4 h-4 mr-1" /> {t("back")}
                 </button>
                 <h3 className="text-3xl font-bold text-foreground">{t("enhance")}</h3>
@@ -247,7 +293,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                 </div>
 
                 <button
-                  onClick={() => setStep(3)}
+                  onClick={() => nextStep(3)}
                   className="mt-8 w-full bg-foreground text-background font-bold py-4 rounded-xl hover:opacity-90 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2"
                 >
                   {t("final_review")} <ChevronRight className="w-5 h-5" />
@@ -266,7 +312,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                 exit="exit"
                 className="w-full max-w-md mx-auto space-y-6"
               >
-                <button onClick={() => setStep(2)} className="text-xs font-bold uppercase tracking-widest flex items-center text-foreground/50 hover:text-foreground mb-4">
+                <button onClick={() => nextStep(2)} className="text-xs font-bold uppercase tracking-widest flex items-center text-foreground/50 hover:text-foreground mb-4">
                   <ChevronLeft className="w-4 h-4 mr-1" /> {t("back")}
                 </button>
                 <h3 className="text-3xl font-bold text-foreground">{t("confirm_voyage")}</h3>
