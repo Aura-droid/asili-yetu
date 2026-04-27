@@ -77,6 +77,8 @@ export async function createPackage(formData: FormData) {
         itinerary,
         inclusions,
         discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
+        max_people: formData.get("max_people") ? parseInt(formData.get("max_people") as string) : 8,
+        people_count_text: (formData.get("people_count_text") as string) || "For 2-8 People",
         biome_orientation,
         temperature_profile,
         intensity_vibe
@@ -140,6 +142,8 @@ export async function updatePackage(id: string, formData: FormData) {
     itinerary,
     inclusions,
     discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
+    max_people: formData.get("max_people") ? parseInt(formData.get("max_people") as string) : 8,
+    people_count_text: (formData.get("people_count_text") as string) || "For 2-8 People",
     biome_orientation,
     temperature_profile,
     intensity_vibe

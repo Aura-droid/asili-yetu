@@ -33,7 +33,7 @@ export default function FeaturedDestinations({ destinations }: { destinations: a
   }, [index]);
 
   return (
-    <section className="py-24 bg-background overflow-hidden border-t border-foreground/5">
+    <section className="py-12 md:py-24 bg-background overflow-hidden border-t border-foreground/5">
       <div className="container mx-auto px-6 mb-12 flex justify-between items-end">
         <div>
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block">{t("badge")}</span>

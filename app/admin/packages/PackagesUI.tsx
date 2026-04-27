@@ -366,7 +366,9 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                             { label: 'Standard Yield (USD)', name: 'price_usd', def: editingPkg?.price_usd || 2500, type: 'number' },
                             { label: 'Discounted Yield (USD) - Optional', name: 'discount_price', def: editingPkg?.discount_price || "", type: 'number' },
                             { label: 'Endurance (Days)', name: 'duration_days', def: editingPkg?.duration_days || 7, type: 'number' },
-                            { label: 'Comfort Level', name: 'difficulty_level', options: ['Classic', 'Luxury', 'Elite', 'Extreme'], def: editingPkg?.difficulty_level }
+                            { label: 'Comfort Level', name: 'difficulty_level', options: ['Classic', 'Luxury', 'Elite', 'Extreme'], def: editingPkg?.difficulty_level },
+                            { label: 'Max People', name: 'max_people', def: editingPkg?.max_people || 8, type: 'number' },
+                            { label: 'Capacity Label', name: 'people_count_text', def: editingPkg?.people_count_text || "For 2-8 People", type: 'text' }
                           ].map((f, i) => (
                            <div key={i} className="bg-white p-6 rounded-[2rem] border border-foreground/5 shadow-sm">
                               <label className="block text-[8px] font-black text-foreground/40 uppercase tracking-widest mb-3 ml-1">{f.label}</label>
@@ -379,7 +381,7 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                                    {f.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                                  </select>
                               ) : (
-                                 <input name={f.name} step="0.01" type={f.type} required={f.name !== 'discount_price'} defaultValue={f.def} className="w-full bg-foreground/5 border-none rounded-xl pl-4 pr-12 py-3 text-foreground focus:ring-1 focus:ring-primary transition-all font-black text-sm" />
+                                 <input name={f.name} step={f.name === 'price_usd' || f.name === 'discount_price' ? "0.01" : "1"} type={f.type} required={f.name !== 'discount_price'} defaultValue={f.def} className="w-full bg-foreground/5 border-none rounded-xl pl-4 pr-12 py-3 text-foreground focus:ring-1 focus:ring-primary transition-all font-black text-sm" />
                               )}
                            </div>
                          ))}

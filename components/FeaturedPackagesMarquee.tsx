@@ -2,10 +2,11 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Clock, ArrowRight, Compass, Sparkles } from "lucide-react";
+import { MapPin, Clock, ArrowRight, Compass, Sparkles, User, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
+import BookingFunnel from "./BookingFunnel";
 
 interface FeaturedPackagesMarqueeProps {
   packages: any[];
@@ -15,12 +16,13 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
   const scrollRef = useRef<HTMLDivElement>(null);
   const t = useTranslations("Packages");
   const locale = useLocale();
+  const [activeBooking, setActiveBooking] = useState<any | null>(null);
 
   if (!packages || packages.length === 0) return null;
 
   return (
-    <section className="relative py-24 overflow-hidden bg-background">
-      {/* Decorative Background Elements */}
+    <section className="relative py-12 md:py-24 overflow-hidden bg-background">
+      {/* ... decorative elements ... */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -71,7 +73,7 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                  viewport={{ once: true }}
                  transition={{ delay: idx * 0.1 }}
-                 className="min-w-[300px] md:min-w-[450px] aspect-[4/5] md:aspect-[16/10] bg-foreground/5 rounded-[2.5rem] relative overflow-hidden snap-center group/card border border-foreground/10 hover:border-primary/30 transition-all duration-700 shadow-2xl"
+                 className="min-w-[320px] md:min-w-[600px] aspect-[4/5.5] md:aspect-[16/9] bg-foreground/5 rounded-[2.5rem] relative overflow-hidden snap-center group/card border border-foreground/10 hover:border-primary/30 transition-all duration-700 shadow-2xl"
                >
                   {/* Background Image with Blade of Light */}
                   <div className="absolute inset-0 z-0">
@@ -88,10 +90,18 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                   </div>
 
                   {/* Top Badges */}
-                  <div className="absolute top-6 left-6 right-6 flex justify-between items-start z-10">
-                     <div className="bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
-                        <Sparkles className="w-3 h-3 text-primary animate-pulse" />
-                        <span className="text-[8px] font-black text-white uppercase tracking-widest">{pkg.biome_orientation || "Savannah"}</span>
+                  <div className="absolute top-6 left-6 right-6 flex flex-wrap justify-between items-start z-10 gap-2">
+                     <div className="flex gap-2">
+                        <div className="bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
+                           <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+                           <span className="text-[8px] font-black text-white uppercase tracking-widest">{pkg.biome_orientation || "Savannah"}</span>
+                        </div>
+                        <div className="bg-primary px-3 py-1.5 rounded-full border border-black/10 flex items-center gap-2 shadow-lg">
+                           <User className="w-3 h-3 text-black" />
+                           <span className="text-[8px] font-black text-black uppercase tracking-widest">
+                              {pkg.people_count_text || (pkg.max_people ? `Up to ${pkg.max_people}` : "For 2-8 People")}
+                           </span>
+                        </div>
                      </div>
                      {pkg.discount_price && (
                         <div className="bg-red-500 px-3 py-1.5 rounded-full shadow-lg">
@@ -100,38 +110,53 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                      )}
                   </div>
 
-                  {/* Content */}
-                  <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end z-10">
+                   {/* Content */}
+                  <div className="absolute inset-0 p-5 md:p-10 flex flex-col justify-end z-10">
                      <div className="flex items-center gap-2 mb-2">
                         <MapPin className="w-3 h-3 text-primary" />
                         <span className="text-[9px] font-bold text-white/60 uppercase tracking-widest">{pkg.destinations?.name || "Tanzania"}</span>
                      </div>
-                     <h3 className="text-xl md:text-3xl font-black text-white uppercase tracking-tighter leading-tight mb-4 group-hover/card:text-primary transition-colors italic">
+                     <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white uppercase tracking-tighter leading-tight mb-4 group-hover/card:text-primary transition-colors italic line-clamp-2 break-words">
                         {pkg.title}
                      </h3>
                      
-                     <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                        <div className="flex items-center gap-4">
+                     <div className="flex flex-col gap-4 border-t border-white/10 pt-4">
+                        <div className="grid grid-cols-3 md:flex md:items-center gap-2 md:gap-4">
                            <div className="flex flex-col">
                               <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Investment</span>
-                              <span className="text-lg md:text-xl font-black text-white">
+                              <span className="text-sm md:text-xl font-black text-white whitespace-nowrap">
                                  ${pkg.discount_price || pkg.price_usd}
-                                 <span className="text-[10px] text-white/30 font-medium ml-1">/PP</span>
+                                 <span className="text-[8px] md:text-[10px] text-white/30 font-medium ml-1">/PP</span>
                               </span>
                            </div>
-                           <div className="w-px h-6 bg-white/10" />
-                           <div className="flex flex-col">
+                           <div className="hidden md:block w-px h-6 bg-white/10" />
+                           <div className="flex flex-col border-l md:border-l-0 border-white/10 pl-2 md:pl-0">
                               <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Duration</span>
-                              <span className="text-xs md:text-sm font-black text-white uppercase">{pkg.duration_days} Days</span>
+                              <span className="text-[10px] md:text-sm font-black text-white uppercase whitespace-nowrap">{pkg.duration_days} Days</span>
+                           </div>
+                           <div className="hidden md:block w-px h-6 bg-white/10" />
+                           <div className="flex flex-col border-l md:border-l-0 border-white/10 pl-2 md:pl-0">
+                              <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Capacity</span>
+                              <span className="text-[9px] md:text-xs font-black text-primary uppercase whitespace-nowrap">
+                                 {pkg.people_count_text || (pkg.max_people ? `Max ${pkg.max_people}` : "2-8 People")}
+                              </span>
                            </div>
                         </div>
 
-                        <Link 
-                          href={`/${locale}/packages?expedition=${pkg.id}#expedition-${pkg.id}`}
-                          className="w-10 h-10 md:w-12 md:h-12 bg-primary text-black rounded-full flex items-center justify-center group/btn hover:scale-110 transition-all shadow-xl"
-                        >
-                           <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                        </Link>
+                        <div className="flex items-center gap-2 w-full">
+                           <button 
+                             onClick={() => setActiveBooking(pkg)}
+                             className="flex-1 bg-primary text-black px-4 py-3 rounded-full font-black uppercase text-[10px] tracking-widest hover:scale-102 transition-all shadow-lg flex items-center justify-center gap-2"
+                           >
+                              <ShoppingBag className="w-3 h-3" /> Book Now
+                           </button>
+                           <Link 
+                             href={`/${locale}/packages?expedition=${pkg.id}#expedition-${pkg.id}`}
+                             className="w-12 h-12 bg-white/10 backdrop-blur-md text-white rounded-full flex items-center justify-center group/btn hover:bg-white/20 transition-all border border-white/10 flex-shrink-0"
+                           >
+                              <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                           </Link>
+                        </div>
                      </div>
                   </div>
                </motion.div>
@@ -152,6 +177,23 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
             ))}
          </div>
       </div>
+
+      <AnimatePresence>
+         {activeBooking && (
+            <BookingFunnel 
+               itinerary={{
+                  recommendedTitle: activeBooking.title,
+                  rationale: activeBooking.description,
+                  dailyBreakdown: activeBooking.itinerary
+               }} 
+               packagePrice={activeBooking.price_usd}
+               packageDiscount={activeBooking.discount_price}
+               peopleCountText={activeBooking.people_count_text || (activeBooking.max_people ? `For up to ${activeBooking.max_people} people` : "For 2-8 people")}
+               maxPeople={activeBooking.max_people || 8}
+               onClose={() => setActiveBooking(null)} 
+            />
+         )}
+      </AnimatePresence>
     </section>
   );
 }

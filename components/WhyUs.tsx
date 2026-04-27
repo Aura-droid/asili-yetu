@@ -47,7 +47,7 @@ export default function WhyUs() {
   ];
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-16">
           <motion.span 

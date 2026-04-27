@@ -31,7 +31,7 @@ export default function FeaturedGallery({ items }: { items: any[] }) {
   }, [index, items.length]);
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 text-center mb-20">
          <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.5em] text-primary mb-6">
             <Compass className="w-4 h-4" /> Visual Masterpieces

@@ -140,6 +140,12 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20">
                 <span className="font-bold tracking-widest uppercase text-[10px] text-primary">{pkg.difficulty_level}</span>
               </div>
+              {pkg.people_count_text && (
+                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                    <User className="w-4 h-4 text-primary" />
+                    <span className="font-bold uppercase text-[10px] tracking-widest text-white">{pkg.people_count_text}</span>
+                 </div>
+              )}
               {pkg.biome_orientation && (
                   <div className="hidden md:flex items-center gap-2 bg-primary/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30">
                     <Layers className="w-4 h-4 text-primary" />
@@ -176,15 +182,27 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               </div>
             </div>
             
-            <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
               <ShareButton 
                 title={pkg.title} 
                 text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
                 url={typeof window !== 'undefined' ? `${window.location.origin}/packages?expedition=${pkg.id}#expedition-${pkg.id}` : undefined}
               />
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowBooking(true);
+                }}
+                className="bg-primary text-black px-6 md:px-10 py-4 md:py-5 rounded-full font-black uppercase tracking-widest text-xs md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center gap-2"
+              >
+                Book Now
+              </button>
               <RustlingButton 
-                onClick={() => setIsOpen(true)}
-                className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform w-full sm:w-auto text-center shrink-0"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen(true);
+                }}
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm hover:bg-white/20 transition-all text-center"
               >
                 {pt("explore_itinerary")}
               </RustlingButton>
@@ -311,6 +329,8 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               }} 
               packagePrice={pkg.price_usd}
               packageDiscount={pkg.discount_price}
+              peopleCountText={pkg.people_count_text || (pkg.max_people ? `For up to ${pkg.max_people} people` : "For 2-8 people")}
+              maxPeople={pkg.max_people || 8}
               onClose={() => setShowBooking(false)} 
             />
          )}

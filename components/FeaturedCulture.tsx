@@ -30,7 +30,7 @@ export default function FeaturedCulture({ stories }: { stories: any[] }) {
   }, [index]);
 
   return (
-    <section className="py-24 bg-foreground rounded-[4rem] mx-4 md:mx-12 overflow-hidden text-background border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+    <section className="py-12 md:py-24 bg-foreground rounded-[3rem] md:rounded-[4rem] mx-2 md:mx-12 overflow-hidden text-background border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
            <div>

@@ -77,7 +77,7 @@ export default function ReviewMarquee() {
   if (!mounted || reviews.length === 0) return null;
 
   return (
-    <div className="py-24 bg-foreground/5 overflow-hidden border-y border-foreground/5 relative">
+    <div className="py-12 md:py-24 bg-foreground/5 overflow-hidden border-y border-foreground/5 relative">
       <div className="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
          <div>
             <h2 className="text-3xl font-black text-foreground tracking-tighter italic uppercase">Voices from the <span className="text-primary italic">Wild</span></h2>

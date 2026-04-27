@@ -327,8 +327,14 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               <Calendar className="text-primary w-6 h-6 flex-shrink-0" />
               <input 
                 value={dates} onChange={(e) => setDates(e.target.value)}
-                type="date" aria-label={t("dates")}
-                className="bg-transparent border-none outline-none w-full text-foreground placeholder:text-foreground/60 font-semibold focus:ring-0 [&::-webkit-calendar-picker-indicator]:opacity-50 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 cursor-pointer" 
+                type="text"
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => {
+                   if (!e.target.value) e.target.type = "text";
+                }}
+                placeholder={t("dates")}
+                aria-label={t("dates")}
+                className="bg-transparent border-none outline-none w-full text-foreground placeholder:text-foreground/60 font-semibold focus:ring-0 [&::-webkit-calendar-picker-indicator]:opacity-50 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 cursor-pointer appearance-none min-h-[40px]" 
               />
            </div>
            
@@ -336,8 +342,8 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
               <Users className="text-primary w-6 h-6 flex-shrink-0" />
               <input 
                 value={guests} onChange={(e) => setGuests(e.target.value)}
-                type="text" placeholder={t("guests")} 
-                className="bg-transparent border-none outline-none w-full text-foreground placeholder:text-foreground/60 font-semibold focus:ring-0" 
+                type="number" min="1" max="20" placeholder={t("guests")} 
+                className="bg-transparent border-none outline-none w-full text-foreground placeholder:text-foreground/60 font-semibold focus:ring-0 appearance-none" 
               />
            </div>
            

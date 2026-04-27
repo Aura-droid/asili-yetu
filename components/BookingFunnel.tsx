@@ -16,9 +16,11 @@ interface BookingFunnelProps {
   initialDates?: string;
   packagePrice?: number;
   packageDiscount?: number;
+  peopleCountText?: string;
+  maxPeople?: number;
 }
 
-export default function BookingFunnel({ itinerary, onClose, initialGuests, initialDates, packagePrice, packageDiscount }: BookingFunnelProps) {
+export default function BookingFunnel({ itinerary, onClose, initialGuests, initialDates, packagePrice, packageDiscount, peopleCountText, maxPeople }: BookingFunnelProps) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
@@ -130,6 +132,13 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                 <span className="font-medium text-sm">{t("private_guide")}</span>
               </div>
 
+              {peopleCountText && (
+                <div className="flex items-center gap-3 text-foreground/80">
+                  <Users className="w-5 h-5 text-primary" />
+                  <span className="font-medium text-sm">{peopleCountText}</span>
+                </div>
+              )}
+
               {packagePrice && (
                 <div className="pt-6 border-t border-foreground/10 space-y-4">
                    <div>
@@ -233,10 +242,27 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
                   </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-foreground/50 mb-2">Number of People</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max={maxPeople || 20}
+                      className="w-full bg-foreground/5 border-none outline-none focus:ring-2 focus:ring-primary rounded-xl px-5 py-4 text-foreground font-semibold placeholder:text-foreground/30"
+                      placeholder="2"
+                      value={formData.guests}
+                      onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                    />
+                    {maxPeople && (
+                      <p className="text-[10px] text-primary font-bold uppercase tracking-widest mt-2 italic">
+                        Limit: {maxPeople} people for this expedition
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <button
                   onClick={() => nextStep(2)}
-                  disabled={!formData.name || !formData.email || !formData.phone}
+                  disabled={!formData.name || !formData.email || !formData.phone || !formData.guests}
                   className="mt-8 w-full bg-foreground text-background font-bold py-4 rounded-xl hover:opacity-90 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2"
                 >
                   {t("continue")} <ChevronRight className="w-5 h-5" />
