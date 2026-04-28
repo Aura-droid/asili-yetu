@@ -150,9 +150,9 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                initial={{ opacity: 0, x: -100 }}
                animate={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.8, type: "spring" }}
-               className="w-full md:w-2/3 h-[60vh] md:h-[80vh] rounded-[4rem] overflow-hidden relative shadow-[0_60px_120px_rgba(0,0,0,0.3)] bg-foreground/5 flex-shrink-0"
+               className="w-full md:w-2/3 h-[60vh] md:h-[80vh] rounded-[4rem] relative shadow-[0_60px_120px_rgba(0,0,0,0.3)] bg-foreground/5 flex-shrink-0"
              >
-                <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
+                <div className="absolute inset-0 bg-primary/5 pointer-events-none rounded-[4rem]" />
                 
                 <button 
                   onClick={() => {
@@ -163,14 +163,14 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                 >
                   <ChevronLeft className="w-4 h-4" /> {t("exit")}
                 </button>
-
+ 
                 <motion.img
                   layoutId={`vehicle-image-${selectedVehicle?.id}`}
                   src={selectedVehicle?.image_url || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"}
                   alt={selectedVehicle?.model_name || "Vehicle"}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-[4rem]"
                 />
-
+ 
                 {/* Hotspots Overlay */}
                 {defaultHotspots.map((spot) => (
                   <motion.div
@@ -184,13 +184,11 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                     <button
                       onClick={() => handleHotspotClick(spot.id)}
                       onMouseEnter={() => {
-                        // Only auto-open on hover for desktop if none is manually locked
                         if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                            setActiveHotspot(spot.id);
                         }
                       }}
                       onMouseLeave={() => {
-                        // Only auto-close on leave for desktop
                         if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                            setActiveHotspot(null);
                         }
@@ -202,7 +200,7 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                         <Search className="w-5 h-5" />
                       </span>
                     </button>
-
+ 
                     {/* Tooltip */}
                     <AnimatePresence>
                       {activeHotspot === spot.id && (
@@ -210,10 +208,10 @@ export default function FleetShowroom({ fleet }: FleetShowroomProps) {
                           initial={{ opacity: 0, y: 10, scale: 0.9 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                          className="absolute -top-4 left-16 w-80 bg-black/80 backdrop-blur-3xl p-8 rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.5)] border border-white/10 pointer-events-none"
+                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-6 w-64 md:w-80 bg-black/80 backdrop-blur-3xl p-6 md:p-8 rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.5)] border border-white/10 pointer-events-none"
                         >
                           <h4 className="text-primary font-black text-xs uppercase tracking-[0.2em] mb-3">{spot.title}</h4>
-                          <p className="text-white/60 text-sm leading-relaxed font-medium">{spot.desc}</p>
+                          <p className="text-white/60 text-xs md:text-sm leading-relaxed font-medium">{spot.desc}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
