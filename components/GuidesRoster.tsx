@@ -99,80 +99,100 @@ export default function GuidesRoster({ guides }: { guides: any[] }) {
         </div>
 
         {/* Guides Grid - Marquee on Mobile, Grid on Desktop */}
-        <div className="relative overflow-hidden md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
-          <motion.div 
-            animate={controls}
-            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full"
-          >
-            {guides.map((guide) => {
-              const local = getLocalizedGuide(guide);
-              return (
-                <motion.div 
-                  key={guide.id} 
-                  variants={itemVariants}
-                  className="group relative bg-foreground/5 rounded-[2rem] overflow-hidden border border-foreground/10 hover:border-primary/50 transition-colors duration-500 flex flex-col w-full shrink-0 md:shrink md:w-auto"
-                >
-                  {/* Image Header */}
-                  <div className="relative w-full aspect-[4/5] overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                    <Image 
-                      src={guide.image_url || guide.image} 
-                      alt={guide.name} 
-                      fill 
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
-                    />
-                    
-                    {/* Overlay Info */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
-                      <p className="text-primary font-black uppercase tracking-widest text-xs mb-2">{local.role}</p>
-                      <h3 className="text-3xl font-black">{guide.name}</h3>
-                    </div>
-                  </div>
-
-                  {/* Body Details */}
-                  <div className="p-8 flex-1 flex flex-col">
-                    <p className="text-foreground/70 mb-8 leading-relaxed font-medium">
-                      {local.bio}
-                    </p>
-
-                    <div className="space-y-4 mt-auto">
-                      <div className="flex items-center gap-4 text-sm">
-                        <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                          <Award className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("experience_label")}</p>
-                          <p className="font-bold text-foreground">{t("years_in_field", { years: guide.experience_years || guide.experience })}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-4 text-sm">
-                        <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                          <MapIcon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("specialty_label")}</p>
-                          <p className="font-bold text-foreground">{local.specialty}</p>
-                        </div>
-                      </div>
-
-                    <div className="flex items-center gap-4 text-sm pb-2">
-                      <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
-                        <Languages className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("languages_label")}</p>
-                        <p className="font-bold text-foreground">
-                          {Array.isArray(guide.languages) ? guide.languages.join(", ") : guide.languages}
-                        </p>
+        <div className="relative md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
+          <div className="overflow-hidden md:overflow-visible">
+            <motion.div 
+              animate={controls}
+              drag="x"
+              dragConstraints={{ right: 0, left: -(guides.length - 1) * 350 }} // Approximation for drag
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -50 && index < guides.length - 1) setIndex(index + 1);
+                if (info.offset.x > 50 && index > 0) setIndex(index - 1);
+              }}
+              className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full touch-pan-y"
+            >
+              {guides.map((guide) => {
+                const local = getLocalizedGuide(guide);
+                return (
+                  <motion.div 
+                    key={guide.id} 
+                    variants={itemVariants}
+                    className="group relative bg-foreground/5 rounded-[2rem] overflow-hidden border border-foreground/10 hover:border-primary/50 transition-colors duration-500 flex flex-col w-full shrink-0 md:shrink md:w-auto"
+                  >
+                    {/* Image Header */}
+                    <div className="relative w-full aspect-[4/5] overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+                      <Image 
+                        src={guide.image_url || guide.image || "/brand/asili-yetu-brand.jpg"} 
+                        alt={guide.name} 
+                        fill 
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                      />
+                      
+                      {/* Overlay Info */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white">
+                        <p className="text-primary font-black uppercase tracking-widest text-xs mb-2">{local.role || t("active_guide")}</p>
+                        <h3 className="text-3xl font-black">{guide.name}</h3>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-              );
-            })}
-          </motion.div>
+  
+                    {/* Body Details */}
+                    <div className="p-8 flex-1 flex flex-col">
+                      <p className="text-foreground/70 mb-8 leading-relaxed font-medium line-clamp-4">
+                        {local.bio}
+                      </p>
+  
+                      <div className="space-y-4 mt-auto">
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                            <Award className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("experience_label")}</p>
+                            <p className="font-bold text-foreground">{t("years_in_field", { years: guide.experience_years || 0 })}</p>
+                          </div>
+                        </div>
+  
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                            <MapIcon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("specialty_label")}</p>
+                            <p className="font-bold text-foreground">{local.specialty || 'General Safari Expert'}</p>
+                          </div>
+                        </div>
+  
+                        <div className="flex items-center gap-4 text-sm pb-2">
+                          <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center text-foreground shrink-0 border border-foreground/5">
+                            <Languages className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] uppercase tracking-widest font-bold text-foreground/50">{t("languages_label")}</p>
+                            <p className="font-bold text-foreground truncate max-w-[150px]">
+                              {Array.isArray(guide.languages) ? guide.languages.join(", ") : (guide.languages || 'English, Swahili')}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+
+          {/* Marquee Indicators (Mobile Only) */}
+          <div className="flex md:hidden justify-center gap-2 mt-8">
+            {guides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-1.5 transition-all duration-500 rounded-full ${i === index ? 'w-8 bg-primary' : 'w-2 bg-foreground/10'}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Call to Action */}
