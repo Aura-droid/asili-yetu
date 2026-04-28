@@ -64,6 +64,7 @@ export default function GuidesUI({ initialGuides }: { initialGuides: any[] }) {
               <tr>
                 <th className="px-6 py-4 font-bold">Guide</th>
                 <th className="px-6 py-4 font-bold">Specialty</th>
+                <th className="px-6 py-4 font-bold">Experience</th>
                 <th className="px-6 py-4 font-bold">Status</th>
                 <th className="px-6 py-4 font-bold text-right">Actions</th>
               </tr>
@@ -88,6 +89,9 @@ export default function GuidesUI({ initialGuides }: { initialGuides: any[] }) {
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-foreground/70">
                     {guide.specialty || '-'}
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-foreground/70">
+                    {guide.experience_years ? `${guide.experience_years} Years` : '-'}
                   </td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${guide.is_active ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
@@ -175,6 +179,16 @@ export default function GuidesUI({ initialGuides }: { initialGuides: any[] }) {
             <div>
                <label className="block text-xs font-bold text-foreground/70 uppercase tracking-wider mb-2">WhatsApp Number *</label>
                <input name="phone_number" defaultValue={editingGuide?.phone_number} required placeholder="+255..." className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:ring-2 focus:ring-primary focus:outline-none font-bold" />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+               <div>
+                  <label className="block text-xs font-bold text-foreground/70 uppercase tracking-wider mb-2">Exp. (Years)</label>
+                  <input name="experience_years" type="number" defaultValue={editingGuide?.experience_years} placeholder="e.g. 5" className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:ring-2 focus:ring-primary focus:outline-none" />
+               </div>
+               <div>
+                  <label className="block text-xs font-bold text-foreground/70 uppercase tracking-wider mb-2">Languages</label>
+                  <input name="languages" defaultValue={editingGuide?.languages?.join(', ')} placeholder="English, Swahili" className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-4 py-3 text-foreground focus:ring-2 focus:ring-primary focus:outline-none" />
+               </div>
             </div>
             <div>
                <label className="block text-xs font-bold text-foreground/70 uppercase tracking-wider mb-2">Guide Portrait {editingGuide ? '(Update)' : '(Photo)'}</label>

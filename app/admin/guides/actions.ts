@@ -13,6 +13,9 @@ export async function addGuide(formData: FormData) {
 
   const phone_number = formData.get('phone_number') as string
   const fleet_assigned = formData.get('fleet_assigned') as string
+  const experience_years = formData.get('experience_years') ? parseInt(formData.get('experience_years') as string) : null
+  const languages_raw = formData.get('languages') as string
+  const languages = languages_raw ? languages_raw.split(',').map(l => l.trim()).filter(l => l !== '') : []
 
   if (!name) return { error: "Name is required" }
   
@@ -46,6 +49,8 @@ export async function addGuide(formData: FormData) {
     bio: bio || null,
     phone_number: phone_number || null,
     fleet_assigned: fleet_assigned || 'Land Cruiser 300',
+    experience_years,
+    languages,
     image_url,
     is_active: true
   })
@@ -137,7 +142,9 @@ export async function updateGuide(id: string, formData: FormData) {
     specialty: specialty || null,
     bio: bio || null,
     phone_number: phone_number || null,
-    fleet_assigned: fleet_assigned || 'Land Cruiser 300'
+    fleet_assigned: fleet_assigned || 'Land Cruiser 300',
+    experience_years: formData.get('experience_years') ? parseInt(formData.get('experience_years') as string) : null,
+    languages: formData.get('languages') ? (formData.get('languages') as string).split(',').map(l => l.trim()).filter(l => l !== '') : []
   }
 
   if (file && file.size > 0) {
