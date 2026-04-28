@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { X, CheckCircle2, ChevronRight, ChevronLeft, Flag, Utensils, Camera, Tent } from "lucide-react";
+import { X, CheckCircle2, ChevronRight, ChevronLeft, Flag, Utensils, Camera, Tent, Users } from "lucide-react";
 import RustlingButton from "./RustlingButton";
 import { useTheme } from "./ThemeProvider";
 import { useTranslations, useLocale } from "next-intl";

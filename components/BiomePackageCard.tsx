@@ -155,45 +155,52 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/20 mt-auto">
-            <div className="flex items-center gap-4">
-              <div>
-                <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">{pt("investment")}</p>
-                <div className="flex items-center text-white">
-                  <DollarSign className="w-5 h-5 text-primary -ml-1" />
-                  {pkg.discount_price ? (
-                    <div className="flex flex-col">
-                      <span className="text-[9px] font-black line-through text-white/40 mb-[-4px]">${pkg.price_usd}</span>
-                      <div className="flex items-center">
-                        <span className="text-3xl md:text-5xl font-black text-primary">{pkg.discount_price}</span>
-                        <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pt-6 border-t border-white/20 mt-auto">
+            <div className="flex items-center gap-4 w-full lg:w-auto">
+              <div className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-0">
+                <div className="shrink-0">
+                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">{pt("investment")}</p>
+                  <div className="flex items-center text-white">
+                    <DollarSign className="w-5 h-5 text-primary -ml-1" />
+                    {pkg.discount_price ? (
+                      <div className="flex flex-col">
+                        <span className="text-[9px] font-black line-through text-white/40 mb-[-4px]">${pkg.price_usd}</span>
+                        <div className="flex items-center">
+                          <span className="text-3xl md:text-5xl font-black text-primary">{pkg.discount_price}</span>
+                          <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <>
-                      <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
-                      <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
-                    </>
-                  )}
+                    ) : (
+                      <>
+                        <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
+                        <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
-                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse">
+                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse hidden lg:block">
                    ★ Negotiable & Tailor-made
                 </p>
               </div>
             </div>
             
-            <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-              <ShareButton 
-                title={pkg.title} 
-                text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
-                url={typeof window !== 'undefined' ? `${window.location.origin}/packages?expedition=${pkg.id}#expedition-${pkg.id}` : undefined}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex items-center gap-3 w-full lg:w-auto">
+              <div className="flex items-center gap-3 w-full sm:col-span-2 lg:w-auto">
+                <ShareButton 
+                  title={pkg.title} 
+                  text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
+                  url={typeof window !== 'undefined' ? `${window.location.origin}/packages?expedition=${pkg.id}#expedition-${pkg.id}` : undefined}
+                />
+                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse lg:hidden">
+                   ★ Negotiable & Tailor-made
+                </p>
+              </div>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowBooking(true);
                 }}
-                className="bg-primary text-black px-6 md:px-10 py-4 md:py-5 rounded-full font-black uppercase tracking-widest text-xs md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center gap-2"
+                className="bg-primary text-black px-6 md:px-10 py-4 md:py-5 rounded-full font-black uppercase tracking-widest text-xs md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-2 w-full lg:w-auto"
               >
                 Book Now
               </button>
@@ -202,7 +209,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                   e.stopPropagation();
                   setIsOpen(true);
                 }}
-                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm hover:bg-white/20 transition-all text-center"
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto"
               >
                 {pt("explore_itinerary")}
               </RustlingButton>

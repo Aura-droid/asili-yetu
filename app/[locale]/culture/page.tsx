@@ -24,7 +24,8 @@ export default async function CulturePage() {
                 <h1 className="text-6xl md:text-[7rem] font-black text-foreground italic uppercase tracking-tighter leading-[0.9] mb-8">
                     {t.rich("title", {
                       p: (chunks) => <span className="text-primary italic">{chunks}</span>,
-                      br: () => <br />
+                      br: () => <br />,
+                      BR: () => <br />
                     })}
                 </h1>
                 <p className="text-xl md:text-2xl text-foreground/50 font-medium max-w-xl leading-relaxed">
