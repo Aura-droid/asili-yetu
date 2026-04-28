@@ -404,16 +404,17 @@
     "carousel": "Carrousel"
   },
   "Guides": {
-    "badge": "The Heart of the Safari",
-    "title": "Meet Your <p>Tour Guides.</p>",
-    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
-    "experience_label": "Experience",
-    "specialty_label": "Specialty",
-    "languages_label": "Languages",
-    "years_in_field": "{years} Years in the Field",
-    "cta_title": "Ready to explore with the best?",
-    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
-    "cta_btn": "Start Planning"
+    "badge": "Le Cœur du Safari",
+    "title": "Rencontrez vos <p>Guides Touristiques.</p>",
+    "sub": "Un lodge de luxe n'est qu'un bâtiment. Un 4x4 personnalisé n'est qu'un véhicule. La véritable magie de la nature sauvage tanzanienne est révélée exclusivement par l'être humain assis derrière le volant.",
+    "experience_label": "Expérience",
+    "specialty_label": "Spécialité",
+    "languages_label": "Langues",
+    "years_in_field": "{years} ans d'expérience",
+    "active_guide": "Guide Actif",
+    "cta_title": "Prêt à explorer avec les meilleurs ?",
+    "cta_sub": "Chaque expédition Asili Yetu comprend un guide principal dédié. Trouvons l'expert parfait pour diriger votre voyage.",
+    "cta_btn": "Commencer à Planifier"
   },
   "Privacy": {
     "title": "Politique de <p>Confidentialité</p>",

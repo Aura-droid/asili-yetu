@@ -404,16 +404,17 @@
     "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature."
   },
   "Guides": {
-    "badge": "The Heart of the Safari",
-    "title": "Meet Your <p>Tour Guides.</p>",
-    "sub": "A luxury lodge is only a building. A customized 4x4 is only a vehicle. The true magic of the Tanzanian wilderness is unlocked exclusively by the human being sitting behind the wheel.",
-    "experience_label": "Experience",
-    "specialty_label": "Specialty",
-    "languages_label": "Languages",
-    "years_in_field": "{years} Years in the Field",
-    "cta_title": "Ready to explore with the best?",
-    "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
-    "cta_btn": "Start Planning"
+    "badge": "قلب السفاري",
+    "title": "تعرف على <p>مرشدي الرحلات.</p>",
+    "sub": "النزل الفاخر هو مجرد مبنى. سيارة الـ 4x4 المخصصة هي مجرد مركبة. السحر الحقيقي لبرية تنزانيا لا يكشفه إلا الإنسان الجالس خلف عجلة القيادة.",
+    "experience_label": "الخبرة",
+    "specialty_label": "التخصص",
+    "languages_label": "اللغات",
+    "years_in_field": "{years} عاماً في الميدان",
+    "active_guide": "مرشد نشط",
+    "cta_title": "جاهز للاستكشاف مع الأفضل؟",
+    "cta_sub": "تتضمن كل رحلة من رحلات أصيلي يتو مرشداً سياحياً كبيراً مخصصاً. دعنا نجد الخبير المثالي لقيادة رحلتك.",
+    "cta_btn": "ابدأ التخطيط"
   },
   "Privacy": {
     "title": "سياسة <p>الخصوصية</p>",
