@@ -191,13 +191,13 @@ export default function SafariDatePicker({ value, onChange, placeholder }: Safar
 
   return (
     <div className="relative w-full" ref={triggerRef}>
-      <div onClick={openCalendar} className="flex items-center gap-3 w-full cursor-pointer">
+      <div onClick={openCalendar} className="flex items-center justify-start gap-3 w-full cursor-pointer text-left">
         <CalendarIcon className="text-primary w-6 h-6 flex-shrink-0" />
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden text-left">
           {value ? (
-            <span className="text-foreground font-semibold">{value}</span>
+            <span className="block text-left text-foreground font-semibold">{value}</span>
           ) : (
-            <span className="text-foreground/60 font-semibold truncate block">{placeholder}</span>
+            <span className="block truncate text-left text-foreground/60 font-semibold">{placeholder}</span>
           )}
         </div>
       </div>
