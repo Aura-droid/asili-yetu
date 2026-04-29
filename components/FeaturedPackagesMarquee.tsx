@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 import { MapPin, Clock, ArrowRight, Compass, Sparkles, User, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
@@ -13,16 +13,40 @@ interface FeaturedPackagesMarqueeProps {
 }
 
 export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMarqueeProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimationControls();
+  const [index, setIndex] = useState(0);
   const t = useTranslations("Packages");
   const locale = useLocale();
   const [activeBooking, setActiveBooking] = useState<any | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      setIndex(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      if (!activeBooking) {
+        setIndex((prev) => (prev + 1) % (packages.length || 1));
+      }
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [packages.length, activeBooking]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      controls.set({ x: 0 });
+      return;
+    }
+    controls.start({ 
+      x: `calc(-${index * 100}% - ${index * 1.5}rem)`,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    });
+  }, [index, controls]);
 
   if (!packages || packages.length === 0) return null;
 
   return (
     <section className="relative py-12 md:py-24 overflow-hidden bg-background">
-      {/* ... decorative elements ... */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -61,10 +85,16 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
       </div>
 
       {/* Marquee Container */}
-      <div className="relative group">
-         <div 
-           ref={scrollRef}
-           className="flex gap-6 px-6 md:px-[10%] overflow-x-auto no-scrollbar snap-x snap-mandatory pb-12"
+      <div className="relative group overflow-hidden md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
+         <motion.div 
+            animate={controls}
+            drag="x"
+            dragConstraints={{ right: 0, left: -(packages.length - 1) * 350 }} 
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -50 && index < packages.length - 1) setIndex(index + 1);
+              if (info.offset.x > 50 && index > 0) setIndex(index - 1);
+            }}
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-[10%] w-full touch-pan-y"
          >
             {packages.map((pkg, idx) => (
                <motion.div 
@@ -73,7 +103,7 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                  viewport={{ once: true }}
                  transition={{ delay: idx * 0.1 }}
-                 className="min-w-[320px] md:min-w-[600px] aspect-[4/5.5] md:aspect-[16/9] bg-foreground/5 rounded-[2.5rem] relative overflow-hidden snap-center group/card border border-foreground/10 hover:border-primary/30 transition-all duration-700 shadow-2xl"
+                 className="min-w-full md:min-w-0 aspect-[4/5.5] md:aspect-[16/9] bg-foreground/5 rounded-[2.5rem] relative overflow-hidden group/card border border-foreground/10 hover:border-primary/30 transition-all duration-700 shadow-2xl shrink-0"
                >
                   {/* Background Image with Blade of Light */}
                   <div className="absolute inset-0 z-0">
@@ -123,7 +153,7 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                      <div className="flex flex-col gap-4 border-t border-white/10 pt-4">
                         <div className="grid grid-cols-3 md:flex md:items-center gap-2 md:gap-4">
                            <div className="flex flex-col">
-                              <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Investment</span>
+                              <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">{t("investment")}</span>
                               <span className="text-sm md:text-xl font-black text-white whitespace-nowrap">
                                  ${pkg.discount_price || pkg.price_usd}
                                  <span className="text-[8px] md:text-[10px] text-white/30 font-medium ml-1">/PP</span>
@@ -161,19 +191,17 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                   </div>
                </motion.div>
             ))}
-         </div>
+         </motion.div>
 
-         {/* Navigation Indicators (Custom Scrollbar UI) */}
-         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+         {/* Navigation Indicators */}
+         <div className="flex md:hidden justify-center gap-2 mt-8">
             {packages.map((_, i) => (
-               <div key={i} className="w-8 h-1 rounded-full bg-foreground/10 overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-primary"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                  />
-               </div>
+               <button
+                 key={i}
+                 onClick={() => setIndex(i)}
+                 className={`h-1.5 transition-all duration-500 rounded-full ${i === index ? 'w-8 bg-primary' : 'w-2 bg-foreground/10'}`}
+                 aria-label={`Go to slide ${i + 1}`}
+               />
             ))}
          </div>
       </div>
