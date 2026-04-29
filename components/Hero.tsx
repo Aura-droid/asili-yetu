@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { MapPin, Calendar, Users, Sparkles, X, Car, ArrowRight, Compass } from "lucide-react";
+import { MapPin, Users, Sparkles, X, Car, ArrowRight, Compass } from "lucide-react";
+import SafariDatePicker from "./SafariDatePicker";
 import { generateItinerary } from "@/app/actions";
 import RustlingButton from "./RustlingButton";
 import BookingFunnel from "./BookingFunnel";
@@ -324,29 +325,10 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
            </div>
            
            <div className="flex-1 flex items-center gap-3 w-full border-b md:border-b-0 md:border-r border-foreground/20 pb-4 md:pb-0 px-5">
-              <Calendar className="text-primary w-6 h-6 flex-shrink-0" />
-              <input 
-                value={dates} onChange={(e) => setDates(e.target.value)}
-                type="text"
-                onFocus={(e) => {
-                   e.target.type = "date";
-                   if ('showPicker' in e.target) {
-                      try { (e.target as any).showPicker(); } catch (err) {}
-                   }
-                }}
-                onClick={(e) => {
-                   const target = e.target as HTMLInputElement;
-                   target.type = "date";
-                   if ('showPicker' in target) {
-                      try { target.showPicker(); } catch (err) {}
-                   }
-                }}
-                onBlur={(e) => {
-                   if (!e.target.value) e.target.type = "text";
-                }}
+              <SafariDatePicker
+                value={dates}
+                onChange={setDates}
                 placeholder={t("dates")}
-                aria-label={t("dates")}
-                className="bg-transparent border-none outline-none w-full text-foreground placeholder:text-foreground/60 font-semibold focus:ring-0 [&::-webkit-calendar-picker-indicator]:opacity-50 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 cursor-pointer appearance-none min-h-[40px]" 
               />
            </div>
            

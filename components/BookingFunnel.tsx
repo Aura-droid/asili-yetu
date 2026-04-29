@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { X, CheckCircle2, ChevronRight, ChevronLeft, Flag, Utensils, Camera, Tent, Users } from "lucide-react";
+import { X, CheckCircle2, ChevronRight, ChevronLeft, Flag, Utensils, Camera, Tent, Users, Calendar } from "lucide-react";
 import RustlingButton from "./RustlingButton";
 import { useTheme } from "./ThemeProvider";
 import { useTranslations, useLocale } from "next-intl";
 import { submitBookingInquiry } from "@/app/actions";
 import { useLoading } from "@/providers/LoadingProvider";
+import SafariDatePicker from "./SafariDatePicker";
 
 interface BookingFunnelProps {
   itinerary: any;
@@ -305,6 +306,19 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                   })}
                 </div>
 
+               <div className="pt-4">
+                  <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground/50 mb-2">
+                    <Calendar className="w-4 h-4" /> Departure Date
+                  </label>
+                  <div className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-5 py-4 flex items-center">
+                    <SafariDatePicker
+                      value={formData.dates}
+                      onChange={(date) => setFormData({ ...formData, dates: date })}
+                      placeholder="Select departure date"
+                    />
+                  </div>
+                </div>
+
                 <div className="pt-4">
                   <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground/50 mb-2">
                     <Utensils className="w-4 h-4" /> {t("dietary")}
@@ -355,6 +369,14 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                       <span className="font-medium text-foreground/70 text-sm italic">{formData.phone}</span>
                     </div>
                   </div>
+                  {formData.dates && (
+                    <div>
+                      <span className="block text-[10px] uppercase font-bold text-foreground/50 tracking-wider">Departure Date</span>
+                      <span className="font-bold text-foreground flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-primary" /> {formData.dates}
+                      </span>
+                    </div>
+                  )}
                   {formData.addons.length > 0 && (
                      <div>
                        <span className="block text-[10px] uppercase font-bold text-foreground/50 tracking-wider">{t("addons")}</span>
