@@ -308,15 +308,16 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
 
                <div className="pt-4">
                   <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground/50 mb-2">
-                    <Calendar className="w-4 h-4" /> Departure Date
+                    <Calendar className="w-4 h-4" /> Safari Start Date
                   </label>
                   <div className="w-full bg-foreground/5 border border-foreground/10 rounded-xl px-5 py-4 flex items-center">
                     <SafariDatePicker
                       value={formData.dates}
                       onChange={(date) => setFormData({ ...formData, dates: date })}
-                      placeholder="Select departure date"
+                      placeholder="When does your adventure begin?"
                     />
                   </div>
+                  <p className="text-[10px] text-foreground/30 font-medium mt-2 italic">This is the date your safari activities commence in Tanzania.</p>
                 </div>
 
                 <div className="pt-4">
@@ -371,7 +372,7 @@ export default function BookingFunnel({ itinerary, onClose, initialGuests, initi
                   </div>
                   {formData.dates && (
                     <div>
-                      <span className="block text-[10px] uppercase font-bold text-foreground/50 tracking-wider">Departure Date</span>
+                      <span className="block text-[10px] uppercase font-bold text-foreground/50 tracking-wider">Safari Start Date</span>
                       <span className="font-bold text-foreground flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-primary" /> {formData.dates}
                       </span>
