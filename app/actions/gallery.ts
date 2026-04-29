@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { getInstagramPosts } from "@/lib/instagram";
 
 export async function getManualGallery() {
   const supabase = await createClient();
@@ -17,15 +18,38 @@ export async function getManualGallery() {
 }
 
 export async function getInstagramMedia() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("gallery_items")
-    .select("*")
-    .eq("source", "instagram")
-    .order("created_at", { ascending: false });
+  try {
+    // 1. First, try to fetch from the API directly to ensure the admin sees what's live
+    const posts = await getInstagramPosts(12);
+    
+    if (posts && posts.length > 0) {
+      // Map API response to the format expected by the GalleryUI
+      const mappedPosts = posts.map(post => ({
+        id: post.id,
+        url: post.media_url,
+        permalink: post.permalink,
+        caption: post.caption,
+        source: 'instagram',
+        created_at: post.timestamp,
+        is_active: true,
+        is_featured: false
+      }));
+      return { error: null, data: mappedPosts };
+    }
 
-  if (error) return { error: error.message, data: [] };
-  return { error: null, data: data };
+    // 2. Fallback to database if API fails or returns empty (though homepage would also be empty)
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("gallery_items")
+      .select("*")
+      .eq("source", "instagram")
+      .order("created_at", { ascending: false });
+
+    if (error) return { error: error.message, data: [] };
+    return { error: null, data: data };
+  } catch (err: any) {
+    return { error: err.message || "Failed to synchronize feed", data: [] };
+  }
 }
 
 export async function addGalleryItem(formData: FormData) {
