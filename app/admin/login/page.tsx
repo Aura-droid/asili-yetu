@@ -33,9 +33,9 @@ export default function LoginPage() {
 
         <form 
           className="space-y-6"
-          action={(formData) => {
+          action={async (formData) => {
              setLoading(true);
-             login(formData);
+             await login(formData);
           }}
         >
           <div>
