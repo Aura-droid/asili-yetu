@@ -25,6 +25,12 @@ const INCLUSION_META: Record<string, { label: string, icon: any }> = {
   wifi: { label: 'Onboard Wi-Fi', icon: Wifi },
 };
 
+const PACKAGE_TIER_META: Record<string, { label: string; className: string }> = {
+  budget: { label: "Budget", className: "bg-emerald-500/20 border-emerald-400/30 text-emerald-100" },
+  mid_range: { label: "Mid Range", className: "bg-amber-400/20 border-amber-300/30 text-amber-50" },
+  luxury: { label: "Luxury", className: "bg-fuchsia-500/20 border-fuchsia-300/30 text-fuchsia-50" },
+};
+
 export default function BiomePackageCard({ pkg }: { pkg: any }) {
   const ref = useRef<HTMLDivElement>(null);
   const { setTheme } = useTheme();
@@ -69,6 +75,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
   ];
 
   const itinerary = pkg.itinerary?.length > 0 ? pkg.itinerary : defaultItinerary;
+  const tierMeta = PACKAGE_TIER_META[pkg.package_tier || "mid_range"] || PACKAGE_TIER_META.mid_range;
 
   const pt = useTranslations("Packages");
   
@@ -99,17 +106,21 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
 
         {/* Content */}
         <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-16 lg:p-24">
-          {pkg.is_featured && (
-            <div className="mb-4 inline-block bg-primary text-[#0f172a] text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit">
-              {pt("masterpiece_edition")}
+          <div className="mb-4 flex flex-wrap gap-2">
+            {pkg.is_featured && (
+              <div className="inline-block bg-primary text-[#0f172a] text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit">
+                {pt("masterpiece_edition")}
+              </div>
+            )}
+            <div className={`inline-block border text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit ${tierMeta.className}`}>
+              {tierMeta.label}
             </div>
-          )}
-
-          {pkg.discount_price && (
-            <div className="mb-4 inline-block bg-red-500 text-white text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit animate-pulse">
-              Special Offer: -{Math.round(((pkg.price_usd - pkg.discount_price) / pkg.price_usd) * 100)}%
-            </div>
-          )}
+            {pkg.discount_price && (
+              <div className="inline-block bg-red-500 text-white text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit animate-pulse">
+                Special Offer: -{Math.round(((pkg.price_usd - pkg.discount_price) / pkg.price_usd) * 100)}%
+              </div>
+            )}
+          </div>
           
           <div className="max-w-3xl">
             <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-4 leading-[1.1] drop-shadow-lg">
@@ -270,6 +281,13 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                              <p className="text-sm font-bold text-foreground leading-none">{pkg.intensity_vibe || "Balanced Flow"}</p>
                           </div>
                        </div>
+                       <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
+                          <Compass className="w-5 h-5 text-primary" />
+                          <div>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Tier</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{tierMeta.label}</p>
+                          </div>
+                       </div>
                     </div>
 
                     <div className="flex items-center gap-3 mb-6">
@@ -352,4 +370,3 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
     </>
   );
 }
-

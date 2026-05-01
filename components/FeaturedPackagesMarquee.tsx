@@ -12,6 +12,12 @@ interface FeaturedPackagesMarqueeProps {
   packages: any[];
 }
 
+const PACKAGE_TIER_META: Record<string, { label: string; className: string }> = {
+  budget: { label: "Budget", className: "bg-emerald-500/90 text-white" },
+  mid_range: { label: "Mid Range", className: "bg-amber-400 text-black" },
+  luxury: { label: "Luxury", className: "bg-fuchsia-500/90 text-white" },
+};
+
 export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMarqueeProps) {
   const controls = useAnimationControls();
   const [index, setIndex] = useState(0);
@@ -96,7 +102,9 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
             }}
             className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-[10%] w-full touch-pan-y"
          >
-            {packages.map((pkg, idx) => (
+            {packages.map((pkg, idx) => {
+               const tierMeta = PACKAGE_TIER_META[pkg.package_tier || "mid_range"] || PACKAGE_TIER_META.mid_range;
+               return (
                <motion.div 
                  key={pkg.id}
                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -125,6 +133,9 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                         <div className="bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
                            <Sparkles className="w-3 h-3 text-primary animate-pulse" />
                            <span className="text-[8px] font-black text-white uppercase tracking-widest">{pkg.biome_orientation || "Savannah"}</span>
+                        </div>
+                        <div className={`px-3 py-1.5 rounded-full border border-black/10 shadow-lg ${tierMeta.className}`}>
+                           <span className="text-[8px] font-black uppercase tracking-widest">{tierMeta.label}</span>
                         </div>
                         <div className="bg-primary px-3 py-1.5 rounded-full border border-black/10 flex items-center gap-2 shadow-lg">
                            <User className="w-3 h-3 text-black" />
@@ -190,7 +201,8 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                      </div>
                   </div>
                </motion.div>
-            ))}
+               );
+            })}
          </motion.div>
 
          {/* Navigation Indicators */}

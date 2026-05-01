@@ -8,6 +8,18 @@ import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 import { useRouter } from "next/navigation";
 import { useLoading } from "@/providers/LoadingProvider";
 
+const PACKAGE_TIER_OPTIONS = [
+  { value: "budget", label: "Budget" },
+  { value: "mid_range", label: "Mid Range" },
+  { value: "luxury", label: "Luxury" },
+];
+
+const PACKAGE_TIER_LABELS: Record<string, string> = {
+  budget: "Budget",
+  mid_range: "Mid Range",
+  luxury: "Luxury",
+};
+
 const AVAILABLE_INCLUSIONS = [
   { id: 'airport', label: 'Airport Transfers', icon: Plane },
   { id: 'accommodation', label: 'Luxury Accommodation', icon: Bed },
@@ -171,6 +183,9 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                         ) : (
                           `$${pkg.price_usd}`
                         )} / person
+                     </p>
+                     <p className="text-[9px] font-black text-primary uppercase tracking-widest mt-1">
+                        {PACKAGE_TIER_LABELS[pkg.package_tier || "mid_range"] || "Mid Range"}
                      </p>
                   </div>
                </div>
@@ -362,14 +377,15 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                          </div>
 
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                          {[
-                            { label: 'Standard Yield (USD)', name: 'price_usd', def: editingPkg?.price_usd || 2500, type: 'number' },
-                            { label: 'Discounted Yield (USD) - Optional', name: 'discount_price', def: editingPkg?.discount_price || "", type: 'number' },
-                            { label: 'Endurance (Days)', name: 'duration_days', def: editingPkg?.duration_days || 7, type: 'number' },
-                            { label: 'Comfort Level', name: 'difficulty_level', options: ['Classic', 'Luxury', 'Elite', 'Extreme'], def: editingPkg?.difficulty_level },
-                            { label: 'Max People', name: 'max_people', def: editingPkg?.max_people || 8, type: 'number' },
-                            { label: 'Capacity Label', name: 'people_count_text', def: editingPkg?.people_count_text || "For 2-8 People", type: 'text' }
-                          ].map((f, i) => (
+                           {[
+                             { label: 'Standard Yield (USD)', name: 'price_usd', def: editingPkg?.price_usd || 2500, type: 'number' },
+                             { label: 'Discounted Yield (USD) - Optional', name: 'discount_price', def: editingPkg?.discount_price || "", type: 'number' },
+                             { label: 'Endurance (Days)', name: 'duration_days', def: editingPkg?.duration_days || 7, type: 'number' },
+                             { label: 'Comfort Level', name: 'difficulty_level', options: ['Classic', 'Luxury', 'Elite', 'Extreme'], def: editingPkg?.difficulty_level },
+                             { label: 'Package Tier', name: 'package_tier', options: PACKAGE_TIER_OPTIONS, def: editingPkg?.package_tier || 'mid_range' },
+                             { label: 'Max People', name: 'max_people', def: editingPkg?.max_people || 8, type: 'number' },
+                             { label: 'Capacity Label', name: 'people_count_text', def: editingPkg?.people_count_text || "For 2-8 People", type: 'text' }
+                           ].map((f, i) => (
                            <div key={i} className="bg-white p-6 rounded-[2rem] border border-foreground/5 shadow-sm">
                               <label className="block text-[8px] font-black text-foreground/40 uppercase tracking-widest mb-3 ml-1">{f.label}</label>
                               {f.options ? (
@@ -378,7 +394,13 @@ export default function PackagesUI({ initialPackages, destinations }: { initialP
                                   defaultValue={f.def || 'Classic'}
                                   className="w-full bg-foreground/5 border-none rounded-xl px-4 py-3 text-foreground focus:ring-1 focus:ring-primary transition-all font-black text-xs uppercase appearance-none"
                                 >
-                                   {f.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                                   {f.options.map((opt) =>
+                                     typeof opt === "string" ? (
+                                       <option key={opt} value={opt}>{opt}</option>
+                                     ) : (
+                                       <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                     )
+                                   )}
                                  </select>
                               ) : (
                                  <input name={f.name} step={f.name === 'price_usd' || f.name === 'discount_price' ? "0.01" : "1"} type={f.type} required={f.name !== 'discount_price'} defaultValue={f.def} className="w-full bg-foreground/5 border-none rounded-xl pl-4 pr-12 py-3 text-foreground focus:ring-1 focus:ring-primary transition-all font-black text-sm" />

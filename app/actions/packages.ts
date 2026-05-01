@@ -24,6 +24,7 @@ export async function createPackage(formData: FormData) {
   const destination_id = formData.get("destination_id") as string;
   const file = formData.get("image") as File;
   const is_featured = formData.get("is_featured") === "on";
+  const package_tier = (formData.get("package_tier") as string) || "mid_range";
   const biome_orientation = formData.get("biome_orientation") as string || "Savannah Majesty";
   const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
   const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
@@ -74,6 +75,7 @@ export async function createPackage(formData: FormData) {
         destination_id: destination_id || null,
         main_image: publicData.publicUrl,
         is_featured,
+        package_tier,
         itinerary,
         inclusions,
         discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
@@ -117,6 +119,7 @@ export async function updatePackage(id: string, formData: FormData) {
   const destination_id = formData.get("destination_id") as string;
   const file = formData.get("image") as File | null;
   const is_featured = formData.get("is_featured") === "on";
+  const package_tier = (formData.get("package_tier") as string) || "mid_range";
   const biome_orientation = formData.get("biome_orientation") as string || "Savannah Majesty";
   const temperature_profile = formData.get("temperature_profile") as string || "Warm & Sun-drenched";
   const intensity_vibe = formData.get("intensity_vibe") as string || "Classic Safari";
@@ -139,6 +142,7 @@ export async function updatePackage(id: string, formData: FormData) {
     difficulty_level,
     destination_id: destination_id || null,
     is_featured,
+    package_tier,
     itinerary,
     inclusions,
     discount_price: formData.get("discount_price") ? parseInt(formData.get("discount_price") as string) : null,
