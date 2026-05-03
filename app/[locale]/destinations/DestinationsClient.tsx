@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { MapPin, Sun, Compass, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import SafariMap from "@/components/SafariMap";
+import StructuredData from "@/components/StructuredData";
 
 export default function DestinationsClient({ destinations }: { destinations: any[] }) {
   const t = useTranslations("Destinations");
@@ -59,6 +60,18 @@ export default function DestinationsClient({ destinations }: { destinations: any
           {destinations.map((dest, index) => {
             const isEven = index % 2 === 0;
 
+            const placeSchema = {
+              "@type": "Place",
+              "name": dest.name,
+              "description": dest.description,
+              "image": dest.image_url || dest.image,
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": dest.latitude,
+                "longitude": dest.longitude
+              }
+            };
+
             return (
               <motion.div 
                 key={dest.id}
@@ -68,6 +81,7 @@ export default function DestinationsClient({ destinations }: { destinations: any
                 transition={{ duration: 0.8, type: "spring", stiffness: 100, damping: 20 }}
                 className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center`}
               >
+                <StructuredData type="Place" data={placeSchema} />
                 {/* Image Side */}
                 <div className="w-full lg:w-1/2 relative group">
                    <div className="absolute inset-0 bg-primary/20 bg-blend-overlay rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -117,11 +131,19 @@ export default function DestinationsClient({ destinations }: { destinations: any
 
                    <div>
                      <Link 
-                       href={`/packages?destination=${dest.id}`}
+                       href={`/${useLocale()}/destinations/${dest.id}`}
                        className="inline-flex items-center gap-3 text-foreground font-bold hover:text-primary transition-colors group"
                      >
-                       {t("view")} 
+                       Explore {dest.name} 
                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
+                     </Link>
+                   </div>
+                   <div className="mt-4">
+                     <Link 
+                       href={`/${useLocale()}/packages?destination=${dest.id}`}
+                       className="text-xs font-bold text-foreground/40 hover:text-primary transition-colors uppercase tracking-widest"
+                     >
+                       {t("view")}
                      </Link>
                    </div>
                 </div>

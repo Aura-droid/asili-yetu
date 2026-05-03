@@ -14,6 +14,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
   const [selectedIntensity, setSelectedIntensity] = useState<string | null>(null);
   const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
   const [priceSort, setPriceSort] = useState<"low" | "high" | null>(null);
+  const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const searchParams = useSearchParams();
   
@@ -57,12 +58,15 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
       const matchesBiome = !selectedBiome || pkg.biome_orientation === selectedBiome;
       const matchesIntensity = !selectedIntensity || pkg.intensity_vibe === selectedIntensity;
       
-      let matchesDuration = true;
-      if (selectedDuration === "short") matchesDuration = pkg.duration_days <= 5;
-      else if (selectedDuration === "medium") matchesDuration = pkg.duration_days > 5 && pkg.duration_days <= 9;
-      else if (selectedDuration === "long") matchesDuration = pkg.duration_days > 9;
+      const matchesDuration = !selectedDuration || (
+        selectedDuration === "short" ? pkg.duration_days <= 5 :
+        selectedDuration === "medium" ? pkg.duration_days > 5 && pkg.duration_days <= 9 :
+        selectedDuration === "long" ? pkg.duration_days > 9 : true
+      );
 
-      return matchesSearch && matchesBiome && matchesIntensity && matchesDuration;
+      const matchesTier = !selectedTier || pkg.package_tier === selectedTier;
+
+      return matchesSearch && matchesBiome && matchesIntensity && matchesDuration && matchesTier;
     });
 
     if (priceSort === "low") {
@@ -81,36 +85,63 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
         layout
         className={`flex flex-col gap-4 sticky top-12 z-40 bg-background/60 backdrop-blur-2xl rounded-[3rem] border border-foreground/5 shadow-2x transition-all duration-500 mx-auto ${containerPadding} ${containerWidth} ${isCondensed ? 'shadow-primary/5' : 'shadow-2xl'}`}
       >
-        <div className="flex items-center gap-4">
-          <div className="relative flex-1">
-            <Search className={`absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/30 transition-all ${isCondensed ? 'scale-75' : ''}`} />
-            <input 
-              type="text"
-              placeholder={isCondensed ? t("quick_search") : t("search_placeholder")}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-foreground/5 border-none rounded-full font-bold text-foreground focus:ring-2 focus:ring-primary transition-all shadow-inner ${isCondensed ? 'py-4 pl-12 pr-6 text-sm' : 'py-6 pl-16 pr-8 text-lg'}`}
-            />
-            {searchQuery && (
-              <button 
-                onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-foreground/5 rounded-full"
-              >
-                <X className="w-4 h-4 text-foreground/40" />
-              </button>
-            )}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-3">
+            <div className="relative flex-1">
+              <Search className={`absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/30 transition-all ${isCondensed ? 'scale-75' : ''}`} />
+              <input 
+                type="text"
+                placeholder={isCondensed ? t("quick_search") : t("search_placeholder")}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={`w-full bg-foreground/5 border-none rounded-full font-bold text-foreground focus:ring-2 focus:ring-primary transition-all shadow-inner ${isCondensed ? 'py-4 pl-12 pr-6 text-sm' : 'py-6 pl-16 pr-8 text-lg'}`}
+              />
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-foreground/5 rounded-full"
+                >
+                  <X className="w-4 h-4 text-foreground/40" />
+                </button>
+              )}
+            </div>
+            <button 
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center justify-center gap-3 rounded-full font-black uppercase tracking-widest transition-all shrink-0 ${showFilters ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'} ${isCondensed ? 'w-12 h-12 p-0' : 'px-8 py-6 text-sm'}`}
+            >
+              <SlidersHorizontal className={`w-5 h-5 ${isCondensed ? 'mr-0' : ''}`} />
+              {!isCondensed && (showFilters ? t("lock_filters") : t("refine"))}
+            </button>
           </div>
-          <button 
-            onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center justify-center gap-3 rounded-full font-black uppercase tracking-widest transition-all shrink-0 ${showFilters ? 'bg-primary text-black' : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'} ${isCondensed ? 'w-12 h-12 p-0' : 'px-8 py-6 text-sm'}`}
-          >
-            <SlidersHorizontal className={`w-5 h-5 ${isCondensed ? 'mr-0' : ''}`} />
-            {!isCondensed && (showFilters ? t("lock_filters") : t("refine"))}
-            {(selectedBiome || selectedIntensity || selectedDuration || priceSort) && (
-               <span className={`bg-white text-black rounded-full flex items-center justify-center text-[10px] animate-pulse ${isCondensed ? 'absolute -top-1 -right-1 w-4 h-4' : 'w-5 h-5'}`}>!</span>
-            )}
-          </button>
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 px-2 no-scrollbar">
+            <button 
+              onClick={() => setSelectedTier(null)}
+              className={`whitespace-nowrap px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border shrink-0 ${!selectedTier ? 'bg-foreground text-background border-foreground' : 'bg-foreground/5 text-foreground/40 border-transparent hover:border-foreground/20'}`}
+            >
+              All Tiers
+            </button>
+            <button 
+              onClick={() => setSelectedTier("luxury")}
+              className={`whitespace-nowrap px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border shrink-0 ${selectedTier === "luxury" ? 'bg-fuchsia-600 text-white border-fuchsia-600 shadow-lg shadow-fuchsia-500/20' : 'bg-fuchsia-500/5 text-fuchsia-500/60 border-fuchsia-500/10 hover:border-fuchsia-500/30'}`}
+            >
+              ★ Luxury
+            </button>
+            <button 
+              onClick={() => setSelectedTier("mid_range")}
+              className={`whitespace-nowrap px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border shrink-0 ${selectedTier === "mid_range" ? 'bg-amber-500 text-black border-amber-500 shadow-lg shadow-amber-500/20' : 'bg-amber-500/5 text-amber-500/60 border-amber-500/10 hover:border-amber-500/30'}`}
+            >
+              ◆ Mid-Range
+            </button>
+            <button 
+              onClick={() => setSelectedTier("budget")}
+              className={`whitespace-nowrap px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border shrink-0 ${selectedTier === "budget" ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-500/20' : 'bg-emerald-500/5 text-emerald-500/60 border-emerald-500/10 hover:border-emerald-500/30'}`}
+            >
+              ● Budget
+            </button>
+          </div>
         </div>
+
 
         <AnimatePresence>
           {showFilters && (
@@ -256,6 +287,7 @@ export default function SafariExplorer({ packages }: { packages: any[] }) {
                 setSelectedBiome(null);
                 setSelectedIntensity(null);
                 setSelectedDuration(null);
+                setSelectedTier(null);
                 setPriceSort(null);
               }}
               className="mt-10 px-10 py-5 bg-foreground text-background rounded-full font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-2xl"

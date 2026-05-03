@@ -4,13 +4,15 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { MapPin, Clock, DollarSign, X, Compass, Layers, Thermometer, Zap, Plane, Bed, Utensils, Ticket, Car, User, Droplets, HeartPulse, Eye, Wifi, CheckCircle2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import RustlingButton from "./RustlingButton";
 import StarRating from "./StarRating";
 import ShareButton from "./ShareButton";
 import ItineraryMap from "./ItineraryMap";
 import PackageReviewModal from "./PackageReviewModal";
 import BookingFunnel from "./BookingFunnel";
+import StructuredData from "./StructuredData";
+import Link from "next/link";
 
 const INCLUSION_META: Record<string, { label: string, icon: any }> = {
   airport: { label: 'Airport Transfers', icon: Plane },
@@ -81,8 +83,36 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
 
   const tierMeta = tierMetaMap[pkg.package_tier || "mid_range"] || tierMetaMap.mid_range;
   
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://asiliyetusafaris.com';
+
+  const tripSchema = {
+    "@type": "Trip",
+    "name": pkg.title,
+    "description": pkg.description,
+    "image": pkg.main_image || pkg.destinations?.image_url,
+    "touristType": "Wildlife Enthusiasts",
+    "offers": {
+      "@type": "Offer",
+      "price": pkg.discount_price || pkg.price_usd,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": `${baseUrl}/${useLocale()}/packages#expedition-${pkg.id}`
+    },
+    "itinerary": itinerary.map((item: any, index: number) => ({
+      "@type": "City",
+      "name": item.destination,
+      "position": index + 1
+    })),
+    "provider": {
+      "@type": "Organization",
+      "name": "Asili Yetu Safaris",
+      "url": baseUrl
+    }
+  };
+
   return (
     <>
+      <StructuredData type="Trip" data={tripSchema} />
       <motion.div 
         ref={ref}
         id={`expedition-${pkg.id}`}
@@ -107,7 +137,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
         </div>
 
         {/* Content */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end p-3 sm:p-4 md:p-8 lg:p-10">
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8 md:p-12 lg:p-16 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
           <div className="mb-2 md:mb-4 flex flex-wrap gap-1.5 md:gap-2">
             {pkg.is_featured && (
               <div className="inline-block bg-primary text-[#0f172a] text-[9px] md:text-xs font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-widest shadow-lg w-fit">
@@ -126,7 +156,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
           
           <div className="max-w-3xl">
             <h2 
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-1.5 md:mb-3 leading-[1.1] drop-shadow-lg line-clamp-2"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-black text-white mb-1.5 md:mb-3 leading-[1.0] drop-shadow-lg line-clamp-2 uppercase tracking-tighter"
               title={pkg.title}
             >
               {pkg.title}
@@ -205,7 +235,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 <ShareButton 
                   title={pkg.title} 
                   text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
-                  url={typeof window !== 'undefined' ? `${window.location.origin}/packages?expedition=${pkg.id}#expedition-${pkg.id}` : undefined}
+                  url={typeof window !== 'undefined' ? `${window.location.origin}/${useLocale()}/packages/${pkg.id}` : undefined}
                 />
                 <p className="text-[7px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse lg:hidden">
                    ★ Negotiable
@@ -220,15 +250,12 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               >
                 Book Now
               </button>
-              <RustlingButton 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpen(true);
-                }}
-                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-3 md:px-10 py-2.5 md:py-4 rounded-full font-bold text-[9px] md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto"
+              <Link 
+                href={`/${useLocale()}/packages/${pkg.id}`}
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-3 md:px-10 py-2.5 md:py-4 rounded-full font-bold text-[9px] md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto flex items-center justify-center gap-2"
               >
                 {pt("explore_itinerary")}
-              </RustlingButton>
+              </Link>
             </div>
           </div>
         </div>

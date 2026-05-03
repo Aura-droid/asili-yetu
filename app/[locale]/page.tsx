@@ -9,6 +9,7 @@ import FeaturedCulture from "@/components/FeaturedCulture";
 import FeaturedGallery from "@/components/FeaturedGallery";
 import WhyUs from "@/components/WhyUs";
 import ResponsibleTourism from "@/components/ResponsibleTourism";
+import StrategicFAQ from "@/components/StrategicFAQ";
 
 import { Suspense } from "react";
 import { getPackages } from "@/app/actions/packages";
@@ -75,6 +76,10 @@ export default async function Home() {
 
       <ScrollReveal>
         <ReviewMarquee />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <StrategicFAQ />
       </ScrollReveal>
 
       <ScrollReveal>

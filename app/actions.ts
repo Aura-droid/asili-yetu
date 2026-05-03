@@ -22,16 +22,34 @@ export async function submitBookingInquiry(payload: any) {
 
         // 0. Intelligent Price Capture: If this was bridged from a package, fetch its baseline price
         let initialQuotedPrice = null;
+        let packageItinerary = null;
+        let packageTitle = null;
+
         if (payload.itinerary?.packageId) {
             const { data: pkg } = await supabaseServer
                 .from('packages')
-                .select('price_usd, discount_price')
+                .select('price_usd, discount_price, itinerary, title')
                 .eq('id', payload.itinerary.packageId)
                 .single();
             
             if (pkg) {
                 initialQuotedPrice = pkg.discount_price || pkg.price_usd;
+                packageItinerary = pkg.itinerary;
+                packageTitle = pkg.title;
             }
+        }
+
+        // Merge package itinerary into the payload if missing
+        let finalItinerary = payload.itinerary || null;
+        if (packageItinerary && Array.isArray(packageItinerary) && packageItinerary.length > 0) {
+            finalItinerary = {
+                ...finalItinerary,
+                recommendedTitle: packageTitle,
+                dailyBreakdown: packageItinerary.map((day: any, idx: number) => ({
+                    day: day.day || day.Day || `Day ${idx + 1}`,
+                    description: day.activity || day.Activity || day.description || day.Description || ""
+                }))
+            };
         }
 
         const { data: newInquiry, error: dbError } = await supabaseServer
@@ -43,7 +61,7 @@ export async function submitBookingInquiry(payload: any) {
                 party_size: partySize,
                 travel_dates: payload.dates || null,
                 special_requests: (payload.dietary || "") + (payload.addons ? ` | Addons: ${payload.addons.join(", ")}` : ""),
-                itinerary_details: payload.itinerary || null,
+                itinerary_details: finalItinerary,
                 quoted_price: initialQuotedPrice, // Seed the bargaining terminal
                 locale: payload.locale || 'en', // Signal context
                 access_token: accessToken, // Client-side generated for guaranteed sync

@@ -15,18 +15,19 @@ import { routing } from '@/i18n/routing';
 import LoadingProvider from "@/providers/LoadingProvider";
 import CookieConsent from "@/components/CookieConsent";
 import { getSettings } from "@/app/actions/settings";
+import { getOrganizationSchema, getTravelAgencySchema } from "@/components/StructuredData";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   
   // This would ideally come from a translation file, but for the root layout, we provide a high-fidelity mapped default
   const descriptions: Record<string, string> = {
-    en: "Premium safari experiences and authentic Tanzanian adventures with Asili Yetu Safaris.",
-    sw: "Uzoefu wa safari za daraja la juu na matukio halisi ya Kitanzania na Asili Yetu Safaris.",
-    es: "Experiencias de safari premium y auténticas aventuras tanzanas con Asili Yetu Safaris.",
+    en: "Experience premium safaris and authentic Tanzanian adventures with Asili Yetu.",
+    sw: "Uzoefu wa safari za daraja la juu na matukio halisi ya Kitanzania na Asili Yetu.",
+    es: "Experiencias de safari premium y auténticas aventuras tanzanas con Asili Yetu.",
     fr: "Expériences de safari premium et aventures tanzaniennes authentiques avec Asili Yetu Safaris.",
     de: "Premium-Safari-Erlebnisse und authentische tansanische Abenteuer mit Asili Yetu Safaris.",
-    zh: "通过 Asili Yetu Safaris 获得优质的游猎体验和真实的坦桑尼亚冒险。",
+    zh: "通过 Asili Yetu 获得优质的游猎体验和真实的坦桑尼亚冒险。",
     ar: "تجارب سفاري متميزة ومغامرات تنزانية أصيلة مع أسيلي يتو سفاريز."
   };
 
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(baseUrl),
     title: {
       default: "Asili Yetu Safaris",
-      template: "%s | Asili Yetu Safaris"
+      template: "%s | Asili Yetu"
     },
     description: descriptions[locale] || descriptions.en,
     alternates: {
@@ -64,6 +65,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: "Asili Yetu Safaris",
+      description: descriptions[locale] || descriptions.en,
+      images: ["/brand/asili-yetu-brand.jpg"],
+    },
+    keywords: ["safari", "tanzania", "serengeti", "ngorongoro", "kilimanjaro", "luxury safari", "authentic safari", "asili yetu"],
   };
 }
 
@@ -84,6 +92,7 @@ export default async function RootLayout(props: {
   const messages = await getMessages();
   const activeNotice = await getActiveNotice();
   const { data: settings } = await getSettings();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   return (
     <html
@@ -98,28 +107,29 @@ export default async function RootLayout(props: {
           dangerouslySetInnerHTML={{
              __html: JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "Asili Yetu Safaris",
-                "url": "https://asiliyetusafaris.com",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "https://asiliyetusafaris.com/en/search?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-             })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-             __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "ItemList",
-                "itemListElement": [
-                  { "@type": "SiteNavigationElement", "position": 1, "name": "About Us", "url": "https://asiliyetusafaris.com/en/about" },
-                  { "@type": "SiteNavigationElement", "position": 2, "name": "Safari Packages", "url": "https://asiliyetusafaris.com/en/packages" },
-                  { "@type": "SiteNavigationElement", "position": 3, "name": "Destinations", "url": "https://asiliyetusafaris.com/en/destinations" },
-                  { "@type": "SiteNavigationElement", "position": 4, "name": "Contact", "url": "https://asiliyetusafaris.com/en/contact" }
+                "@graph": [
+                  {
+                    "@type": "WebSite",
+                    "name": "Asili Yetu Safaris",
+                    "url": baseUrl,
+                    "potentialAction": {
+                      "@type": "SearchAction",
+                      "target": `${baseUrl}/${locale}/search?q={search_term_string}`,
+                      "query-input": "required name=search_term_string"
+                    }
+                  },
+                  getOrganizationSchema(baseUrl),
+                  getTravelAgencySchema(baseUrl),
+                  {
+                    "@type": "ItemList",
+                    "name": "Primary Navigation",
+                    "itemListElement": [
+                      { "@type": "SiteNavigationElement", "position": 1, "name": "Safari Packages", "url": `${baseUrl}/${locale}/packages` },
+                      { "@type": "SiteNavigationElement", "position": 2, "name": "Destinations", "url": `${baseUrl}/${locale}/destinations` },
+                      { "@type": "SiteNavigationElement", "position": 3, "name": "Our Fleet", "url": `${baseUrl}/${locale}/fleet` },
+                      { "@type": "SiteNavigationElement", "position": 4, "name": "About Us", "url": `${baseUrl}/${locale}/about` }
+                    ]
+                  }
                 ]
              })
           }}
