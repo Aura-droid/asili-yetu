@@ -21,10 +21,35 @@ interface Destination {
 }
 
 export default function SafariExplorerMap({ destinations }: { destinations: any[] }) {
-  const t = useTranslations("Destinations.Map");
+  const t = useTranslations("Destinations");
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [selectedDest, setSelectedDest] = useState<any | null>(null);
+
+  // Helper to get translated destination data
+  const getTranslatedDest = (dest: any) => {
+    if (!dest) return null;
+    const nameLower = dest.name.toLowerCase();
+    let slug = "";
+    if (nameLower.includes("serengeti")) slug = "serengeti";
+    else if (nameLower.includes("ngorongoro")) slug = "ngorongoro";
+    else if (nameLower.includes("tarangire")) slug = "tarangire";
+    else if (nameLower.includes("kilimanjaro")) slug = "kilimanjaro";
+    else if (nameLower.includes("manyara")) slug = "manyara";
+    else if (nameLower.includes("zanzibar")) slug = "zanzibar";
+
+    if (slug) {
+      return {
+        ...dest,
+        name: t(`Data.${slug}.name`),
+        type: t(`Data.${slug}.type`),
+        description: t(`Data.${slug}.desc`)
+      };
+    }
+    return dest;
+  };
+
+  const displayDest = getTranslatedDest(selectedDest);
 
   useEffect(() => {
     if (map.current || !mapContainer.current) return;
@@ -100,15 +125,15 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
       
       {/* Search/Legend Overlay */}
       <div className="absolute top-8 left-8 z-10 bg-black/60 backdrop-blur-xl p-6 rounded-3xl border border-white/10 max-w-xs pointer-events-none">
-         <h3 className="text-white font-black text-xl mb-2 tracking-tighter italic uppercase">{t("discovery_mode")}</h3>
+         <h3 className="text-white font-black text-xl mb-2 tracking-tighter italic uppercase">{t("Map.discovery_mode")}</h3>
          <p className="text-white/60 text-xs font-medium leading-relaxed">
-            {t("discovery_sub")}
+            {t("Map.discovery_sub")}
          </p>
       </div>
 
       {/* Selected Destination Popup */}
       <AnimatePresence>
-        {selectedDest && (
+        {displayDest && (
           <motion.div
             key="selected-dest-popup"
             initial={{ opacity: 0, y: 50 }}
@@ -124,22 +149,22 @@ export default function SafariExplorerMap({ destinations }: { destinations: any[
             </button>
 
             <div className="relative h-48 rounded-2xl overflow-hidden mb-6 shadow-lg shrink-0">
-               <img src={selectedDest.image_url || selectedDest.image} alt={selectedDest.name} className="w-full h-full object-cover" />
+               <img src={displayDest.image_url || displayDest.image} alt={displayDest.name} className="w-full h-full object-cover" />
                <div className="absolute top-4 left-4 bg-primary px-3 py-1 rounded-full text-[10px] font-black uppercase text-black">
-                  {selectedDest.type}
+                  {displayDest.type}
                </div>
             </div>
 
-            <h3 className="text-white text-3xl font-black mb-4 tracking-tighter leading-tight italic">{selectedDest.name}</h3>
+            <h3 className="text-white text-3xl font-black mb-4 tracking-tighter leading-tight italic">{displayDest.name}</h3>
             <div className="text-white/70 text-sm leading-relaxed mb-8 flex-1 overflow-y-auto pr-2 custom-scrollbar">
-               {selectedDest.description}
+               {displayDest.description}
             </div>
 
             <Link 
-              href={`/packages?q=${selectedDest.name}`}
+              href={`/packages?q=${displayDest.name}`}
               className="w-full bg-white py-4 rounded-xl text-black font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-primary transition-all active:scale-95"
             >
-               {t("explore_packages")} <ArrowRight className="w-5 h-5" />
+               {t("Map.explore_packages")} <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
         )}

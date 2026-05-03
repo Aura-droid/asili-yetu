@@ -60,21 +60,48 @@ export default function DestinationsClient({ destinations }: { destinations: any
           {destinations.map((dest, index) => {
             const isEven = index % 2 === 0;
 
+            // Helper to get translated destination data
+            const getTranslatedDest = (d: any) => {
+              if (!d) return d;
+              const nameLower = d.name.toLowerCase();
+              let slug = "";
+              if (nameLower.includes("serengeti")) slug = "serengeti";
+              else if (nameLower.includes("ngorongoro")) slug = "ngorongoro";
+              else if (nameLower.includes("tarangire")) slug = "tarangire";
+              else if (nameLower.includes("kilimanjaro")) slug = "kilimanjaro";
+              else if (nameLower.includes("manyara")) slug = "manyara";
+              else if (nameLower.includes("zanzibar")) slug = "zanzibar";
+
+              if (slug) {
+                return {
+                  ...d,
+                  name: t(`Data.${slug}.name`),
+                  type: t(`Data.${slug}.type`),
+                  description: t(`Data.${slug}.desc`),
+                  best_time: t(`Data.${slug}.time`),
+                  key_wildlife: t(`Data.${slug}.wildlife`)
+                };
+              }
+              return d;
+            };
+
+            const displayDest = getTranslatedDest(dest);
+
             const placeSchema = {
               "@type": "Place",
-              "name": dest.name,
-              "description": dest.description,
-              "image": dest.image_url || dest.image,
+              "name": displayDest.name,
+              "description": displayDest.description,
+              "image": displayDest.image_url || displayDest.image,
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": dest.latitude,
-                "longitude": dest.longitude
+                "latitude": displayDest.latitude,
+                "longitude": displayDest.longitude
               }
             };
 
             return (
               <motion.div 
-                key={dest.id}
+                key={displayDest.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -87,15 +114,15 @@ export default function DestinationsClient({ destinations }: { destinations: any
                    <div className="absolute inset-0 bg-primary/20 bg-blend-overlay rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                    <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-foreground/10 shadow-2xl">
                      <Image 
-                        src={dest.image_url || dest.image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"}
-                        alt={dest.name}
+                        src={displayDest.image_url || displayDest.image || "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"}
+                        alt={displayDest.name}
                         fill
                         className="object-cover transition-transform duration-1000 group-hover:scale-105"
                      />
                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                      <div className="absolute bottom-8 left-8 text-white">
                         <span className="bg-primary text-black px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
-                          {dest.type}
+                          {displayDest.type}
                         </span>
                      </div>
                    </div>
@@ -103,44 +130,44 @@ export default function DestinationsClient({ destinations }: { destinations: any
 
                 {/* Text Side */}
                 <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                   <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">{dest.name}</h2>
+                   <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 leading-tight">{displayDest.name}</h2>
                    <p className="text-foreground/70 text-lg leading-relaxed mb-8 font-medium">
-                     {dest.description}
+                     {displayDest.description}
                    </p>
 
                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                       <div className="bg-foreground/5 p-5 rounded-2xl border border-foreground/10">
                          <div className="flex items-center gap-3 text-primary mb-2">
-                           <Sun className="w-5 h-5" /> <span className="font-bold text-xs uppercase tracking-widest text-foreground/50">Best Time</span>
+                           <Sun className="w-5 h-5" /> <span className="font-bold text-xs uppercase tracking-widest text-foreground/50">{t("time")}</span>
                          </div>
-                         <p className="text-foreground font-semibold">{dest.best_time || dest.bestTime}</p>
+                         <p className="text-foreground font-semibold">{displayDest.best_time}</p>
                       </div>
                       <div className="bg-foreground/5 p-5 rounded-2xl border border-foreground/10">
                          <div className="flex items-center gap-3 text-primary mb-2">
                            <Compass className="w-5 h-5" /> <span className="font-bold text-xs uppercase tracking-widest text-foreground/50">{t("wildlife")}</span>
                          </div>
-                         <p className="text-foreground font-semibold">{dest.key_wildlife || dest.keyWildlife}</p>
+                         <p className="text-foreground font-semibold">{displayDest.key_wildlife}</p>
                       </div>
                       <div className="bg-foreground/5 p-5 rounded-2xl border border-foreground/10 sm:col-span-2">
                          <div className="flex items-center gap-3 text-primary mb-2">
                            <MapPin className="w-5 h-5" /> <span className="font-bold text-xs uppercase tracking-widest text-foreground/50">{t("scale")}</span>
                          </div>
-                         <p className="text-foreground font-semibold">{dest.size}</p>
+                         <p className="text-foreground font-semibold">{displayDest.size}</p>
                       </div>
                    </div>
 
                    <div>
                      <Link 
-                       href={`/${useLocale()}/destinations/${dest.id}`}
+                       href={`/${useLocale()}/destinations/${displayDest.id}`}
                        className="inline-flex items-center gap-3 text-foreground font-bold hover:text-primary transition-colors group"
                      >
-                       Explore {dest.name} 
+                       Explore {displayDest.name} 
                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                      </Link>
                    </div>
                    <div className="mt-4">
                      <Link 
-                       href={`/${useLocale()}/packages?destination=${dest.id}`}
+                       href={`/${useLocale()}/packages?destination=${displayDest.id}`}
                        className="text-xs font-bold text-foreground/40 hover:text-primary transition-colors uppercase tracking-widest"
                      >
                        {t("view")}
