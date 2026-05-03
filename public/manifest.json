@@ -1,0 +1,23 @@
+{
+  "name": "Asili Yetu Command Center",
+  "short_name": "Asili Admin",
+  "description": "Admin Dashboard for Asili Yetu Safaris",
+  "start_url": "/admin",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#f97316",
+  "icons": [
+    {
+      "src": "/brand/logo-mark-no-bg.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/logo-mark-no-bg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

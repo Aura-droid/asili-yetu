@@ -25,11 +25,7 @@ const INCLUSION_META: Record<string, { label: string, icon: any }> = {
   wifi: { label: 'Onboard Wi-Fi', icon: Wifi },
 };
 
-const PACKAGE_TIER_META: Record<string, { label: string; className: string }> = {
-  budget: { label: "Budget", className: "bg-emerald-500/20 border-emerald-400/30 text-emerald-100" },
-  mid_range: { label: "Mid Range", className: "bg-amber-400/20 border-amber-300/30 text-amber-50" },
-  luxury: { label: "Luxury", className: "bg-fuchsia-500/20 border-fuchsia-300/30 text-fuchsia-50" },
-};
+// Tier meta moved inside component for translations
 
 export default function BiomePackageCard({ pkg }: { pkg: any }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -75,9 +71,15 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
   ];
 
   const itinerary = pkg.itinerary?.length > 0 ? pkg.itinerary : defaultItinerary;
-  const tierMeta = PACKAGE_TIER_META[pkg.package_tier || "mid_range"] || PACKAGE_TIER_META.mid_range;
-
   const pt = useTranslations("Packages");
+
+  const tierMetaMap: Record<string, { label: string; className: string }> = {
+    budget: { label: pt("tier_budget"), className: "bg-emerald-500/20 border-emerald-400/30 text-emerald-100" },
+    mid_range: { label: pt("tier_mid_range"), className: "bg-amber-400/20 border-amber-300/30 text-amber-50" },
+    luxury: { label: pt("tier_luxury"), className: "bg-fuchsia-500/20 border-fuchsia-300/30 text-fuchsia-50" },
+  };
+
+  const tierMeta = tierMetaMap[pkg.package_tier || "mid_range"] || tierMetaMap.mid_range;
   
   return (
     <>
@@ -105,29 +107,32 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
         </div>
 
         {/* Content */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-16 lg:p-24">
-          <div className="mb-4 flex flex-wrap gap-2">
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-3 sm:p-4 md:p-8 lg:p-10">
+          <div className="mb-2 md:mb-4 flex flex-wrap gap-1.5 md:gap-2">
             {pkg.is_featured && (
-              <div className="inline-block bg-primary text-[#0f172a] text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit">
+              <div className="inline-block bg-primary text-[#0f172a] text-[9px] md:text-xs font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-widest shadow-lg w-fit">
                 {pt("masterpiece_edition")}
               </div>
             )}
-            <div className={`inline-block border text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit ${tierMeta.className}`}>
+            <div className={`inline-block border text-[9px] md:text-xs font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-widest shadow-lg w-fit ${tierMeta.className}`}>
               {tierMeta.label}
             </div>
             {pkg.discount_price && (
-              <div className="inline-block bg-red-500 text-white text-xs md:text-sm font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-lg w-fit animate-pulse">
+              <div className="inline-block bg-red-500 text-white text-[9px] md:text-xs font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-widest shadow-lg w-fit animate-pulse">
                 Special Offer: -{Math.round(((pkg.price_usd - pkg.discount_price) / pkg.price_usd) * 100)}%
               </div>
             )}
           </div>
           
           <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-7xl font-extrabold text-white mb-4 leading-[1.1] drop-shadow-lg">
+            <h2 
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-1.5 md:mb-3 leading-[1.1] drop-shadow-lg line-clamp-2"
+              title={pkg.title}
+            >
               {pkg.title}
             </h2>
 
-            <div className="mb-8">
+            <div className="mb-2 md:mb-6">
               <StarRating 
                  interactive
                  onRate={(r) => {
@@ -139,71 +144,71 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               />
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-white/90 text-sm md:text-base font-medium mb-12">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                <MapPin className="w-5 h-5 text-primary" />
-                <span>{pkg.destinations?.name || "Tanzania"}</span>
+            <div className="flex flex-wrap items-center gap-1.5 md:gap-3 text-white/90 font-medium mb-2.5 md:mb-6">
+              <div className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
+                <MapPin className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+                <span className="text-[9px] md:text-sm">{pkg.destinations?.name || "Tanzania"}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                <Clock className="w-5 h-5 text-primary" />
-                <span>{pkg.duration_days} {pt("days")} / {pkg.duration_days - 1} {pt("nights")}</span>
+              <div className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
+                <Clock className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+                <span className="text-[9px] md:text-sm">{pkg.duration_days} {pt("days")} / {pkg.duration_days - 1} {pt("nights")}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/20">
-                <span className="font-bold tracking-widest uppercase text-[10px] text-primary">{pkg.difficulty_level}</span>
+              <div className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
+                <span className="font-bold tracking-widest uppercase text-[8px] md:text-[10px] text-primary">{pkg.difficulty_level}</span>
               </div>
               {pkg.people_count_text && (
-                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                    <User className="w-4 h-4 text-primary" />
-                    <span className="font-bold uppercase text-[10px] tracking-widest text-white">{pkg.people_count_text}</span>
+                 <div className="hidden sm:flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
+                    <User className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+                    <span className="font-bold uppercase text-[8px] md:text-[10px] tracking-widest text-white">{pkg.people_count_text}</span>
                  </div>
               )}
               {pkg.biome_orientation && (
-                  <div className="hidden md:flex items-center gap-2 bg-primary/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30">
-                    <Layers className="w-4 h-4 text-primary" />
-                    <span className="font-bold uppercase text-[10px] tracking-widest text-white">{pkg.biome_orientation}</span>
+                  <div className="hidden md:flex items-center gap-1 md:gap-2 bg-primary/20 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-primary/30">
+                    <Layers className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+                    <span className="font-bold uppercase text-[8px] md:text-[10px] tracking-widest text-white">{pkg.biome_orientation}</span>
                   </div>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pt-6 border-t border-white/20 mt-auto">
-            <div className="flex items-center gap-4 w-full lg:w-auto">
-              <div className="flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-0">
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-2.5 md:gap-6 pt-2.5 md:pt-6 border-t border-white/20 mt-auto">
+            <div className="flex items-center gap-3 md:gap-4 w-full lg:w-auto">
+              <div className="flex flex-row lg:flex-col items-center lg:items-start gap-2 lg:gap-0">
                 <div className="shrink-0">
-                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-1">{pt("investment")}</p>
+                  <p className="text-[8px] md:text-[10px] font-bold text-white/50 uppercase tracking-widest mb-0.5 md:mb-1">{pt("investment")}</p>
                   <div className="flex items-center text-white">
-                    <DollarSign className="w-5 h-5 text-primary -ml-1" />
+                    <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-primary -ml-1" />
                     {pkg.discount_price ? (
                       <div className="flex flex-col">
-                        <span className="text-[9px] font-black line-through text-white/40 mb-[-4px]">${pkg.price_usd}</span>
+                        <span className="text-[8px] md:text-[9px] font-black line-through text-white/40 mb-[-2px] md:mb-[-4px]">${pkg.price_usd}</span>
                         <div className="flex items-center">
-                          <span className="text-3xl md:text-5xl font-black text-primary">{pkg.discount_price}</span>
-                          <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                          <span className="text-xl sm:text-2xl md:text-5xl font-black text-primary">{pkg.discount_price}</span>
+                          <span className="text-white/50 ml-1.5 md:ml-2 text-[9px] md:text-base font-medium">/ {pt("per_person")}</span>
                         </div>
                       </div>
                     ) : (
                       <>
-                        <span className="text-3xl md:text-5xl font-black">{pkg.price_usd}</span>
-                        <span className="text-white/50 ml-2 text-xs md:text-base font-medium">/ {pt("per_person")}</span>
+                        <span className="text-xl sm:text-2xl md:text-5xl font-black">{pkg.price_usd}</span>
+                        <span className="text-white/50 ml-1.5 md:ml-2 text-[9px] md:text-base font-medium">/ {pt("per_person")}</span>
                       </>
                     )}
                   </div>
                 </div>
-                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse hidden lg:block">
+                <p className="text-[8px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse hidden lg:block">
                    ★ Negotiable & Tailor-made
                 </p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex items-center gap-3 w-full lg:w-auto">
-              <div className="flex items-center gap-3 w-full sm:col-span-2 lg:w-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex items-center gap-2 w-full lg:w-auto">
+              <div className="flex items-center justify-between sm:justify-start gap-3 w-full sm:col-span-2 lg:w-auto">
                 <ShareButton 
                   title={pkg.title} 
                   text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
                   url={typeof window !== 'undefined' ? `${window.location.origin}/packages?expedition=${pkg.id}#expedition-${pkg.id}` : undefined}
                 />
-                <p className="text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse lg:hidden">
-                   ★ Negotiable & Tailor-made
+                <p className="text-[7px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse lg:hidden">
+                   ★ Negotiable
                 </p>
               </div>
               <button 
@@ -211,7 +216,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                   e.stopPropagation();
                   setShowBooking(true);
                 }}
-                className="bg-primary text-black px-6 md:px-10 py-4 md:py-5 rounded-full font-black uppercase tracking-widest text-xs md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-2 w-full lg:w-auto"
+                className="bg-primary text-black px-3 md:px-10 py-2.5 md:py-4 rounded-full font-black uppercase tracking-widest text-[9px] md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-2 w-full lg:w-auto"
               >
                 Book Now
               </button>
@@ -220,7 +225,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                   e.stopPropagation();
                   setIsOpen(true);
                 }}
-                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold text-xs md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto"
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-3 md:px-10 py-2.5 md:py-4 rounded-full font-bold text-[9px] md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto"
               >
                 {pt("explore_itinerary")}
               </RustlingButton>

@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useLoading } from "@/providers/LoadingProvider";
+import AdminPwaPrompt from "./AdminPwaPrompt";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
@@ -139,6 +140,7 @@ export default function AdminSidebar() {
       </nav>
 
       <div className="p-8 bg-black/40 backdrop-blur-md border-t border-white/5">
+        <AdminPwaPrompt />
         <button className="flex items-center gap-4 text-red-400/60 hover:text-red-400 transition-all w-full px-5 py-3 rounded-2xl hover:bg-red-500/5 font-black text-xs uppercase tracking-widest group">
           <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> Sign Out
         </button>

@@ -41,6 +41,7 @@ export async function proxy(request: NextRequest) {
   const isPublicRoute = 
     !request.nextUrl.pathname.startsWith('/admin') && 
     !request.nextUrl.pathname.startsWith('/sitemap.xml') && 
+    !request.nextUrl.pathname.startsWith('/manifest.json') && 
     !request.nextUrl.pathname.startsWith('/robots.txt');
 
   if (!isPublicRoute) {
@@ -66,6 +67,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|manifest.json|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf)$).*)",
   ],
 };
