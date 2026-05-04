@@ -69,7 +69,7 @@ export default function AdminOfflinePage() {
               onClick={() => window.location.reload()}
               className="w-full py-5 bg-red-500 text-white rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-red-600 transition-all active:scale-95 shadow-xl shadow-red-500/20 flex items-center justify-center gap-3"
             >
-              <RefreshCcw className="w-4 h-4" /> Force System Restart
+              <RefreshCcw className="w-4 h-4" /> Reload Admin Console
             </button>
           </div>
         </div>

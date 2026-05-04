@@ -454,7 +454,7 @@
   "Offline": {
     "title": "Signal Interrompu en <p>Savane</p>",
     "sub": "Notre liaison satellite a été interrompue. Vérifiez votre télémétrie locale ou attendez le prochain passage.",
-    "retry": "Rétablir la Liaison",
+    "retry": "Réessayer la Connexion",
     "view_saved": "Voir les Itinéraires Enregistrés"
   }
 }

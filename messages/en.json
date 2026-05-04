@@ -484,7 +484,7 @@
   "Offline": {
     "title": "Signal Lost in <p>Savannah</p>",
     "sub": "Our satellite uplink has been interrupted. Check your local telemetry or wait for the next pass.",
-    "retry": "Re-establish Uplink",
+    "retry": "Retry Connection",
     "view_saved": "View Saved Itineraries"
   }
 }
