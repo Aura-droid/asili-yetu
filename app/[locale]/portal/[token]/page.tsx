@@ -152,14 +152,16 @@ export default function GuestPortalPage() {
                         {day.day}
                       </div>
                       <div className="pt-2">
-                        {day.destination ? (
+                        {day.destination || day.Destination ? (
                           <div className="space-y-1">
-                            <p className="text-sm font-bold text-black group-hover:text-primary transition-colors uppercase italic">{day.destination}</p>
-                            <p className="text-[10px] text-black/40 font-black uppercase tracking-widest">{day.accommodation}</p>
-                            {day.description && <p className="text-xs text-black/60 mt-1">{day.description}</p>}
+                            <p className="text-sm font-bold text-black group-hover:text-primary transition-colors uppercase italic">{day.destination || day.Destination}</p>
+                            <p className="text-[10px] text-black/40 font-black uppercase tracking-widest">{day.accommodation || day.Accommodation}</p>
+                            {(day.description || day.Description || day.activity || day.Activity) && (
+                              <p className="text-xs text-black/60 mt-1">{day.description || day.Description || day.activity || day.Activity}</p>
+                            )}
                           </div>
                         ) : (
-                          <p className="text-sm font-bold text-black group-hover:text-primary transition-colors">{day.description}</p>
+                          <p className="text-sm font-bold text-black group-hover:text-primary transition-colors">{day.description || day.Description || day.activity || day.Activity}</p>
                         )}
                       </div>
                     </div>

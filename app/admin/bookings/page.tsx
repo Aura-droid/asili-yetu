@@ -353,7 +353,13 @@ export default function AdminBookingsPage() {
                                    </div>
                                    <div className="flex-1">
                                       <textarea 
-                                        defaultValue={day.description || day.Description || day.Activity}
+                                        defaultValue={
+                                          day.description || 
+                                          day.Description || 
+                                          day.activity ||
+                                          day.Activity || 
+                                          (day.destination || day.Destination ? `${day.destination || day.Destination}${day.accommodation || day.Accommodation ? ` • Overnight: ${day.accommodation || day.Accommodation}` : ''}` : "")
+                                        }
                                         onBlur={async (e) => {
                                           const newBreakdown = [...(inquiry.itinerary_details?.dailyBreakdown || [])];
                                           newBreakdown[idx] = { ...day, description: e.target.value };
