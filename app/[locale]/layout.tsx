@@ -16,7 +16,6 @@ import LoadingProvider from "@/providers/LoadingProvider";
 import CookieConsent from "@/components/CookieConsent";
 import { getSettings } from "@/app/actions/settings";
 import { getOrganizationSchema, getTravelAgencySchema } from "@/components/StructuredData";
-import ConnectivityGuard from "@/components/ConnectivityGuard";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -143,10 +142,8 @@ export default async function RootLayout(props: {
               <CookieConsent />
               <Spotlight />
               <JungleTransitionOverlay />
-              <ConnectivityGuard>
-                <Navbar />
-                {children}
-              </ConnectivityGuard>
+              <Navbar />
+              {children}
               <Footer settings={settings} />
             </ThemeProvider>
           </LoadingProvider>
