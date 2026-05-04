@@ -15,14 +15,15 @@ export default function ConnectivityGuard({ children }: { children: React.ReactN
   useEffect(() => {
     const handleOffline = () => {
       setIsOffline(true);
+      const currentPath = window.location.pathname;
       // Determine if we are in admin or public space
       if (pathname.includes("/admin")) {
-        router.push("/admin/offline");
+        router.push(`/admin/offline?from=${encodeURIComponent(currentPath)}`);
       } else {
         // Find current locale from pathname or default to /en/offline
         const segments = pathname.split("/");
         const locale = segments[1] || "en";
-        router.push(`/${locale}/offline`);
+        router.push(`/${locale}/offline?from=${encodeURIComponent(currentPath)}`);
       }
     };
 

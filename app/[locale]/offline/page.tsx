@@ -4,15 +4,33 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WifiOff, Map, RefreshCcw, Compass } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Link } from "@/i18n/routing";
 
 export default function OfflinePage() {
   const t = useTranslations("Offline");
+  const locale = useLocale();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleRetry = () => {
+    if (typeof window !== "undefined" && navigator.onLine) {
+      const from = searchParams.get("from");
+      if (from) {
+        router.push(from);
+      } else {
+        router.push(`/${locale}`);
+      }
+    } else {
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center p-6 relative overflow-hidden">
@@ -72,16 +90,17 @@ export default function OfflinePage() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button 
-            onClick={() => window.location.reload()}
+            onClick={handleRetry}
             className="w-full sm:w-auto px-10 py-5 bg-white text-black rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-primary transition-all active:scale-95 shadow-2xl"
           >
             <RefreshCcw className="w-4 h-4" /> {t("retry")}
           </button>
-          <button 
-            className="w-full sm:w-auto px-10 py-5 bg-white/5 text-white/60 border border-white/10 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-white/10 transition-all active:scale-95"
+          <Link 
+            href="/packages"
+            className="w-full sm:w-auto px-10 py-5 bg-white/5 text-white/60 border border-white/10 rounded-full font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-white/10 transition-all active:scale-95 text-center"
           >
             <Map className="w-4 h-4" /> {t("view_saved")}
-          </button>
+          </Link>
         </div>
 
         {/* Footer Telemetry */}

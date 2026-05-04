@@ -4,7 +4,25 @@ import { motion } from "framer-motion";
 import { ServerOff, RefreshCcw, Activity, ShieldAlert } from "lucide-react";
 import Image from "next/image";
 
+import { useSearchParams, useRouter } from "next/navigation";
+
 export default function AdminOfflinePage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleRetry = () => {
+    if (typeof window !== "undefined" && navigator.onLine) {
+      const from = searchParams.get("from");
+      if (from) {
+        router.push(from);
+      } else {
+        router.push("/admin");
+      }
+    } else {
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#020617] flex flex-col items-center justify-center p-6 relative overflow-hidden">
       {/* Blueprint Grid Effect */}
@@ -66,7 +84,7 @@ export default function AdminOfflinePage() {
             </div>
 
             <button 
-              onClick={() => window.location.reload()}
+              onClick={handleRetry}
               className="w-full py-5 bg-red-500 text-white rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-red-600 transition-all active:scale-95 shadow-xl shadow-red-500/20 flex items-center justify-center gap-3"
             >
               <RefreshCcw className="w-4 h-4" /> Reload Admin Console
