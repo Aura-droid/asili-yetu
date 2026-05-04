@@ -33,12 +33,13 @@ export default function LoginPage() {
 
         <form 
           className="space-y-6"
-          onSubmit={async (e) => {
-             e.preventDefault();
+          action={async (formData) => {
              setLoading(true);
-             const formData = new FormData(e.currentTarget);
-             await login(formData);
-             setLoading(false);
+             try {
+               await login(formData);
+             } finally {
+               setLoading(false);
+             }
           }}
         >
           <div>

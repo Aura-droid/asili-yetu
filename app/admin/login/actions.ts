@@ -13,12 +13,22 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  console.log('Login attempt for:', data.email)
 
-  if (error) {
-    redirect('/admin/login?error=' + encodeURIComponent(error.message))
+  try {
+    const { error } = await supabase.auth.signInWithPassword(data)
+
+    if (error) {
+      console.error('Login error:', error.message)
+      redirect('/admin/login?error=' + encodeURIComponent(error.message))
+    }
+  } catch (err: any) {
+    if (err.message === 'NEXT_REDIRECT') throw err;
+    console.error('Unexpected login crash:', err)
+    throw err;
   }
 
+  console.log('Login successful for:', data.email)
   revalidatePath('/admin', 'layout')
   redirect('/admin')
 }
