@@ -89,12 +89,30 @@ export default function InstagramClient({ posts }: InstagramClientProps) {
             rel="noopener noreferrer" 
             className="group relative block aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg"
           >
-            <Image 
-              src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
-              alt={post.caption || "Safari moment by Asili Yetu"} 
-              fill 
-              className="object-cover transition-transform duration-1000 group-hover:scale-110" 
-            />
+            {post.media_type === 'VIDEO' ? (
+              <div className="absolute inset-0 w-full h-full">
+                <video 
+                  src={post.media_url} 
+                  poster={post.thumbnail_url}
+                  muted 
+                  loop 
+                  playsInline 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.pause();
+                    e.currentTarget.currentTime = 0;
+                  }}
+                />
+              </div>
+            ) : (
+              <Image 
+                src={post.media_url} 
+                alt={post.caption || "Safari moment by Asili Yetu"} 
+                fill 
+                className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+              />
+            )}
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
               <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -142,12 +160,26 @@ export default function InstagramClient({ posts }: InstagramClientProps) {
               rel="noopener noreferrer" 
               className="relative block w-72 aspect-[4/5] overflow-hidden rounded-3xl bg-foreground/10 shadow-lg shrink-0"
             >
-              <Image 
-                src={post.media_type === 'VIDEO' && post.thumbnail_url ? post.thumbnail_url : post.media_url} 
-                alt={post.caption || "Safari moment"} 
-                fill 
-                className="object-cover" 
-              />
+              {post.media_type === 'VIDEO' ? (
+                <div className="absolute inset-0 w-full h-full">
+                  <video 
+                    src={post.media_url} 
+                    poster={post.thumbnail_url}
+                    muted 
+                    loop 
+                    autoPlay
+                    playsInline 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : (
+                <Image 
+                  src={post.media_url} 
+                  alt={post.caption || "Safari moment"} 
+                  fill 
+                  className="object-cover" 
+                />
+              )}
               <div className="absolute bottom-4 left-4 right-4 bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-white/10">
                  <p className="text-[10px] text-white font-medium line-clamp-2 leading-tight">
                     {post.caption || "The spirit of the wild..."}

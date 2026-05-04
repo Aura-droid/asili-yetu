@@ -452,5 +452,11 @@
     "desc": "Tunatumia kuki muhimu ili kusawazisha kipindi chako na uzoefu uliowekwa ndani kwenye savannah.",
     "accept": "Kubali Mapigo",
     "decline": "Kataa Zisizo Muhimu"
+  },
+  "Offline": {
+    "title": "Mawasiliano <p>Yamekatika</p>",
+    "sub": "Mawasiliano ya setilaiti yameingiliana. Tafadhali jaribu tena au subiri kidogo.",
+    "retry": "Unganisha Tena",
+    "view_saved": "Angalia Safari Zilizohifadhiwa"
   }
 }

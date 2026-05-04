@@ -480,5 +480,11 @@
     "desc": "We use essential cookies to synchronize your session and localized experience across the savannah.",
     "accept": "Accept Pulse",
     "decline": "Decline Non-Essential"
+  },
+  "Offline": {
+    "title": "Signal Lost in <p>Savannah</p>",
+    "sub": "Our satellite uplink has been interrupted. Check your local telemetry or wait for the next pass.",
+    "retry": "Re-establish Uplink",
+    "view_saved": "View Saved Itineraries"
   }
 }

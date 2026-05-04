@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import "../../app/globals.css";
 import AdminSidebar from "@/components/AdminSidebar";
 import LoadingProvider from "@/providers/LoadingProvider";
+import ConnectivityGuard from "@/components/ConnectivityGuard";
 
 export const metadata: Metadata = {
   title: "Asili Yetu | Admin Console",
@@ -20,10 +21,12 @@ export default function AdminRootLayout({
       <body className="bg-background text-foreground antialiased">
         <div className="flex min-h-screen">
           <LoadingProvider>
-            <AdminSidebar />
-            <main className="flex-1 overflow-y-auto">
-              {children}
-            </main>
+            <ConnectivityGuard>
+              <AdminSidebar />
+              <main className="flex-1 overflow-y-auto">
+                {children}
+              </main>
+            </ConnectivityGuard>
           </LoadingProvider>
         </div>
       </body>

@@ -27,6 +27,8 @@ export async function getInstagramMedia() {
       const mappedPosts = posts.map(post => ({
         id: post.id,
         url: post.media_url,
+        thumbnail_url: post.thumbnail_url,
+        type: post.media_type.toLowerCase() === 'video' ? 'video' : 'image',
         permalink: post.permalink,
         caption: post.caption,
         source: 'instagram',

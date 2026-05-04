@@ -450,5 +450,11 @@
     "desc": "Nous utilisons des cookies essentiels pour synchroniser votre session et votre expérience localisée à travers la savane.",
     "accept": "Accepter le Pouls",
     "decline": "Refuser les Non-Essentiels"
+  },
+  "Offline": {
+    "title": "Signal Interrompu en <p>Savane</p>",
+    "sub": "Notre liaison satellite a été interrompue. Vérifiez votre télémétrie locale ou attendez le prochain passage.",
+    "retry": "Rétablir la Liaison",
+    "view_saved": "Voir les Itinéraires Enregistrés"
   }
 }

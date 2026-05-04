@@ -70,13 +70,31 @@ export default function ClientGallery({ posts }: { posts: any[] }) {
                 <Link href={post.permalink || "#"} target={post.permalink ? "_blank" : "_self"} rel="noopener noreferrer" className="block w-full h-full">
                   <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-color-burn" />
                   
-                  <Image 
-                    src={post.url}
-                    alt={post.caption?.substring(0, 50) || "Safari imagery"}
-                    fill
-                    className="object-cover transition-transform duration-[3000ms] group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                  {post.type === 'video' ? (
+                    <div className="absolute inset-0 w-full h-full">
+                      <video 
+                        src={post.url} 
+                        poster={post.thumbnail_url || post.url}
+                        muted 
+                        loop 
+                        playsInline 
+                        className="w-full h-full object-cover transition-transform duration-[3000ms] group-hover:scale-110"
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.pause();
+                          e.currentTarget.currentTime = 0;
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <Image 
+                      src={post.url}
+                      alt={post.caption?.substring(0, 50) || "Safari imagery"}
+                      fill
+                      className="object-cover transition-transform duration-[3000ms] group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  )}
 
                   {/* Gradient Overlay & Metadata */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-end p-6 md:p-8">
