@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WifiOff, Map, RefreshCcw, Compass } from "lucide-react";
 import Image from "next/image";
@@ -7,6 +8,11 @@ import { useTranslations } from "next-intl";
 
 export default function OfflinePage() {
   const t = useTranslations("Offline");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center p-6 relative overflow-hidden">
@@ -87,7 +93,7 @@ export default function OfflinePage() {
            <div className="w-px h-8 bg-white/5" />
            <div className="flex flex-col items-center gap-1">
               <span className="text-[8px] font-black text-white/20 uppercase tracking-widest">Last Telemetry</span>
-              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{new Date().toLocaleTimeString()}</span>
+              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{mounted ? new Date().toLocaleTimeString() : "--:--:--"}</span>
            </div>
            <div className="w-px h-8 bg-white/5" />
            <div className="flex flex-col items-center gap-1">
