@@ -25,11 +25,12 @@ export async function submitBookingInquiry(payload: any) {
         let packageItinerary = null;
         let packageTitle = null;
 
-        if (payload.itinerary?.packageId) {
+        const packageId = payload.itinerary?.packageId || payload.itinerary?.package_id;
+        if (packageId) {
             const { data: pkg } = await supabaseServer
                 .from('packages')
                 .select('price_usd, discount_price, itinerary, title')
-                .eq('id', payload.itinerary.packageId)
+                .eq('id', packageId)
                 .single();
             
             if (pkg) {
@@ -39,16 +40,20 @@ export async function submitBookingInquiry(payload: any) {
             }
         }
 
-        // Merge package itinerary into the payload if missing
+        // Merge package itinerary into the payload if missing or if it's a package booking
         let finalItinerary = payload.itinerary || null;
         if (packageItinerary && Array.isArray(packageItinerary) && packageItinerary.length > 0) {
             finalItinerary = {
                 ...finalItinerary,
                 recommendedTitle: packageTitle,
-                dailyBreakdown: packageItinerary.map((day: any, idx: number) => ({
-                    day: day.day || day.Day || `Day ${idx + 1}`,
-                    description: day.activity || day.Activity || day.description || day.Description || ""
-                }))
+                dailyBreakdown: packageItinerary.map((day: any, idx: number) => {
+                    const desc = day.description || day.Description || day.activity || day.Activity || 
+                                (day.destination ? `Explore ${day.destination}${day.accommodation ? ` • Overnight at ${day.accommodation}` : ''}` : "");
+                    return {
+                        day: day.day || day.Day || `Day ${idx + 1}`,
+                        description: desc
+                    };
+                })
             };
         }
 

@@ -25,7 +25,7 @@ export default function BookingFunnelWrapper({
 
       {showBooking && (
         <BookingFunnel 
-          itinerary={{ package_id: packageId, title: packageTitle }} 
+          itinerary={{ packageId: packageId, title: packageTitle }} 
           onClose={() => setShowBooking(false)} 
         />
       )}
