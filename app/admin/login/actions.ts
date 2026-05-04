@@ -1,13 +1,11 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
 
-  // type-casting here for convenience
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -20,15 +18,13 @@ export async function login(formData: FormData) {
 
     if (error) {
       console.error('Login error:', error.message)
-      redirect('/admin/login?error=' + encodeURIComponent(error.message))
+      return { success: false, error: error.message }
     }
+    
+    revalidatePath('/admin', 'layout')
+    return { success: true, redirectTo: '/admin' }
   } catch (err: any) {
-    if (err.message === 'NEXT_REDIRECT') throw err;
     console.error('Unexpected login crash:', err)
-    throw err;
+    return { success: false, error: 'An internal system error occurred. Please check logs.' }
   }
-
-  console.log('Login successful for:', data.email)
-  revalidatePath('/admin', 'layout')
-  redirect('/admin')
 }

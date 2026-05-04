@@ -1,14 +1,18 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { login } from "./actions";
 import { Compass, AlertCircle, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
-  const error = searchParams.get("error");
+  const urlError = searchParams.get("error");
   const [loading, setLoading] = useState(false);
+  const [localError, setLocalError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const displayError = localError || urlError;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-foreground flex items-center justify-center p-6">
@@ -24,10 +28,10 @@ export default function LoginPage() {
           <p className="text-foreground/50 text-sm mt-2 font-bold uppercase tracking-widest">Asili Yetu Safaris</p>
         </div>
 
-        {error && (
+        {displayError && (
           <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl flex items-start gap-3 border border-red-100">
              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-             <p className="text-sm font-medium">{error}</p>
+             <p className="text-sm font-medium">{displayError}</p>
           </div>
         )}
 
@@ -35,9 +39,18 @@ export default function LoginPage() {
           className="space-y-6"
           action={async (formData) => {
              setLoading(true);
+             setLocalError(null);
              try {
-               await login(formData);
-             } finally {
+               const result = await login(formData);
+               if (result.success && result.redirectTo) {
+                 router.push(result.redirectTo);
+                 router.refresh();
+               } else if (result.error) {
+                 setLocalError(result.error);
+                 setLoading(false);
+               }
+             } catch (err) {
+               setLocalError("A synchronization error occurred. Please try again.");
                setLoading(false);
              }
           }}
