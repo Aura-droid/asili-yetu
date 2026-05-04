@@ -361,10 +361,18 @@ export default function AdminBookingsPage() {
                                           (day.destination || day.Destination ? `${day.destination || day.Destination}${day.accommodation || day.Accommodation ? ` • Overnight: ${day.accommodation || day.Accommodation}` : ''}` : "")
                                         }
                                         onBlur={async (e) => {
-                                          const newBreakdown = [...(inquiry.itinerary_details?.dailyBreakdown || [])];
-                                          newBreakdown[idx] = { ...day, description: e.target.value };
-                                          await updateInquiryItinerary(inquiry.id, newBreakdown);
-                                          loadInquiries();
+                                          try {
+                                            const newBreakdown = [...(inquiry.itinerary_details?.dailyBreakdown || [])];
+                                            newBreakdown[idx] = { ...day, description: e.target.value };
+                                            const res = await updateInquiryItinerary(inquiry.id, newBreakdown);
+                                            if (res.success) {
+                                              loadInquiries();
+                                            } else {
+                                              console.error("Signal Sync Error:", res.error);
+                                            }
+                                          } catch (err) {
+                                            console.error("Terminal Connection Error:", err);
+                                          }
                                         }}
                                         className="w-full bg-transparent border-none outline-none resize-none text-sm font-medium leading-relaxed text-foreground placeholder:text-foreground/20"
                                         rows={2}
