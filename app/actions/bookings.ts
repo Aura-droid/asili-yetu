@@ -269,28 +269,45 @@ export async function updateInquiryDossier(inquiryId: string, updates: any) {
 }
 
 export async function updateInquiryItinerary(inquiryId: string, dailyBreakdown: any[]) {
-  const supabase = await createClient();
-  
-  // Fetch current details to preserve title and strategy
-  const { data: inquiry } = await supabase
-    .from("inquiries")
-    .select("itinerary_details")
-    .eq("id", inquiryId)
-    .single();
+  console.log('Update itinerary attempt for:', inquiryId);
+  try {
+    const supabase = await createClient();
+    
+    // Fetch current details to preserve title and strategy
+    const { data: inquiry, error: fetchError } = await supabase
+      .from("inquiries")
+      .select("itinerary_details")
+      .eq("id", inquiryId)
+      .single();
 
-  const currentItinerary = inquiry?.itinerary_details || {};
-  const updatedItinerary = {
-    ...currentItinerary,
-    dailyBreakdown: dailyBreakdown
-  };
+    if (fetchError) {
+      console.error('Fetch error during itinerary update:', fetchError.message);
+      return { success: false, error: fetchError.message };
+    }
 
-  const { error } = await supabase
-    .from("inquiries")
-    .update({ itinerary_details: updatedItinerary })
-    .eq("id", inquiryId);
-  
-  revalidatePath("/admin/bookings");
-  return { success: !error, error: error?.message };
+    const currentItinerary = inquiry?.itinerary_details || {};
+    const updatedItinerary = {
+      ...currentItinerary,
+      dailyBreakdown: dailyBreakdown
+    };
+
+    const { error: updateError } = await supabase
+      .from("inquiries")
+      .update({ itinerary_details: updatedItinerary })
+      .eq("id", inquiryId);
+    
+    if (updateError) {
+      console.error('Database update error:', updateError.message);
+      return { success: false, error: updateError.message };
+    }
+
+    console.log('Itinerary updated successfully for:', inquiryId);
+    revalidatePath("/admin/bookings");
+    return { success: true };
+  } catch (err: any) {
+    console.error('Critical crash in updateInquiryItinerary:', err);
+    return { success: false, error: err.message || "Internal server error during synchronization." };
+  }
 }
 
 export async function sendSignalNotification(inquiryId: string, content: string) {
