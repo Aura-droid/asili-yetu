@@ -54,7 +54,9 @@ export default function OfflinePage() {
         </div>
 
         <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight mb-6 uppercase italic">
-          {t("title")}
+          {t.rich("title", {
+            p: (chunks) => <span className="text-white/50">{chunks}</span>
+          })}
         </h1>
         
         <p className="text-white/60 text-lg font-medium leading-relaxed mb-12 max-w-md mx-auto">
