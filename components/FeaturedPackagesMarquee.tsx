@@ -166,7 +166,7 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                            )}
                         </div>
 
-                         <div className="max-w-[20rem] xl:max-w-[22rem] 2xl:max-w-[24rem]">
+                          <div className="max-w-[20rem] xl:max-w-[22rem] 2xl:max-w-[24rem]">
                            <div className="flex items-center gap-2 mb-3">
                               <MapPin className="w-3.5 h-3.5 text-primary" />
                               <span className="text-[10px] font-bold text-white/65 uppercase tracking-[0.28em]">
@@ -234,9 +234,9 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                               {pkg.destinations?.name || "Tanzania"}
                            </span>
                         </div>
-                        <h3 className="text-[1.9rem] lg:text-[1.7rem] 2xl:text-[1.85rem] font-black text-white uppercase tracking-tighter leading-[0.92] group-hover/card:text-primary transition-colors italic drop-shadow-lg">
+                        <div className="text-[1.9rem] lg:text-[1.7rem] 2xl:text-[1.85rem] font-black text-white uppercase tracking-tighter leading-[0.92] group-hover/card:text-primary transition-colors italic drop-shadow-lg">
                            {pkg.title}
-                        </h3>
+                        </div>
                      </div>
                   </div>
 
@@ -247,9 +247,9 @@ export default function FeaturedPackagesMarquee({ packages }: FeaturedPackagesMa
                         <MapPin className="w-3 h-3 text-primary" />
                         <span className="text-[9px] font-bold text-white/60 uppercase tracking-widest">{pkg.destinations?.name || "Tanzania"}</span>
                      </div>
-                     <h3 className="text-lg font-black text-white uppercase tracking-tighter leading-[1.05] mb-5 group-hover/card:text-primary transition-colors italic line-clamp-3 break-words max-w-[20ch]">
+                     <div className="text-lg font-black text-white uppercase tracking-tighter leading-[1.05] mb-5 group-hover/card:text-primary transition-colors italic line-clamp-3 break-words max-w-[20ch]">
                         {pkg.title}
-                     </h3>
+                     </div>
                      
                      <div className="flex flex-col gap-4 border-t border-white/10 pt-4">
                         <div className="grid grid-cols-2 gap-2 lg:grid-cols-2 lg:gap-3">

@@ -5,9 +5,11 @@ import SafariExplorer from "@/components/SafariExplorer";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from 'next';
 
-export async function generateMetadata({ searchParams }: { searchParams: Promise<{ expedition?: string }> }): Promise<Metadata> {
+export async function generateMetadata({ searchParams, params }: { searchParams: Promise<{ expedition?: string }>, params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+  const { locale } = await params;
   const { expedition } = await searchParams;
-  
+
   if (expedition) {
     const { data } = await supabase
       .from("packages")
@@ -19,6 +21,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       return {
         title: `${data.title} | Asili Yetu Safaris`,
         description: `Experience the wild with our ${data.duration_days}-day expedition. Rated ${data.avg_rating || '5.0'} stars.`,
+        alternates: {
+          canonical: `${baseUrl}/${locale}/packages?expedition=${expedition}`,
+        },
         openGraph: {
           title: data.title,
           description: data.description?.slice(0, 160),
@@ -31,6 +36,18 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   return {
     title: "Eco-Expeditions & Private Safaris | Asili Yetu",
     description: "Curated safari masterpieces across the African savannah.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/packages`,
+      languages: {
+        en: `${baseUrl}/en/packages`,
+        sw: `${baseUrl}/sw/packages`,
+        es: `${baseUrl}/es/packages`,
+        fr: `${baseUrl}/fr/packages`,
+        de: `${baseUrl}/de/packages`,
+        zh: `${baseUrl}/zh/packages`,
+        ar: `${baseUrl}/ar/packages`,
+      }
+    }
   };
 }
 

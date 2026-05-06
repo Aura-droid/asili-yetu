@@ -124,7 +124,7 @@ export default function StrategicFAQ() {
 
         <div className="mt-16 p-8 bg-foreground text-white rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-black/20">
           <div className="text-center md:text-left">
-            <h4 className="text-2xl font-black tracking-tight mb-2">Still have strategic questions?</h4>
+            <p className="text-2xl font-black tracking-tight mb-2">Still have strategic questions?</p>
             <p className="text-white/60 font-medium">Our concierge team is standing by for real-time intelligence dispatch.</p>
           </div>
           <a 

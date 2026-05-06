@@ -1,8 +1,29 @@
 import { getDestinations } from "@/app/actions/destinations";
 import DestinationsClient from "./DestinationsClient";
 import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 
-// Destinations fetched with translatable fallback logic inside the component
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+  
+  return {
+    title: "Safari Destinations in Tanzania | Serengeti, Ngorongoro, Zanzibar",
+    description: "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the spice islands of Zanzibar.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/destinations`,
+      languages: {
+        en: `${baseUrl}/en/destinations`,
+        sw: `${baseUrl}/sw/destinations`,
+        es: `${baseUrl}/es/destinations`,
+        fr: `${baseUrl}/fr/destinations`,
+        de: `${baseUrl}/de/destinations`,
+        zh: `${baseUrl}/zh/destinations`,
+        ar: `${baseUrl}/ar/destinations`,
+      }
+    }
+  };
+}
 
 export default async function DestinationsPage() {
   const t = await getTranslations("Destinations");

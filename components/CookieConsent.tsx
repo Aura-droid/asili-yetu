@@ -46,7 +46,7 @@ export default function CookieConsent() {
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
                     <Cookie className="w-5 h-5 text-primary" />
                   </div>
-                  <h3 className="font-black tracking-tight text-lg">{t("title")}</h3>
+                  <p className="font-black tracking-tight text-lg">{t("title")}</p>
                 </div>
                 <button 
                   onClick={() => setShow(false)}

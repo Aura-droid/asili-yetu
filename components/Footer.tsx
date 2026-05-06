@@ -56,7 +56,7 @@ export default function Footer({ settings }: { settings?: any }) {
           </div>
 
           <div>
-            <h4 className="text-foreground font-black uppercase tracking-widest text-xs mb-6">{t("Footer.expeditions")}</h4>
+            <p className="text-foreground font-black uppercase tracking-widest text-[10px] mb-6">{t("Footer.expeditions")}</p>
             <ul className="space-y-4 text-sm font-semibold text-foreground/60">
               <li><Link href="/packages" onClick={() => setIsLoading(true)} className="hover:text-primary transition-colors">{t("Navbar.safaris")}</Link></li>
               <li><Link href="/destinations" onClick={() => setIsLoading(true)} className="hover:text-primary transition-colors">{t("Navbar.destinations")}</Link></li>
@@ -67,7 +67,7 @@ export default function Footer({ settings }: { settings?: any }) {
           </div>
 
           <div>
-            <h4 className="text-foreground font-black uppercase tracking-widest text-xs mb-6">{t("Footer.contact_base")}</h4>
+            <p className="text-foreground font-black uppercase tracking-widest text-[10px] mb-6">{t("Footer.contact_base")}</p>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-foreground/60 text-sm font-semibold">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -85,7 +85,7 @@ export default function Footer({ settings }: { settings?: any }) {
           </div>
 
           <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10 flex flex-col justify-center items-start">
-             <h4 className="text-foreground font-black text-lg mb-2">{t("Footer.whatsapp_title")}</h4>
+             <p className="text-foreground font-black text-lg mb-2">{t("Footer.whatsapp_title")}</p>
              <p className="text-foreground/60 text-sm font-medium mb-6 italic">
                 {t("Footer.whatsapp_desc")}
              </p>

@@ -52,7 +52,7 @@ export default function ResponsibleTourism() {
             </motion.p>
 
             <div className="space-y-4">
-              <h4 className="text-primary font-black uppercase tracking-widest text-xs mb-6">{t("commitments_title")}</h4>
+              <p className="text-primary font-black uppercase tracking-widest text-xs mb-6">{t("commitments_title")}</p>
               <div className="flex flex-wrap gap-4">
                 {commitments.map((c, i) => (
                   <motion.div 
@@ -78,7 +78,7 @@ export default function ResponsibleTourism() {
             className="bg-primary/5 p-12 rounded-[3rem] border border-background/5 text-center relative group"
           >
             <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <h3 className="text-5xl md:text-8xl font-black text-primary mb-6 italic tracking-tighter">100%</h3>
+            <p className="text-5xl md:text-8xl font-black text-primary mb-6 italic tracking-tighter">100%</p>
             <p className="text-2xl font-bold mb-8 uppercase tracking-widest leading-tight">{t("impact")}</p>
             <div className="w-16 h-1 bg-primary mx-auto" />
           </motion.div>

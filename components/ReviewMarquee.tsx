@@ -116,7 +116,7 @@ export default function ReviewMarquee() {
                      {review.source === 'instagram' ? <InstagramIcon className="w-5 h-5" /> : (review.user_name || "AT").split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
-                     <h4 className="font-bold text-slate-900">{review.source === 'instagram' ? `@${review.user_name}` : review.user_name}</h4>
+                     <p className="font-bold text-slate-900">{review.source === 'instagram' ? `@${review.user_name}` : review.user_name}</p>
                      <p className="text-[10px] uppercase font-black tracking-widest text-slate-400">
                        {review.source === 'instagram' ? (
                          <span className="text-[#E1306C] flex items-center gap-1">{t("ig_label")}</span>

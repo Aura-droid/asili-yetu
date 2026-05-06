@@ -18,6 +18,18 @@ import { getCultureStories } from "@/app/actions/culture";
 import { getManualGallery } from "@/app/actions/gallery";
 
 import ScrollReveal from "@/components/ScrollReveal";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+  
+  return {
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+    }
+  };
+}
 
 export default async function Home() {
   const [
