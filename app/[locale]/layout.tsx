@@ -20,25 +20,24 @@ import { getOrganizationSchema, getTravelAgencySchema } from "@/components/Struc
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   
-  // High-converting, keyword-dense descriptions mirroring industry leaders (150-160 chars)
-  const descriptions: Record<string, string> = {
-    en: "Leading Safari Agency in Tanzania ✓ Tailor-made Expeditions ✓ Expert Local Guides ✓ Serengeti & Zanzibar Specialists ✓ Private & Group Safaris. Book your dream trip.",
-    sw: "Kampuni ya Safari Tanzania ✓ Safari za Binafsi ✓ Waongoza Safari Wataalam ✓ Wataalam wa Serengeti na Zanzibar ✓ Utalii Endelevu. Weka nafasi ya safari yako sasa.",
-    es: "Agencia Líder de Safaris en Tanzania ✓ Expediciones a Medida ✓ Guías Locales Expertos ✓ Especialistas en Serengeti y Zanzíbar ✓ Safaris Privados. Reserve su viaje.",
-    fr: "Agence de Safari Leader en Tanzanie ✓ Expéditions Sur Mesure ✓ Guides Locaux Experts ✓ Spécialistes du Serengeti et de Zanzibar ✓ Safaris Privés. Réservez votre voyage.",
-    de: "Führende Safari-Agentur in Tansania ✓ Maßgeschneiderte Expeditionen ✓ Erfahrene lokale Guides ✓ Spezialisten für Serengeti & Sansibar ✓ Private Safaris. Jetzt buchen.",
-    zh: "坦桑尼亚领先的游猎机构 ✓ 私人定制探险 ✓ 专家级当地导游 ✓ 塞伦盖蒂和桑给巴尔专家 ✓ 私人及团体游猎。立即预订您的梦想之旅。",
-    ar: "وكالة السفاري الرائدة في تنزانيا ✓ بعثات مخصصة ✓ أدلة محليون خبراء ✓ متخصصون في سيرينجيتي وزنجبار ✓ سفاري خاص ومجموعات. احجز رحلة أحلامك الآن."
+  const titles: Record<string, string> = {
+    en: "Leading Travel Agency in Tanzania - Book your Safari",
+    sw: "Wakala wa Safari Anayeongoza Tanzania - Weka Nafasi",
+    es: "Agencia de Viajes Líder en Tanzania - Reserve su Safari",
+    fr: "Principale Agence de Voyage en Tanzanie - Réservez",
+    de: "Führendes Reisebüro in Tansania - Buchen Sie",
+    zh: "坦桑尼亚领先的旅行社 - 预订您的游猎",
+    ar: "وكالة السفر الرائدة في تنزانيا - احجز رحلتك"
   };
 
-  const titles: Record<string, string> = {
-    en: "Leading Travel Agency in Tanzania - Book your Tanzania Vacation",
-    sw: "Wakala wa Safari Anayeongoza Tanzania - Weka Nafasi ya Likizo Yako",
-    es: "Agencia de Viajes Líder en Tanzania - Reserve sus Vacaciones en Tanzania",
-    fr: "Principale Agence de Voyage en Tanzanie - Réservez vos Vacances",
-    de: "Führendes Reisebüro in Tansania - Buchen Sie Ihren Tansania-Urlaub",
-    zh: "坦桑尼亚领先的旅行社 - 预订您的坦桑尼亚假期",
-    ar: "وكالة السفر الرائدة في تنزانيا - احجز عطلتك في تنزانيا"
+  const descriptions: Record<string, string> = {
+    en: "Leading Safari Agency in Tanzania ✓ Tailor-made Expeditions ✓ Expert Local Guides ✓ Serengeti & Zanzibar Specialists. Book your dream trip.",
+    sw: "Kampuni ya Safari Tanzania ✓ Safari za Binafsi ✓ Waongoza Safari Wataalam ✓ Wataalam wa Serengeti na Zanzibar. Weka nafasi yako sasa.",
+    es: "Agencia Líder de Safaris en Tanzania ✓ Expediciones a Medida ✓ Guías Locales Expertos ✓ Especialistas en Serengeti y Zanzíbar. Reserve su viaje.",
+    fr: "Agence de Safari Leader en Tanzanie ✓ Expéditions Sur Mesure ✓ Guides Locaux Experts ✓ Spécialistes du Serengeti et de Zanzibar. Réservez.",
+    de: "Führende Safari-Agentur in Tansania ✓ Maßgeschneiderte Expeditionen ✓ Erfahrene lokale Guides ✓ Spezialisten für Serengeti & Sansibar.",
+    zh: "坦桑尼亚领先的游猎机构 ✓ 私人定制探险 ✓ 专家级当地导游 ✓ 塞伦盖蒂和桑给巴尔专家。立即预订您的梦想之旅。",
+    ar: "وكالة السفاري الرائدة في تنزانيا ✓ بعثات مخصصة ✓ أدلة محليون خبراء ✓ متخصصون في سيرينجيتي وزنجبار. احجز الآن."
   };
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
@@ -50,6 +49,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | ${titles[locale] || titles.en}`
     },
     description: descriptions[locale] || descriptions.en,
+    alternates: {
+      languages: {
+        'en': `${baseUrl}/en`,
+        'sw': `${baseUrl}/sw`,
+        'es': `${baseUrl}/es`,
+        'fr': `${baseUrl}/fr`,
+        'de': `${baseUrl}/de`,
+        'zh': `${baseUrl}/zh`,
+        'ar': `${baseUrl}/ar`,
+        'x-default': `${baseUrl}/en`,
+      }
+    },
     openGraph: {
       type: "website",
       siteName: "Asili Yetu Safaris",
