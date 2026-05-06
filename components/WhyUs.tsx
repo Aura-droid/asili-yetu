@@ -38,11 +38,18 @@ export default function WhyUs() {
       img: "/images/Gallery/Lion.jpeg"
     },
     {
+      icon: <ShieldCheck className="w-8 h-8" />,
+      title: t("confidence_title"),
+      desc: t("confidence_desc"),
+      color: "from-amber-600/80 to-transparent",
+      img: "/images/Gallery/Twiga.jpeg"
+    },
+    {
       icon: <Award className="w-8 h-8" />,
       title: t("professional_title"),
       desc: t("professional_desc"),
       color: "from-rose-600/80 to-transparent",
-      img: "/images/Gallery/Twiga.jpeg"
+      img: "/others/toyota-land-cruiser.jpg"
     }
   ];
 

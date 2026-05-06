@@ -7,6 +7,10 @@ import { useTranslations } from "next-intl";
 
 const faqs = [
   {
+    question: "Is Asili Yetu Safaris associated with other similarly named agencies?",
+    answer: "No. Asili Yetu Safaris is a unique, independent premium tour operator. We are not associated with 'Asili Tanzania' or other similarly named firms. Our focus is exclusively on high-end, tailor-made Masterpiece Expeditions with our own private fleet and expert guides."
+  },
+  {
     question: "What is the best time to visit Tanzania for a safari?",
     answer: "The best time for a safari in Tanzania is during the dry season from late June to October. This period offers the best wildlife viewing as animals gather around water sources, and the Great Migration is typically in the Serengeti. However, the 'Green Season' (November to May) offers lush landscapes and is excellent for birdwatching and calving season."
   },
