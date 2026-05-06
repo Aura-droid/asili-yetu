@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Specific AI Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Sitemap Link
+Sitemap: https://asiliyetusafaris.com/sitemap.xml

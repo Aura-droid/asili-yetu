@@ -61,11 +61,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'x-default': `${baseUrl}/en`,
       }
     },
+    formatDetection: {
+      telephone: false,
+    },
+    authors: [{ name: "Asili Yetu Safaris", url: baseUrl }],
+    creator: "Asili Yetu Safaris",
+    publisher: "Asili Yetu Safaris",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       type: "website",
       siteName: "Asili Yetu Safaris",
-      title: titles[locale] || titles.en,
-      description: descriptions[locale] || descriptions.en,
+      title: locale === 'en' ? "Asili Yetu Safaris | Tanzania" : titles[locale]?.split(' - ')[0],
+      description: descriptions[locale]?.split('. ')[0] + '.',
       locale: locale === 'en' ? 'en_US' : locale,
       images: [
         {
@@ -78,8 +95,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     twitter: {
       card: "summary_large_image",
-      title: titles[locale] || titles.en,
-      description: descriptions[locale] || descriptions.en,
+      site: "@asiliyetusafaris",
+      creator: "@asiliyetusafaris",
+      title: locale === 'en' ? "Asili Yetu Safaris | Tanzania" : titles[locale]?.split(' - ')[0],
+      description: descriptions[locale]?.split('. ')[0] + '.',
       images: [`${baseUrl}/brand/asili-yetu-brand.jpg`],
     },
     keywords: ["safari", "tanzania", "serengeti", "ngorongoro", "kilimanjaro", "luxury safari", "authentic safari", "asili yetu"],
