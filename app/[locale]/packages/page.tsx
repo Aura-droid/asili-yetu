@@ -20,9 +20,19 @@ export async function generateMetadata({ searchParams, params }: { searchParams:
     if (data) {
       return {
         title: `${data.title} | Asili Yetu Safaris`,
-        description: `Experience the wild with our ${data.duration_days}-day expedition. Rated ${data.avg_rating || '5.0'} stars.`,
+        description: `Experience the wild with our ${data.duration_days}-day expedition. Rated ${data.avg_rating || '5.0'} stars. Professional local guides and luxury camps included.`,
         alternates: {
           canonical: `${baseUrl}/${locale}/packages?expedition=${expedition}`,
+          languages: {
+            'en': `${baseUrl}/en/packages?expedition=${expedition}`,
+            'sw': `${baseUrl}/sw/packages?expedition=${expedition}`,
+            'es': `${baseUrl}/es/packages?expedition=${expedition}`,
+            'fr': `${baseUrl}/fr/packages?expedition=${expedition}`,
+            'de': `${baseUrl}/de/packages?expedition=${expedition}`,
+            'zh': `${baseUrl}/zh/packages?expedition=${expedition}`,
+            'ar': `${baseUrl}/ar/packages?expedition=${expedition}`,
+            'x-default': `${baseUrl}/en/packages?expedition=${expedition}`,
+          },
         },
         openGraph: {
           title: data.title,
@@ -35,17 +45,18 @@ export async function generateMetadata({ searchParams, params }: { searchParams:
 
   return {
     title: "Eco-Expeditions & Private Safaris | Asili Yetu",
-    description: "Curated safari masterpieces across the African savannah.",
+    description: "Discover curated safari masterpieces across the Serengeti and Tanzania. Private, luxury, and eco-friendly expeditions tailored to your needs.",
     alternates: {
       canonical: `${baseUrl}/${locale}/packages`,
       languages: {
-        en: `${baseUrl}/en/packages`,
-        sw: `${baseUrl}/sw/packages`,
-        es: `${baseUrl}/es/packages`,
-        fr: `${baseUrl}/fr/packages`,
-        de: `${baseUrl}/de/packages`,
-        zh: `${baseUrl}/zh/packages`,
-        ar: `${baseUrl}/ar/packages`,
+        'en': `${baseUrl}/en/packages`,
+        'sw': `${baseUrl}/sw/packages`,
+        'es': `${baseUrl}/es/packages`,
+        'fr': `${baseUrl}/fr/packages`,
+        'de': `${baseUrl}/de/packages`,
+        'zh': `${baseUrl}/zh/packages`,
+        'ar': `${baseUrl}/ar/packages`,
+        'x-default': `${baseUrl}/en/packages`,
       }
     }
   };

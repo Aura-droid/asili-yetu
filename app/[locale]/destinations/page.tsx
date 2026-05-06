@@ -8,18 +8,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
   
   return {
-    title: "Safari Destinations in Tanzania | Serengeti, Ngorongoro, Zanzibar",
-    description: "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the spice islands of Zanzibar.",
+    title: "Tanzania Safari Destinations | Serengeti & Zanzibar",
+    description: "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the crystal waters of Zanzibar.",
     alternates: {
       canonical: `${baseUrl}/${locale}/destinations`,
       languages: {
-        en: `${baseUrl}/en/destinations`,
-        sw: `${baseUrl}/sw/destinations`,
-        es: `${baseUrl}/es/destinations`,
-        fr: `${baseUrl}/fr/destinations`,
-        de: `${baseUrl}/de/destinations`,
-        zh: `${baseUrl}/zh/destinations`,
-        ar: `${baseUrl}/ar/destinations`,
+        'en': `${baseUrl}/en/destinations`,
+        'sw': `${baseUrl}/sw/destinations`,
+        'es': `${baseUrl}/es/destinations`,
+        'fr': `${baseUrl}/fr/destinations`,
+        'de': `${baseUrl}/de/destinations`,
+        'zh': `${baseUrl}/zh/destinations`,
+        'ar': `${baseUrl}/ar/destinations`,
+        'x-default': `${baseUrl}/en/destinations`,
       }
     }
   };
