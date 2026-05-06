@@ -396,7 +396,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
       {/* Hero Branding / Subtle Indicator (Desktop Bottom) */}
       <div className="absolute bottom-10 left-12 hidden lg:flex items-center gap-6 z-30">
          <div className="flex flex-col">
-            <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.5em] mb-2">Operational Status</span>
+            <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.5em] mb-2">{t("operational_status")}</span>
             <div className="flex items-center gap-3">
                <div className="flex -space-x-2">
                   {[1,2,3].map(i => (
@@ -405,7 +405,7 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
                     </div>
                   ))}
                </div>
-               <span className="text-xs font-bold text-white/60 italic">14 Guides active in-field</span>
+               <span className="text-xs font-bold text-white/60 italic">14 {t("guides_active")}</span>
             </div>
          </div>
       </div>

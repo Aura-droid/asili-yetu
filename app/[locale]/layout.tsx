@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === 'en' ? 'en_US' : locale,
       images: [
         {
-          url: "/brand/asili-yetu-brand.jpg",
+          url: `${baseUrl}/brand/asili-yetu-brand.jpg`,
           width: 1200,
           height: 630,
           alt: "Asili Yetu Safaris - Premium Tanzanian Expeditions",
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: "summary_large_image",
       title: titles[locale] || titles.en,
       description: descriptions[locale] || descriptions.en,
-      images: ["/brand/asili-yetu-brand.jpg"],
+      images: [`${baseUrl}/brand/asili-yetu-brand.jpg`],
     },
     keywords: ["safari", "tanzania", "serengeti", "ngorongoro", "kilimanjaro", "luxury safari", "authentic safari", "asili yetu"],
   };

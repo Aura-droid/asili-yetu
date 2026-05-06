@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle, MessageCircle, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const faqs = [
   {
@@ -29,6 +30,7 @@ const faqs = [
 
 export default function StrategicFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const t = useTranslations("Hero");
 
   // Schema.org FAQPage data for AEO
   const faqSchema = {
@@ -55,13 +57,13 @@ export default function StrategicFAQ() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest mb-4 border border-primary/20">
             <Sparkles className="w-3 h-3" />
-            Strategic Intelligence
+            {t("strategic_intelligence")}
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-6 uppercase italic">
             Expedition <span className="text-primary italic">Intelligence</span>
           </h2>
           <p className="text-foreground/60 text-lg max-w-2xl mx-auto font-medium">
-            Essential knowledge for the modern explorer. We've distilled the most frequent inquiries into actionable strategic insights.
+            {t("faq_subtitle")}
           </p>
         </div>
 
@@ -124,14 +126,14 @@ export default function StrategicFAQ() {
 
         <div className="mt-16 p-8 bg-foreground text-white rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-black/20">
           <div className="text-center md:text-left">
-            <p className="text-2xl font-black tracking-tight mb-2">Still have strategic questions?</p>
-            <p className="text-white/60 font-medium">Our concierge team is standing by for real-time intelligence dispatch.</p>
+            <p className="text-2xl font-black tracking-tight mb-2">{t("still_have_questions")}</p>
+            <p className="text-white/60 font-medium">{t("concierge_team")}</p>
           </div>
           <a 
             href="#contact"
             className="px-8 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
           >
-            Dispatch Inquiry
+            {t("dispatch_inquiry")}
           </a>
         </div>
       </div>
