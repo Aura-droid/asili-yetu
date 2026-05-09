@@ -247,15 +247,6 @@ export default function Hero({ featuredPackages = [] }: { featuredPackages?: any
                        {currentFeatured.duration_days}D Immersion • <span className="text-primary italic">Live Selection</span>
                     </p>
                  </div>
-
-                 {/* Indicators for "Stack" */}
-                 {featuredPackages.length > 1 && (
-                    <div className="absolute -left-2 top-1/2 -translate-y-1/2 flex flex-col gap-1">
-                       {featuredPackages.map((_, i) => (
-                          <div key={i} className={`w-1 h-3 rounded-full transition-all duration-500 ${currentIndex === i ? 'bg-primary scale-y-125' : 'bg-white/10'}`} />
-                       ))}
-                    </div>
-                 )}
               </motion.div>
            </motion.div>
         )}

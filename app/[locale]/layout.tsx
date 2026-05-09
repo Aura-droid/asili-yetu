@@ -31,13 +31,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const descriptions: Record<string, string> = {
-    en: "Leading Safari Agency in Tanzania ✓ Tailor-made Expeditions ✓ Expert Local Guides ✓ Serengeti & Zanzibar Specialists. Book your dream trip.",
-    sw: "Kampuni ya Safari Tanzania ✓ Safari za Binafsi ✓ Waongoza Safari Wataalam ✓ Wataalam wa Serengeti na Zanzibar. Weka nafasi yako sasa.",
-    es: "Agencia Líder de Safaris en Tanzania ✓ Expediciones a Medida ✓ Guías Locales Expertos ✓ Especialistas en Serengeti y Zanzíbar. Reserve su viaje.",
-    fr: "Agence de Safari Leader en Tanzanie ✓ Expéditions Sur Mesure ✓ Guides Locaux Experts ✓ Spécialistes du Serengeti et de Zanzibar. Réservez.",
-    de: "Führende Safari-Agentur in Tansania ✓ Maßgeschneiderte Expeditionen ✓ Erfahrene lokale Guides ✓ Spezialisten für Serengeti & Sansibar.",
-    zh: "坦桑尼亚领先的游猎机构 ✓ 私人定制探险 ✓ 专家级当地导游 ✓ 塞伦盖蒂和桑给巴尔专家。立即预订您的梦想之旅。",
-    ar: "وكالة السفاري الرائدة في تنزانيا ✓ بعثات مخصصة ✓ أدلة محليون خبراء ✓ متخصصون في سيرينجيتي وزنجبار. احجز الآن."
+    en: "Leading Tour Operator in Tanzania ✓ Tailor-made Expeditions ✓ Expert Local Guides ✓ Serengeti & Zanzibar Specialists. Book your dream trip.",
+    sw: "Opereta wa Utalii Anayeongoza Tanzania ✓ Safari za Binafsi ✓ Waongoza Safari Wataalam ✓ Wataalam wa Serengeti na Zanzibar. Weka nafasi yako sasa.",
+    es: "Operador Turístico Líder en Tanzania ✓ Expediciones a Medida ✓ Guías Locales Expertos ✓ Especialistas en Serengeti y Zanzíbar. Reserve su viaje.",
+    fr: "Tour Opérateur Leader en Tanzanie ✓ Expéditions Sur Mesure ✓ Guides Locaux Experts ✓ Spécialistes du Serengeti et de Zanzibar. Réservez.",
+    de: "Führender Reiseveranstalter in Tansania ✓ Maßgeschneiderte Expeditionen ✓ Erfahrene lokale Guides ✓ Spezialisten für Serengeti & Sansibar.",
+    zh: "坦桑尼亚领先的旅游运营商 ✓ 私人定制探险 ✓ 专家级当地导游 ✓ 塞伦盖蒂和桑给巴尔专家。立即预订您的梦想之旅。",
+    ar: "مشغل جولات رائد في تنزانيا ✓ بعثات مخصصة ✓ أدلة محليون خبراء ✓ متخصصون في سيرينجيتي وزنجبار. احجز الآن."
   };
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     description: descriptions[locale] || descriptions.en,
     alternates: {
+      canonical: `${baseUrl}/${locale}`,
       languages: {
         'en': `${baseUrl}/en`,
         'sw': `${baseUrl}/sw`,
