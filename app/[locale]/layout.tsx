@@ -15,7 +15,7 @@ import { routing } from '@/i18n/routing';
 import LoadingProvider from "@/providers/LoadingProvider";
 import CookieConsent from "@/components/CookieConsent";
 import { getSettings } from "@/app/actions/settings";
-import { getOrganizationSchema, getTravelAgencySchema } from "@/components/StructuredData";
+import { getOrganizationSchema, getTravelAgencySchema, getBreadcrumbSchema } from "@/components/StructuredData";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -151,14 +151,24 @@ export default async function RootLayout(props: {
                   },
                   getOrganizationSchema(baseUrl),
                   getTravelAgencySchema(baseUrl),
+                  getBreadcrumbSchema(baseUrl, [
+                    { name: "Home", item: `/${locale}` },
+                    { name: "Packages", item: `/${locale}/packages` },
+                    { name: "Destinations", item: `/${locale}/destinations` },
+                    { name: "About Us", item: `/${locale}/about` }
+                  ]),
                   {
                     "@type": "ItemList",
-                    "name": "Primary Navigation",
+                    "name": "Main Navigation",
+                    "description": "Primary sections of Asili Yetu Safaris",
                     "itemListElement": [
                       { "@type": "SiteNavigationElement", "position": 1, "name": "Safari Packages", "url": `${baseUrl}/${locale}/packages` },
-                      { "@type": "SiteNavigationElement", "position": 2, "name": "Destinations", "url": `${baseUrl}/${locale}/destinations` },
-                      { "@type": "SiteNavigationElement", "position": 3, "name": "Our Fleet", "url": `${baseUrl}/${locale}/fleet` },
-                      { "@type": "SiteNavigationElement", "position": 4, "name": "About Us", "url": `${baseUrl}/${locale}/about` }
+                      { "@type": "SiteNavigationElement", "position": 2, "name": "Tanzanian Destinations", "url": `${baseUrl}/${locale}/destinations` },
+                      { "@type": "SiteNavigationElement", "position": 3, "name": "Our Premium Fleet", "url": `${baseUrl}/${locale}/fleet` },
+                      { "@type": "SiteNavigationElement", "position": 4, "name": "Expert Guides", "url": `${baseUrl}/${locale}/guides` },
+                      { "@type": "SiteNavigationElement", "position": 5, "name": "Cultural Experiences", "url": `${baseUrl}/${locale}/culture` },
+                      { "@type": "SiteNavigationElement", "position": 6, "name": "Photo Gallery", "url": `${baseUrl}/${locale}/gallery` },
+                      { "@type": "SiteNavigationElement", "position": 7, "name": "About Asili Yetu", "url": `${baseUrl}/${locale}/about` }
                     ]
                   }
                 ]
