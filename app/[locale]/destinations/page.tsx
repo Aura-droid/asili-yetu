@@ -1,6 +1,7 @@
 import { getDestinations } from "@/app/actions/destinations";
 import DestinationsClient from "./DestinationsClient";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -28,7 +29,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function DestinationsPage() {
   const t = await getTranslations("Destinations");
+  const locale = await getLocale();
   const { data: dbDestinations } = await getDestinations();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
   
   const staticDestinations = [
     {
@@ -110,5 +113,16 @@ export default async function DestinationsPage() {
     ? dbDestinations 
     : staticDestinations).sort((a: any, b: any) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
 
-  return <DestinationsClient destinations={displayDestinations} />;
+  return (
+    <>
+      <StructuredData
+        type="BreadcrumbList"
+        data={getBreadcrumbSchema(baseUrl, [
+          { name: "Home", item: `/${locale}` },
+          { name: "Destinations", item: `/${locale}/destinations` },
+        ])}
+      />
+      <DestinationsClient destinations={displayDestinations} />
+    </>
+  );
 }

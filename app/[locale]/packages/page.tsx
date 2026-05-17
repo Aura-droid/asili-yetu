@@ -2,8 +2,9 @@ import { supabase } from "@/lib/supabase";
 import { Compass } from "lucide-react";
 import React from "react";
 import SafariExplorer from "@/components/SafariExplorer";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Metadata } from 'next';
+import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
 
 export async function generateMetadata({ searchParams, params }: { searchParams: Promise<{ expedition?: string }>, params: Promise<{ locale: string }> }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
@@ -64,8 +65,10 @@ export async function generateMetadata({ searchParams, params }: { searchParams:
 
 export default async function PackagesPage({ searchParams }: { searchParams: Promise<{ expedition?: string }> }) {
   const t = await getTranslations("Packages");
+  const locale = await getLocale();
   const { expedition } = await searchParams;
   const { data: packages, error } = await supabase.from("packages").select("*, destinations(name, image_url)");
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   const jsonLd = packages?.map(pkg => ({
     '@context': 'https://schema.org',
@@ -88,6 +91,13 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 transition-colors duration-1000">
+      <StructuredData
+        type="BreadcrumbList"
+        data={getBreadcrumbSchema(baseUrl, [
+          { name: "Home", item: `/${locale}` },
+          { name: "Safaris", item: `/${locale}/packages` },
+        ])}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

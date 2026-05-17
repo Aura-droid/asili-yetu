@@ -1,14 +1,48 @@
 import { supabase } from "@/lib/supabase";
 import React from "react";
 import FleetShowroom from "@/components/FleetShowroom";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+
+  return {
+    title: "Safari Fleet | 4x4 Land Cruisers for Tanzania Expeditions",
+    description: "Explore the Asili Yetu safari fleet and see the expedition vehicles used for game drives, transfers, and tailor-made Tanzania journeys.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/fleet`,
+      languages: {
+        en: `${baseUrl}/en/fleet`,
+        sw: `${baseUrl}/sw/fleet`,
+        es: `${baseUrl}/es/fleet`,
+        fr: `${baseUrl}/fr/fleet`,
+        de: `${baseUrl}/de/fleet`,
+        zh: `${baseUrl}/zh/fleet`,
+        ar: `${baseUrl}/ar/fleet`,
+        "x-default": `${baseUrl}/en/fleet`,
+      }
+    }
+  };
+}
 
 export default async function FleetPage() {
   const t = await getTranslations("Fleet");
+  const locale = await getLocale();
   const { data: fleet, error } = await supabase.from("vehicles").select("*");
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   return (
     <div className="min-h-screen bg-background pt-32 pb-20 px-6">
+      <StructuredData
+        type="BreadcrumbList"
+        data={getBreadcrumbSchema(baseUrl, [
+          { name: "Home", item: `/${locale}` },
+          { name: "Fleet", item: `/${locale}/fleet` },
+        ])}
+      />
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 md:mb-24">
           <h1 className="text-6xl md:text-8xl font-black text-foreground tracking-tighter leading-[0.9] mb-8 uppercase">

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description: `Book your dream ${park} safari ${month ? `for ${month}` : ''}. Expert local guides, private 4x4s, and authentic cultural encounters.`,
     alternates: {
-       canonical: `/safari/${slug}`
+       canonical: `/${locale}/safari/${slug}`
     }
   };
 }

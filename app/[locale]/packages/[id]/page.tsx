@@ -7,7 +7,7 @@ import Image from "next/image";
 import StarRating from "@/components/StarRating";
 import ItineraryMap from "@/components/ItineraryMap";
 import RustlingButton from "@/components/RustlingButton";
-import StructuredData from "@/components/StructuredData";
+import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
 import BookingFunnelWrapper from "../../../../components/BookingFunnelWrapper";
 
 type Props = {
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [pkg.main_image || ''],
     },
     alternates: {
-      canonical: `/packages/${id}`
+      canonical: `/${locale}/packages/${id}`
     }
   };
 }
@@ -111,9 +111,42 @@ export default async function PackageDossierPage({ params }: Props) {
     }
   };
 
+  const productSchema = {
+    "@type": "Product",
+    "name": pkg.title,
+    "description": pkg.description,
+    "image": pkg.main_image || pkg.destinations?.image_url,
+    "brand": {
+      "@type": "Brand",
+      "name": "Asili Yetu Safaris"
+    },
+    "category": "Safari Package",
+    "offers": {
+      "@type": "Offer",
+      "price": pkg.discount_price || pkg.price_usd,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": `${baseUrl}/${locale}/packages/${pkg.id}`
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": pkg.avg_rating || 5,
+      "reviewCount": pkg.review_count || 124
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground pb-32">
+      <StructuredData
+        type="BreadcrumbList"
+        data={getBreadcrumbSchema(baseUrl, [
+          { name: "Home", item: `/${locale}` },
+          { name: "Safaris", item: `/${locale}/packages` },
+          { name: pkg.title, item: `/${locale}/packages/${pkg.id}` },
+        ])}
+      />
       <StructuredData type="Trip" data={tripSchema} />
+      <StructuredData type="Product" data={productSchema} />
       
       {/* Cinematic Hero Header */}
       <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">

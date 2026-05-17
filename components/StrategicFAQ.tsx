@@ -133,12 +133,12 @@ export default function StrategicFAQ() {
             <p className="text-2xl font-black tracking-tight mb-2">{t("still_have_questions")}</p>
             <p className="text-white/60 font-medium">{t("concierge_team")}</p>
           </div>
-          <a 
-            href="#contact"
+          <button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
           >
             {t("dispatch_inquiry")}
-          </a>
+          </button>
         </div>
       </div>
     </section>

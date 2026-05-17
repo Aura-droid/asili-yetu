@@ -21,7 +21,7 @@ export default function Footer({ settings }: { settings?: any }) {
   const address = settings?.office_location || "Arusha, Tanzania";
 
   return (
-    <footer className="bg-background border-t border-foreground/10 pt-20 pb-10 relative overflow-hidden">
+    <footer id="contact" className="bg-background border-t border-foreground/10 pt-20 pb-10 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">

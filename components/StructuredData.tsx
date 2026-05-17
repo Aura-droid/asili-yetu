@@ -1,7 +1,7 @@
 import React from "react";
 
 interface StructuredDataProps {
-  type: "Organization" | "TravelAgency" | "LocalBusiness" | "Trip" | "Place" | "FAQPage" | "BreadcrumbList";
+  type: "Organization" | "TravelAgency" | "LocalBusiness" | "Trip" | "Place" | "FAQPage" | "BreadcrumbList" | "ItemList" | "Product";
   data: any;
 }
 
@@ -31,6 +31,8 @@ export const getOrganizationSchema = (baseUrl: string) => ({
   "name": "Asili Yetu Safaris",
   "alternateName": "Asili Yetu",
   "legalName": "Asili Yetu Safaris Limited",
+  "foundingDate": "2026-03-31",
+  "identifier": "BRELA Certificate of Incorporation No. 202068049",
   "disambiguatingDescription": "Asili Yetu Safaris is an independent premium tour operator specializing in luxury and authentic Tanzanian expeditions, not to be confused with other agencies with similar names.",
   "description": "Asili Yetu Safaris provides premium, tailor-made wildlife safaris, Kilimanjaro climbs, and Zanzibar beach holidays in Tanzania. We specialize in high-end, authentic experiences led by expert local guides.",
   "url": baseUrl,

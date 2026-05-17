@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
   
   return {
+    title: "Tanzania Safaris, Kilimanjaro Climbs & Zanzibar Escapes",
+    description: "Plan tailor-made Tanzania safaris with expert local guides. Explore Serengeti, Ngorongoro, Kilimanjaro, Zanzibar, culture, fleet, and custom safari itineraries.",
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
@@ -37,6 +39,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'ar': `${baseUrl}/ar`,
         'x-default': `${baseUrl}/en`,
       },
+    },
+    openGraph: {
+      title: "Asili Yetu Safaris | Tanzania Safari Planning",
+      description: "Private safaris, Kilimanjaro climbs, Zanzibar escapes, and custom Tanzania itineraries led by local experts.",
+      url: `${baseUrl}/${locale}`,
     }
   };
 }

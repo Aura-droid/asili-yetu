@@ -15,7 +15,7 @@ import { routing } from '@/i18n/routing';
 import LoadingProvider from "@/providers/LoadingProvider";
 import CookieConsent from "@/components/CookieConsent";
 import { getSettings } from "@/app/actions/settings";
-import { getOrganizationSchema, getTravelAgencySchema, getBreadcrumbSchema } from "@/components/StructuredData";
+import { getOrganizationSchema, getTravelAgencySchema } from "@/components/StructuredData";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -142,21 +142,10 @@ export default async function RootLayout(props: {
                   {
                     "@type": "WebSite",
                     "name": "Asili Yetu Safaris",
-                    "url": baseUrl,
-                    "potentialAction": {
-                      "@type": "SearchAction",
-                      "target": `${baseUrl}/${locale}/search?q={search_term_string}`,
-                      "query-input": "required name=search_term_string"
-                    }
+                    "url": baseUrl
                   },
                   getOrganizationSchema(baseUrl),
                   getTravelAgencySchema(baseUrl),
-                  getBreadcrumbSchema(baseUrl, [
-                    { name: "Home", item: `/${locale}` },
-                    { name: "Packages", item: `/${locale}/packages` },
-                    { name: "Destinations", item: `/${locale}/destinations` },
-                    { name: "About Us", item: `/${locale}/about` }
-                  ]),
                   {
                     "@type": "ItemList",
                     "name": "Main Navigation",

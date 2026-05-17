@@ -1,32 +1,91 @@
 import React from "react";
-import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { motion } from "framer-motion";
 import { Heart, ShieldCheck, Music, History } from "lucide-react";
 import ClientCultureView from "./ClientCultureView";
 import { getCultureStories } from "@/app/actions/culture";
+import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
 
-export const metadata = {
-  title: "Cultural Immersion | Maasai Heritage",
-  description: "Experience the living heart of the savannah through the eyes of the Maasai people.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+
+  return {
+    title: "Cultural Immersion | Maasai Heritage & Tanzanian Traditions",
+    description: "Discover Maasai heritage, cultural immersion, and the living traditions that add depth to an Asili Yetu safari in Tanzania.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/culture`,
+      languages: {
+        en: `${baseUrl}/en/culture`,
+        sw: `${baseUrl}/sw/culture`,
+        es: `${baseUrl}/es/culture`,
+        fr: `${baseUrl}/fr/culture`,
+        de: `${baseUrl}/de/culture`,
+        zh: `${baseUrl}/zh/culture`,
+        ar: `${baseUrl}/ar/culture`,
+        "x-default": `${baseUrl}/en/culture`,
+      }
+    }
+  };
+}
 
 export default async function CulturePage() {
   const t = await getTranslations("Culture");
+  const locale = await getLocale();
   const stories = await getCultureStories();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
+
+  const renderTitle = (title: string) => {
+    const normalized = title
+      .replace(/&lt;br\s*\/?&gt;/gi, "<br />")
+      .replace(/<BR\s*\/?>/g, "<br />");
+    const lines = normalized.split(/<br\s*\/?>/i);
+
+    return lines
+      .map((line, index) => {
+        const content = line
+          .split(/(<p>.*?<\/p>)/gi)
+          .filter(Boolean)
+          .map((segment, segmentIndex) => {
+            const match = segment.match(/^<p>(.*?)<\/p>$/i);
+
+            if (match) {
+              return (
+                <span key={segmentIndex} className="text-primary italic">
+                  {match[1]}
+                </span>
+              );
+            }
+
+            return <React.Fragment key={segmentIndex}>{segment}</React.Fragment>;
+          });
+
+        return (
+          <React.Fragment key={index}>
+            {content}
+            {index < lines.length - 1 && <br />}
+          </React.Fragment>
+        );
+      });
+  };
 
    return (
     <main className="min-h-screen pt-32 pb-20 overflow-hidden bg-[#fafafa]">
+       <StructuredData
+         type="BreadcrumbList"
+         data={getBreadcrumbSchema(baseUrl, [
+           { name: "Home", item: `/${locale}` },
+           { name: "Culture", item: `/${locale}/culture` },
+         ])}
+       />
        {/* Hero Section */}
        <div className="container mx-auto max-w-7xl px-6 mb-24 md:mb-32">
           <div className="flex flex-col lg:flex-row items-end gap-12">
              <div className="flex-1">
                 <span className="bg-primary/20 text-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6 inline-block">{t("badge")}</span>
                 <h1 className="text-6xl md:text-[7rem] font-black text-foreground italic uppercase tracking-tighter leading-[0.9] mb-8">
-                    {t.rich("title", {
-                      p: (chunks) => <span className="text-primary italic">{chunks}</span>,
-                      br: () => <br />,
-                      BR: () => <br />
-                    })}
+                    {renderTitle(t.raw("title"))}
                 </h1>
                 <p className="text-xl md:text-2xl text-foreground/50 font-medium max-w-xl leading-relaxed">
                    {t("subtitle")}

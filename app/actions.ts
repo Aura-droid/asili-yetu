@@ -6,6 +6,11 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 // Note: GoogleGenerativeAI client is now initialized within individual server functions for reliability.
+const GEMINI_ITINERARY_MODELS = [
+    process.env.GEMINI_ITINERARY_MODEL,
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+].filter(Boolean) as string[];
 
 export async function submitBookingInquiry(payload: any) {
     try {
@@ -147,9 +152,6 @@ export async function generateItinerary(query: { location: string, dates: string
         }
 
         // 3. Fallback to AI Generation for unique requests
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17" });
-
         const prompt = `
           You are an expert luxury safari planner for "Asili Yetu Safaris". 
           The user wants to go to: ${query.location}. Dates: ${query.dates}. Guests: ${query.guests}. 
@@ -168,11 +170,44 @@ export async function generateItinerary(query: { location: string, dates: string
           }
         `;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+        const genAI = new GoogleGenerativeAI(apiKey);
+        let text = "";
+        let lastError: unknown = null;
 
-        if (!text) throw new Error("No response from AI system");
+        for (const modelName of GEMINI_ITINERARY_MODELS) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                text = response.text();
+
+                if (text) {
+                    break;
+                }
+            } catch (error: any) {
+                lastError = error;
+                const message = String(error?.message || "");
+
+                // If the model is unavailable or deprecated, try the next supported model.
+                if (
+                    message.includes("404") ||
+                    message.includes("not found") ||
+                    message.includes("not supported")
+                ) {
+                    console.warn(`Gemini itinerary model unavailable: ${modelName}`);
+                    continue;
+                }
+
+                throw error;
+            }
+        }
+
+        if (!text) {
+            if (lastError) {
+                throw lastError;
+            }
+            throw new Error("No response from AI system");
+        }
         const cleanJson = text.replace(/```json/g, "").replace(/```/g, "").trim();
 
         let parsed;
