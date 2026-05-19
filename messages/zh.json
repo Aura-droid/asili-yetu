@@ -98,8 +98,8 @@
     "professional_desc": "我们将非洲的热情与国际服务标准相结合。",
     "confidence_title": "预订信心",
     "confidence_desc": "我们保证定金支付后的报价，接受银行转账/卡支付，并根据您的需求提供灵活的预订政策。",
-    "badge": "The Asili Advantage",
-    "advantage": "The Asili Advantage"
+    "badge": "Asili 优势",
+    "advantage": "Asili 优势"
   },
   "ResponsibleTourism": {
     "title": "负责任的旅游",
@@ -111,7 +111,7 @@
     "wildlife": "野生动物保护伙伴关系",
     "ethical": "道德文化互动",
     "impact": "我们衡量成功的标准不仅是游客数量，更是影响力。",
-    "ethical_promise": "Our Ethical Promise"
+    "ethical_promise": "我们的道德承诺"
   },
   "Footer": {
     "whatsapp_title": "直接联系",
@@ -124,7 +124,7 @@
     "rights": "保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款",
-    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
+    "brela": "已获得 BRELA 许可和注册的公司（坦桑尼亚）"
   },
   "Booking": {
     "booking": "预订",
@@ -154,7 +154,8 @@
     "initialize": "启动探险",
     "welcome": "欢迎来到荒野",
     "confirmed": "您宏伟的远征已确认",
-    "return": "返回基地"
+    "return": "返回基地",
+    "negotiable_note": "本次探险的每一个细节都可协商，并可根据您的偏好完全定制。"
   },
   "FunFact": {
     "label": "荒野真相",
@@ -203,7 +204,9 @@
     "mission_title": "MISSION",
     "vision_title": "VISION",
     "presence_arusha_title": "Arusha, Tanzania",
-    "presence_koln_title": "Köln, Germany"
+    "presence_koln_title": "Köln, Germany",
+    "meta_title": "关于 Asili Yetu Safaris | 坦桑尼亚之根，全球之范",
+    "meta_description": "探索 Asili Yetu Safaris 的故事、价值观、使命及负责任的旅行理念。我们是一家扎根于坦桑尼亚阿鲁沙的本土奢华旅行公司。"
   },
   "Destinations": {
     "badge": "传奇之地",
@@ -271,7 +274,9 @@
       "discovery_mode": "探索模式",
       "discovery_sub": "在坦桑尼亚荒野中导航。点击金色航点。",
       "explore_packages": "探索套餐"
-    }
+    },
+    "meta_title": "坦桑尼亚狩猎目的地 | 塞伦盖蒂与桑给巴尔",
+    "meta_description": "探索坦桑尼亚最具标志性的狩猎目的地。从塞伦盖蒂一望无际的平原，到桑给巴尔晶莹剔透的水域，等您发现。"
   },
   "Gallery": {
     "badge": "镜头",
@@ -292,20 +297,22 @@
     "ac": "空调",
     "fridge": "冰箱",
     "specs": "车辆规格",
-    "readying": "Deployment Readying",
-    "grade": "Explorer Grade",
-    "exit": "Exit Showroom",
-    "dossier": "Technical Dossier",
-    "payload": "Payload Capacity",
-    "explorers": "{count} Explorers",
+    "readying": "准备就绪",
+    "grade": "探险家级别",
+    "exit": "展厅退出",
+    "dossier": "技术文件",
+    "payload": "载重能力",
+    "explorers": "{count} 位探险家",
     "hotspots": {
-      "roof_title": "Pop-Up Roof",
-      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
-      "susp_title": "Heavy-Duty Suspension",
-      "susp_desc": "Smooth ride across the toughest terrains.",
-      "seat_title": "Comfortable Seating",
-      "seat_desc": "Spacious window seats for every passenger."
-    }
+      "roof_title": "弹出式车顶",
+      "roof_desc": "无遮挡的 360° 视野，便于摄影和野生动物观赏。",
+      "susp_title": "重型悬架",
+      "susp_desc": "在最崎岖的地形上也能平稳行驶。",
+      "seat_title": "舒适座椅",
+      "seat_desc": "每位乘客都有宽敞的靠窗座位。"
+    },
+    "meta_title": "探险车队 | 坦桑尼亚之旅的四驱陆地巡洋舰",
+    "meta_description": "探索 Asili Yetu 的探险车队，了解用于野生动物追踪、接送服务以及量身定制的坦桑尼亚旅程的专属车辆。"
   },
   "Instagram": {
     "title": "来自荒野的现场",
@@ -390,7 +397,43 @@
     "explore_itinerary": "探索行程",
     "dossier": "档案",
     "concept": "探险理念",
-    "book_masterpiece": "预订此杰作"
+    "book_masterpiece": "预订此杰作",
+    "negotiable_note": "本次探险的每一个细节都可协商，并可根据您的偏好完全定制。",
+    "featured_heading_prefix": "精选",
+    "featured_heading_accent": "探险",
+    "see_all_packages": "查看所有套餐",
+    "book_now": "立即预订",
+    "special_offer": "特别优惠",
+    "duration_label": "持续时间",
+    "people_range": "适合 2-8 人",
+    "up_to_people": "最多 {count} 人",
+    "for_people_range": "适合 2-8 人",
+    "for_up_to_people": "最多 {count} 人",
+    "tanzania_fallback": "坦桑尼亚",
+    "savannah": "稀树草原",
+    "savannah_majesty": "稀树草原的宏伟",
+    "negotiable_tailor_made": "价格可议，量身定制",
+    "negotiable_short": "价格可议",
+    "share_text": "查看这次 {days} 天的探险：{title}。在 Asili Yetu 上获得高度评价（{rating} 星）！",
+    "biome_label": "生态区",
+    "thermal_profile_label": "气候特征",
+    "momentum_label": "动感",
+    "tier_label": "级别",
+    "warm_sun_drenched": "温暖，阳光充足",
+    "balanced_flow": "平衡的节奏",
+    "strategic_inclusions": "精选行程",
+    "inclusion_airport": "机场接送",
+    "inclusion_accommodation": "豪华住宿",
+    "inclusion_meals": "全包餐饮",
+    "inclusion_park_fees": "国家公园门票",
+    "inclusion_vehicle": "4x4 路虎卫士",
+    "inclusion_guide": "专业导游",
+    "inclusion_water": "瓶装水",
+    "inclusion_insurance": "紧急撤离",
+    "inclusion_binoculars": "高端望远镜",
+    "inclusion_wifi": "车载Wi-Fi",
+    "meta_title": "生态探险与私人定制狩猎 | Asili Yetu",
+    "meta_description": "探索横跨塞伦盖蒂及坦桑尼亚的精心策划的狩猎杰作。私人、奢华且环保的探险之旅，量身定制，满足您的专属需求。"
   },
   "Culture": {
     "badge": "活着的传统",
@@ -411,10 +454,16 @@
     "story_3_label": "故事 III",
     "story_3_title": "平原守望者",
     "story_3_desc": "马赛人与狮子和大象共存了几个世纪，体现了人与自然之间终极的伙伴关系。",
-    "ritual_label": "Ritual",
-    "ritual_name": "Adammu Dance",
-    "kinship_label": "Kinship",
-    "kinship_name": "Manyatta Life"
+    "ritual_label": "仪式",
+    "ritual_name": "阿达姆舞",
+    "kinship_label": "亲缘",
+    "kinship_name": "马尼亚塔生活",
+    "pillars_badge": "文化基石",
+    "pillars_subtitle": "通往鲜活文化遗产的四大入口",
+    "pillars_footer": "鲜活叙事",
+    "explore_narrative": "探索叙事",
+    "meta_title": "深度文化体验 | 马赛遗产与坦桑尼亚传统",
+    "meta_description": "探索马赛遗产、沉浸式文化体验，以及为Asili Yetu坦桑尼亚狩猎之旅增添深厚底蕴的鲜活传统。"
   },
   "Guides": {
     "badge": "游猎之魂",
@@ -460,5 +509,11 @@
     "desc": "我们使用必要的 Cookie 来同步您在稀树草原上的会话和本地化体验。",
     "accept": "接受脉搏",
     "decline": "拒绝非必要"
+  },
+  "Offline": {
+    "title": "信号消失在<p>稀树草原</p>",
+    "sub": "我们的卫星上行链路已中断。请检查本地遥测数据，或等待下一次卫星过境。",
+    "retry": "重试连接",
+    "view_saved": "查看已保存行程"
   }
 }

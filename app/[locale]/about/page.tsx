@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import AboutClient from "./AboutClient";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "About" });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   return {
-    title: "About Asili Yetu Safaris | Tanzanian Roots, Global Standards",
-    description: "Learn the story, values, mission, and responsible travel philosophy behind Asili Yetu Safaris, a locally rooted safari company based in Arusha, Tanzania.",
+    title: t("meta_title"),
+    description: t("meta_description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/about`,
       languages: {
@@ -22,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       }
     },
     openGraph: {
-      title: "About Asili Yetu Safaris",
-      description: "Discover the roots, values, and safari philosophy behind Asili Yetu Safaris in Tanzania.",
+      title: t("meta_title"),
+      description: t("meta_description"),
       url: `${baseUrl}/${locale}/about`,
     }
   };

@@ -2,10 +2,12 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Star, Quote, Eye } from "lucide-react";
+import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ClientCultureView({ stories = [] }: { stories?: any[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("Culture");
 
   if (!stories || stories.length === 0) return null;
 
@@ -56,7 +58,7 @@ export default function ClientCultureView({ stories = [] }: { stories?: any[] })
                       >
                          <Star className="w-5 h-5" />
                       </div>
-                      Explore Narrative
+                      {t("explore_narrative")}
                    </button>
                 </div>
              </div>

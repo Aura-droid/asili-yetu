@@ -98,8 +98,8 @@
     "professional_desc": "Wir kombinieren afrikanische Herzlichkeit mit internationalen Servicestandards.",
     "confidence_title": "BUCHUNGSSICHERHEIT",
     "confidence_desc": "Wir garantieren die nach der Anzahlung genannten Preise, akzeptieren Banküberweisungen/Karten und bieten flexible, auf Ihre Bedürfnisse zugeschnittene Buchungsrichtlinien.",
-    "badge": "The Asili Advantage",
-    "advantage": "The Asili Advantage"
+    "badge": "Der Asili-Vorteil",
+    "advantage": "Der Asili-Vorteil"
   },
   "ResponsibleTourism": {
     "title": "Verantwortungsbewusster Tourismus",
@@ -111,7 +111,7 @@
     "wildlife": "Partnerschaften zum Schutz von Wildtieren",
     "ethical": "Ethische kulturelle Interaktionen",
     "impact": "Wir messen Erfolg nicht nur an Besuchern, sondern an der Wirkung.",
-    "ethical_promise": "Our Ethical Promise"
+    "ethical_promise": "Unser ethisches Versprechen"
   },
   "Footer": {
     "whatsapp_title": "Direkter Kontakt",
@@ -124,7 +124,7 @@
     "rights": "Alle Rechte vorbehalten.",
     "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen",
-    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
+    "brela": "Lizenziertes & Registriertes BRELA-Unternehmen (Tansania)"
   },
   "Booking": {
     "booking": "Buchung",
@@ -154,7 +154,8 @@
     "initialize": "Expedition Starten",
     "welcome": "Willkommen in der Wildnis.",
     "confirmed": "Ihre majestätische Expedition ist bestätigt.",
-    "return": "Zurück zur Basis"
+    "return": "Zurück zur Basis",
+    "negotiable_note": "Jedes Detail dieser Expedition ist verhandelbar und vollständig an Ihre Wünsche anpassbar."
   },
   "FunFact": {
     "label": "DIE WILDE WAHRHEIT",
@@ -203,7 +204,9 @@
     "mission_title": "MISSION",
     "vision_title": "VISION",
     "presence_arusha_title": "Arusha, Tanzania",
-    "presence_koln_title": "Köln, Germany"
+    "presence_koln_title": "Köln, Germany",
+    "meta_title": "Über Asili Yetu Safaris | Tansanische Wurzeln, Globale Standards",
+    "meta_description": "Entdecken Sie die Geschichte, Werte, Mission und die Philosophie des verantwortungsbewussten Reisens, die Asili Yetu Safaris auszeichnen – ein lokal verwurzeltes Safari-Unternehmen mit Sitz in Arusha, Tansania."
   },
   "Destinations": {
     "badge": "Länder der Legenden",
@@ -271,7 +274,9 @@
       "discovery_mode": "Entdeckermodus",
       "discovery_sub": "Navigieren Sie durch die Wildnis Tansanias. Klicken Sie auf einen goldenen Wegpunkt.",
       "explore_packages": "Pakete erkunden"
-    }
+    },
+    "meta_title": "Tansanische Safari-Destinationen | Serengeti & Sansibar",
+    "meta_description": "Erkunden Sie die ikonischsten Safari-Destinationen Tansanias. Von den endlosen Ebenen der Serengeti bis zu den kristallklaren Gewässern Sansibars."
   },
   "Gallery": {
     "badge": "Die Linse",
@@ -292,20 +297,22 @@
     "ac": "Klima",
     "fridge": "Kühlschrank",
     "specs": "Fahrzeugspezifikationen",
-    "readying": "Deployment Readying",
-    "grade": "Explorer Grade",
-    "exit": "Exit Showroom",
-    "dossier": "Technical Dossier",
-    "payload": "Payload Capacity",
-    "explorers": "{count} Explorers",
+    "readying": "Bereitstellung im Gange",
+    "grade": "Explorer-Klasse",
+    "exit": "Aus dem Showroom",
+    "dossier": "Technisches Dossier",
+    "payload": "Zuladungskapazität",
+    "explorers": "{count} Entdecker",
     "hotspots": {
-      "roof_title": "Pop-Up Roof",
-      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
-      "susp_title": "Heavy-Duty Suspension",
-      "susp_desc": "Smooth ride across the toughest terrains.",
-      "seat_title": "Comfortable Seating",
-      "seat_desc": "Spacious window seats for every passenger."
-    }
+      "roof_title": "Aufklappbares Dach",
+      "roof_desc": "Ungehinderte 360°-Sicht für Fotografie und Tierbeobachtung.",
+      "susp_title": "Hochleistungsfederung",
+      "susp_desc": "Sanfte Fahrt über härtestes Gelände.",
+      "seat_title": "Bequeme Sitze",
+      "seat_desc": "Geräumige Fensterplätze für jeden Passagier."
+    },
+    "meta_title": "Unsere Safari-Fahrzeugflotte | 4x4 Land Cruiser für Tansania-Expeditionen",
+    "meta_description": "Entdecken Sie die Safari-Fahrzeugflotte von Asili Yetu und lernen Sie die Expeditionsfahrzeuge kennen, die für Pirschfahrten, Transfers und maßgeschneiderte Tansania-Reisen eingesetzt werden."
   },
   "Instagram": {
     "title": "Live aus der Wildnis",
@@ -390,7 +397,43 @@
     "explore_itinerary": "Reiseverlauf erkunden",
     "dossier": "Dossier",
     "concept": "Expeditionskonzept",
-    "book_masterpiece": "Dieses Meisterwerk buchen"
+    "book_masterpiece": "Dieses Meisterwerk buchen",
+    "negotiable_note": "Jedes Detail dieser Expedition ist verhandelbar und vollständig an Ihre Wünsche anpassbar.",
+    "featured_heading_prefix": "Ausgewählte",
+    "featured_heading_accent": "Expeditionen",
+    "inclusion_vehicle": "Exklusiver 4x4 Land Cruiser",
+    "inclusion_guide": "Professioneller Guide",
+    "inclusion_water": "Abgefülltes Wasser",
+    "inclusion_insurance": "Notfall-Evakuierung",
+    "inclusion_binoculars": "High-End-Fernglas",
+    "inclusion_wifi": "Bord-WLAN",
+    "see_all_packages": "Alle Reisen entdecken",
+    "book_now": "Jetzt buchen",
+    "special_offer": "Exklusives Angebot",
+    "duration_label": "Dauer",
+    "people_range": "Für 2-8 Personen",
+    "up_to_people": "Bis zu {count} Personen",
+    "for_people_range": "Für 2-8 Personen",
+    "for_up_to_people": "Für bis zu {count} Personen",
+    "tanzania_fallback": "Tansania",
+    "savannah": "Savanne",
+    "savannah_majesty": "Majestätische Savanne",
+    "negotiable_tailor_made": "Verhandelbar & Maßgeschneidert",
+    "negotiable_short": "Verhandelbar",
+    "share_text": "Entdecken Sie diese {days}-tägige Expedition: {title}. Hoch bewertet ({rating} Sterne) bei Asili Yetu!",
+    "biome_label": "Biom",
+    "thermal_profile_label": "Thermisches Profil",
+    "momentum_label": "Dynamik",
+    "tier_label": "Kategorie",
+    "warm_sun_drenched": "Warm & Sonnenverwöhnt",
+    "balanced_flow": "Harmonischer Fluss",
+    "strategic_inclusions": "Strategische Inklusivleistungen",
+    "inclusion_airport": "Flughafentransfers",
+    "inclusion_accommodation": "Luxuriöse Unterkünfte",
+    "inclusion_meals": "Vollpension",
+    "inclusion_park_fees": "Nationalparkgebühren",
+    "meta_title": "Öko-Expeditionen & Private Safaris | Asili Yetu",
+    "meta_description": "Entdecken Sie kuratierte Safari-Meisterwerke in der Serengeti und ganz Tansania. Private, luxuriöse und umweltfreundliche Expeditionen, maßgeschneidert nach Ihren Wünschen."
   },
   "Culture": {
     "badge": "Lebendige Traditionen",
@@ -412,9 +455,15 @@
     "story_3_title": "Hüter der Ebenen",
     "story_3_desc": "Seit Jahrhunderten koexistieren die Maasai mit Löwen und Elefanten und verkörpern die ultimative Partnerschaft zwischen Mensch und Natur.",
     "ritual_label": "Ritual",
-    "ritual_name": "Adammu Dance",
-    "kinship_label": "Kinship",
-    "kinship_name": "Manyatta Life"
+    "ritual_name": "Adammu-Tanz",
+    "kinship_label": "Verwandtschaft",
+    "kinship_name": "Manyatta-Leben",
+    "pillars_badge": "Kulturelle Säulen",
+    "pillars_subtitle": "Vier Zugangspunkte zum lebendigen Erbe",
+    "pillars_footer": "Lebendige Geschichte",
+    "explore_narrative": "Erzählung erkunden",
+    "meta_title": "Kulturelle Immersion | Massai-Erbe & Tansanische Traditionen",
+    "meta_description": "Entdecken Sie das Massai-Erbe, kulturelle Immersion und die lebendigen Traditionen, die einer Asili Yetu Safari in Tansania Tiefe verleihen."
   },
   "Guides": {
     "badge": "Das Herz der Safari",
@@ -460,5 +509,11 @@
     "desc": "Wir verwenden essenzielle Cookies, um Ihre Sitzung und Ihr lokalisiertes Erlebnis in der Savanne zu synchronisieren.",
     "accept": "Puls akzeptieren",
     "decline": "Nicht-essenzielle ablehnen"
+  },
+  "Offline": {
+    "title": "Signal in der <p>Savanne</p> verloren",
+    "sub": "Unsere Satellitenverbindung ist unterbrochen. Überprüfen Sie Ihre lokale Telemetrie oder warten Sie auf den nächsten Durchgang.",
+    "retry": "Verbindung wiederherstellen",
+    "view_saved": "Gespeicherte Reisepläne anzeigen"
   }
 }

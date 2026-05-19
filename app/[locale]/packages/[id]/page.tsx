@@ -214,22 +214,22 @@ export default async function PackageDossierPage({ params }: Props) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10">
                   <Layers className="w-6 h-6 text-primary mb-3" />
-                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">Biome</p>
+                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">{t("biome_label")}</p>
                   <p className="text-sm font-bold">{pkg.biome_orientation || "Savannah"}</p>
                </div>
                <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10">
                   <Thermometer className="w-6 h-6 text-primary mb-3" />
-                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">Thermal</p>
+                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">{t("thermal_profile_label")}</p>
                   <p className="text-sm font-bold">{pkg.temperature_profile || "Warm"}</p>
                </div>
                <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10">
                   <Zap className="w-6 h-6 text-primary mb-3" />
-                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">Intensity</p>
+                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">{t("momentum_label")}</p>
                   <p className="text-sm font-bold">{pkg.intensity_vibe || "Balanced"}</p>
                </div>
                <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10">
                   <Compass className="w-6 h-6 text-primary mb-3" />
-                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">Difficulty</p>
+                  <p className="text-[10px] font-black text-foreground/30 uppercase tracking-widest mb-1">{t("tier_label")}</p>
                   <p className="text-sm font-bold uppercase">{pkg.difficulty_level}</p>
                </div>
             </div>
@@ -240,7 +240,7 @@ export default async function PackageDossierPage({ params }: Props) {
                   <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
                      <Compass className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Expedition Concept</h3>
+                  <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">{t("concept")}</h3>
                </div>
                <p className="text-2xl font-medium text-foreground/80 leading-relaxed">
                   {pkg.description}
@@ -254,18 +254,20 @@ export default async function PackageDossierPage({ params }: Props) {
                      <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
                         <CheckCircle2 className="w-6 h-6" />
                      </div>
-                     <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Strategic Inclusions</h3>
+                     <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">{t("strategic_inclusions")}</h3>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                      {pkg.inclusions.map((incId: string) => {
                        const meta = INCLUSION_META[incId];
                        if (!meta) return null;
                        const Icon = meta.icon;
+                       const translationKey = `inclusion_${incId}`;
+                       const label = t.raw(translationKey) ? t(translationKey) : meta.label;
                        return (
                          <div key={incId} className="bg-foreground/[0.03] border border-foreground/5 p-6 rounded-[2rem] flex flex-col items-center justify-center gap-4 text-center group hover:bg-primary transition-all duration-500">
                             <Icon className="w-8 h-8 text-primary group-hover:text-black transition-colors" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-foreground/40 group-hover:text-black leading-tight transition-colors">
-                               {meta.label}
+                               {label}
                             </span>
                          </div>
                        );
@@ -278,10 +280,10 @@ export default async function PackageDossierPage({ params }: Props) {
           {/* Sidebar Booking Card */}
           <div className="lg:sticky lg:top-32 h-fit space-y-6">
              <div className="bg-foreground/5 backdrop-blur-xl rounded-[3rem] p-8 border border-foreground/10 shadow-2xl">
-                <p className="text-xs font-black text-foreground/30 uppercase tracking-widest mb-4">Starting Investment</p>
+                <p className="text-xs font-black text-foreground/30 uppercase tracking-widest mb-4">{t("investment")}</p>
                 <div className="flex items-baseline gap-2 mb-8">
                    <span className="text-6xl font-black text-primary">${pkg.discount_price || pkg.price_usd}</span>
-                   <span className="text-foreground/40 font-bold uppercase text-xs">/ per person</span>
+                   <span className="text-foreground/40 font-bold uppercase text-xs">/ {t("per_person")}</span>
                 </div>
                 
                 <BookingFunnelWrapper 
@@ -291,13 +293,13 @@ export default async function PackageDossierPage({ params }: Props) {
                 />
                 
                 <p className="text-[10px] font-medium text-foreground/30 italic text-center mt-6">
-                   ★ Price is negotiable based on group size & season. Customizations available.
+                   ★ {t("negotiable_note")}
                 </p>
              </div>
              
              <div className="bg-primary/10 rounded-[2rem] p-6 border border-primary/20">
                 <h4 className="text-sm font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                   <User className="w-4 h-4" /> Local Expertise
+                   <User className="w-4 h-4" /> {t("active_guide")}
                 </h4>
                 <p className="text-xs text-foreground/60 leading-relaxed font-medium">
                    This expedition is managed by our Arusha headquarters. You will have a private 4x4 Land Cruiser and a professional Tanzanian guide.

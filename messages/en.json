@@ -191,7 +191,9 @@
     "p_safe": "Uncompromising Safety",
     "p_safe_sub": "Your peace of mind is our priority. We maintain the highest standards of safety in every expedition.",
     "p_cons": "Conscious Travel",
-    "p_cons_sub": "Every trip contributes to local community development and wildlife conservation efforts."
+    "p_cons_sub": "Every trip contributes to local community development and wildlife conservation efforts.",
+    "meta_title": "About Asili Yetu Safaris | Tanzanian Roots, Global Standards",
+    "meta_description": "Learn the story, values, mission, and responsible travel philosophy behind Asili Yetu Safaris, a locally rooted safari company based in Arusha, Tanzania."
   },
   "Destinations": {
     "badge": "The Lands of Legend",
@@ -259,7 +261,9 @@
       "discovery_mode": "Discovery Mode",
       "discovery_sub": "Navigate the Tanzanian wilderness. Click on a golden waypoint to explore the deep secrets of our private reserves.",
       "explore_packages": "Explore Packages"
-    }
+    },
+    "meta_title": "Tanzania Safari Destinations | Serengeti & Zanzibar",
+    "meta_description": "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the crystal waters of Zanzibar."
   },
   "Gallery": {
     "badge": "Visual Archive",
@@ -289,7 +293,9 @@
       "susp_desc": "Smooth ride across the toughest terrains.",
       "seat_title": "Comfortable Seating",
       "seat_desc": "Spacious window seats for every passenger."
-    }
+    },
+    "meta_title": "Safari Fleet | 4x4 Land Cruisers for Tanzania Expeditions",
+    "meta_description": "Explore the Asili Yetu safari fleet and see the expedition vehicles used for game drives, transfers, and tailor-made Tanzania journeys."
   },
   "Instagram": {
     "title": "Live from the Wild",
@@ -354,9 +360,43 @@
     "dossier": "Dossier",
     "concept": "Expedition Concept",
     "book_masterpiece": "Book This Masterpiece",
-    "negotiable_note": "Every detail of this expedition is negotiable and fully customizable to your preferences."
+    "negotiable_note": "Every detail of this expedition is negotiable and fully customizable to your preferences.",
+    "featured_heading_prefix": "Featured",
+    "featured_heading_accent": "Expeditions",
+    "see_all_packages": "See All Packages",
+    "book_now": "Book Now",
+    "special_offer": "Special Offer",
+    "duration_label": "Duration",
+    "people_range": "For 2-8 People",
+    "up_to_people": "Up to {count} People",
+    "for_people_range": "For 2-8 people",
+    "for_up_to_people": "For up to {count} people",
+    "tanzania_fallback": "Tanzania",
+    "savannah": "Savannah",
+    "savannah_majesty": "Savannah Majesty",
+    "negotiable_tailor_made": "Negotiable & Tailor-made",
+    "negotiable_short": "Negotiable",
+    "share_text": "Check out this {days}-day expedition: {title}. Highly rated ({rating} stars) on Asili Yetu!",
+    "biome_label": "Biome",
+    "thermal_profile_label": "Thermal Profile",
+    "momentum_label": "Momentum",
+    "tier_label": "Tier",
+    "warm_sun_drenched": "Warm & Sun-drenched",
+    "balanced_flow": "Balanced Flow",
+    "strategic_inclusions": "Strategic Inclusions",
+    "inclusion_airport": "Airport Transfers",
+    "inclusion_accommodation": "Luxury Accommodation",
+    "inclusion_meals": "Full Board Meals",
+    "inclusion_park_fees": "National Park Fees",
+    "inclusion_vehicle": "4x4 Land Cruiser",
+    "inclusion_guide": "Professional Guide",
+    "inclusion_water": "Bottled Water",
+    "inclusion_insurance": "Emergency Evacuation",
+    "inclusion_binoculars": "High-End Binoculars",
+    "inclusion_wifi": "Onboard Wi-Fi",
+    "meta_title": "Eco-Expeditions & Private Safaris | Asili Yetu",
+    "meta_description": "Discover curated safari masterpieces across the Serengeti and Tanzania. Private, luxury, and eco-friendly expeditions tailored to your needs."
   },
-
   "Culture": {
     "badge": "Living Traditions",
     "title": "The <p>Maasai</p> <br /> <p>Bloodline</p>",
@@ -379,7 +419,13 @@
     "story_2_desc": "Intricate beadwork isn't just art—it's a narrative. Colors tell stories of age, status, and family history.",
     "story_3_label": "Story III",
     "story_3_title": "Guardians of the Plains",
-    "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature."
+    "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature.",
+    "pillars_badge": "Cultural Pillars",
+    "pillars_subtitle": "Four entry points into living heritage",
+    "pillars_footer": "Living Story",
+    "explore_narrative": "Explore Narrative",
+    "meta_title": "Cultural Immersion | Maasai Heritage & Tanzanian Traditions",
+    "meta_description": "Discover Maasai heritage, cultural immersion, and the living traditions that add depth to an Asili Yetu safari in Tanzania."
   },
   "Ecosystem": {
     "badge": "Quick Access",
@@ -415,15 +461,6 @@
     "success_sub": "Expedition Pulse Established.",
     "error": "Failed to join the registry."
   },
-  "Gallery": {
-    "badge": "Visual Archive",
-    "title": "Through the <p>Lens</p>",
-    "sub": "A high-fidelity record of raw beauty and cinematic encounters across the Tanzanian wild.",
-    "awaiting": "Awaiting Visuals",
-    "connect": "Connect with our Instagram to populate the live archive.",
-    "video": "Cinematic",
-    "photo": "Stills"
-  },
   "Guides": {
     "badge": "The Heart of the Safari",
     "title": "Meet Your <p>Tour Guides.</p>",
@@ -436,27 +473,6 @@
     "cta_title": "Ready to explore with the best?",
     "cta_sub": "Every Asili Yetu expedition includes a dedicated senior tour guide. Let's find the perfect expert to lead your journey.",
     "cta_btn": "Start Planning"
-  },
-  "Fleet": {
-    "title": "The Elite <p>Fleet</p>",
-    "sub": "Our customized 4x4 Land Cruisers are more than just vehicles—they are mobile observation platforms designed for the raw Tanzanian wild.",
-    "select": "Select a Vessel for Technical Inspection",
-    "readying": "Deployment Readying",
-    "grade": "Explorer Grade",
-    "seats": "{count} Seats",
-    "exit": "Exit Showroom",
-    "dossier": "Technical Dossier",
-    "payload": "Payload Capacity",
-    "explorers": "{count} Explorers",
-    "specs": "Vehicle Specifications",
-    "hotspots": {
-      "roof_title": "Pop-Up Roof",
-      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
-      "susp_title": "Heavy-Duty Suspension",
-      "susp_desc": "Smooth ride across the toughest terrains.",
-      "seat_title": "Comfortable Seating",
-      "seat_desc": "Spacious window seats for every passenger."
-    }
   },
   "Privacy": {
     "title": "Privacy <p>Policy</p>",

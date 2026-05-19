@@ -7,11 +7,12 @@ import type { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Fleet" });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   return {
-    title: "Safari Fleet | 4x4 Land Cruisers for Tanzania Expeditions",
-    description: "Explore the Asili Yetu safari fleet and see the expedition vehicles used for game drives, transfers, and tailor-made Tanzania journeys.",
+    title: t("meta_title"),
+    description: t("meta_description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/fleet`,
       languages: {

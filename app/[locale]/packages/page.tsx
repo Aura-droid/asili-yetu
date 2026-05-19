@@ -44,9 +44,11 @@ export async function generateMetadata({ searchParams, params }: { searchParams:
     }
   }
 
+  const t = await getTranslations({ locale, namespace: "Packages" });
+
   return {
-    title: "Eco-Expeditions & Private Safaris | Asili Yetu",
-    description: "Discover curated safari masterpieces across the Serengeti and Tanzania. Private, luxury, and eco-friendly expeditions tailored to your needs.",
+    title: t("meta_title"),
+    description: t("meta_description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/packages`,
       languages: {

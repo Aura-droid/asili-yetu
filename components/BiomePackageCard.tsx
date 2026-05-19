@@ -14,19 +14,6 @@ import BookingFunnel from "./BookingFunnel";
 import StructuredData from "./StructuredData";
 import Link from "next/link";
 
-const INCLUSION_META: Record<string, { label: string, icon: any }> = {
-  airport: { label: 'Airport Transfers', icon: Plane },
-  accommodation: { label: 'Luxury Accommodation', icon: Bed },
-  meals: { label: 'Full Board Meals', icon: Utensils },
-  park_fees: { label: 'National Park Fees', icon: Ticket },
-  vehicle: { label: '4x4 Land Cruiser', icon: Car },
-  guide: { label: 'Professional Guide', icon: User },
-  water: { label: 'Bottled Water', icon: Droplets },
-  insurance: { label: 'Emergency Evacuation', icon: HeartPulse },
-  binoculars: { label: 'High-End Binoculars', icon: Eye },
-  wifi: { label: 'Onboard Wi-Fi', icon: Wifi },
-};
-
 // Tier meta moved inside component for translations
 
 export default function BiomePackageCard({ pkg }: { pkg: any }) {
@@ -74,6 +61,19 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
 
   const itinerary = pkg.itinerary?.length > 0 ? pkg.itinerary : defaultItinerary;
   const pt = useTranslations("Packages");
+  const locale = useLocale();
+  const inclusionMeta: Record<string, { label: string; icon: any }> = {
+    airport: { label: pt("inclusion_airport"), icon: Plane },
+    accommodation: { label: pt("inclusion_accommodation"), icon: Bed },
+    meals: { label: pt("inclusion_meals"), icon: Utensils },
+    park_fees: { label: pt("inclusion_park_fees"), icon: Ticket },
+    vehicle: { label: pt("inclusion_vehicle"), icon: Car },
+    guide: { label: pt("inclusion_guide"), icon: User },
+    water: { label: pt("inclusion_water"), icon: Droplets },
+    insurance: { label: pt("inclusion_insurance"), icon: HeartPulse },
+    binoculars: { label: pt("inclusion_binoculars"), icon: Eye },
+    wifi: { label: pt("inclusion_wifi"), icon: Wifi },
+  };
 
   const tierMetaMap: Record<string, { label: string; className: string }> = {
     budget: { label: pt("tier_budget"), className: "bg-emerald-500/20 border-emerald-400/30 text-emerald-100" },
@@ -96,7 +96,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
       "price": pkg.discount_price || pkg.price_usd,
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "url": `${baseUrl}/${useLocale()}/packages#expedition-${pkg.id}`
+      "url": `${baseUrl}/${locale}/packages#expedition-${pkg.id}`
     },
     "itinerary": itinerary.map((item: any, index: number) => ({
       "@type": "City",
@@ -149,7 +149,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
             </div>
             {pkg.discount_price && (
               <div className="inline-block bg-red-500 text-white text-[9px] md:text-xs font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-widest shadow-lg w-fit animate-pulse">
-                Special Offer: -{Math.round(((pkg.price_usd - pkg.discount_price) / pkg.price_usd) * 100)}%
+                {pt("special_offer")}: -{Math.round(((pkg.price_usd - pkg.discount_price) / pkg.price_usd) * 100)}%
               </div>
             )}
           </div>
@@ -177,7 +177,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
             <div className="flex flex-wrap items-center gap-1.5 md:gap-3 text-white/90 font-medium mb-2.5 md:mb-6">
               <div className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
                 <MapPin className="w-3 h-3 md:w-5 md:h-5 text-primary" />
-                <span className="text-[9px] md:text-sm">{pkg.destinations?.name || "Tanzania"}</span>
+                <span className="text-[9px] md:text-sm">{pkg.destinations?.name || pt("tanzania_fallback")}</span>
               </div>
               <div className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-md px-2.5 md:px-4 py-1 md:py-2 rounded-full border border-white/20">
                 <Clock className="w-3 h-3 md:w-5 md:h-5 text-primary" />
@@ -225,7 +225,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                   </div>
                 </div>
                 <p className="text-[8px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-1 animate-pulse hidden lg:block">
-                   ★ Negotiable & Tailor-made
+                   {pt("negotiable_tailor_made")}
                 </p>
               </div>
             </div>
@@ -234,11 +234,15 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               <div className="flex items-center justify-between sm:justify-start gap-3 w-full sm:col-span-2 lg:w-auto">
                 <ShareButton 
                   title={pkg.title} 
-                  text={`Check out this ${pkg.duration_days}-day expedition: ${pkg.title}. Highly rated (${(pkg.avg_rating || 5.0).toFixed(1)} ★) on Asili Yetu!`}
-                  url={typeof window !== 'undefined' ? `${window.location.origin}/${useLocale()}/packages/${pkg.id}` : undefined}
+                  text={pt("share_text", {
+                    days: pkg.duration_days,
+                    title: pkg.title,
+                    rating: (pkg.avg_rating || 5.0).toFixed(1),
+                  })}
+                  url={typeof window !== 'undefined' ? `${window.location.origin}/${locale}/packages/${pkg.id}` : undefined}
                 />
                 <p className="text-[7px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] animate-pulse lg:hidden">
-                   ★ Negotiable
+                   {pt("negotiable_short")}
                 </p>
               </div>
               <button 
@@ -248,10 +252,10 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                 }}
                 className="bg-primary text-black px-3 md:px-10 py-2.5 md:py-4 rounded-full font-black uppercase tracking-widest text-[9px] md:text-sm hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-2 w-full lg:w-auto"
               >
-                Book Now
+                {pt("book_now")}
               </button>
               <Link 
-                href={`/${useLocale()}/packages/${pkg.id}`}
+                href={`/${locale}/packages/${pkg.id}`}
                 className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-3 md:px-10 py-2.5 md:py-4 rounded-full font-bold text-[9px] md:text-sm hover:bg-white/20 transition-all text-center w-full lg:w-auto flex items-center justify-center gap-2"
               >
                 {pt("explore_itinerary")}
@@ -295,28 +299,28 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                        <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
                           <Layers className="w-5 h-5 text-primary" />
                           <div>
-                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Biome</p>
-                             <p className="text-sm font-bold text-foreground leading-none">{pkg.biome_orientation || "Savannah Majesty"}</p>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">{pt("biome_label")}</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.biome_orientation || pt("savannah_majesty")}</p>
                           </div>
                        </div>
                        <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
                           <Thermometer className="w-5 h-5 text-primary" />
                           <div>
-                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Thermal profile</p>
-                             <p className="text-sm font-bold text-foreground leading-none">{pkg.temperature_profile || "Warm & Sun-drenched"}</p>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">{pt("thermal_profile_label")}</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.temperature_profile || pt("warm_sun_drenched")}</p>
                           </div>
                        </div>
                        <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
                           <Zap className="w-5 h-5 text-primary" />
                           <div>
-                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Momentum</p>
-                             <p className="text-sm font-bold text-foreground leading-none">{pkg.intensity_vibe || "Balanced Flow"}</p>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">{pt("momentum_label")}</p>
+                             <p className="text-sm font-bold text-foreground leading-none">{pkg.intensity_vibe || pt("balanced_flow")}</p>
                           </div>
                        </div>
                        <div className="flex items-center gap-3 bg-foreground/5 px-6 py-3 rounded-2xl border border-foreground/10">
                           <Compass className="w-5 h-5 text-primary" />
                           <div>
-                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">Tier</p>
+                             <p className="text-[8px] font-black text-foreground/30 uppercase tracking-[0.2em] leading-none mb-1">{pt("tier_label")}</p>
                              <p className="text-sm font-bold text-foreground leading-none">{tierMeta.label}</p>
                           </div>
                        </div>
@@ -339,11 +343,11 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
                            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
                               <CheckCircle2 className="w-6 h-6" />
                            </div>
-                           <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">Strategic Inclusions</h3>
+                           <h3 className="text-xl font-bold uppercase tracking-widest text-foreground/40 italic">{pt("strategic_inclusions")}</h3>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                            {pkg.inclusions.map((incId: string) => {
-                             const meta = INCLUSION_META[incId];
+                             const meta = inclusionMeta[incId];
                              if (!meta) return null;
                              const Icon = meta.icon;
                              return (
@@ -386,7 +390,7 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
               }} 
               packagePrice={pkg.price_usd}
               packageDiscount={pkg.discount_price}
-              peopleCountText={pkg.people_count_text || (pkg.max_people ? `For up to ${pkg.max_people} people` : "For 2-8 people")}
+              peopleCountText={pkg.people_count_text || (pkg.max_people ? pt("for_up_to_people", { count: pkg.max_people }) : pt("for_people_range"))}
               maxPeople={pkg.max_people || 8}
               onClose={() => setShowBooking(false)} 
             />
@@ -402,3 +406,4 @@ export default function BiomePackageCard({ pkg }: { pkg: any }) {
     </>
   );
 }
+

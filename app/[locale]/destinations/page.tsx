@@ -6,11 +6,12 @@ import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Destinations" });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
   
   return {
-    title: "Tanzania Safari Destinations | Serengeti & Zanzibar",
-    description: "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the crystal waters of Zanzibar.",
+    title: t("meta_title"),
+    description: t("meta_description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/destinations`,
       languages: {

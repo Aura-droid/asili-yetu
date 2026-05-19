@@ -9,11 +9,12 @@ import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Culture" });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
   return {
-    title: "Cultural Immersion | Maasai Heritage & Tanzanian Traditions",
-    description: "Discover Maasai heritage, cultural immersion, and the living traditions that add depth to an Asili Yetu safari in Tanzania.",
+    title: t("meta_title"),
+    description: t("meta_description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/culture`,
       languages: {
@@ -40,9 +41,10 @@ export default async function CulturePage() {
       label: t("ritual_label"),
       title: t("ritual_name"),
       description: t("story_1_desc"),
-      icon: Music,
+      icon: "music",
+      size: "wide",
       className:
-        "lg:col-span-5 bg-[radial-gradient(circle_at_top,rgba(225,161,42,0.18),transparent_58%),linear-gradient(180deg,#ffffff_0%,#fbf4e8_100%)] border-primary/20",
+        "bg-[radial-gradient(circle_at_top,rgba(225,161,42,0.18),transparent_58%),linear-gradient(180deg,#ffffff_0%,#fbf4e8_100%)] border-primary/20",
       iconClassName: "text-primary",
       chipClassName: "bg-primary/12 text-primary border-primary/20",
     },
@@ -50,9 +52,10 @@ export default async function CulturePage() {
       label: t("kinship_label"),
       title: t("kinship_name"),
       description: t("subtitle"),
-      icon: Heart,
+      icon: "heart",
+      size: "standard",
       className:
-        "lg:col-span-4 lg:translate-y-10 bg-[radial-gradient(circle_at_top,rgba(239,68,68,0.14),transparent_55%),linear-gradient(180deg,#fff8f8_0%,#ffffff_100%)] border-red-200/60",
+        "bg-[radial-gradient(circle_at_top,rgba(239,68,68,0.14),transparent_55%),linear-gradient(180deg,#fff8f8_0%,#ffffff_100%)] border-red-200/60",
       iconClassName: "text-red-500",
       chipClassName: "bg-red-500/10 text-red-500 border-red-200/70",
     },
@@ -60,9 +63,10 @@ export default async function CulturePage() {
       label: t("v_ancestry_title"),
       title: t("story_2_title"),
       description: t("story_2_desc"),
-      icon: History,
+      icon: "history",
+      size: "standard",
       className:
-        "lg:col-span-3 bg-[radial-gradient(circle_at_top,rgba(104,78,52,0.16),transparent_60%),linear-gradient(180deg,#fffdf7_0%,#f6efe3_100%)] border-stone-300/70",
+        "bg-[radial-gradient(circle_at_top,rgba(104,78,52,0.16),transparent_60%),linear-gradient(180deg,#fffdf7_0%,#f6efe3_100%)] border-stone-300/70",
       iconClassName: "text-stone-600",
       chipClassName: "bg-stone-500/10 text-stone-600 border-stone-300/70",
     },
@@ -70,9 +74,10 @@ export default async function CulturePage() {
       label: t("v_guardianship_title"),
       title: t("story_3_title"),
       description: t("story_3_desc"),
-      icon: ShieldCheck,
+      icon: "shield",
+      size: "wide",
       className:
-        "lg:col-span-7 lg:-translate-y-6 bg-[radial-gradient(circle_at_top,rgba(166,124,55,0.16),transparent_58%),linear-gradient(180deg,#fffaf1_0%,#f7f1e8_100%)] border-amber-300/50",
+        "bg-[radial-gradient(circle_at_top,rgba(166,124,55,0.16),transparent_58%),linear-gradient(180deg,#fffaf1_0%,#f7f1e8_100%)] border-amber-300/50",
       iconClassName: "text-amber-700",
       chipClassName: "bg-amber-500/10 text-amber-700 border-amber-300/60",
     },
@@ -123,7 +128,7 @@ export default async function CulturePage() {
        />
        {/* Hero Section */}
        <div className="container mx-auto max-w-7xl px-6 mb-24 md:mb-32">
-          <div className="flex flex-col lg:flex-row items-end gap-12">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-12 xl:gap-16">
              <div className="flex-1">
                 <span className="bg-primary/20 text-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6 inline-block">{t("badge")}</span>
                 <h1 className="text-6xl md:text-[7rem] font-black text-foreground italic uppercase tracking-tighter leading-[0.9] mb-8">
@@ -134,7 +139,7 @@ export default async function CulturePage() {
                 </p>
              </div>
              
-             <div className="w-full lg:w-[44%]">
+             <div className="w-full lg:w-[52%] xl:w-[54%]">
                 <CultureHighlights highlights={highlights} />
              </div>
           </div>

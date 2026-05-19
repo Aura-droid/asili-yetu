@@ -119,12 +119,12 @@
     "whatsapp_btn": "Contáctanos por WhatsApp",
     "address": "Arusha, Tanzania",
     "region": "East Africa",
-    "expeditions": "Expeditions",
-    "contact_base": "Contact Base",
-    "rights": "All Rights Reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "brela": "Licensed & Registered BRELA Firm (Tanzania)"
+    "expeditions": "Expediciones",
+    "contact_base": "Base de Contacto",
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "brela": "Empresa Licenciada y Registrada en BRELA (Tanzania)"
   },
   "Booking": {
     "booking": "Reserva",
@@ -154,7 +154,8 @@
     "initialize": "Iniciar Expedición",
     "welcome": "Bienvenido a lo Salvaje.",
     "confirmed": "Tu majestuosa expedición está confirmada.",
-    "return": "Volver a la Base"
+    "return": "Volver a la Base",
+    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias."
   },
   "FunFact": {
     "label": "LA VERDAD SALVAJE",
@@ -206,7 +207,9 @@
     "p_cons_sub": "Cada viaje contribuye al desarrollo de las comunidades locales y a los esfuerzos de conservación de la vida silvestre.",
     "vision_title": "VISION",
     "presence_arusha_title": "Arusha, Tanzania",
-    "presence_koln_title": "Köln, Germany"
+    "presence_koln_title": "Köln, Germany",
+    "meta_title": "Acerca de Asili Yetu Safaris | Raíces Tanzanas, Estándares Globales",
+    "meta_description": "Conozca la historia, los valores, la misión y la filosofía de viajes responsables detrás de Asili Yetu Safaris, una empresa de safaris con profundas raíces locales con sede en Arusha, Tanzania."
   },
   "Destinations": {
     "badge": "Tierras de Leyenda",
@@ -253,11 +256,11 @@
         "wildlife": "Monos Colobos Rojos, Tortugas Marinas, Delfines"
       },
       "manyara": {
-        "name": "Lake Manyara National Park",
-        "type": "Alkaline Lake",
-        "desc": "Famous for its tree-climbing lions and vast flocks of flamingos, this park offers a diverse landscape from groundwater forests to the lake shores.",
-        "time": "Year-Round",
-        "wildlife": "Tree-climbing Lions, Elephants, Flamingos"
+        "name": "Parque Nacional del Lago Manyara",
+        "type": "Lago Alcalino",
+        "desc": "Famoso por sus leones trepadores de árboles y sus vastas bandadas de flamencos, este parque ofrece un paisaje diverso desde bosques de aguas subterráneas hasta las orillas del lago.",
+        "time": "Todo el año",
+        "wildlife": "Leones trepadores de árboles, Elefantes, Flamencos"
       }
     },
     "Map": {
@@ -265,16 +268,18 @@
       "discovery_sub": "Navega por la naturaleza de Tanzania. Haz clic en un marcador dorado para explorar los secretos de nuestras reservas privadas.",
       "explore_packages": "Explorar Paquetes"
     },
-    "wildlife_safaris_title": "WILDLIFE SAFARIS",
-    "wildlife_safaris_desc": "Tanzania is one of the most iconic wildlife destinations in the world. Home to the Great Migration, vast savannahs, and rich biodiversity, it offers unmatched safari experiences.",
-    "cultural_immersion_title": "CULTURAL IMMERSION",
-    "cultural_immersion_desc": "Culture is the heartbeat of Tanzania. We connect travelers with communities in ways that are respectful, educational, and meaningful.",
-    "mountain_adventures_title": "MOUNTAIN ADVENTURES",
-    "mountain_adventures_desc": "For adventure seekers, Tanzania offers some of Africa’s most iconic peaks like Kilimanjaro and Meru.",
-    "coastal_experiences_title": "COASTAL AND ISLAND EXPERIENCES",
-    "coastal_experiences_desc": "Tanzania’s coastline offers a completely different world of relaxation and culture.",
-    "customized_title": "CUSTOMIZED TRAVEL EXPERIENCES",
-    "customized_desc": "We understand that every traveler is different. Every itinerary is carefully built around your purpose, time, and expectations."
+    "wildlife_safaris_title": "SAFARIS DE VIDA SILVESTRE",
+    "wildlife_safaris_desc": "Tanzania es uno de los destinos de vida silvestre más icónicos del mundo. Hogar de la Gran Migración, vastas sabanas y una rica biodiversidad, ofrece experiencias de safari inigualables.",
+    "cultural_immersion_title": "INMERSIÓN CULTURAL",
+    "cultural_immersion_desc": "La cultura es el latido de Tanzania. Conectamos a los viajeros con las comunidades de maneras respetuosas, educativas y significativas.",
+    "mountain_adventures_title": "AVENTURAS EN MONTAÑA",
+    "mountain_adventures_desc": "Para los buscadores de aventuras, Tanzania ofrece algunos de los picos más icónicos de África como el Kilimanjaro y el Meru.",
+    "coastal_experiences_title": "EXPERIENCIAS COSTERAS E INSULARES",
+    "coastal_experiences_desc": "La costa de Tanzania ofrece un mundo completamente diferente de relajación y cultura.",
+    "customized_title": "EXPERIENCIAS DE VIAJE PERSONALIZADAS",
+    "customized_desc": "Entendemos que cada viajero es diferente. Cada itinerario se construye cuidadosamente en torno a su propósito, tiempo y expectativas.",
+    "meta_title": "Destinos de Safari en Tanzania | Serengueti y Zanzíbar",
+    "meta_description": "Explore los destinos de safari más icónicos de Tanzania. Desde las llanuras infinitas del Serengueti hasta las aguas cristalinas de Zanzíbar."
   },
   "Gallery": {
     "badge": "La Lente",
@@ -295,20 +300,22 @@
     "ac": "Clima",
     "fridge": "Refrigerador",
     "specs": "Especificaciones del Vehículo",
-    "readying": "Deployment Readying",
-    "grade": "Explorer Grade",
-    "exit": "Exit Showroom",
-    "dossier": "Technical Dossier",
-    "payload": "Payload Capacity",
-    "explorers": "{count} Explorers",
+    "readying": "Preparación para el Despliegue",
+    "grade": "Grado Explorador",
+    "exit": "Salida de Sala de Exposición",
+    "dossier": "Dossier Técnico",
+    "payload": "Capacidad de Carga Útil",
+    "explorers": "{count} Exploradores",
     "hotspots": {
-      "roof_title": "Pop-Up Roof",
-      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
-      "susp_title": "Heavy-Duty Suspension",
-      "susp_desc": "Smooth ride across the toughest terrains.",
-      "seat_title": "Comfortable Seating",
-      "seat_desc": "Spacious window seats for every passenger."
-    }
+      "roof_title": "Techo Elevable",
+      "roof_desc": "Vistas panorámicas de 360° sin obstrucciones para fotografía y observación de vida silvestre.",
+      "susp_title": "Suspensión de Trabajo Pesado",
+      "susp_desc": "Viaje suave por los terrenos más difíciles.",
+      "seat_title": "Asientos Cómodos",
+      "seat_desc": "Espaciosos asientos junto a la ventana para cada pasajero."
+    },
+    "meta_title": "Nuestra Flota de Safari | Land Cruisers 4x4 para Expediciones en Tanzania",
+    "meta_description": "Explore la flota de safari de Asili Yetu y descubra los vehículos de expedición utilizados para safaris fotográficos, traslados y viajes a medida por Tanzania."
   },
   "Instagram": {
     "title": "En vivo desde lo salvaje",
@@ -394,7 +401,42 @@
     "dossier": "Dossier",
     "concept": "Concepto de la Expedición",
     "book_masterpiece": "Reservar esta Obra Maestra",
-    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias."
+    "negotiable_note": "Cada detalle de esta expedición es negociable y totalmente personalizable según sus preferencias.",
+    "featured_heading_prefix": "Destacadas",
+    "featured_heading_accent": "Expediciones",
+    "see_all_packages": "Ver Todos los Paquetes",
+    "book_now": "Reservar Ahora",
+    "special_offer": "Oferta Especial",
+    "duration_label": "Duración",
+    "people_range": "Para 2-8 Personas",
+    "up_to_people": "Hasta {count} Personas",
+    "for_people_range": "Para 2-8 personas",
+    "for_up_to_people": "Para hasta {count} personas",
+    "tanzania_fallback": "Tanzania",
+    "savannah": "Sabana",
+    "savannah_majesty": "Majestad de la Sabana",
+    "negotiable_tailor_made": "Negociable y Hecho a Medida",
+    "negotiable_short": "Negociable",
+    "share_text": "Echa un vistazo a esta expedición de {days} días: {title}. Altamente valorada ({rating} estrellas) en Asili Yetu!",
+    "biome_label": "Bioma",
+    "thermal_profile_label": "Perfil Térmico",
+    "momentum_label": "Impulso",
+    "tier_label": "Categoría",
+    "warm_sun_drenched": "Cálido y bañado por el sol",
+    "balanced_flow": "Flujo Equilibrado",
+    "strategic_inclusions": "Inclusiones Estratégicas",
+    "inclusion_airport": "Traslados al Aeropuerto",
+    "inclusion_accommodation": "Alojamiento de Lujo",
+    "inclusion_meals": "Comidas con Pensión Completa",
+    "inclusion_park_fees": "Tasas de Parque Nacional",
+    "inclusion_vehicle": "Land Cruiser 4x4",
+    "inclusion_guide": "Guía Profesional",
+    "inclusion_water": "Agua Embotellada",
+    "inclusion_insurance": "Evacuación de Emergencia",
+    "inclusion_binoculars": "Prismáticos de Alta Gama",
+    "inclusion_wifi": "Wi-Fi a Bordo",
+    "meta_title": "Ecoexpediciones y Safaris Privados | Asili Yetu",
+    "meta_description": "Descubra safaris magistrales por el Serengueti y Tanzania. Expediciones privadas, de lujo y ecológicas, diseñadas a su medida."
   },
   "Culture": {
     "badge": "Tradiciones Vivantes",
@@ -416,9 +458,15 @@
     "story_3_title": "Guardianes de las Llanuras",
     "story_3_desc": "Coexistiendo con leones y elefantes durante siglos, los Maasai encarnan la asociación definitiva entre el hombre y la naturaleza.",
     "ritual_label": "Ritual",
-    "ritual_name": "Adammu Dance",
-    "kinship_label": "Kinship",
-    "kinship_name": "Manyatta Life"
+    "ritual_name": "Danza Adammu",
+    "kinship_label": "Parentesco",
+    "kinship_name": "Vida en el Manyatta",
+    "pillars_badge": "Pilares Culturales",
+    "pillars_subtitle": "Cuatro puntos de entrada a la herencia viva",
+    "pillars_footer": "Historia Viviente",
+    "explore_narrative": "Explorar Narrativa",
+    "meta_title": "Inmersión Cultural | Patrimonio Maasái y Tradiciones Tanzanas",
+    "meta_description": "Descubra el patrimonio Maasái, la inmersión cultural y las tradiciones vivientes que añaden profundidad a un safari de Asili Yetu en Tanzania."
   },
   "Guides": {
     "badge": "El Corazón del Safari",
@@ -464,5 +512,11 @@
     "desc": "Utilizamos cookies esenciales para sincronizar su sesión y experiencia localizada a través de la sabana.",
     "accept": "Aceptar Pulso",
     "decline": "Rechazar No Esenciales"
+  },
+  "Offline": {
+    "title": "Señal Perdida en <p>Sabana</p>",
+    "sub": "Nuestro enlace satelital se ha interrumpido. Verifique su telemetría local o espere el próximo pase.",
+    "retry": "Reintentar Conexión",
+    "view_saved": "Ver Itinerarios Guardados"
   }
 }

@@ -105,7 +105,13 @@
     "story_2_desc": "Kazi ya ushanga si sanaa tu—ni simulizi. Rangi husimulia hadithi za umri, hadhi, na historia ya familia.",
     "story_3_label": "Hadithi ya Tatu",
     "story_3_title": "Walinda Mapori",
-    "story_3_desc": "Wakiishi na simba na tembo kwa karne nyingi, Wamaasai wanaonyesha ushirikiano mkuu kati ya binadamu na asili."
+    "story_3_desc": "Wakiishi na simba na tembo kwa karne nyingi, Wamaasai wanaonyesha ushirikiano mkuu kati ya binadamu na asili.",
+    "pillars_badge": "Nguzo za Utamaduni",
+    "pillars_subtitle": "Njia nne za kuingia kwenye urithi wa moja kwa moja",
+    "pillars_footer": "Hadithi Hai",
+    "explore_narrative": "Gundua Hadithi Yetu",
+    "meta_title": "Uhamasishaji wa Kitamaduni | Urithi wa Kimasai & Mila za Kitanzania",
+    "meta_description": "Gundua urithi wa Kimasai, uhamasishaji wa kitamaduni, na mila za moja kwa moja zinazoongeza kina kwenye safari ya Asili Yetu nchini Tanzania."
   },
   "Ecosystem": {
     "badge": "Ufikiaji wa Haraka",
@@ -186,8 +192,10 @@
       "seat_title": "Viti vya Kustarehesha",
       "seat_desc": "Viti vya kutosha pembeni ya dirisha kwa kila abiria."
     },
-    "readying": "Deployment Readying",
-    "explorers": "{count} Explorers"
+    "readying": "Kujiandaa kwa Safari",
+    "explorers": "{count} Wazururaji Mashuhuri",
+    "meta_title": "Msafara wa Safari | Land Cruiser 4x4 kwa Misafara ya Tanzania",
+    "meta_description": "Gundua msafara wa magari ya Asili Yetu Safaris na uone magari ya misafara yanayotumika kwa safari za wanyamapori, uhamisho, na safari maalum za Tanzania."
   },
   "Instagram": {
     "title": "Mubashara kutoka Nyikani",
@@ -195,7 +203,7 @@
     "follow": "FUATA @ASILIYETUSAFARIS",
     "empty_title": "Nyika imetulia leo",
     "empty_desc": "Waongozaji wetu wako ndani kabisa ya mbuga wakigundua njia mpya. Rudi baadaye kuona matukio mubashara ya safari zetu!",
-    "video": "Video",
+    "video": "Video Bora",
     "photo": "Picha",
     "carousel": "Albamu"
   },
@@ -249,10 +257,45 @@
     "nights": "Usiku",
     "investment": "Bei",
     "explore_itinerary": "Gundua Ratiba",
-    "dossier": "Dossier",
+    "dossier": "Jalada la Safari",
     "concept": "Wazo la Safari",
     "book_masterpiece": "Weka Nafasi ya Safari Hii",
-    "negotiable_note": "Kila kipengele cha safari hii kinaweza kujadiliwa na kubadilishwa kulingana na matakwa yako."
+    "negotiable_note": "Kila kipengele cha safari hii kinaweza kujadiliwa na kubadilishwa kulingana na matakwa yako.",
+    "featured_heading_prefix": "Safari",
+    "featured_heading_accent": "Zilizopambanuka",
+    "see_all_packages": "Tazama Safari Zote",
+    "book_now": "Weka Nafasi",
+    "special_offer": "Ofa Maalum",
+    "duration_label": "Muda",
+    "people_range": "Kwa Watu 2-8",
+    "up_to_people": "Hadi Watu {count}",
+    "for_people_range": "Kwa watu 2-8",
+    "for_up_to_people": "Kwa hadi watu {count}",
+    "tanzania_fallback": "Tanzania Yetu Tukufu",
+    "savannah": "Savana",
+    "savannah_majesty": "Ukuu wa Savana",
+    "negotiable_tailor_made": "Ya Kujadiliwa na Kubinafsishwa",
+    "negotiable_short": "Ya Kujadiliwa",
+    "share_text": "Angalia safari hii ya siku {days}: {title}. Imepewa alama za juu ({rating} nyota) kwenye Asili Yetu!",
+    "biome_label": "Mazingira",
+    "thermal_profile_label": "Hali ya Joto",
+    "momentum_label": "Mtiririko",
+    "tier_label": "Kiwango",
+    "warm_sun_drenched": "Joto na Mwanga wa Jua",
+    "balanced_flow": "Mtiririko wa Kati",
+    "strategic_inclusions": "Vilivyojumuishwa Muhimu",
+    "inclusion_airport": "Usafiri wa Uwanja wa Ndege",
+    "inclusion_accommodation": "Malazi ya Kifahari",
+    "inclusion_meals": "Milo Kamili",
+    "inclusion_park_fees": "Ada za Hifadhi",
+    "inclusion_vehicle": "Land Cruiser 4x4",
+    "inclusion_guide": "Mwongoza Safari wa Kitaalamu",
+    "inclusion_water": "Maji ya Chupa",
+    "inclusion_insurance": "Uokoaji wa Dharura",
+    "inclusion_binoculars": "Darubini za Ubora wa Juu",
+    "inclusion_wifi": "Wi-Fi Ndani ya Gari",
+    "meta_title": "Misafara Endelevu & Safari za Faragha | Asili Yetu",
+    "meta_description": "Gundua kazi bora za safari zilizopangwa kwa ustadi kote Serengeti na Tanzania. Misafara ya faragha, ya kifahari, na rafiki kwa mazingira iliyobuniwa kulingana na mahitaji yako."
   },
   "Reviews": {
     "title": "Sauti kutoka <p>Nyikani</p>",
@@ -361,7 +404,9 @@
     "p_safe": "Usalama Usio na Maelewano",
     "p_safe_sub": "Amani yako ya akili ni kipaumbele chetu. Tunazingatia viwango vya juu zaidi vya usalama katika kila safari.",
     "p_cons": "Usafiri wa Makini",
-    "p_cons_sub": "Kila safari inachangia maendeleo ya jamii ya wenyeji na juhudi za uhifadhi wa wanyamapori."
+    "p_cons_sub": "Kila safari inachangia maendeleo ya jamii ya wenyeji na juhudi za uhifadhi wa wanyamapori.",
+    "meta_title": "Kuhusu Asili Yetu Safaris | Chimbuko la Kitanzania, Viwango vya Kimataifa",
+    "meta_description": "Jifunze hadithi, maadili, dhamira, na falsafa ya utalii uwajibikaji nyuma ya Asili Yetu Safaris, kampuni ya safari yenye chimbuko la Kitanzania yenye makao makuu Arusha, Tanzania."
   },
   "Destinations": {
     "badge": "Ardhi za Hadithi",
@@ -429,7 +474,9 @@
       "discovery_mode": "Hali ya Ugunduzi",
       "discovery_sub": "Elekeza nyika ya Tanzania. Bonyeza alama ya dhahabu kugundua siri za hifadhi zetu.",
       "explore_packages": "Gundua Vifurushi"
-    }
+    },
+    "meta_title": "Maeneo ya Safari Tanzania | Serengeti & Zanzibar",
+    "meta_description": "Gundua maeneo mashuhuri zaidi ya safari nchini Tanzania. Kuanzia tambarare zisizo na kikomo za Serengeti hadi maji safi ya kioo ya Zanzibar."
   },
   "Privacy": {
     "title": "Sera ya <p>Faragha</p>",

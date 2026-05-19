@@ -75,7 +75,8 @@
     "initialize": "بدء الحملة",
     "welcome": "مرحباً بكم في البرية.",
     "confirmed": "تم تأكيد رحلتكم المهيبة.",
-    "return": "العودة إلى القاعدة"
+    "return": "العودة إلى القاعدة",
+    "negotiable_note": "كل تفاصيل هذه الرحلة الاستكشافية قابلة للتفاوض وقابلة للتخصيص بالكامل حسب تفضيلاتكم."
   },
   "FunFact": {
     "label": "الحقيقة البرية",
@@ -124,7 +125,9 @@
     "mission_title": "MISSION",
     "vision_title": "VISION",
     "presence_arusha_title": "Arusha, Tanzania",
-    "presence_koln_title": "Köln, Germany"
+    "presence_koln_title": "Köln, Germany",
+    "meta_title": "عن سفاري أصيلي ييتو | جذور تنزانية، معايير عالمية",
+    "meta_description": "اكتشف القصة والقيم والرسالة وفلسفة السفر المسؤول وراء سفاري أصيلي ييتو، وهي شركة سفاري متجذرة محلياً ومقرها أروشا، تنزانيا."
   },
   "Destinations": {
     "badge": "أراضي الأساطير",
@@ -192,7 +195,9 @@
       "discovery_mode": "وضع الاكتشاف",
       "discovery_sub": "تنقل في برية تنزانيا. انقر على نقطة ذهبية للاستكشاف.",
       "explore_packages": "استكشاف الباقات"
-    }
+    },
+    "meta_title": "وجهات سفاري تنزانيا | سيرينجيتي وزنجبار",
+    "meta_description": "استكشف أشهر وجهات السفاري في تنزانيا. من سهول سيرينجيتي الشاسعة إلى المياه الفيروزية لزنجبار."
   },
   "Packages": {
     "title": "رحلاتنا",
@@ -233,7 +238,43 @@
     "explore_itinerary": "استكشاف مسار الرحلة",
     "dossier": "ملف الرحلة",
     "concept": "مفهوم البعثة",
-    "book_masterpiece": "احجز هذه التحفة"
+    "book_masterpiece": "احجز هذه التحفة",
+    "negotiable_note": "كل تفاصيل هذه الرحلة الاستكشافية قابلة للتفاوض وقابلة للتخصيص بالكامل حسب تفضيلاتكم.",
+    "featured_heading_prefix": "مميزة",
+    "featured_heading_accent": "رحلات استكشافية",
+    "see_all_packages": "مشاهدة جميع الباقات",
+    "book_now": "احجز الآن",
+    "special_offer": "عرض خاص",
+    "duration_label": "المدة",
+    "people_range": "لشخصين إلى 8 أشخاص",
+    "up_to_people": "لغاية {count} شخص",
+    "for_people_range": "لشخصين إلى 8 أشخاص",
+    "for_up_to_people": "لغاية {count} أشخاص",
+    "tanzania_fallback": "تنزانيا",
+    "savannah": "السهول العشبية",
+    "savannah_majesty": "جلال السهول العشبية",
+    "negotiable_tailor_made": "قابل للتفاوض ومصمم خصيصًا",
+    "negotiable_short": "قابل للتفاوض",
+    "share_text": "اكتشف هذه الرحلة الاستكشافية التي تستمر {days} أيام: {title}. حصلت على تقييم عالٍ ({rating} نجوم) على \"أسيلى ييتو\"!",
+    "biome_label": "البيئة الحيوية",
+    "thermal_profile_label": "الخصائص الحرارية",
+    "momentum_label": "الزخم",
+    "tier_label": "المستوى",
+    "warm_sun_drenched": "دافئ ومشمس",
+    "balanced_flow": "تدفق متوازن",
+    "strategic_inclusions": "مزايا مدروسة",
+    "inclusion_airport": "الانتقالات من وإلى المطار",
+    "inclusion_accommodation": "إقامة فاخرة",
+    "inclusion_meals": "وجبات شاملة",
+    "inclusion_park_fees": "رسوم المنتزهات الوطنية",
+    "inclusion_vehicle": "سيارة لاند كروزر دفع رباعي",
+    "inclusion_guide": "مرشد محترف",
+    "inclusion_water": "مياه معبأة",
+    "inclusion_insurance": "إخلاء طارئ",
+    "inclusion_binoculars": "مناظير راقية",
+    "inclusion_wifi": "واي فاي على متن المركبة",
+    "meta_title": "رحلات استكشاف بيئية وسفاري خاصة | أصيلي ييتو",
+    "meta_description": "اكتشف روائع السفاري المنسقة عبر سيرينجيتي وتنزانيا. رحلات خاصة وفاخرة وصديقة للبيئة مصممة خصيصاً لتناسب احتياجاتك."
   },
   "Sentinel": {
     "dispatch": "إيفاد المرشدين",
@@ -320,20 +361,22 @@
     "ac": "مكيف",
     "fridge": "ثلاجة",
     "specs": "مواصفات المركبة",
-    "readying": "Deployment Readying",
-    "grade": "Explorer Grade",
-    "exit": "Exit Showroom",
-    "dossier": "Technical Dossier",
-    "payload": "Payload Capacity",
-    "explorers": "{count} Explorers",
+    "readying": "جاهزية الانتشار",
+    "grade": "درجة المستكشف",
+    "exit": "خروج من المعرض",
+    "dossier": "الملف الفني",
+    "payload": "سعة الحمولة",
+    "explorers": "{count} مستكشفون",
     "hotspots": {
-      "roof_title": "Pop-Up Roof",
-      "roof_desc": "Unobstructed 360° views for photography and wildlife spotting.",
-      "susp_title": "Heavy-Duty Suspension",
-      "susp_desc": "Smooth ride across the toughest terrains.",
-      "seat_title": "Comfortable Seating",
-      "seat_desc": "Spacious window seats for every passenger."
-    }
+      "roof_title": "سقف قابل للطي",
+      "roof_desc": "إطلالات بانورامية غير معاقة بزاوية 360 درجة للتصوير ومشاهدة الحياة البرية.",
+      "susp_title": "نظام تعليق عالي التحمل",
+      "susp_desc": "رحلة سلسة عبر أصعب التضاريس.",
+      "seat_title": "مقاعد مريحة",
+      "seat_desc": "مقاعد فسيحة بجوار النوافذ لكل مسافر."
+    },
+    "meta_title": "أسطول السفاري | سيارات لاند كروزر 4x4 لرحلات تنزانيا الاستكشافية",
+    "meta_description": "استكشف أسطول سفاري أصيلي ييتو واطلع على مركبات الرحلات الاستكشافية المستخدمة في رحلات مشاهدة الحيوانات، والتنقلات، والرحلات التنزانية المصممة خصيصاً."
   },
   "Instagram": {
     "title": "مباشر من البرية",
@@ -393,28 +436,34 @@
     "brela": "شركة بريلا مرخصة ومسجلة (تنزانيا)"
   },
   "Culture": {
-    "badge": "Living Traditions",
-    "title": "The <p>Maasai</p> <br /> <p>Bloodline</p>",
-    "subtitle": "Step into the ancient rhythms of the savannah. We invite you to experience the deep-rooted wisdom, vibrant tapestry, and enduring strength of the Maasai people.",
-    "ritual_label": "Ritual",
-    "ritual_name": "Adammu Dance",
-    "kinship_label": "Kinship",
-    "kinship_name": "Manyatta Life",
-    "values_title": "Values of the Savannah",
-    "v_guardianship_title": "Guardianship",
-    "v_guardianship_desc": "Coexisting with the wildlife as the ultimate stewards of the ecosystem for millennia.",
-    "v_ancestry_title": "Ancestry",
-    "v_ancestry_desc": "Stories passed down through oral tradition, echoing from the dawn of humanity.",
-    "v_expression_title": "Expression",
-    "v_expression_desc": "Every colored bead, every rhythmic jump, a celebration of the spirit of Africa.",
-    "story_1_label": "Story I",
-    "story_1_title": "The Jump of Adumu",
-    "story_1_desc": "A rhythmic test of strength and grace, the celebrated jump of the Maasai youth symbolizes the spirit of the savannah.",
-    "story_2_title": "The Language of Beads",
-    "story_2_desc": "Intricate beadwork isn't just art—it's a narrative. Colors tell stories of age, status, and family history.",
-    "story_3_label": "Story III",
-    "story_3_title": "Guardians of the Plains",
-    "story_3_desc": "Coexisting with lions and elephants for centuries, the Maasai embody the ultimate partnership between human and nature."
+    "badge": "تقاليد حية",
+    "title": "<p>خط</p> <br /> <p>دم</p> <p>الماساي</p>",
+    "subtitle": "اخطُ في إيقاعات السافانا القديمة. ندعوك لتجربة الحكمة المتجذرة، النسيج النابض بالحياة، والقوة الدائمة لشعب الماساي.",
+    "ritual_label": "طقوس",
+    "ritual_name": "رقصة الأدومو",
+    "kinship_label": "قرابة",
+    "kinship_name": "حياة المانياتا",
+    "values_title": "قيم السافانا",
+    "v_guardianship_title": "الوصاية",
+    "v_guardianship_desc": "نتعايش مع الحياة البرية كأسمى رعاة للنظام البيئي لآلاف السنين.",
+    "v_ancestry_title": "الأجداد",
+    "v_ancestry_desc": "قصص تنتقل عبر التقاليد الشفوية، يتردد صداها من فجر البشرية.",
+    "v_expression_title": "التعبير",
+    "v_expression_desc": "كل خرزة ملونة، كل قفزة إيقاعية، هي احتفال بروح أفريقيا.",
+    "story_1_label": "قصة أولى",
+    "story_1_title": "قفزة الأدومو",
+    "story_1_desc": "اختبار إيقاعي للقوة والرقي، قفزة شباب الماساي المحتفى بها ترمز إلى روح السافانا.",
+    "story_2_title": "لغة الخرز",
+    "story_2_desc": "ليست المشغولات الخرزية المعقدة مجرد فن - إنها سرد. الألوان تحكي قصص العمر والمكانة وتاريخ العائلة.",
+    "story_3_label": "قصة ثالثة",
+    "story_3_title": "حراس السهول",
+    "story_3_desc": "من خلال التعايش مع الأسود والفيلة لقرون، يجسد الماساي الشراكة المثلى بين الإنسان والطبيعة.",
+    "pillars_badge": "ركائز ثقافية",
+    "pillars_subtitle": "أربعة نقاط دخول إلى التراث الحي",
+    "pillars_footer": "قصة حية",
+    "explore_narrative": "استكشاف السرد",
+    "meta_title": "انغماس ثقافي | تراث الماساي وتقاليد تنزانيا",
+    "meta_description": "اكتشف تراث الماساي والانغماس الثقافي والتقاليد الحية التي تضيف عمقًا لرحلة سفاري أسيلي يويتو في تنزانيا."
   },
   "Guides": {
     "badge": "قلب السفاري",
@@ -460,5 +509,11 @@
     "desc": "نحن نستخدم ملفات تعريف الارتباط الأساسية لمزامنة جلستك وتجربتك المحلية عبر السافانا.",
     "accept": "قبول النبض",
     "decline": "رفض غير الأساسي"
+  },
+  "Offline": {
+    "title": "فقدان الإشارة في <p>السافانا</p>",
+    "sub": "لقد انقطع اتصالنا عبر الأقمار الصناعية. يرجى التحقق من القياسات عن بعد المحلية لديك أو الانتظار حتى المرور التالي.",
+    "retry": "إعادة محاولة الاتصال",
+    "view_saved": "عرض مسارات الرحلة المحفوظة"
   }
 }
