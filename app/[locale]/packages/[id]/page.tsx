@@ -9,6 +9,7 @@ import ItineraryMap from "@/components/ItineraryMap";
 import RustlingButton from "@/components/RustlingButton";
 import StructuredData, { getBreadcrumbSchema } from "@/components/StructuredData";
 import BookingFunnelWrapper from "../../../../components/BookingFunnelWrapper";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: string; id: string }>;
@@ -38,7 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .eq('id', id)
     .single();
 
-  if (!pkg) return { title: "Package Not Found" };
+  if (!pkg) {
+    notFound();
+  }
 
   return {
     title: `${pkg.title} | ${pkg.destinations?.name || 'Safari'}`,
@@ -65,14 +68,7 @@ export default async function PackageDossierPage({ params }: Props) {
     .single();
 
   if (!pkg) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <h1 className="text-4xl font-black mb-4">Expedition Lost in Transit</h1>
-          <Link href={`/${locale}/packages`} className="text-primary font-bold underline">Return to Headquarters</Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   const itinerary = pkg.itinerary?.length > 0 ? pkg.itinerary : [];

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import StructuredData from "@/components/StructuredData";
 import { getDestinations } from "@/app/actions/destinations";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: string; id: string }>;
@@ -16,7 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { data: destinations } = await getDestinations();
   const dest = destinations?.find((d: any) => d.id === id);
 
-  if (!dest) return { title: "Destination Not Found" };
+  if (!dest) {
+    notFound();
+  }
 
   return {
     title: `${dest.name} | Safari Destination`,
@@ -39,14 +42,7 @@ export default async function DestinationDetailPage({ params }: Props) {
   const dest = destinations?.find((d: any) => d.id === id);
 
   if (!dest) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <h1 className="text-4xl font-black mb-4">Location Uncharted</h1>
-          <Link href={`/${locale}/destinations`} className="text-primary font-bold underline">Return to Atlas</Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   const placeSchema = {
