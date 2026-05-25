@@ -279,7 +279,8 @@
     "customized_title": "EXPERIENCIAS DE VIAJE PERSONALIZADAS",
     "customized_desc": "Entendemos que cada viajero es diferente. Cada itinerario se construye cuidadosamente en torno a su propósito, tiempo y expectativas.",
     "meta_title": "Destinos de Safari en Tanzania | Serengueti y Zanzíbar",
-    "meta_description": "Explore los destinos de safari más icónicos de Tanzania. Desde las llanuras infinitas del Serengueti hasta las aguas cristalinas de Zanzíbar."
+    "meta_description": "Explore los destinos de safari más icónicos de Tanzania. Desde las llanuras infinitas del Serengueti hasta las aguas cristalinas de Zanzíbar.",
+    "back_to_atlas": "Volver al Atlas"
   },
   "Gallery": {
     "badge": "La Lente",
@@ -436,7 +437,9 @@
     "inclusion_binoculars": "Prismáticos de Alta Gama",
     "inclusion_wifi": "Wi-Fi a Bordo",
     "meta_title": "Ecoexpediciones y Safaris Privados | Asili Yetu",
-    "meta_description": "Descubra safaris magistrales por el Serengueti y Tanzania. Expediciones privadas, de lujo y ecológicas, diseñadas a su medida."
+    "meta_description": "Descubra safaris magistrales por el Serengueti y Tanzania. Expediciones privadas, de lujo y ecológicas, diseñadas a su medida.",
+    "back_to_safaris": "Volver a Safaris",
+    "active_guide": "Experiencia Local"
   },
   "Culture": {
     "badge": "Tradiciones Vivantes",

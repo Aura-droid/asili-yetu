@@ -276,7 +276,8 @@
     "customized_title": "EXPÉRIENCES DE VOYAGE SUR MESURE",
     "customized_desc": "Nous comprenons que chaque voyageur est unique. Chaque itinéraire est soigneusement conçu autour de votre objectif, de votre temps et de vos attentes.",
     "meta_title": "Destinations de safari en Tanzanie | Serengeti & Zanzibar",
-    "meta_description": "Explorez les destinations de safari les plus emblématiques de Tanzanie. Des plaines infinies du Serengeti aux eaux cristallines de Zanzibar."
+    "meta_description": "Explorez les destinations de safari les plus emblématiques de Tanzanie. Des plaines infinies du Serengeti aux eaux cristallines de Zanzibar.",
+    "back_to_atlas": "Retour à l'Atlas"
   },
   "Gallery": {
     "badge": "L'Objectif",
@@ -389,7 +390,9 @@
     "inclusion_binoculars": "Jumelles Haut de Gamme",
     "inclusion_wifi": "Wi-Fi à Bord",
     "meta_title": "Éco-expéditions & Safaris privés | Asili Yetu",
-    "meta_description": "Découvrez des chefs-d'œuvre de safari soigneusement élaborés à travers le Serengeti et la Tanzanie. Des expéditions privées, luxueuses et respectueuses de l'environnement, conçues sur mesure pour vos désirs."
+    "meta_description": "Découvrez des chefs-d'œuvre de safari soigneusement élaborés à travers le Serengeti et la Tanzanie. Des expéditions privées, luxueuses et respectueuses de l'environnement, conçues sur mesure pour vos désirs.",
+    "back_to_safaris": "Retour aux Safaris",
+    "active_guide": "Expertise Locale"
   },
   "Culture": {
     "badge": "Traditions Vivantes",

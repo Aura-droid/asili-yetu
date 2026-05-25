@@ -263,7 +263,8 @@
       "explore_packages": "Explore Packages"
     },
     "meta_title": "Tanzania Safari Destinations | Serengeti & Zanzibar",
-    "meta_description": "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the crystal waters of Zanzibar."
+    "meta_description": "Explore the most iconic safari destinations in Tanzania. From the endless plains of the Serengeti to the crystal waters of Zanzibar.",
+    "back_to_atlas": "Back to Atlas"
   },
   "Gallery": {
     "badge": "Visual Archive",
@@ -395,7 +396,9 @@
     "inclusion_binoculars": "High-End Binoculars",
     "inclusion_wifi": "Onboard Wi-Fi",
     "meta_title": "Eco-Expeditions & Private Safaris | Asili Yetu",
-    "meta_description": "Discover curated safari masterpieces across the Serengeti and Tanzania. Private, luxury, and eco-friendly expeditions tailored to your needs."
+    "meta_description": "Discover curated safari masterpieces across the Serengeti and Tanzania. Private, luxury, and eco-friendly expeditions tailored to your needs.",
+    "back_to_safaris": "Back to Safaris",
+    "active_guide": "Local Expertise"
   },
   "Culture": {
     "badge": "Living Traditions",

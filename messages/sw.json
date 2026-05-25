@@ -295,7 +295,9 @@
     "inclusion_binoculars": "Darubini za Ubora wa Juu",
     "inclusion_wifi": "Wi-Fi Ndani ya Gari",
     "meta_title": "Misafara Endelevu & Safari za Faragha | Asili Yetu",
-    "meta_description": "Gundua kazi bora za safari zilizopangwa kwa ustadi kote Serengeti na Tanzania. Misafara ya faragha, ya kifahari, na rafiki kwa mazingira iliyobuniwa kulingana na mahitaji yako."
+    "meta_description": "Gundua kazi bora za safari zilizopangwa kwa ustadi kote Serengeti na Tanzania. Misafara ya faragha, ya kifahari, na rafiki kwa mazingira iliyobuniwa kulingana na mahitaji yako.",
+    "back_to_safaris": "Rudi kwenye Safari",
+    "active_guide": "Ujuzi wa Ndani"
   },
   "Reviews": {
     "title": "Sauti kutoka <p>Nyikani</p>",
@@ -476,7 +478,8 @@
       "explore_packages": "Gundua Vifurushi"
     },
     "meta_title": "Maeneo ya Safari Tanzania | Serengeti & Zanzibar",
-    "meta_description": "Gundua maeneo mashuhuri zaidi ya safari nchini Tanzania. Kuanzia tambarare zisizo na kikomo za Serengeti hadi maji safi ya kioo ya Zanzibar."
+    "meta_description": "Gundua maeneo mashuhuri zaidi ya safari nchini Tanzania. Kuanzia tambarare zisizo na kikomo za Serengeti hadi maji safi ya kioo ya Zanzibar.",
+    "back_to_atlas": "Rudi kwenye Ramani"
   },
   "Privacy": {
     "title": "Sera ya <p>Faragha</p>",

@@ -276,7 +276,8 @@
       "explore_packages": "Pakete erkunden"
     },
     "meta_title": "Tansanische Safari-Destinationen | Serengeti & Sansibar",
-    "meta_description": "Erkunden Sie die ikonischsten Safari-Destinationen Tansanias. Von den endlosen Ebenen der Serengeti bis zu den kristallklaren Gewässern Sansibars."
+    "meta_description": "Erkunden Sie die ikonischsten Safari-Destinationen Tansanias. Von den endlosen Ebenen der Serengeti bis zu den kristallklaren Gewässern Sansibars.",
+    "back_to_atlas": "Zurück zum Atlas"
   },
   "Gallery": {
     "badge": "Die Linse",
@@ -433,7 +434,9 @@
     "inclusion_meals": "Vollpension",
     "inclusion_park_fees": "Nationalparkgebühren",
     "meta_title": "Öko-Expeditionen & Private Safaris | Asili Yetu",
-    "meta_description": "Entdecken Sie kuratierte Safari-Meisterwerke in der Serengeti und ganz Tansania. Private, luxuriöse und umweltfreundliche Expeditionen, maßgeschneidert nach Ihren Wünschen."
+    "meta_description": "Entdecken Sie kuratierte Safari-Meisterwerke in der Serengeti und ganz Tansania. Private, luxuriöse und umweltfreundliche Expeditionen, maßgeschneidert nach Ihren Wünschen.",
+    "back_to_safaris": "Zurück zu Safaris",
+    "active_guide": "Lokale Expertise"
   },
   "Culture": {
     "badge": "Lebendige Traditionen",

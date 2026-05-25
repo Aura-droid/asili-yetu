@@ -276,7 +276,8 @@
       "explore_packages": "探索套餐"
     },
     "meta_title": "坦桑尼亚狩猎目的地 | 塞伦盖蒂与桑给巴尔",
-    "meta_description": "探索坦桑尼亚最具标志性的狩猎目的地。从塞伦盖蒂一望无际的平原，到桑给巴尔晶莹剔透的水域，等您发现。"
+    "meta_description": "探索坦桑尼亚最具标志性的狩猎目的地。从塞伦盖蒂一望无际的平原，到桑给巴尔晶莹剔透的水域，等您发现。",
+    "back_to_atlas": "返回地图"
   },
   "Gallery": {
     "badge": "镜头",
@@ -433,7 +434,9 @@
     "inclusion_binoculars": "高端望远镜",
     "inclusion_wifi": "车载Wi-Fi",
     "meta_title": "生态探险与私人定制狩猎 | Asili Yetu",
-    "meta_description": "探索横跨塞伦盖蒂及坦桑尼亚的精心策划的狩猎杰作。私人、奢华且环保的探险之旅，量身定制，满足您的专属需求。"
+    "meta_description": "探索横跨塞伦盖蒂及坦桑尼亚的精心策划的狩猎杰作。私人、奢华且环保的探险之旅，量身定制，满足您的专属需求。",
+    "back_to_safaris": "返回猎奇之旅",
+    "active_guide": "当地专业知识"
   },
   "Culture": {
     "badge": "活着的传统",
