@@ -134,7 +134,7 @@ export default function StrategicFAQ() {
             <p className="text-white/60 font-medium">{t("concierge_team")}</p>
           </div>
           <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('whatsapp-contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
           >
             {t("dispatch_inquiry")}

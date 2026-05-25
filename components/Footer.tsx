@@ -84,7 +84,7 @@ export default function Footer({ settings }: { settings?: any }) {
             </ul>
           </div>
 
-          <div className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10 flex flex-col justify-center items-start">
+          <div id="whatsapp-contact" className="bg-foreground/5 p-6 rounded-3xl border border-foreground/10 flex flex-col justify-center items-start">
              <p className="text-foreground font-black text-lg mb-2">{t("Footer.whatsapp_title")}</p>
              <p className="text-foreground/60 text-sm font-medium mb-6 italic">
                 {t("Footer.whatsapp_desc")}
