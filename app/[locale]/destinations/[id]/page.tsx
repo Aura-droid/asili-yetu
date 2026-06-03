@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import { supabase } from "@/lib/supabase";
 import { getTranslations } from "next-intl/server";
-import { MapPin, Sun, Compass, ArrowLeft, Wind, Mountain, Cloud } from "lucide-react";
+import { Sun, Compass, ArrowLeft, Wind, Mountain, Cloud } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import StructuredData from "@/components/StructuredData";
@@ -12,25 +11,117 @@ type Props = {
   params: Promise<{ locale: string; id: string }>;
 };
 
+function getStaticDestination(id: string, t: Awaited<ReturnType<typeof getTranslations>>) {
+  const destinations = [
+    {
+      id: "serengeti",
+      name: t("Data.serengeti.name"),
+      type: t("Data.serengeti.type"),
+      image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80",
+      description: t("Data.serengeti.desc"),
+      best_time: t("Data.serengeti.time"),
+      key_wildlife: t("Data.serengeti.wildlife"),
+      size: "14,763 sq km",
+      latitude: -2.3333,
+      longitude: 34.8333
+    },
+    {
+      id: "ngorongoro",
+      name: t("Data.ngorongoro.name"),
+      type: t("Data.ngorongoro.type"),
+      image: "/destinations/ngorongoro-1.jpg",
+      description: t("Data.ngorongoro.desc"),
+      best_time: t("Data.ngorongoro.time"),
+      key_wildlife: t("Data.ngorongoro.wildlife"),
+      size: "260 sq km",
+      latitude: -3.2442,
+      longitude: 35.5862
+    },
+    {
+      id: "tarangire",
+      name: t("Data.tarangire.name"),
+      type: t("Data.tarangire.type"),
+      image: "/destinations/tarangire-1.jpg",
+      description: t("Data.tarangire.desc"),
+      best_time: t("Data.tarangire.time"),
+      key_wildlife: t("Data.tarangire.wildlife"),
+      size: "2,850 sq km",
+      latitude: -3.9531,
+      longitude: 35.9619
+    },
+    {
+      id: "kilimanjaro",
+      name: t("Data.kilimanjaro.name"),
+      type: t("Data.kilimanjaro.type"),
+      image: "/destinations/kilimanjaro-1.jpg",
+      description: t("Data.kilimanjaro.desc"),
+      best_time: t("Data.kilimanjaro.time"),
+      key_wildlife: t("Data.kilimanjaro.wildlife"),
+      size: "5,895 meters (Peak)",
+      latitude: -3.0674,
+      longitude: 37.3556
+    },
+    {
+      id: "manyara",
+      name: t("Data.manyara.name"),
+      type: t("Data.manyara.type"),
+      image: "https://images.unsplash.com/photo-1547407139-3c921a661958?auto=format&fit=crop&q=80",
+      description: t("Data.manyara.desc"),
+      best_time: t("Data.manyara.time"),
+      key_wildlife: t("Data.manyara.wildlife"),
+      size: "330 sq km",
+      latitude: -3.4287,
+      longitude: 35.8083
+    },
+    {
+      id: "zanzibar",
+      name: t("Data.zanzibar.name"),
+      type: t("Data.zanzibar.type"),
+      image: "/destinations/zanzibar-1.jpg",
+      description: t("Data.zanzibar.desc"),
+      best_time: t("Data.zanzibar.time"),
+      key_wildlife: t("Data.zanzibar.wildlife"),
+      size: "2,462 sq km",
+      latitude: -6.1659,
+      longitude: 39.2026
+    }
+  ];
+
+  return destinations.find((destination) => destination.id === id);
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Destinations" });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
   const { data: destinations } = await getDestinations();
-  const dest = destinations?.find((d: any) => d.id === id);
+  const dest = destinations?.find((d: any) => d.id === id) || getStaticDestination(id, t);
 
   if (!dest) {
     notFound();
   }
 
   return {
-    title: `${dest.name} | Safari Destination`,
+    title: `${dest.name} | Tanzania Safari Destination`,
     description: dest.description?.slice(0, 155),
     openGraph: {
       title: dest.name,
       description: dest.description?.slice(0, 160),
-      images: [dest.image_url || ''],
+      images: [dest.image_url || dest.image || ''],
+      url: `${baseUrl}/${locale}/destinations/${id}`,
     },
     alternates: {
-      canonical: `/destinations/${id}`
+      canonical: `${baseUrl}/${locale}/destinations/${id}`,
+      languages: {
+        en: `${baseUrl}/en/destinations/${id}`,
+        sw: `${baseUrl}/sw/destinations/${id}`,
+        es: `${baseUrl}/es/destinations/${id}`,
+        fr: `${baseUrl}/fr/destinations/${id}`,
+        de: `${baseUrl}/de/destinations/${id}`,
+        zh: `${baseUrl}/zh/destinations/${id}`,
+        ar: `${baseUrl}/ar/destinations/${id}`,
+        "x-default": `${baseUrl}/en/destinations/${id}`,
+      }
     }
   };
 }
@@ -39,7 +130,7 @@ export default async function DestinationDetailPage({ params }: Props) {
   const { id, locale } = await params;
   const t = await getTranslations("Destinations");
   const { data: destinations } = await getDestinations();
-  const dest = destinations?.find((d: any) => d.id === id);
+  const dest = destinations?.find((d: any) => d.id === id) || getStaticDestination(id, t);
 
   if (!dest) {
     notFound();

@@ -1,4 +1,4 @@
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
@@ -8,6 +8,23 @@ const handleI18nRouting = createIntlMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const publicLocaleRoutes = [
+    "/about",
+    "/packages",
+    "/destinations",
+    "/culture",
+    "/gallery",
+    "/fleet",
+    "/guides",
+    "/privacy",
+    "/terms",
+  ];
+
+  if (publicLocaleRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`))) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/en${pathname}`;
+    return NextResponse.redirect(url, 308);
+  }
   
   // 0. Check Maintenance Mode
   const isMaintenancePage = pathname.includes('/maintenance');

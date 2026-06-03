@@ -4,6 +4,7 @@ import { getDestinations } from '@/app/actions/destinations';
 
 const locales = ['en', 'sw', 'es', 'fr', 'de', 'zh', 'ar'];
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://asiliyetusafaris.com';
+const staticDestinationIds = ['serengeti', 'ngorongoro', 'tarangire', 'kilimanjaro', 'manyara', 'zanzibar'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [packagesRes, destinationsRes] = await Promise.all([
@@ -32,10 +33,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  const destinationRoutes = destinations.flatMap((dest) =>
+  const destinationIds = Array.from(new Set([
+    ...staticDestinationIds,
+    ...destinations.map((dest) => dest.id).filter(Boolean),
+  ]));
+
+  const destinationRoutes = destinationIds.flatMap((id) =>
     locales.map((locale) => ({
-      url: `${baseUrl}/${locale}/destinations/${dest.id}`,
-      lastModified: new Date(dest.updated_at || new Date()),
+      url: `${baseUrl}/${locale}/destinations/${id}`,
+      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     }))
