@@ -20,6 +20,7 @@ export const safariEmailTemplate = (clientName: string, itineraryTitle: string, 
     const bannerImg = `https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=1200`;
     const portalUrl = accessToken ? `${siteUrl}/${locale}/portal/${accessToken}` : siteUrl;
     const messageContent = customMessage || `The wilderness is calling. Your customized safari profile has been successfully initialized in our command center. Our concierge team has updated your safari status to: ${status.replace('_', ' ').toUpperCase()}.`;
+    const itineraryData = payload?.itinerary || payload?.itinerary_details;
 
     return `
     <!DOCTYPE html>
@@ -46,15 +47,19 @@ export const safariEmailTemplate = (clientName: string, itineraryTitle: string, 
                     <h3 style="font-size: 20px; font-weight: 900; color: #1a1a1a; margin: 0; letter-spacing: -0.5px;">${itineraryTitle}</h3>
                 </div>
 
-                ${payload?.itinerary?.dailyBreakdown ? `
+                ${itineraryData?.dailyBreakdown ? `
                 <div style="margin-top: 40px; padding-top: 35px; border-top: 2px solid #f0f0f0;">
                     <h3 style="font-size: 20px; font-weight: 900; color: #1a1a1a; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.5px;">Expedition Roadmap</h3>
-                    ${payload.itinerary.dailyBreakdown.map((day: any) => `
+                    ${itineraryData.dailyBreakdown.map((day: any) => {
+                        const desc = day.description || day.Description || day.activity || day.Activity || 
+                                    (day.destination ? `Explore ${day.destination}${day.accommodation ? ` • Overnight at ${day.accommodation}` : ''}` : 'Activity details being finalized...');
+                        return `
                         <div style="display: flex; gap: 20px; margin-bottom: 25px;">
                             <div style="width: 40px; height: 40px; background: #1a1a1a; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; flex-shrink: 0;">${day.day || day.Day}</div>
-                            <div style="padding-top: 10px; font-size: 14px; color: #555555; line-height: 1.6;">${day.description || day.Description || day.Activity || 'Activity details being finalized...'}</div>
+                            <div style="padding-top: 10px; font-size: 14px; color: #555555; line-height: 1.6;">${desc}</div>
                         </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
                 ` : ''}
 
@@ -120,6 +125,7 @@ export const getAcknowledgmentEmailHtml = (payload: any, locale: string = 'en') 
  * Detailed notification for the Admin
  */
 export const getAdminNotificationHtml = (payload: any) => {
+    const itineraryData = payload?.itinerary || payload?.itinerary_details;
     return `
     <!DOCTYPE html>
     <html>
@@ -144,24 +150,28 @@ export const getAdminNotificationHtml = (payload: any) => {
                     </div>
                     <div style="padding: 15px; background: #f9f9f9; border-radius: 12px; border: 1px solid #f0f0f0;">
                         <span style="font-size: 9px; font-weight: 900; color: #999; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px;">Selected Masterpiece</span>
-                        <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${payload.itinerary?.recommendedTitle || 'Custom Configuration'}</span>
+                        <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${itineraryData?.recommendedTitle || 'Custom Configuration'}</span>
                     </div>
                 </div>
 
                 <div style="background: #1a1a1a; color: #ffffff; border-radius: 20px; padding: 30px; margin: 30px 0; position: relative;">
                     <h4 style="margin: 0 0 10px 0; font-size: 10px; font-weight: 900; color: ${accentColor}; text-transform: uppercase; letter-spacing: 2px;">Concierge Strategy</h4>
-                    <p style="margin: 0; font-size: 15px; line-height: 1.6; font-style: italic; color: #e0e0e0;">"${payload.itinerary?.strategy || payload.itinerary?.rationale || 'Awaiting manual strategy deployment.'}"</p>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; font-style: italic; color: #e0e0e0;">"${itineraryData?.strategy || itineraryData?.rationale || 'Awaiting manual strategy deployment.'}"</p>
                 </div>
 
-                ${payload.itinerary?.dailyBreakdown ? `
+                ${itineraryData?.dailyBreakdown ? `
                 <div style="margin-top: 30px;">
                     <h4 style="font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; color: #1a1a1a;">Operational Breakdown</h4>
-                    ${payload.itinerary.dailyBreakdown.map((day: any) => `
+                    ${itineraryData.dailyBreakdown.map((day: any) => {
+                        const desc = day.description || day.Description || day.activity || day.Activity || 
+                                    (day.destination ? `Explore ${day.destination}${day.accommodation ? ` • Overnight at ${day.accommodation}` : ''}` : 'Activity details being finalized...');
+                        return `
                         <div style="padding: 15px 0; border-bottom: 1px solid #eee;">
                             <span style="font-weight: 900; color: ${accentColor}; font-size: 13px; margin-right: 10px;">Day ${day.day || day.Day}</span>
-                            <span style="font-size: 13px; color: #555; line-height: 1.5;">${day.description || day.Description || day.Activity}</span>
+                            <span style="font-size: 13px; color: #555; line-height: 1.5;">${desc}</span>
                         </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
                 ` : ''}
             </div>
