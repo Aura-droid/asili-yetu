@@ -81,19 +81,23 @@ export default async function PackageDossierPage({ params }: Props) {
   const tierMeta = tierMetaMap[pkg.package_tier || "mid_range"] || tierMetaMap.mid_range;
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://asiliyetusafaris.com';
+  const packageUrl = `${baseUrl}/${locale}/packages/${pkg.id}`;
+  const packageImage = pkg.main_image || pkg.destinations?.image_url;
+  const packagePrice = Number(pkg.discount_price || pkg.price_usd);
+  const hasRealRating = Number(pkg.review_count) > 0 && Number(pkg.avg_rating) > 0;
 
   const tripSchema = {
     "@type": "Trip",
     "name": pkg.title,
     "description": pkg.description,
-    "image": pkg.main_image || pkg.destinations?.image_url,
+    "image": packageImage,
     "touristType": "Wildlife Enthusiasts",
     "offers": {
       "@type": "Offer",
-      "price": pkg.discount_price || pkg.price_usd,
+      "price": packagePrice,
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "url": `${baseUrl}/${locale}/packages/${pkg.id}`
+      "url": packageUrl
     },
     "itinerary": itinerary.map((item: any, index: number) => ({
       "@type": "City",
@@ -109,26 +113,38 @@ export default async function PackageDossierPage({ params }: Props) {
 
   const productSchema = {
     "@type": "Product",
+    "@id": `${packageUrl}#product`,
     "name": pkg.title,
     "description": pkg.description,
-    "image": pkg.main_image || pkg.destinations?.image_url,
+    "image": packageImage ? [packageImage] : undefined,
     "brand": {
       "@type": "Brand",
       "name": "Asili Yetu Safaris"
     },
+    "sku": String(pkg.id),
     "category": "Safari Package",
+    "url": packageUrl,
     "offers": {
       "@type": "Offer",
-      "price": pkg.discount_price || pkg.price_usd,
+      "@id": `${packageUrl}#offer`,
+      "price": packagePrice,
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "url": `${baseUrl}/${locale}/packages/${pkg.id}`
+      "itemCondition": "https://schema.org/NewCondition",
+      "url": packageUrl,
+      "seller": {
+        "@type": "Organization",
+        "name": "Asili Yetu Safaris",
+        "url": baseUrl
+      }
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": pkg.avg_rating || 5,
-      "reviewCount": pkg.review_count || 124
-    }
+    ...(hasRealRating ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": Number(pkg.avg_rating),
+        "reviewCount": Number(pkg.review_count)
+      }
+    } : {})
   };
 
   return (

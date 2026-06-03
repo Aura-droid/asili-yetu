@@ -72,24 +72,48 @@ export default async function PackagesPage({ searchParams }: { searchParams: Pro
   const { data: packages, error } = await supabase.from("packages").select("*, destinations(name, image_url)");
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asiliyetusafaris.com";
 
-  const jsonLd = packages?.map(pkg => ({
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: pkg.title,
-    description: pkg.description,
-    image: pkg.main_image,
-    offers: {
-      '@type': 'Offer',
-      price: pkg.price_usd,
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      reviewCount: '124',
-    },
-  })) || [];
+  const jsonLd = packages?.map((pkg) => {
+    const packageUrl = `${baseUrl}/${locale}/packages/${pkg.id}`;
+    const packageImage = pkg.main_image || pkg.destinations?.image_url;
+    const hasRealRating = Number(pkg.review_count) > 0 && Number(pkg.avg_rating) > 0;
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      '@id': `${packageUrl}#product`,
+      name: pkg.title,
+      description: pkg.description,
+      image: packageImage ? [packageImage] : undefined,
+      brand: {
+        '@type': 'Brand',
+        name: 'Asili Yetu Safaris',
+      },
+      sku: String(pkg.id),
+      category: 'Safari Package',
+      url: packageUrl,
+      offers: {
+        '@type': 'Offer',
+        '@id': `${packageUrl}#offer`,
+        price: Number(pkg.discount_price || pkg.price_usd),
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        itemCondition: 'https://schema.org/NewCondition',
+        url: packageUrl,
+        seller: {
+          '@type': 'Organization',
+          name: 'Asili Yetu Safaris',
+          url: baseUrl,
+        },
+      },
+      ...(hasRealRating ? {
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: Number(pkg.avg_rating),
+          reviewCount: Number(pkg.review_count),
+        },
+      } : {}),
+    };
+  }) || [];
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 transition-colors duration-1000">
